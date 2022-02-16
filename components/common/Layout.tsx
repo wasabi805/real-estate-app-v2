@@ -1,18 +1,19 @@
-import React from 'react'
-import { Layout, Menu, Row, Col } from 'antd'
+import React, {useState}from 'react'
+import { Layout, Menu, Row, Col , Modal} from 'antd'
 import 'antd/dist/antd.css'
 
 const { Header, Footer } = Layout
 
-const PageHeader = () => {
+const PageHeader = ({showModal}) => {
+    
   const navigation = [{ id: 'Login' }, { id: 'nav 2' }, { id: 'nav 3' }]
 
   return (
     <Header>
       <Row>
-        <Col span={20}></Col>
+        <Col span={18}></Col>
 
-        <Col span={4}>
+        <Col span={6}>
           <Menu
             theme="dark"
             mode="horizontal"
@@ -24,7 +25,7 @@ const PageHeader = () => {
               return (
                 <Menu.Item
                   key={key}
-                  onClick={() => alert('hi')}
+                  onClick={showModal}
                 >{`${nav.id}`}</Menu.Item>
               )
             })}
@@ -47,10 +48,27 @@ export const TESTCOMP2 = () => {
 }
 
 const PageLayout = ({ children }) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+      };
+    
+      const handleOk = () => {
+        setIsModalVisible(false);
+      };
+    
+      const handleCancel = () => {
+        setIsModalVisible(false);
+      };
   return (
     <Layout className={'Layout'}>
-      <PageHeader />
+      <PageHeader showModal={showModal} />
       {children}
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
       <PageFooter />
     </Layout>
   )
