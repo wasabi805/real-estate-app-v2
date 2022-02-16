@@ -2,17 +2,20 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import axios from 'axios'
-import {JUST_A_TEST_CONST} from "constants"
+import { JUST_A_TEST_CONST } from 'constants'
+import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
+
 interface IHomeProps {
   res: any
 }
 const Home: NextPage<IHomeProps> = ({ res }) => {
   console.log(res)
-  console.log(JUST_A_TEST_CONST )
+  console.log(JUST_A_TEST_CONST)
   return (
-    <div>
-      <h1>Welcome to Next</h1>
-    </div>
+    <PageLayout>
+      <TESTCOMP1 />
+      <TESTCOMP2 />
+    </PageLayout>
   )
 }
 export default Home
@@ -40,7 +43,7 @@ export const getStaticProps = async () => {
   //     console.error(error)
   //   })
 
-  const res='temp value'
+  const res = 'temp value'
 
   return {
     props: {
