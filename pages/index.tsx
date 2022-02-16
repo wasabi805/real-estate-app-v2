@@ -11,7 +11,6 @@ interface IHomeProps {
   res: any
 }
 const Home: NextPage<IHomeProps> = ({ res }) => {
-  console.log(res)
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   console.log({ state, dispatch })

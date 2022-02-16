@@ -1,12 +1,15 @@
 import React from 'react'
+import * as LoginModalActions from 'actions/modalActions'
+
+const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE } = LoginModalActions
 
 export interface IinitialState {
-    state: {
-        isLoginModalVisibile: boolean
-    }
-    dispatch: React.Dispatch<IAction>
+  state: {
+    isLoginModalVisibile: boolean
+  }
+  dispatch: React.Dispatch<IAction>
 }
-  
+
 export interface IAction {
   type: string
   payload?: {}
@@ -16,17 +19,24 @@ export const initialState = {
   isLoginModalVisibile: false,
 }
 
-interface IappReducer{
-    state: IinitialState
-    action: IAction
-}
-
-const appReducer = (state=initialState, action: IAction) => {
+const appReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case 'SET_LOGIN_MODLE_VISIBLE':
+    //  LOGIN MODAL
+    case RENDER_LOGIN_MODLE:
+      const { renderLoginModal } = action.payload
+
       return {
         ...state,
+        isLoginModalVisibile: renderLoginModal,
       }
+
+    case DISMISS_LOGIN_MODLE:
+      const { dismissLoginModal } = action.payload
+      return {
+        ...state,
+        isLoginModalVisibile: dismissLoginModal,
+      }
+
     default:
       return state
   }
