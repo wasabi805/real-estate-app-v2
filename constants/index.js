@@ -1,0 +1,1 @@
+export const JUST_A_TEST_CONST = 'JUST_A_TEST_CONST'
