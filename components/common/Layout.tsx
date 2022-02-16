@@ -1,22 +1,36 @@
 import React from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Row, Col } from 'antd'
 import 'antd/dist/antd.css'
 
 const { Header, Footer } = Layout
 
 const PageHeader = () => {
+  const navigation = [{ id: 'Login' }, { id: 'nav 2' }, { id: 'nav 3' }]
+
   return (
     <Header>
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        //  defaultSelectedKeys={['2']}
-      >
-        {new Array(3).fill(null).map((_, index) => {
-          const key = index + 1
-          return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>
-        })}
-      </Menu>
+      <Row>
+        <Col span={20}></Col>
+
+        <Col span={4}>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            //  defaultSelectedKeys={['2']}
+          >
+            {Object.values(navigation).map((nav, idx) => {
+              console.log(nav)
+              const key = idx
+              return (
+                <Menu.Item
+                  key={key}
+                  onClick={() => alert('hi')}
+                >{`${nav.id}`}</Menu.Item>
+              )
+            })}
+          </Menu>
+        </Col>
+      </Row>
     </Header>
   )
 }
