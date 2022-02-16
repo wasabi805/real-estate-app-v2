@@ -1,18 +1,20 @@
 import type { NextPage } from 'next'
-import React, { useReducer } from 'react'
-import appReducer, { initialState } from 'reducers/appReducer'
+import React, { useContext } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import axios from 'axios'
 import { JUST_A_TEST_CONST } from 'constants'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
+import AppContext from '../context/appContext'
 
 interface IHomeProps {
   res: any
 }
 const Home: NextPage<IHomeProps> = ({ res }) => {
   console.log(res)
-  console.log(JUST_A_TEST_CONST)
+  const appContext = useContext(AppContext)
+  const { state, dispatch } = appContext
+  console.log({ state, dispatch })
   return (
     <PageLayout>
       <TESTCOMP1 />

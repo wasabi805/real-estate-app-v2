@@ -15,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           dispatch,
         }}
       >
-        <div>Im on everypage</div>
         <Component {...pageProps} />
       </AppContext.Provider>
     </>

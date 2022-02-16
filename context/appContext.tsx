@@ -1,7 +1,7 @@
-import React from 'react'
-import { createContext } from 'react'
-import { IinitialState } from '../reducers/appReducer'
 
-const AppContext = React.createContext<IinitialState | null>(null)
+import { createContext } from 'react'
+import { IinitialState, initialState } from '../reducers/appReducer'
+
+const AppContext = createContext<IinitialState>(initialState)
 
 export default AppContext
