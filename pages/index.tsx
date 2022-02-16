@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import React, { useReducer } from 'react'
+import appReducer, { initialState } from 'reducers/appReducer'
 import Head from 'next/head'
 import Image from 'next/image'
 import axios from 'axios'

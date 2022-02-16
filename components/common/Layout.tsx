@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Layout, Menu, Row, Col, Modal } from 'antd'
 import 'antd/dist/antd.css'
 import FormInput from '../common/FormInput'
-import {formInputStyles} from './styles'
+import { formInputStyles } from './styles'
 
 const { Header, Footer } = Layout
 
@@ -73,9 +73,12 @@ const PageLayout = ({ children }) => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-         
         <FormInput placeholder={'enter email'} className={formInputStyles} />
-        <FormInput isPasswordInput={true} className={formInputStyles} placeholder={'enter password'} />
+        <FormInput
+          isPasswordInput={true}
+          className={formInputStyles}
+          placeholder={'enter password'}
+        />
       </Modal>
 
       <PageFooter />

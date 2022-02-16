@@ -5,7 +5,7 @@ import FormInput from '../common/FormInput'
 // import {formInputStyles} from './styles'
 
 const LoginModal = () => {
-  const [ isModalVisible, setIsModalVisible ] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
     setIsModalVisible(true)
@@ -26,9 +26,10 @@ const LoginModal = () => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <FormInput placeholder={'enter email'} 
-    //   className={formInputStyles}
-       />
+      <FormInput
+        placeholder={'enter email'}
+        //   className={formInputStyles}
+      />
       <FormInput
         isPasswordInput={true}
         // className={formInputStyles}
