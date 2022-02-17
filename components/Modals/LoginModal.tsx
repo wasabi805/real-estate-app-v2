@@ -1,44 +1,34 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Modal } from 'antd'
 import 'antd/dist/antd.css'
-import FormInput from '../common/FormInput'
 import AppContext from 'context/appContext'
 import * as LoginModalActions from 'actions/modalActions'
-// import {formInputStyles} from './styles'
 
-const LoginModal = () => {
+interface ILoginModalProps {
+  children: JSX.Element[]
+}
+
+const LoginModal: React.FC<ILoginModalProps> = ({ children }) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { renderLoginModal } = LoginModalActions
+  const { dismissLoginModal } = LoginModalActions
 
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const showModal = () => dispatch(renderLoginModal)
-
-  const handleOk = () => {
-    setIsModalVisible(false)
+  const onSubmit = () => {
+    alert('submit the creds')
   }
 
-  const handleCancel = () => {
-    setIsModalVisible(false)
+  const onCancel = () => {
+    dispatch(dismissLoginModal)
   }
 
   return (
     <Modal
       title="Welcome to QuikSeek"
-      visible={isModalVisible}
-      onOk={handleOk}
-      onCancel={handleCancel}
+      visible={state.isLoginModalVisibile}
+      onOk={onSubmit}
+      onCancel={onCancel}
     >
-      <FormInput
-        placeholder={'enter email'}
-        //   className={formInputStyles}
-      />
-      <FormInput
-        isPasswordInput={true}
-        // className={formInputStyles}
-        placeholder={'enter password'}
-      />
+      {children}
     </Modal>
   )
 }
