@@ -12,14 +12,11 @@ export const dismissLoginModal = {
 
 export const SET_LOGIN_FORM_CHANGE = 'SET_LOGIN_FORM_CHANGE'
 
-export const setLoginFormChange=( userLoginData ) =>{
-    
-    return{
-        type: SET_LOGIN_FORM_CHANGE,
-        payload:{
-            userLoginData
-        }
-    }
+export const setLoginFormChange = (userLoginData) => {
+  return {
+    type: SET_LOGIN_FORM_CHANGE,
+    payload: {
+      userLoginData,
+    },
+  }
 }
-   
-

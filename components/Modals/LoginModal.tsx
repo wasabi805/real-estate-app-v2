@@ -20,10 +20,12 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     dispatch(dismissLoginModal)
   }
 
-  const handleLoginFormChange =(e: React.ChangeEvent<HTMLInputElement>): void=>{
-    const {name, value} = e.target
- 
-    dispatch(setLoginFormChange({[ name ]: value}))
+  const handleLoginFormChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const { name, value } = e.target
+
+    dispatch(setLoginFormChange({ [name]: value }))
   }
 
   return (
@@ -33,12 +35,12 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
       onOk={onSubmit}
       onCancel={onCancel}
     >
-      <FormInput 
-      name={'email'} 
-      value={state.user.email}
-      placeholder={'enter email'}
-      handleChange={handleLoginFormChange}
-       />
+      <FormInput
+        name={'email'}
+        value={state.user.email}
+        placeholder={'enter email'}
+        handleChange={handleLoginFormChange}
+      />
       <FormInput
         name="password"
         value={state.user.passsword}
