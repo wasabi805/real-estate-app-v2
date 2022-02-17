@@ -12,10 +12,6 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   const { state, dispatch } = appContext
   const { dismissLoginModal, setLoginFormChange } = LoginModalActions
 
-  const onSubmit = () => {
-    alert('submit the creds')
-  }
-
   const onCancel = () => {
     dispatch(dismissLoginModal)
   }
@@ -32,7 +28,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     <Modal
       title="Welcome to QuikSeek"
       visible={state.isLoginModalVisibile}
-      onOk={onSubmit}
+      onOk={()=>alert('hi there')}
       onCancel={onCancel}
     >
       <FormInput

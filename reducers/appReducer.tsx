@@ -1,13 +1,12 @@
 import React from 'react'
 import * as LoginModalActions from 'actions/modalActions'
 
-const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE, SET_LOGIN_FORM_CHANGE } =
-  LoginModalActions
+const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE, SET_LOGIN_FORM_CHANGE } = LoginModalActions
 
 export interface IinitialState {
   state: {
     isLoginModalVisibile: boolean
-    user: {
+    user:{
       email: string
       passsword: string
     }
@@ -26,7 +25,7 @@ export interface IAction {
 
 export const initialState = {
   isLoginModalVisibile: false,
-  user: { password: '', email: '' },
+  user:{password:'', email: ''}
 }
 
 const appReducer = (state = initialState, action: IAction) => {
@@ -39,7 +38,7 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         isLoginModalVisibile: renderLoginModal,
       }
-
+     
     case DISMISS_LOGIN_MODLE:
       const { dismissLoginModal } = action.payload
       return {
@@ -47,19 +46,19 @@ const appReducer = (state = initialState, action: IAction) => {
         isLoginModalVisibile: dismissLoginModal,
       }
 
-    case SET_LOGIN_FORM_CHANGE:
-      const { userLoginData } = action.payload
-
-      const name = Object.keys(userLoginData).pop()
-      const value = Object.values(userLoginData).pop()
-
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          [name]: value,
-        },
-      }
+      case SET_LOGIN_FORM_CHANGE :
+        const { userLoginData } = action.payload
+      
+        const name = Object.keys(userLoginData).pop()
+        const value = Object.values(userLoginData).pop()
+   
+        return{
+          ...state,
+          user:{
+            ...state.user,
+            [name] : value
+          }
+        }
 
     default:
       return state
