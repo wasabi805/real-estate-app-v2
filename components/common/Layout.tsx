@@ -56,18 +56,8 @@ const PageLayout: React.FC<IPageLayoutProps> = ({ children }) => {
   return (
     <Layout className={'Layout'}>
       <PageHeader />
-
       {children}
-
-      <LoginModal>
-        <FormInput placeholder={'enter email'} className={formInputStyles} />
-        <FormInput
-          isPasswordInput={true}
-          className={formInputStyles}
-          placeholder={'enter password'}
-        />
-      </LoginModal>
-
+      <LoginModal />
       <PageFooter />
     </Layout>
   )
