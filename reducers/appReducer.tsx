@@ -12,14 +12,21 @@ export interface IinitialState {
 
 export interface IAction {
   type: string
-  payload?: {}
+  payload: {}
 }
 
 export const initialState = {
   isLoginModalVisibile: false,
 }
 
-const appReducer = (state = initialState, action: IAction) => {
+interface IActionArg {
+  type: string
+  payload: {
+    renderLoginModal?: boolean
+    dismissLoginModal?: boolean
+  }
+}
+const appReducer = (state = initialState, action: IActionArg) => {
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
