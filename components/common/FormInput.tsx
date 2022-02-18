@@ -1,8 +1,7 @@
 import React from 'react'
-import { Input, Space } from 'antd'
-import { IAction } from 'reducers/appReducer'
-
+import { Input } from 'antd'
 import 'antd/dist/antd.css'
+import { ModalFormLabel } from './styles'
 
 interface IFormInput {
   className?: any
@@ -47,35 +46,33 @@ const FormInput: React.FC<IFormInput> = ({
     <>
       {isPasswordInput ? (
         <div>
-          <Space direction="vertical">
-            <Input.Password
-              id={id}
-              type={type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              prefix={prefix}
-              disabled={disabled}
-              required={required}
-              onChange={handleChange}
-            />{' '}
-          </Space>
+          <ModalFormLabel text={'Password'} />
+          <Input.Password
+            id={id}
+            type={type}
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            prefix={prefix}
+            disabled={disabled}
+            required={required}
+            onChange={handleChange}
+          />{' '}
         </div>
       ) : (
         <div>
-          <Space direction="vertical">
-            <Input
-              id={id}
-              type={type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              prefix={prefix}
-              disabled={disabled}
-              required={required}
-              onChange={handleChange}
-            />{' '}
-          </Space>
+          <ModalFormLabel text={'Email'} />
+          <Input
+            id={id}
+            type={type}
+            name={name}
+            value={value}
+            placeholder={placeholder}
+            prefix={prefix}
+            disabled={disabled}
+            required={required}
+            onChange={handleChange}
+          />{' '}
         </div>
       )}
     </>

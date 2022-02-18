@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input {
+  font-weight: 400 !important;
+  font-size: 1.5em !important;
+}
