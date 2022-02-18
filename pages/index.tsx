@@ -1,9 +1,6 @@
 import type { NextPage } from 'next'
+import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import axios from 'axios'
-import { JUST_A_TEST_CONST } from 'constants'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 import AppContext from '../context/appContext'
 
@@ -11,21 +8,32 @@ interface IHomeProps {
   res: any
 }
 const Home: NextPage<IHomeProps> = ({ res }) => {
+  const { user, error, isLoading } = useUser()
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  console.log({ state, dispatch })
+
+  if (isLoading) return <div>Loading...</div>
+  if (error)
+    return (
+      <div>
+        <h3>from index.tsx</h3>
+        {error.message}
+      </div>
+    )
+
+  if (user) {
+    alert('put the user name in the navbar now')
+  }
   return (
     <PageLayout>
-      <TESTCOMP1 />
-      <TESTCOMP2 />
+      {/* <TESTCOMP1 />
+      <TESTCOMP2 /> */}
     </PageLayout>
   )
 }
 export default Home
 
 export const getStaticProps = async () => {
-  console.log(process.env.REALTOR_API_KEY)
-
   var options = {
     method: 'GET',
     url: 'https://realtor.p.rapidapi.com/locations/auto-complete',

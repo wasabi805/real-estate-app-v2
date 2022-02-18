@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Space } from 'antd'
+import { IAction } from 'reducers/appReducer'
 
 import 'antd/dist/antd.css'
 

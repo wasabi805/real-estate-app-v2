@@ -28,7 +28,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     <Modal
       title="Welcome to QuikSeek"
       visible={state.isLoginModalVisibile}
-      onOk={()=>alert('hi there')}
+      onOk={() => alert('hi there')}
       onCancel={onCancel}
     >
       <FormInput
