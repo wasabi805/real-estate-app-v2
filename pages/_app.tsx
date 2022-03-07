@@ -9,18 +9,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   return (
-    <>
-      <UserProvider>
-        <AppContext.Provider
-          value={{
-            state,
-            dispatch,
-          }}
-        >
-          <Component {...pageProps} />
-        </AppContext.Provider>
-      </UserProvider>
-    </>
+    <UserProvider>
+      <AppContext.Provider
+        value={{
+          state,
+          dispatch,
+        }}
+      >
+        <Component {...pageProps} />
+      </AppContext.Provider>
+    </UserProvider>
   )
 }
 

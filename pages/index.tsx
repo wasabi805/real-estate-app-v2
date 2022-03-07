@@ -3,6 +3,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 import AppContext from '../context/appContext'
+import { SearchSection } from '../components/home'
 
 interface IHomeProps {
   res: any
@@ -22,12 +23,15 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
     )
 
   if (user) {
-    alert('put the user name in the navbar now')
+    console.log({
+      user,
+    })
   }
   return (
     <PageLayout>
-      {/* <TESTCOMP1 />
-      <TESTCOMP2 /> */}
+      <SearchSection backgroundImage={'helloImage'}>hello</SearchSection>
+      <TESTCOMP1 />
+      <TESTCOMP2 />
     </PageLayout>
   )
 }
