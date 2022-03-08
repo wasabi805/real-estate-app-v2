@@ -17,7 +17,9 @@ export const useInitAutoComplete = (id) => {
       script = document.createElement('script')
       script.type = 'application/javascript'
       script.id = `${id}`
-      script.innerText = "alert('i will be the initfunction')"
+      
+      script.innerText =
+        "function initAutoComplete(){ return alert('i work now')  }"
 
       document.body.appendChild(script)
       script.addEventListener('load', handleScript)
