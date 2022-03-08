@@ -1,8 +1,10 @@
 import React from 'react'
 import * as LoginModalActions from 'actions/modalActions'
+import * as SearchActions from 'actions/searchActions'
 
 const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE, SET_LOGIN_FORM_CHANGE } =
   LoginModalActions
+const { SET_SEARCH_FIELD } = SearchActions
 
 export interface IinitialState {
   state: {
@@ -10,6 +12,9 @@ export interface IinitialState {
     user: {
       email: string
       passsword: string
+    }
+    search: {
+      value: string
     }
   }
   dispatch: React.Dispatch<IAction>
@@ -21,12 +26,16 @@ export interface IAction {
     renderLoginModal?: boolean
     dismissLoginModal?: boolean
     userLoginData?: any
+    search?: {
+      value: string
+    }
   }
 }
 
 export const initialState = {
   isLoginModalVisibile: false,
   user: { password: '', email: '' },
+  search: '',
 }
 
 const appReducer = (state = initialState, action: IAction) => {
@@ -51,13 +60,20 @@ const appReducer = (state = initialState, action: IAction) => {
       const { userLoginData } = action.payload
 
       const name = Object.keys(userLoginData).pop()
-      const value = Object.values(userLoginData).pop()
 
       return {
         ...state,
         user: {
           ...state.user,
-          [name]: value,
+          [name]: Object.values(userLoginData).pop(),
+        },
+      }
+
+    case SET_SEARCH_FIELD:
+      return {
+        ...state,
+        search: {
+          value: action.payload.value,
         },
       }
 
