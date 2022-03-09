@@ -5,14 +5,16 @@ import { Input } from 'antd'
 const { Search } = Input
 
 interface ISearchbarProps {
-  name: string
-  value: string
-  placeHolder: string
-  onChange: () => void
-  onSearch: () => void
+  id?: string,
+  name?: string
+  value?: string
+  placeHolder?: string
+  onChange?: () => void
+  onSearch?: () => void
 }
 
 const Searchbar: React.FC<ISearchbarProps> = ({
+  id,
   name,
   value,
   placeHolder,
@@ -22,7 +24,7 @@ const Searchbar: React.FC<ISearchbarProps> = ({
   return (
     <>
       <Search
-        id="autocomplete"
+        id={id}
         placeholder={placeHolder}
         name={name}
         value={value}

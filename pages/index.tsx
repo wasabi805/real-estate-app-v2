@@ -31,7 +31,7 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
 
   return (
     <>
-      <GooglePlacesScript />
+      {/* <GooglePlacesScript /> */}
       <SearchSection />
       <TESTCOMP1 />
       <TESTCOMP2 />
