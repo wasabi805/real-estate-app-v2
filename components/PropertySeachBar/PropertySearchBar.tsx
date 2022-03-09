@@ -72,7 +72,7 @@ const PropertySearchBar = () => {
     dispatch(autoCompleteUpdateState(autoSelectedInput))
   }
 
-  const handleHomeSearch = () => {}
+  const handleHomeSearch = async () => {}
   const handleSetInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     dispatch(setSearchField(value))
