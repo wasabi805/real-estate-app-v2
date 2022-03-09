@@ -5,7 +5,7 @@ import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 
 const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE, SET_LOGIN_FORM_CHANGE } =
   LoginModalActions
-const { SET_SEARCH_FIELD , AUTO_COMPLETE_UPDATE_INPUT} = SearchActions
+const { SET_SEARCH_FIELD, AUTO_COMPLETE_UPDATE_INPUT } = SearchActions
 
 export interface IinitialState {
   state: {
@@ -79,14 +79,14 @@ const appReducer = (state = initialState, action: IAction) => {
         },
       }
 
-      case AUTO_COMPLETE_UPDATE_INPUT:
-        console.log(action.payload)
-        return{
-          ...state,
-          search:{
-            value: action.payload.addressObject.formatted_address
-          }
-        }
+    case AUTO_COMPLETE_UPDATE_INPUT:
+      console.log(action.payload)
+      return {
+        ...state,
+        search: {
+          value: action.payload.addressObject.formatted_address,
+        },
+      }
 
     default:
       return state

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
-const SectionContainer = styled.div(({ backgroundImage, children }) => {
+
+const SectionContainer = styled.div(({ children }) => {
   return {
     position: 'relative',
     display: 'flex',

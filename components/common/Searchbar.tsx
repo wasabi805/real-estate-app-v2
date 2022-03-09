@@ -5,7 +5,7 @@ import { Input } from 'antd'
 const { Search } = Input
 
 interface ISearchbarProps {
-  id?: string,
+  id?: string
   name?: string
   value?: string
   placeHolder?: string

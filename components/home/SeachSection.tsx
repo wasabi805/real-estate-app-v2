@@ -5,7 +5,7 @@ import img from 'images/banner-living-room-teal_1000.jpg'
 import styled from '@emotion/styled'
 
 import PropertySearchBar from '@components/PropertySeachBar'
-
+import { SearchSectionContentStyle, SearchSectionHeaderStyle } from '@components/PropertySeachBar/styles'
 
 const BackgroundImage = styled.div(({ children }) => {
   return {
@@ -20,14 +20,13 @@ const BackgroundImage = styled.div(({ children }) => {
   }
 })
 
+
 const SearchSection: React.FC = () => {
-
   return (
-    <SectionContainer backgroundImage={img}>
-      <div style={{ zIndex: '1000' }}>
-        <h3>Find a home!</h3>
-
-        <PropertySearchBar/>
+    <SectionContainer>
+      <div className={SearchSectionContentStyle}>
+        <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
+        <PropertySearchBar />
       </div>
       <BackgroundImage />
     </SectionContainer>
