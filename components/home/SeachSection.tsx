@@ -23,7 +23,7 @@ const BackgroundImage = styled.div(({ children }) => {
   }
 })
 
-const SearchSection = () => {
+const SearchSection: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
@@ -44,8 +44,8 @@ const SearchSection = () => {
           placeHolder={SEARCH_PLACEHOLDER}
           onSearch={handleHomeSearch}
           onChange={handleSearchInputChange}
-          // name={'seach-input'}
-          // value={search.value}
+          name={'seach-input'}
+          value={search.value}
         />
       </div>
       <BackgroundImage />

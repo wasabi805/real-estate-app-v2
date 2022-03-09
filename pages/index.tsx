@@ -4,8 +4,7 @@ import React, { useContext } from 'react'
 import { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 import AppContext from '../context/appContext'
 import { SearchSection } from '../components/home'
-
-import Script from 'next/script'
+import GooglePlacesScript from 'scripts/googlePlaces'
 
 interface IHomeProps {
   res: any
@@ -15,14 +14,6 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
 
   // console.log('what is res', res)
 
-  /**
-   * expected behavior to clear out env at runtime | see : https://github.com/vercel/next.js/issues/26582
-   */
-  const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
-
-  const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places&callback=initAutoComplete`
-  
-  
   if (isLoading) return <div>Loading...</div>
   if (error)
     return (
@@ -39,26 +30,12 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
   }
 
   return (
-    <div>
-      <Script id="initAutoComplete">
-        {`let autocomplete; 
-             function initAutoComplete(){
-                 autocomplete= new google.maps.places.Autocomplete(
-                     document.getElementById('autocomplete'),
-                     { 
-                         componentRestrictions:{
-                             'country':['US']
-                         },
-                         fields:['place_id', 'geometry','name']
-                     }); 
-             }`}
-      </Script>
-      <Script src={externalScript} />
-
+    <>
+      <GooglePlacesScript />
       <SearchSection />
       <TESTCOMP1 />
       <TESTCOMP2 />
-    </div>
+    </>
   )
 }
 export default Home
@@ -73,7 +50,7 @@ export const getStaticProps = async () => {
       'x-rapidapi-key': process.env.REALTOR_API_KEY,
     },
   }
-  
+
   // const res = await axios
   //   .request(options)
   //   .then(function (response) {

@@ -4,7 +4,21 @@ import { Input } from 'antd'
 
 const { Search } = Input
 
-const Searchbar = ({ name, value, placeHolder, onChange, onSearch }) => {
+interface ISearchbarProps {
+  name: string
+  value: string
+  placeHolder: string
+  onChange: () => void
+  onSearch: () => void
+}
+
+const Searchbar: React.FC<ISearchbarProps> = ({
+  name,
+  value,
+  placeHolder,
+  onChange,
+  onSearch,
+}) => {
   return (
     <>
       <Search
