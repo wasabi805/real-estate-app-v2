@@ -5,8 +5,7 @@ import { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 import AppContext from '../context/appContext'
 import { SearchSection } from '../components/home'
 
-import { useExternalScript } from 'hooks/useExternalScript'
-import { useInitAutoComplete } from 'hooks/useInitAutoComplete'
+import Script from 'next/script'
 
 interface IHomeProps {
   res: any
@@ -14,19 +13,16 @@ interface IHomeProps {
 const Home: NextPage<IHomeProps> = ({ res }) => {
   const { user, error, isLoading } = useUser()
 
-  // const externalScript = "<external-script-url>";
+  // console.log('what is res', res)
 
-  // const externalScript =`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`
-  // const externalScript =`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places&callback=test`
-  const externalScript = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places&callback=initAutoComplete`
-  const scriptState = useExternalScript(externalScript)
-  const initMapState = useInitAutoComplete('google-map')
-  console.log(initMapState)
-  useInitAutoComplete()
-  React.useEffect(() => {
-    console.log('what is the state to the hook ', scriptState)
-  }, [scriptState])
+  /**
+   * expected behavior to clear out env at runtime | see : https://github.com/vercel/next.js/issues/26582
+   */
+  const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 
+  const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places&callback=initAutoComplete`
+  
+  
   if (isLoading) return <div>Loading...</div>
   if (error)
     return (
@@ -44,7 +40,22 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
 
   return (
     <div>
-      {scriptState === 'ready' && <SearchSection />}
+      <Script id="initAutoComplete">
+        {`let autocomplete; 
+             function initAutoComplete(){
+                 autocomplete= new google.maps.places.Autocomplete(
+                     document.getElementById('autocomplete'),
+                     { 
+                         componentRestrictions:{
+                             'country':['US']
+                         },
+                         fields:['place_id', 'geometry','name']
+                     }); 
+             }`}
+      </Script>
+      <Script src={externalScript} />
+
+      <SearchSection />
       <TESTCOMP1 />
       <TESTCOMP2 />
     </div>
@@ -62,7 +73,7 @@ export const getStaticProps = async () => {
       'x-rapidapi-key': process.env.REALTOR_API_KEY,
     },
   }
-
+  
   // const res = await axios
   //   .request(options)
   //   .then(function (response) {

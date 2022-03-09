@@ -44,8 +44,8 @@ const SearchSection = () => {
           placeHolder={SEARCH_PLACEHOLDER}
           onSearch={handleHomeSearch}
           onChange={handleSearchInputChange}
-          name={'seach-input'}
-          value={search.value}
+          // name={'seach-input'}
+          // value={search.value}
         />
       </div>
       <BackgroundImage />
