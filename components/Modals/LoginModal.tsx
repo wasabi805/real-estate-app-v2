@@ -12,7 +12,8 @@ interface ILoginModalProps {}
 const LoginModal: React.FC<ILoginModalProps> = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { dismissLoginModal, setLoginFormChange } = LoginModalActions
+  const { dismissLoginModal, setLoginFormChange, setIsLogin } =
+    LoginModalActions
 
   const onCancel = () => {
     dispatch(dismissLoginModal)
@@ -26,6 +27,10 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     dispatch(setLoginFormChange({ [name]: value }))
   }
 
+  const handleTabClick = (key: string) => {
+    key === 'login' ? dispatch(setIsLogin(true)) : dispatch(setIsLogin(false))
+  }
+
   return (
     <Modal
       title="Welcome to QuikSeek"
@@ -35,10 +40,11 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     >
       <div>
         {/* LOGIN EXISTING USER */}
-        <Tabs defaultActiveKey="1" onChange={() => console.log('hi')}>
-          <TabPane tab="Login" key="1">
+        <Tabs defaultActiveKey="1" onTabClick={(key) => handleTabClick(key)}>
+          <TabPane tab="Login" key="login">
             <LoginModaContentWrapper>
               <FormInput
+                label={'email'}
                 name={'email'}
                 value={state.user.email}
                 placeholder={'enter email'}
@@ -61,23 +67,23 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
 
           {/* REGISTER NEW USER */}
 
-          <TabPane tab="Register" key="2">
+          <TabPane tab="Register" key="register">
             <FormInput
-            label={'email'}
+              label={'email'}
               name={'email'}
               value={state.user.email}
               placeholder={'enter email'}
               handleChange={handleLoginFormChange}
             />
             <FormInput
-              label='create password'
+              label="create password"
               name="create-password"
               value={state.user.passsword}
               placeholder={'enter password'}
               handleChange={handleLoginFormChange}
             />
 
-          <FormInput
+            <FormInput
               label={'confirm password'}
               name="confirm-password"
               value={state.user.passsword}

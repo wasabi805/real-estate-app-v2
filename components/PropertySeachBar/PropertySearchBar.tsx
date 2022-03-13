@@ -85,7 +85,6 @@ const PropertySearchBar = () => {
     )
   }, [])
 
-
   return (
     <input
       className={properySearchInputStyles}

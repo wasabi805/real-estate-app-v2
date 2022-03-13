@@ -10,8 +10,17 @@ export const dismissLoginModal = {
   payload: { dismissLoginModal: false },
 }
 
-export const SET_LOGIN_FORM_CHANGE = 'SET_LOGIN_FORM_CHANGE'
+export const SET_IS_LOGIN = 'SET_IS_LOGIN'
+export const setIsLogin = (bool) => {
+  return {
+    type: SET_IS_LOGIN,
+    payload: {
+      isLogin: bool,
+    },
+  }
+}
 
+export const SET_LOGIN_FORM_CHANGE = 'SET_LOGIN_FORM_CHANGE'
 export const setLoginFormChange = (userLoginData) => {
   return {
     type: SET_LOGIN_FORM_CHANGE,

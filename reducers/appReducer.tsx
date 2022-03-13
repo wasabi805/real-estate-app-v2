@@ -3,8 +3,12 @@ import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/searchActions'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 
-const { RENDER_LOGIN_MODLE, DISMISS_LOGIN_MODLE, SET_LOGIN_FORM_CHANGE } =
-  LoginModalActions
+const {
+  RENDER_LOGIN_MODLE,
+  DISMISS_LOGIN_MODLE,
+  SET_IS_LOGIN,
+  SET_LOGIN_FORM_CHANGE,
+} = LoginModalActions
 const { SET_SEARCH_FIELD, AUTO_COMPLETE_UPDATE_INPUT } = SearchActions
 
 export interface IinitialState {
@@ -16,6 +20,13 @@ export interface IinitialState {
     }
     search: {
       value: string
+    }
+    fetchProperty: boolean
+    loginModal: {
+      isLogin: true
+      email: string
+      confirmEmail: string
+      password: string
     }
   }
   dispatch: React.Dispatch<IAction>
@@ -30,6 +41,7 @@ export interface IAction {
     search?: {
       value: string
     }
+    isLogin: boolean
     addressObject: IGooglePlacesAddressObj
   }
 }
@@ -38,6 +50,13 @@ export const initialState = {
   isLoginModalVisibile: false,
   user: { password: '', email: '' },
   search: '',
+  fetchProperty: false,
+  loginModal: {
+    isLogin: true,
+    email: '',
+    confirmEmail: '',
+    password: '',
+  },
 }
 
 const appReducer = (state = initialState, action: IAction) => {
@@ -56,6 +75,14 @@ const appReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         isLoginModalVisibile: dismissLoginModal,
+      }
+
+    case SET_IS_LOGIN:
+      return {
+        ...state,
+        loginModal: {
+          isLogin: action.payload.isLogin,
+        },
       }
 
     case SET_LOGIN_FORM_CHANGE:
@@ -86,6 +113,7 @@ const appReducer = (state = initialState, action: IAction) => {
         search: {
           value: action.payload.addressObject.formatted_address,
         },
+        fetchProperty: true,
       }
 
     default:
