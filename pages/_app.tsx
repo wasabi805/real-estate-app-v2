@@ -6,7 +6,22 @@ import AppContext from 'context/appContext'
 import appReducer, { initialState } from 'reducers/appReducer'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 
-function MyApp({ Component, pageProps }: AppProps) {
+export const getStaticProps = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  const data = await res.json()
+
+  console.log(data)
+  return {
+    props: {
+      ninjas: data,
+    },
+  }
+}
+interface IAppProps extends AppProps {
+  AppData: any
+}
+
+function App({ Component, pageProps, AppData }: IAppProps) {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   return (
@@ -25,4 +40,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+App.getInitialProps = async () => {
+  const req = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  const data = await req.json()
+  return { AppData: data.results }
+}
+
+export default App

@@ -25,8 +25,8 @@ export interface IinitialState {
     loginModal: {
       isLogin: true
       email: string
-      confirmEmail: string
       password: string
+      confirmPassword: string
     }
   }
   dispatch: React.Dispatch<IAction>
@@ -81,6 +81,7 @@ const appReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         loginModal: {
+          email: state.loginModal.email,
           isLogin: action.payload.isLogin,
         },
       }
@@ -92,8 +93,8 @@ const appReducer = (state = initialState, action: IAction) => {
 
       return {
         ...state,
-        user: {
-          ...state.user,
+        loginModal: {
+          ...state.loginModal,
           [name]: Object.values(userLoginData).pop(),
         },
       }

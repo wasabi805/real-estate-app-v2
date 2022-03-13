@@ -4,7 +4,6 @@ import React, { useContext } from 'react'
 import { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 import AppContext from '../context/appContext'
 import { SearchSection } from '../components/home'
-import GooglePlacesScript from 'scripts/googlePlaces'
 
 interface IHomeProps {
   res: any

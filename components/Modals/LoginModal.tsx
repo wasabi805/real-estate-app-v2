@@ -23,12 +23,26 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const { name, value } = e.target
-
     dispatch(setLoginFormChange({ [name]: value }))
   }
 
   const handleTabClick = (key: string) => {
     key === 'login' ? dispatch(setIsLogin(true)) : dispatch(setIsLogin(false))
+  }
+
+  const handleCreateNewUser = () => {
+    alert('i ran')
+    // get reducer data and check if user exists in dynamo
+    // 1.) on back end make a get all user and see if the user already exists
+    //this check has to be able to be done from any page in the app
+    fetchData()
+  }
+
+  const fetchData = async () => {
+    const req = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    const AppData = await req.json()
+    console.log({ AppData })
+    return { AppData: AppData.results }
   }
 
   return (
@@ -46,13 +60,14 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
               <FormInput
                 label={'email'}
                 name={'email'}
-                value={state.user.email}
+                value={state.loginModal.email}
                 placeholder={'enter email'}
                 handleChange={handleLoginFormChange}
               />
               <FormInput
                 name="password"
-                value={state.user.passsword}
+                label={'password'}
+                value={state.loginModal.password}
                 isPasswordInput={true}
                 placeholder={'enter password'}
                 handleChange={handleLoginFormChange}
@@ -71,14 +86,14 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             <FormInput
               label={'email'}
               name={'email'}
-              value={state.user.email}
+              value={state.loginModal.email}
               placeholder={'enter email'}
               handleChange={handleLoginFormChange}
             />
             <FormInput
               label="create password"
-              name="create-password"
-              value={state.user.passsword}
+              name="password"
+              value={state.loginModal.password}
               placeholder={'enter password'}
               handleChange={handleLoginFormChange}
             />
@@ -86,19 +101,27 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             <FormInput
               label={'confirm password'}
               name="confirm-password"
-              value={state.user.passsword}
+              value={state.loginModal.confirmPassword}
               placeholder={'confirm password'}
               handleChange={handleLoginFormChange}
             />
 
             <div>
-              <Button type="primary">Register Now!</Button>
+              <Button onClick={handleCreateNewUser} type="primary">
+                Register Now!
+              </Button>
             </div>
           </TabPane>
         </Tabs>
       </div>
     </Modal>
   )
+}
+
+LoginModal.getInitialProps = async () => {
+  const req = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  const data = await req.json()
+  return { AppData: data.results }
 }
 
 export default LoginModal
