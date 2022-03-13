@@ -61,7 +61,7 @@ const FormInput: React.FC<IFormInput> = ({
         </div>
       ) : (
         <div>
-          <ModalFormLabel text={'Email'} />
+          <ModalFormLabel text={label} />
           <Input
             id={id}
             type={type}

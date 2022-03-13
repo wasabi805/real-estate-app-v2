@@ -34,6 +34,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
       onCancel={onCancel}
     >
       <div>
+        {/* LOGIN EXISTING USER */}
         <Tabs defaultActiveKey="1" onChange={() => console.log('hi')}>
           <TabPane tab="Login" key="1">
             <LoginModaContentWrapper>
@@ -58,24 +59,34 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
             </LoginModaContentWrapper>
           </TabPane>
 
+          {/* REGISTER NEW USER */}
+
           <TabPane tab="Register" key="2">
             <FormInput
+            label={'email'}
               name={'email'}
               value={state.user.email}
               placeholder={'enter email'}
               handleChange={handleLoginFormChange}
             />
             <FormInput
-              name="password"
+              label='create password'
+              name="create-password"
               value={state.user.passsword}
-              isPasswordInput={true}
               placeholder={'enter password'}
               handleChange={handleLoginFormChange}
             />
 
+          <FormInput
+              label={'confirm password'}
+              name="confirm-password"
+              value={state.user.passsword}
+              placeholder={'confirm password'}
+              handleChange={handleLoginFormChange}
+            />
+
             <div>
-              <Button type="primary">Primary Button</Button>
-              <Button>Default Button</Button>
+              <Button type="primary">Register Now!</Button>
             </div>
           </TabPane>
         </Tabs>
