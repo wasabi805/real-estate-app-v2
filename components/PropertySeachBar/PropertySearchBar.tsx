@@ -4,6 +4,7 @@ import * as SearchActions from 'actions/searchActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
+import { useRouter } from 'next/router'
 
 const { setSearchField, autoCompleteUpdateState } = SearchActions
 
@@ -14,6 +15,8 @@ const PropertySearchBar = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { search } = state
+
+  const router = useRouter()
 
   console.log('what is state', state)
   const [query, setQuery] = useState('')
@@ -63,12 +66,10 @@ const PropertySearchBar = () => {
     const query = addressObject.formatted_address
     updateQuery(query)
 
-    // TODO : set the state in reducer and redirect to next page
     handleAutoSelected(addressObject)
   }
 
   const handleAutoSelected = (autoSelectedInput: IGooglePlacesAddressObj) => {
-    console.log('bring to reducer')
     dispatch(autoCompleteUpdateState(autoSelectedInput))
   }
 
@@ -83,6 +84,7 @@ const PropertySearchBar = () => {
       handleScriptLoad(setQuery, autoCompleteRef)
     )
   }, [])
+
 
   return (
     <input

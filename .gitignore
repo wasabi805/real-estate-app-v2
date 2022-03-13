@@ -3,6 +3,9 @@
 # global 
 /.npm-global
 
+#lamda Code
+/lamda
+
 #env vars
 .env.local
 
