@@ -24,7 +24,7 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
 
   if (user) {
     console.log({
-      user,
+      user: user,
     })
   }
 

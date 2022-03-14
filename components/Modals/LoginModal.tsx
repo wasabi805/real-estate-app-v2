@@ -31,7 +31,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   }
 
   const handleCreateNewUser = () => {
-    alert('i ran')
+
     // get reducer data and check if user exists in dynamo
     // 1.) on back end make a get all user and see if the user already exists
     //this check has to be able to be done from any page in the app
@@ -121,6 +121,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
 LoginModal.getInitialProps = async () => {
   const req = await fetch('https://jsonplaceholder.typicode.com/todos/1')
   const data = await req.json()
+  console.log(data)
   return { AppData: data.results }
 }
 
