@@ -11,7 +11,12 @@ const { setSearchField, autoCompleteUpdateState } = SearchActions
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
 
-const PropertySearchBar = () => {
+
+interface IProps{
+  callsOnLocationSelected?: ()=> void | []
+}
+
+const PropertySearchBar: React.FC< IProps > = ({ callsOnLocationSelected }) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { search } = state
@@ -66,11 +71,19 @@ const PropertySearchBar = () => {
     const query = addressObject.formatted_address
     updateQuery(query)
 
-    handleAutoSelected(addressObject)
+    handleAutoSelected(addressObject, callsOnLocationSelected)
   }
 
-  const handleAutoSelected = (autoSelectedInput: IGooglePlacesAddressObj) => {
-    dispatch(autoCompleteUpdateState(autoSelectedInput))
+  const handleAutoSelected = async (autoSelectedInput: IGooglePlacesAddressObj, fns = null) => {
+    await dispatch(autoCompleteUpdateState(autoSelectedInput))
+
+    if(typeof fns === 'function'){ fns()}
+    
+    if(Array.isArray(fns)){
+      fns.forEach( async (element) => {
+         await element()
+      });
+    }
   }
 
   const handleHomeSearch = async () => {}

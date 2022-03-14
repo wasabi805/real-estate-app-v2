@@ -1,6 +1,6 @@
 import React from 'react'
 import SectionContainer from '@components/common/SectionContainer'
-
+import * as SearchActions from 'actions/searchActions'
 import img from 'images/banner-living-room-teal_1000.jpg'
 import styled from '@emotion/styled'
 
@@ -28,7 +28,7 @@ const SearchSection: React.FC = () => {
     <SectionContainer>
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
-        <PropertySearchBar />
+        <PropertySearchBar callsOnLocationSelected={ [()=>console.log('fn1'), ()=>console.log('fn2')] } />
       </div>
       <BackgroundImage />
     </SectionContainer>
