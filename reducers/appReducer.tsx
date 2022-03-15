@@ -20,8 +20,10 @@ export interface IinitialState {
     }
     search: {
       value: string
+      isAutoComplete: boolean
     }
     fetchProperty: boolean
+
     loginModal: {
       isLogin: true
       email: string
@@ -40,6 +42,7 @@ export interface IAction {
     userLoginData?: any
     search?: {
       value: string
+      isAutoComplete: boolean
     }
     isLogin: boolean
     addressObject: IGooglePlacesAddressObj
@@ -49,8 +52,12 @@ export interface IAction {
 export const initialState = {
   isLoginModalVisibile: false,
   user: { password: '', email: '' },
-  search: '',
+  search: {
+    value: '',
+    isAutoComplete: false,
+  },
   fetchProperty: false,
+
   loginModal: {
     isLogin: true,
     email: '',
@@ -102,17 +109,18 @@ const appReducer = (state = initialState, action: IAction) => {
     case SET_SEARCH_FIELD:
       return {
         ...state,
+        fetchProperty: false,
         search: {
           value: action.payload.value,
         },
       }
 
     case AUTO_COMPLETE_UPDATE_INPUT:
-      console.log(action.payload)
       return {
         ...state,
         search: {
           value: action.payload.addressObject.formatted_address,
+          isAutoComplete: true,
         },
         fetchProperty: true,
       }

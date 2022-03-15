@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
-import SectionContainer from '@components/common/SectionContainer'
 import * as SearchActions from 'actions/searchActions'
+import AppContext from 'context/appContext'
+
+import SectionContainer from '@components/common/SectionContainer'
+
 import img from 'images/banner-living-room-teal_1000.jpg'
 import styled from '@emotion/styled'
 
+import realtorApi from '@pages/api/realtor'
 import PropertySearchBar from '@components/PropertySeachBar'
 import {
   SearchSectionContentStyle,
@@ -25,17 +29,22 @@ const BackgroundImage = styled.div(({ children }) => {
 })
 
 const SearchSection: React.FC = () => {
-  const handleFetchProperties = async () => {
-    const res = await axios.get('http://localhost:3000/api/realtor')
+  const appContext = useContext(AppContext)
+  const { state, dispatch } = appContext
+  const { search } = state
+  console.log(state, '777777')
 
-    console.log(res)
-  }
+  // await axios.get('http://localhost:3000/api/realtor',{
+  //     params:{
+  //       address: 'bar'
+  //     }
+  //   }).then(resp=> console.log({resp}, '$$$$$$'))
 
   return (
     <SectionContainer>
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
-        <PropertySearchBar callsOnLocationSelected={handleFetchProperties} />
+        <PropertySearchBar />
       </div>
       <BackgroundImage />
     </SectionContainer>
@@ -45,6 +54,7 @@ const SearchSection: React.FC = () => {
 export default SearchSection
 
 export const getStaticProps = async (req, res) => {
+  console.log(req, 'is it here in the back end?')
   try {
     var options = {
       method: 'GET',

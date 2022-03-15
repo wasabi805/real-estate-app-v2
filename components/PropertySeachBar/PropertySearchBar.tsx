@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
+import axios from 'axios'
 import { SEARCH_PLACEHOLDER } from '../../strings'
 import * as SearchActions from 'actions/searchActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
-import { useRouter } from 'next/router'
 
 const { setSearchField, autoCompleteUpdateState } = SearchActions
 
@@ -20,9 +20,6 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
   const { state, dispatch } = appContext
   const { search } = state
 
-  const router = useRouter()
-
-  console.log('what is state', state)
   const [query, setQuery] = useState('')
   const autoCompleteRef = useRef(null)
 
@@ -73,10 +70,25 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
     handleAutoSelected(addressObject, callsOnLocationSelected)
   }
 
+  //only make api calls to the back end if auto complete was selected by the user
+  useEffect(() => {
+    if (state.fetchProperty) {
+      axios
+        .get('http://localhost:3000/api/realtor', {
+          params: {
+            location: state.search.value,
+            isAutoComplete: state.search.isAutoComplete,
+          },
+        })
+        .then((resp) => console.log({ resp }, '$$$$$$'))
+    }
+  }, [state.fetchProperty])
+
   const handleAutoSelected = async (
     autoSelectedInput: IGooglePlacesAddressObj,
     fns = null
   ) => {
+    // update context state to auto selected address
     await dispatch(autoCompleteUpdateState(autoSelectedInput))
 
     /**
