@@ -6,11 +6,11 @@ import AppContext from 'context/appContext'
 import appReducer, { initialState } from 'reducers/appReducer'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
 
-interface IAppProps extends AppProps{
+interface IAppProps extends AppProps {
   AppData: any
 }
 
-function App({ Component, pageProps, AppData }: IAppProps ,) {
+function App({ Component, pageProps, AppData }: IAppProps) {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   return (

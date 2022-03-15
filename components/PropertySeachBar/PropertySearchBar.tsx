@@ -11,12 +11,11 @@ const { setSearchField, autoCompleteUpdateState } = SearchActions
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
 
-
-interface IProps{
-  callsOnLocationSelected?: ()=> void | []
+interface IProps {
+  callsOnLocationSelected?: () => void | []
 }
 
-const PropertySearchBar: React.FC< IProps > = ({ callsOnLocationSelected }) => {
+const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { search } = state
@@ -74,15 +73,23 @@ const PropertySearchBar: React.FC< IProps > = ({ callsOnLocationSelected }) => {
     handleAutoSelected(addressObject, callsOnLocationSelected)
   }
 
-  const handleAutoSelected = async (autoSelectedInput: IGooglePlacesAddressObj, fns = null) => {
+  const handleAutoSelected = async (
+    autoSelectedInput: IGooglePlacesAddressObj,
+    fns = null
+  ) => {
     await dispatch(autoCompleteUpdateState(autoSelectedInput))
 
-    if(typeof fns === 'function'){ fns()}
-    
-    if(Array.isArray(fns)){
-      fns.forEach( async (element) => {
-         await element()
-      });
+    /**
+     * The logic below is so that when a user selects a location, the api call to fetch properties can be called and also be routed to another page if nessesary.
+     */
+    if (typeof fns === 'function') {
+      fns()
+    }
+
+    if (Array.isArray(fns)) {
+      fns.forEach(async (element) => {
+        await element()
+      })
     }
   }
 

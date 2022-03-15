@@ -31,7 +31,6 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   }
 
   const handleCreateNewUser = () => {
-
     // get reducer data and check if user exists in dynamo
     // 1.) on back end make a get all user and see if the user already exists
     //this check has to be able to be done from any page in the app
