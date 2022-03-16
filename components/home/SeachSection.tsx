@@ -46,7 +46,12 @@ const SearchSection: React.FC = () => {
           isAutoComplete: state.search.isAutoComplete,
         },
       })
-      .then((resp) => console.log({ resp }, 'AutoComplete results or Suggested places from google api'))
+      .then((resp) =>
+        console.log(
+          { resp },
+          'AutoComplete results or Suggested places from google api'
+        )
+      )
   }
 
   return (
