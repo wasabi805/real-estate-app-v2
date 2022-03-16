@@ -21,3 +21,13 @@ export const autoCompleteUpdateState = (
     },
   }
 }
+
+export const UPDATE_SEARCH_PROPERTY_ON_ENTER = 'UPDATE_SEARCH_PROPERTY_ON_ENTER'
+export const updateSearchPropertyOnEnter = (searchQueryString: string) => {
+  return {
+    type: UPDATE_SEARCH_PROPERTY_ON_ENTER,
+    payload: {
+      searchQueryString,
+    },
+  }
+}

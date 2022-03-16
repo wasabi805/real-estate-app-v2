@@ -6,7 +6,8 @@ import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 
-const { setSearchField, autoCompleteUpdateState } = SearchActions
+const { setSearchField, autoCompleteUpdateState, updateSearchPropertyOnEnter } =
+  SearchActions
 
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
@@ -77,10 +78,10 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
         .get('http://localhost:3000/api/realtor', {
           params: {
             location: state.search.value,
-            isAutoComplete: state.search.isAutoComplete,
+            isAutoComplete: true,
           },
         })
-        .then((resp) => console.log({ resp }, '$$$$$$'))
+        .then((resp) => console.log({ resp }, 'response from auto complete'))
     }
   }, [state.fetchProperty])
 
@@ -117,6 +118,21 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
     )
   }, [])
 
+  const handleOnKeyPress = async (e) => {
+    const { value } = e.target
+    if (e.which == 13 || e.keyCode == 13) {
+      await dispatch(updateSearchPropertyOnEnter(value))
+      await axios
+        .get('http://localhost:3000/api/realtor', {
+          params: {
+            location: value,
+            isAutoComplete: false,
+          },
+        })
+        .then((resp) => console.log({ resp }, 'response from enter clicked'))
+    }
+  }
+
   return (
     <input
       className={properySearchInputStyles}
@@ -127,6 +143,7 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
       onChange={handleSetInputField}
       name={'seach-input'}
       value={search.value}
+      onKeyPress={handleOnKeyPress}
     />
   )
 }
