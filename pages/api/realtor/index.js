@@ -6,6 +6,35 @@ const realtorApi = async (request, response) => {
     typeof request.query.isAutoComplete,
     'What is the query from the front client?'
   )
+
+  const getListings =(stateCode, cityName)=>{
+    const  options = {
+      method: 'GET',
+      url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
+      params: {
+        state_code: `${stateCode}`,
+        city: `${cityName}`,
+        offset: '0',
+        limit: '200',
+        sort: 'relevance',
+      },
+      headers: {
+        'x-rapidapi-host': 'realtor.p.rapidapi.com',
+        'x-rapidapi-key': process.env.REALTOR_API_KEY,
+      },
+    }
+  
+    return axios
+    .request(options)
+    .then((listings) => JSON.stringify(listings.data))
+    .then((apiRes) => {
+      response.status(200).send(apiRes)
+    })
+    .catch((error) => {
+      console.error(error)
+    })  
+  }
+
   try {
     let stateCode
     let city
@@ -50,31 +79,7 @@ const realtorApi = async (request, response) => {
       console.log(mainPrediction, 'mainPrediction')
       console.log({ stateCode, city })
 
-      var options = {
-        method: 'GET',
-        url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
-        params: {
-          state_code: `${stateCode}`,
-          city: `${city}`,
-          offset: '0',
-          limit: '200',
-          sort: 'relevance',
-        },
-        headers: {
-          'x-rapidapi-host': 'realtor.p.rapidapi.com',
-          'x-rapidapi-key': process.env.REALTOR_API_KEY,
-        },
-      }
-
-      return axios
-        .request(options)
-        .then((listings) => JSON.stringify(listings.data))
-        .then((apiRes) => {
-          response.status(200).send(apiRes)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      return getListings(stateCode, city)
     }
 
     /**
@@ -120,33 +125,8 @@ const realtorApi = async (request, response) => {
       // TODO: if full address is provided, prepare 2nd api from  Realty Mole
       // https://rapidapi.com/realtymole/api/realty-mole-property-api/
     }
+    return getListings(stateCode, city)
 
-    console.log('right before real request', { stateCode, city })
-    var options = {
-      method: 'GET',
-      url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
-      params: {
-        state_code: `${stateCode}`,
-        city: `${city}`,
-        offset: '0',
-        limit: '200',
-        sort: 'relevance',
-      },
-      headers: {
-        'x-rapidapi-host': 'realtor.p.rapidapi.com',
-        'x-rapidapi-key': process.env.REALTOR_API_KEY,
-      },
-    }
-
-    return axios
-      .request(options)
-      .then((listings) => JSON.stringify(listings.data))
-      .then((apiRes) => {
-        response.status(200).send(apiRes)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
   } catch (err) {}
 }
 
