@@ -9,7 +9,6 @@ const realtorApi = async (request, response) => {
   try {
     let stateCode
     let city
-
     /**
      * If request data was given as a standard form submit
      */
@@ -17,18 +16,23 @@ const realtorApi = async (request, response) => {
       console.log(
         'Call google places to aid in format before sending to realtor API'
       )
+      const queryString = request.query.location
+      const data = queryString.split(' ')
+  
+      const rData = data.join(`+`)
 
       const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
       var config = {
         method: 'get',
-        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=San%Jose&key=${googleApiKey}`,
+        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=${rData}&key=${googleApiKey}`,
         headers: {},
       }
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data), 'YEE')
-        })
+          return JSON.stringify(response.data)
+        }).then( (suggestion)=>response.status(200).send(suggestion) )
+
         .catch(function (error) {
           console.log(error)
         })
@@ -94,16 +98,16 @@ const realtorApi = async (request, response) => {
         'x-rapidapi-key': process.env.REALTOR_API_KEY,
       },
     }
-    return
-    // return axios
-    //   .request(options)
-    //   .then((listings) => JSON.stringify(listings.data))
-    //   .then((apiRes) => {
-    //     response.status(200).send(apiRes)
-    //   })
-    //   .catch((error) => {
-    //     console.error(error)
-    //   })
+    // return
+    return axios
+      .request(options)
+      .then((listings) => JSON.stringify(listings.data))
+      .then((apiRes) => {
+        response.status(200).send(apiRes)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   } catch (err) {}
 }
 

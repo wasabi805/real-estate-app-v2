@@ -78,6 +78,9 @@ const PropertySearchBar: React.FC<IProps> = () => {
   }
 
   useEffect(() => {
+
+   
+
     loadScript(externalScript, () =>
       handleScriptLoad(setQuery, autoCompleteRef)
     )
