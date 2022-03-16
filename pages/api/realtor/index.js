@@ -17,6 +17,21 @@ const realtorApi = async (request, response) => {
       console.log(
         'Call google places to aid in format before sending to realtor API'
       )
+
+      const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
+      var config = {
+        method: 'get',
+        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=San%Jose&key=${googleApiKey}`,
+        headers: {},
+      }
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data), 'YEE')
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
 
     /**
@@ -79,16 +94,16 @@ const realtorApi = async (request, response) => {
         'x-rapidapi-key': process.env.REALTOR_API_KEY,
       },
     }
-
-    return axios
-      .request(options)
-      .then((listings) => JSON.stringify(listings.data))
-      .then((apiRes) => {
-        response.status(200).send(apiRes)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    return
+    // return axios
+    //   .request(options)
+    //   .then((listings) => JSON.stringify(listings.data))
+    //   .then((apiRes) => {
+    //     response.status(200).send(apiRes)
+    //   })
+    //   .catch((error) => {
+    //     console.error(error)
+    //   })
   } catch (err) {}
 }
 

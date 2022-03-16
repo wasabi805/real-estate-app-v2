@@ -72,7 +72,6 @@ const PropertySearchBar: React.FC<IProps> = () => {
     await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
   }
 
-  const handleHomeSearch = async () => {}
   const handleSetInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     dispatch(setSearchField(value))
