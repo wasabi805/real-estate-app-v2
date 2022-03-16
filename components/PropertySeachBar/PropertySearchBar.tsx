@@ -1,22 +1,17 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import axios from 'axios'
 import { SEARCH_PLACEHOLDER } from '../../strings'
 import * as SearchActions from 'actions/searchActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 
-const { setSearchField, autoCompleteUpdateState, updateSearchPropertyOnEnter } =
+const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
   SearchActions
 
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
 
-interface IProps {
-  callsOnLocationSelected?: () => void | []
-}
-
-const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
+const PropertySearchBar: React.FC<IProps> = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { search } = state
@@ -67,43 +62,14 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
     const addressObject = autoComplete.getPlace() // get place from google api
     const query = addressObject.formatted_address
     updateQuery(query)
-
-    handleAutoSelected(addressObject, callsOnLocationSelected)
+    handleAutoSelected(addressObject)
   }
 
-  //only make api calls to the back end if auto complete was selected by the user
-  useEffect(() => {
-    if (state.fetchProperty) {
-      axios
-        .get('http://localhost:3000/api/realtor', {
-          params: {
-            location: state.search.value,
-            isAutoComplete: true,
-          },
-        })
-        .then((resp) => console.log({ resp }, 'response from auto complete'))
-    }
-  }, [state.fetchProperty])
-
   const handleAutoSelected = async (
-    autoSelectedInput: IGooglePlacesAddressObj,
-    fns = null
+    autoSelectedInput: IGooglePlacesAddressObj
   ) => {
     // update context state to auto selected address
-    await dispatch(autoCompleteUpdateState(autoSelectedInput))
-
-    /**
-     * The logic below is so that when a user selects a location, the api call to fetch properties can be called and also be routed to another page if nessesary.
-     */
-    if (typeof fns === 'function') {
-      fns()
-    }
-
-    if (Array.isArray(fns)) {
-      fns.forEach(async (element) => {
-        await element()
-      })
-    }
+    await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
   }
 
   const handleHomeSearch = async () => {}
@@ -118,32 +84,15 @@ const PropertySearchBar: React.FC<IProps> = ({ callsOnLocationSelected }) => {
     )
   }, [])
 
-  const handleOnKeyPress = async (e) => {
-    const { value } = e.target
-    if (e.which == 13 || e.keyCode == 13) {
-      await dispatch(updateSearchPropertyOnEnter(value))
-      await axios
-        .get('http://localhost:3000/api/realtor', {
-          params: {
-            location: value,
-            isAutoComplete: false,
-          },
-        })
-        .then((resp) => console.log({ resp }, 'response from enter clicked'))
-    }
-  }
-
   return (
     <input
       className={properySearchInputStyles}
       ref={autoCompleteRef}
       id={'autocomplete'}
-      placeHolder={SEARCH_PLACEHOLDER}
-      onSearch={handleHomeSearch}
+      placeholder={SEARCH_PLACEHOLDER}
       onChange={handleSetInputField}
       name={'seach-input'}
       value={search.value}
-      onKeyPress={handleOnKeyPress}
     />
   )
 }

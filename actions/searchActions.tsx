@@ -10,24 +10,15 @@ export const setSearchField = (char: string) => {
   }
 }
 
-export const AUTO_COMPLETE_UPDATE_INPUT = 'AUTO_COMPLETE_UPDATE_INPUT'
-export const autoCompleteUpdateState = (
+export const AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS =
+  'AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS'
+export const autoCompleteUpdateStateAndFetchListings = (
   addressObject: IGooglePlacesAddressObj
 ) => {
   return {
-    type: AUTO_COMPLETE_UPDATE_INPUT,
+    type: AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
     payload: {
       addressObject,
-    },
-  }
-}
-
-export const UPDATE_SEARCH_PROPERTY_ON_ENTER = 'UPDATE_SEARCH_PROPERTY_ON_ENTER'
-export const updateSearchPropertyOnEnter = (searchQueryString: string) => {
-  return {
-    type: UPDATE_SEARCH_PROPERTY_ON_ENTER,
-    payload: {
-      searchQueryString,
     },
   }
 }

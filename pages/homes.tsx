@@ -8,10 +8,6 @@ const Homes = () => {
   const { state, dispatch } = appContext
   const { search } = state
 
-  useEffect(() => {
-    console.log(localStorage)
-  }, [])
-
   return (
     <div>
       <div style={{ display: 'flex' }}>

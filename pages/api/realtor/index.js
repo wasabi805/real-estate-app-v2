@@ -3,19 +3,34 @@ import { stateCodes } from '../enums'
 
 const realtorApi = async (request, response) => {
   console.log(
-    { request: request.query },
+    typeof request.query.isAutoComplete,
     'What is the query from the front client?'
   )
   try {
+    let stateCode
+    let city
+
+    /**
+     * If request data was given as a standard form submit
+     */
+    if (request.query.isAutoComplete === 'false') {
+      console.log(
+        'Call google places to aid in format before sending to realtor API'
+      )
+    }
+
+    /**
+     * If request data was from Google Places Auto Complete
+     */
+
     const { location, isAutoComplete } = request.query
 
     const locationData = location.split(',')
+
+    // easier to grab the order of data when reversed since the state code tends to be at the end of the string google places api provides
     const formatLocationData = locationData
       .map((item) => item.trim(' '))
       .reverse()
-
-    let stateCode
-    let city
 
     const queryParam1 = formatLocationData[1].split(' ')[0]
     const queryParam2 = formatLocationData[2]
@@ -25,7 +40,7 @@ const realtorApi = async (request, response) => {
       return Object.keys(state).pop() === queryParam1
     })
 
-    // validate that queryParam1 is a valid spelling of state
+    // validate that queryParam1 is a valid spelling for the state
     const fullStateNameSent = stateCodes.some((state) => {
       return Object.values(state).pop() === queryParam1
     })
@@ -33,7 +48,7 @@ const realtorApi = async (request, response) => {
     // Scenerio 1.) AutoComplete sends a valid state name, but no city
 
     //ex.) California, USA
-    if (isAutoComplete === 'true' && fullStateNameSent) {
+    if (request.query.isAutoComplete === 'true' && fullStateNameSent) {
       console.log('++++ the full stateName was sent from autoComplete +++++ ')
       console.log(
         'send error back to front end and notify City and State are required'
@@ -41,7 +56,7 @@ const realtorApi = async (request, response) => {
     }
 
     //Scenerio 2.) AutoComplete sends a valid state code and city name, a zipcode, or a full address
-    if (isAutoComplete === 'true' && validStateCodeSent) {
+    if (request.query.isAutoComplete === 'true' && validStateCodeSent) {
       stateCode = queryParam1
       city = queryParam2
 

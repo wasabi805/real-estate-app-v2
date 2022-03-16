@@ -9,11 +9,8 @@ const {
   SET_IS_LOGIN,
   SET_LOGIN_FORM_CHANGE,
 } = LoginModalActions
-const {
-  SET_SEARCH_FIELD,
-  AUTO_COMPLETE_UPDATE_INPUT,
-  UPDATE_SEARCH_PROPERTY_ON_ENTER,
-} = SearchActions
+const { SET_SEARCH_FIELD, AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS } =
+  SearchActions
 
 export interface IinitialState {
   state: {
@@ -48,6 +45,7 @@ export interface IAction {
       value: string
       isAutoComplete: boolean
     }
+    value: string
     searchQueryString?: string
     isLogin: boolean
     addressObject: IGooglePlacesAddressObj
@@ -116,26 +114,22 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         fetchProperty: false,
         search: {
+          ...state.search,
           value: action.payload.value,
         },
       }
 
-    case AUTO_COMPLETE_UPDATE_INPUT:
+    case AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS:
       return {
         ...state,
         search: {
-          value: action.payload.addressObject.formatted_address,
-          isAutoComplete: true,
-        },
-        fetchProperty: true,
-      }
-
-    case UPDATE_SEARCH_PROPERTY_ON_ENTER:
-      return {
-        ...state,
-        search: {
-          value: action.payload.searchQueryString,
-          isAutoComplete: false,
+          ...state.search,
+          value:
+            action.payload.addressObject.formatted_address ||
+            action.payload.addressObject.name,
+          isAutoComplete: action.payload.addressObject.formatted_address
+            ? true
+            : false,
         },
         fetchProperty: true,
       }

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import axios from 'axos'
+import axios from 'axios'
 import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
 import { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
