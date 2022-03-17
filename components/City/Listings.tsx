@@ -25,13 +25,19 @@ const Listings = () => {
           onTabClick={(key) => console.log(key)}
         >
           <TabPane tab="Photos" key="Photos">
-            {searchResults.data.map((house, idx) => {
-              return (
-                <Card key={`home-${idx}`} cover={<img src={house.photo}></img>}>
-                  <Meta title="one million dollars" />
-                </Card>
-              )
-            })}
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {searchResults.data.map((house, idx) => {
+                return (
+                  <Card
+                    key={`home-${idx}`}
+                    cover={<img src={house.photo}></img>}
+                    style={{ width: '50%' }}
+                  >
+                    <Meta title="one million dollars" />
+                  </Card>
+                )
+              })}
+            </div>
           </TabPane>
 
           <TabPane tab="Table" key="Table">
