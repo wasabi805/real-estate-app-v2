@@ -24,10 +24,10 @@ const CityDetails = () => {
         </Col>
       </Row>
       <Row>
-        <Col flex={3}>
+        <Col span={14} style={{border: '2px solid orange'} }>
           <Image src={mockMap}  alt='the-five-kingdoms'/>
           </Col>
-        <Col flex={2}>
+        <Col span={10} style={{border: '2px solid plum'}}>
           <Row>
             <h3>Santa Monica Homes For Sale</h3>
           </Row>

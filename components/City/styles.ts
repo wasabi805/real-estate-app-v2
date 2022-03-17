@@ -12,7 +12,7 @@ export const ListingsContainer = styled.div`
         .ant-tabs-nav-wrap {
           // Overrides the Ant design library style tag placement of tabs
           div[style] {
-            transform: translate(38vw, 0px) !important;
+            transform: translate(30vw, 0px) !important;
           }
 
           // Overrides the Ant design library style tag placement of the ink tab when a tab is selected
