@@ -53,7 +53,7 @@ export interface IAction {
       isAutoComplete: boolean
     }
     value: string
-    data?: {}
+    data?: []
     searchQueryString?: string
     isLogin: boolean
     addressObject: IGooglePlacesAddressObj
