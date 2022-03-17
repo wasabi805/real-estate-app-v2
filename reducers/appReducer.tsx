@@ -2,6 +2,7 @@ import React from 'react'
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/searchActions'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
+import { mockListings } from 'mockListings'
 
 const {
   RENDER_LOGIN_MODLE,
@@ -68,7 +69,7 @@ export const initialState = {
   },
   fetchProperty: false,
   searchResults: {
-    data: {},
+    data: mockListings,
   },
 
   loginModal: {

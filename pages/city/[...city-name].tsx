@@ -1,5 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
+import 'antd/dist/antd.css'
+import Listings from '@components/City/Listings'
+import PropertySearchBar from '@components/PropertySeachBar'
+
+import { Row, Col } from 'antd'
 
 const CityDetails = () => {
   const appContext = useContext(AppContext)
@@ -9,7 +14,26 @@ const CityDetails = () => {
     console.log('CITY PAGE LOADED', state)
   }, [])
 
-  return <div>This is the city page</div>
+  return (
+    <div className={'city-wrapper'}>
+      <Row>
+        <Col>
+          <PropertySearchBar />
+        </Col>
+      </Row>
+      <Row>
+        <Col flex={3}>Map</Col>
+        <Col flex={2}>
+          <Row>
+            <h3>Santa Monica Homes For Sale</h3>
+          </Row>
+          <Row> Search Filters live here</Row>
+
+          <Listings />
+        </Col>
+      </Row>
+    </div>
+  )
 }
 
 export default CityDetails
