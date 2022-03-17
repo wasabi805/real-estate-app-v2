@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import { Col, Tabs, Card, Menu, Dropdown } from 'antd'
+import { Row, Col, Tabs, Card, Menu, Dropdown } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
+import ListingCard from './ListingCard'
+
 const { TabPane } = Tabs
 const { Meta } = Card
 
@@ -26,17 +28,9 @@ const Listings = () => {
         >
           <TabPane tab="Photos" key="Photos">
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {searchResults.data.map((house, idx) => {
-                return (
-                  <Card
-                    key={`home-${idx}`}
-                    cover={<img src={house.photo}></img>}
-                    style={{ width: '50%' }}
-                  >
-                    <Meta title="one million dollars" />
-                  </Card>
-                )
-              })}
+              {searchResults.data.map((house) => (
+                <ListingCard key={house.property_id} houseData={house} />
+              ))}
             </div>
           </TabPane>
 

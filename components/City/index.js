@@ -1,5 +1,6 @@
 import Listings from './Listings.tsx'
+import ListingCard from './ListingCard.tsx'
 import FiltersBar from './FiltersBar.tsx'
 import SortByOptionsMenu from './SortByOptionsMenu.tsx'
 
-export { Listings, FiltersBar, SortByOptionsMenu }
+export { Listings, ListingCard, FiltersBar, SortByOptionsMenu }

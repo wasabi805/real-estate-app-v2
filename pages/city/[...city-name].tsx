@@ -20,7 +20,8 @@ const CityDetails = () => {
     <div className={'city-wrapper'}>
       <Row>
         <Col>
-          <PropertySearchBar />
+          <input placeholder="uncomment this to get back auto search"></input>
+          {/* <PropertySearchBar /> */}
         </Col>
       </Row>
       <Row>

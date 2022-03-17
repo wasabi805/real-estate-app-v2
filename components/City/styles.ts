@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Row } from 'antd'
 
 export const ListingsContainer = styled.div`
   // background: #e2e2e8;
@@ -34,3 +35,16 @@ export const SortByOptionsContainer = styled.div`
   position: absolute;
   z-index: 100;
 `
+
+export const SpecRowTwo = styled(Row)`
+  .spec-col-two {
+  }
+  .baths {
+    padding: 0 1em;
+  }
+
+  .sq-ft {
+  }
+`
+
+export const SpecColTwo = styled(Row)``
