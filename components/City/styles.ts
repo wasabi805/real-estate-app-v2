@@ -5,9 +5,8 @@ export const ListingsContainer = styled.div`
   display: flex;
   border: 2px solid magenta;
 
-  // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.
-
   .ant-col {
+    // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.
     .photo-and-table-tab {
       .ant-tabs-nav {
         .ant-tabs-nav-wrap {
@@ -29,4 +28,9 @@ export const ListingsContainer = styled.div`
       }
     }
   }
+`
+
+export const SortByOptionsContainer = styled.div`
+  position: absolute;
+  z-index: 100;
 `
