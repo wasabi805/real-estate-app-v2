@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import AppContext from 'context/appContext'
-
+import * as SearchActions from 'actions/searchActions'
 import SectionContainer from '@components/common/SectionContainer'
 
 import img from 'images/banner-living-room-teal_1000.jpg'
@@ -12,6 +13,8 @@ import {
   SearchSectionContentStyle,
   SearchSectionHeaderStyle,
 } from '@components/PropertySeachBar/styles'
+
+const { updateStateWithSearchResults } = SearchActions
 
 const BackgroundImage = styled.div(({ children }) => {
   return {
@@ -30,6 +33,7 @@ const SearchSection: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { search } = state
+  const router = useRouter()
 
   useEffect(() => {
     if (state.fetchProperty) {
@@ -46,16 +50,21 @@ const SearchSection: React.FC = () => {
           isAutoComplete: state.search.isAutoComplete,
         },
       })
-      .then((resp) =>
+      .then((response) => {
+        const { city, state } = response.data.meta.tracking_params
         console.log(
-          { resp },
+          { response },
           'AutoComplete results or Suggested places from google api'
         )
-      )
+        // update state with search results
+        dispatch(updateStateWithSearchResults(response.data))
+        router.push(`/city/${city}/${state}`)
+      })
   }
 
   return (
     <SectionContainer>
+      {console.log('what is state', state)}
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
         <PropertySearchBar />

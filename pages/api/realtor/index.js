@@ -7,8 +7,8 @@ const realtorApi = async (request, response) => {
     'What is the query from the front client?'
   )
 
-  const getListings =(stateCode, cityName)=>{
-    const  options = {
+  const getListings = (stateCode, cityName) => {
+    const options = {
       method: 'GET',
       url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
       params: {
@@ -23,16 +23,16 @@ const realtorApi = async (request, response) => {
         'x-rapidapi-key': process.env.REALTOR_API_KEY,
       },
     }
-  
+
     return axios
-    .request(options)
-    .then((listings) => JSON.stringify(listings.data))
-    .then((apiRes) => {
-      response.status(200).send(apiRes)
-    })
-    .catch((error) => {
-      console.error(error)
-    })  
+      .request(options)
+      .then((listings) => JSON.stringify(listings.data))
+      .then((apiRes) => {
+        response.status(200).send(apiRes)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   try {
@@ -126,7 +126,6 @@ const realtorApi = async (request, response) => {
       // https://rapidapi.com/realtymole/api/realty-mole-property-api/
     }
     return getListings(stateCode, city)
-
   } catch (err) {}
 }
 

@@ -22,3 +22,14 @@ export const autoCompleteUpdateStateAndFetchListings = (
     },
   }
 }
+
+export const UPDATE_STATE_WITH_SEARCH_RESULTS =
+  'UPDATE_STATE_WITH_SEARCH_RESULTS'
+export const updateStateWithSearchResults = (data) => {
+  return {
+    type: UPDATE_STATE_WITH_SEARCH_RESULTS,
+    payload: {
+      data,
+    },
+  }
+}
