@@ -16,7 +16,7 @@ const AscendDescendTab = () => {
     const { data } = state.searchResults
     const { activeSort } = state.sortAndFilter
     let isAsc = key === 'sort-listings-ascending'
-
+    alert('asc desc tab clicked')
     dispatch(updateListingsByAscOrDesc(isAsc, activeSort, data))
   }
 

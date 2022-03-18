@@ -32,10 +32,12 @@ export interface IinitialState {
     }
     fetchProperty: boolean
     searchResults: {
-      data: {}
+      data: []
+      initialData: []
     }
     sortAndFilter: {
       activeSort: string
+      sortedProperties: []
     }
 
     loginModal: {
@@ -66,6 +68,7 @@ export interface IAction {
 
     sortAndFilter: {
       activeSort: string
+      sortedProperties: []
     }
   }
 }
@@ -80,9 +83,11 @@ export const initialState = {
   fetchProperty: false,
   searchResults: {
     data: mockListings,
+    initialData: mockListings,
   },
   sortAndFilter: {
     activeSort: 'Price',
+    sortedProperties: [],
   },
 
   loginModal: {
@@ -162,6 +167,7 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         searchResults: {
           data: { ...action.payload.data },
+          initialData: { ...action.payload.data },
         },
         fetchProperty: false,
       }

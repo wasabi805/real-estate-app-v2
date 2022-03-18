@@ -32,12 +32,12 @@ export const updateListingsByAscOrDesc = (
       }
 
     case 'Beds':
-    return {
-      type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
-      payload: {
-        data: sortByQuantity(isAsc, 'beds', data),
-      },
-    }
+      return {
+        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
+        payload: {
+          data: sortByQuantity(isAsc, 'beds', data),
+        },
+      }
 
     case 'Square Feet':
       return {
