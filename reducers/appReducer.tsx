@@ -94,7 +94,7 @@ export const initialState = {
   sortAndFilter: {
     activeSort: 'Price',
     sortedProperties: [],
-    isAscending: true,
+    isAscending: null,
   },
 
   loginModal: {
@@ -106,6 +106,7 @@ export const initialState = {
 }
 
 const appReducer = (state = initialState, action: IAction) => {
+  console.log('what is the type in the REDUCER', action)
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
@@ -186,6 +187,10 @@ const appReducer = (state = initialState, action: IAction) => {
           ...state.sortAndFilter,
           activeSort: action.payload.sortAndFilter.activeSort,
         },
+        searchResults:{
+          ...state.searchResults,
+          data: action.payload.searchResults.data
+        }
       }
 
     case UPDATE_LISTINGS_BY_ASC_OR_DESC:
@@ -210,6 +215,10 @@ const appReducer = (state = initialState, action: IAction) => {
     case SORT_LISTINGS:
       return {
         ...state,
+        searchResults:{
+          ...state.searchResults,
+          data: action.payload.searchResults.data
+        }
       }
 
     default:

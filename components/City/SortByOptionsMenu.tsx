@@ -31,6 +31,7 @@ const AscendDescendTab = () => {
   )
 }
 
+//----------------------------------------------------------------
 const SortByOptionsMenu = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
@@ -38,7 +39,9 @@ const SortByOptionsMenu = () => {
 
   const activeSortCAtegory = state.sortAndFilter.activeSort
   const handleSetActive = (e: string) => {
-    dispatch(setActiveSortCategory(e.key))
+    alert('i menu item was clicked')
+    console.log('what is state when menu clicked', state)
+    dispatch(setActiveSortCategory(e.key, state.sortAndFilter, state.searchResults))
   }
 
   const menu = (

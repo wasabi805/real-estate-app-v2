@@ -1,11 +1,44 @@
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 export const SET_ACTIVE_SORT_CATEGORY = 'SET_ACTIVE_SORT_CATEGORY'
-export const setActiveSortCategory = (category: string) => {
+
+export const setActiveSortCategory = (category: string, sortAndFilter, searchResults) => {
+  let rSortAndFilter;
+  rSortAndFilter = sortAndFilter.isAscending
+  if(rSortAndFilter === null || undefined){
+    rSortAndFilter = true
+  }else{
+    rSortAndFilter = sortAndFilter.isAscending
+  }
+  
+  const listingsToSort = [...searchResults?.data]
+
+  const clickedTab = sortAndFilter.activeSort
+
+  const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
+    (item) => item?.value === sortAndFilter?.activeSort
+  )?.pop()?.key
+
+  const sortByQuantity = (isAsc: Boolean, key: string, data: any) =>
+    data.sort((a: any, b: any) =>{
+      console.log(typeof a[key], 'what is the type?')
+
+      return isAsc ? a[key] - b[key] : (+b[key]) - (+a[key])
+    }
+      
+    )
+
+  console.log(sortByQuantity(rSortAndFilter, sortKey,  listingsToSort), 'YEEEE')
+
+
   return {
     type: SET_ACTIVE_SORT_CATEGORY,
     payload: {
       sortAndFilter: {
         activeSort: category,
+      },
+
+      searchResults: {
+        data: sortByQuantity(rSortAndFilter, sortKey,  listingsToSort),
       },
     },
   }
@@ -23,6 +56,8 @@ export const setIsAscending = (bool: boolean) => {
   }
 }
 
+/** !!!!!!! FIRES WHEN THE MENU TABS ARE CLICKED */
+
 export const SORT_LISTINGS = 'SORT_LISTINGS'
 export const sortListings = (sortAndFilter, searchResults) => {
   console.log('the data to play with ', { sortAndFilter, searchResults })
@@ -36,61 +71,50 @@ export const sortListings = (sortAndFilter, searchResults) => {
   )?.pop()?.key
 
   const sortByQuantity = (isAsc: Boolean, key: string, data: any) =>
-    data.sort((a: string, b: string) =>
-      isAsc ? a[key] - b[key] : b[key] - a[key]
+    data.sort((a: any, b: any) =>
+      isAsc ? a[key] - b[key] : (+b[key]) - (+a[key])
     )
 
   switch (clickedTab) {
     case 'Price':
-      console.log(
-        sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
-      )
-
       return {
         type: SORT_LISTINGS,
+        payload:{
+          searchResults: {
+            data: sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
+          }
+        }
       }
 
-    default:
-      return
-  }
-}
-
-export const UPDATE_LISTINGS_BY_ASC_OR_DESC = 'UPDATE_LISTINGS_BY_ASC_OR_DESC'
-
-export const updateListingsByAscOrDesc = (
-  isAsc: boolean,
-  category: string,
-  data: any
-) => {
-  const sortByQuantity = (isAsc: Boolean, key: string, data: any) =>
-    data.sort((a: string, b: string) =>
-      isAsc ? a[key] - b[key] : b[key] - a[key]
-    )
-  // sqft_raw
-  switch (category) {
-    case 'Price':
+      case 'Beds':
       return {
-        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
-        payload: {
-          data: sortByQuantity(isAsc, 'price_raw', data),
-        },
+        type: SORT_LISTINGS,
+        payload:{
+          searchResults: {
+            data: sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
+          }
+        }
       }
 
-    case 'Beds':
-      return {
-        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
-        payload: {
-          data: sortByQuantity(isAsc, 'beds', data),
-        },
-      }
+      case 'Square Feet':
+        return {
+          type: SORT_LISTINGS,
+          payload:{
+            searchResults: {
+              data: sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
+            }
+          }
+        }
 
-    case 'Square Feet':
-      return {
-        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
-        payload: {
-          data: sortByQuantity(isAsc, 'sqft_raw', data),
-        },
-      }
+        case 'Baths':
+          return {
+            type: SORT_LISTINGS,
+            payload:{
+              searchResults: {
+                data: sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
+              }
+            }
+          }
 
     default:
       return
