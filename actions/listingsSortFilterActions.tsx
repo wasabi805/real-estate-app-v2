@@ -21,13 +21,29 @@ export const updateListingsByAscOrDesc = (
     data.sort((a: string, b: string) =>
       isAsc ? a[key] - b[key] : b[key] - a[key]
     )
-
+  // sqft_raw
   switch (category) {
     case 'Price':
       return {
         type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
         payload: {
           data: sortByQuantity(isAsc, 'price_raw', data),
+        },
+      }
+
+    case 'Beds':
+    return {
+      type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
+      payload: {
+        data: sortByQuantity(isAsc, 'beds', data),
+      },
+    }
+
+    case 'Square Feet':
+      return {
+        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
+        payload: {
+          data: sortByQuantity(isAsc, 'sqft_raw', data),
         },
       }
 

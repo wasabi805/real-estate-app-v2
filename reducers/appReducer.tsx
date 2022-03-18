@@ -167,10 +167,6 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SET_ACTIVE_SORT_CATEGORY:
-      console.log(
-        'action.payload.sortAndFilter.activeSort',
-        action.payload.sortAndFilter.activeSort
-      )
       return {
         ...state,
         sortAndFilter: {
