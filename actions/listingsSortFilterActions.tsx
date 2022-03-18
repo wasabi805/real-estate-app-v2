@@ -1,3 +1,4 @@
+import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 export const SET_ACTIVE_SORT_CATEGORY = 'SET_ACTIVE_SORT_CATEGORY'
 export const setActiveSortCategory = (category: string) => {
   return {
@@ -25,8 +26,32 @@ export const setIsAscending = (bool: boolean) => {
 export const SORT_LISTINGS = 'SORT_LISTINGS'
 export const sortListings = (sortAndFilter, searchResults) => {
   console.log('the data to play with ', { sortAndFilter, searchResults })
-  return {
-    type: SORT_LISTINGS,
+
+  const listingsToSort = [...searchResults?.data]
+
+  const clickedTab = sortAndFilter.activeSort
+
+  const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
+    (item) => item?.value === sortAndFilter?.activeSort
+  )?.pop()?.key
+
+  const sortByQuantity = (isAsc: Boolean, key: string, data: any) =>
+    data.sort((a: string, b: string) =>
+      isAsc ? a[key] - b[key] : b[key] - a[key]
+    )
+
+  switch (clickedTab) {
+    case 'Price':
+      console.log(
+        sortByQuantity(sortAndFilter.isAscending, sortKey, listingsToSort)
+      )
+
+      return {
+        type: SORT_LISTINGS,
+      }
+
+    default:
+      return
   }
 }
 
