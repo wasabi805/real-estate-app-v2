@@ -37,7 +37,8 @@ export interface IinitialState {
     }
     sortAndFilter: {
       activeSort: string
-      sortedProperties: []
+      sortedProperties: [],
+      isAscending: boolean
     }
 
     loginModal: {
@@ -67,8 +68,9 @@ export interface IAction {
     addressObject: IGooglePlacesAddressObj
 
     sortAndFilter: {
-      activeSort: string
-      sortedProperties: []
+      activeSort?: string
+      sortedProperties?: []
+      isAscending?: boolean
     }
   }
 }
@@ -88,6 +90,7 @@ export const initialState = {
   sortAndFilter: {
     activeSort: 'Price',
     sortedProperties: [],
+    isAscending: true
   },
 
   loginModal: {
