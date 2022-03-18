@@ -10,6 +10,26 @@ export const setActiveSortCategory = (category: string) => {
   }
 }
 
+export const SET_IS_ASCENDING = 'SET_IS_ASCENDING'
+export const setIsAscending = (bool: boolean) => {
+  return {
+    type: SET_IS_ASCENDING,
+    payload: {
+      sortAndFilter: {
+        isAscending: bool,
+      },
+    },
+  }
+}
+
+export const SORT_LISTINGS = 'SORT_LISTINGS'
+export const sortListings = (sortAndFilter, searchResults) => {
+  console.log('the data to play with ', { sortAndFilter, searchResults })
+  return {
+    type: SORT_LISTINGS,
+  }
+}
+
 export const UPDATE_LISTINGS_BY_ASC_OR_DESC = 'UPDATE_LISTINGS_BY_ASC_OR_DESC'
 
 export const updateListingsByAscOrDesc = (

@@ -10,14 +10,16 @@ const { TabPane } = Tabs
 const AscendDescendTab = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { updateListingsByAscOrDesc } = ListingsSortFilterActions
+  const { setIsAscending, updateListingsByAscOrDesc } =
+    ListingsSortFilterActions
 
   const handleTabClick = (key: string) => {
-    const { data } = state.searchResults
-    const { activeSort } = state.sortAndFilter
+    // const { data } = state.searchResults
+    // const { activeSort } = state.sortAndFilter
     let isAsc = key === 'sort-listings-ascending'
     alert('asc desc tab clicked')
-    dispatch(updateListingsByAscOrDesc(isAsc, activeSort, data))
+    dispatch(setIsAscending(isAsc))
+    // dispatch(updateListingsByAscOrDesc(isAsc, activeSort, data))
   }
 
   return (

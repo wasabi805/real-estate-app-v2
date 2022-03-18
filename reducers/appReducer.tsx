@@ -16,8 +16,12 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
-const { SET_ACTIVE_SORT_CATEGORY, UPDATE_LISTINGS_BY_ASC_OR_DESC } =
-  ListingsSortFilterActions
+const {
+  SORT_LISTINGS,
+  SET_IS_ASCENDING,
+  SET_ACTIVE_SORT_CATEGORY,
+  UPDATE_LISTINGS_BY_ASC_OR_DESC,
+} = ListingsSortFilterActions
 
 export interface IinitialState {
   state: {
@@ -37,7 +41,7 @@ export interface IinitialState {
     }
     sortAndFilter: {
       activeSort: string
-      sortedProperties: [],
+      sortedProperties: []
       isAscending: boolean
     }
 
@@ -90,7 +94,7 @@ export const initialState = {
   sortAndFilter: {
     activeSort: 'Price',
     sortedProperties: [],
-    isAscending: true
+    isAscending: true,
   },
 
   loginModal: {
@@ -192,6 +196,20 @@ const appReducer = (state = initialState, action: IAction) => {
           ...state.searchResults,
           data: action.payload.data,
         },
+      }
+
+    case SET_IS_ASCENDING:
+      return {
+        ...state,
+        sortAndFilter: {
+          ...state.sortAndFilter,
+          isAscending: action.payload.sortAndFilter.isAscending,
+        },
+      }
+
+    case SORT_LISTINGS:
+      return {
+        ...state,
       }
 
     default:
