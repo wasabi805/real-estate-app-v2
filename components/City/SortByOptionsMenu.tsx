@@ -4,6 +4,7 @@ import { Menu, Dropdown, Tabs } from 'antd'
 import { SortByOptionsContainer } from './styles'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { SORT_LISTING_CATEGORIES } from 'strings'
+import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 
 const { TabPane } = Tabs
 
@@ -43,9 +44,9 @@ const SortByOptionsMenu = () => {
   const menu = (
     <Menu>
       <AscendDescendTab />
-      {SORT_LISTING_CATEGORIES.map((category) => (
-        <Menu.Item key={category} onClick={handleSetActive}>
-          {category}
+      {SORT_BY_LISTING_CATEGORIES.map((category) => (
+        <Menu.Item key={category.value} onClick={handleSetActive}>
+          {category.value}
         </Menu.Item>
       ))}
     </Menu>
