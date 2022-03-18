@@ -1,6 +1,7 @@
 import React from 'react'
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/searchActions'
+import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 import { mockListings } from 'mockListings'
 
@@ -15,6 +16,11 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
+const {
+  SET_ACTIVE_SORT_CATEGORY,
+  SORT_LISTINGS_ASCENDING,
+  SORT_LISTINGS_DESCENDING,
+} = ListingsSortFilterActions
 
 export interface IinitialState {
   state: {
@@ -30,6 +36,9 @@ export interface IinitialState {
     fetchProperty: boolean
     searchResults: {
       data: {}
+    }
+    sortAndFilter: {
+      activeSort: string
     }
 
     loginModal: {
@@ -57,6 +66,10 @@ export interface IAction {
     searchQueryString?: string
     isLogin: boolean
     addressObject: IGooglePlacesAddressObj
+
+    sortAndFilter: {
+      activeSort: string
+    }
   }
 }
 
@@ -70,6 +83,9 @@ export const initialState = {
   fetchProperty: false,
   searchResults: {
     data: mockListings,
+  },
+  sortAndFilter: {
+    activeSort: 'Price',
   },
 
   loginModal: {
@@ -151,6 +167,29 @@ const appReducer = (state = initialState, action: IAction) => {
           data: { ...action.payload.data },
         },
         fetchProperty: false,
+      }
+
+    case SET_ACTIVE_SORT_CATEGORY:
+      console.log(
+        'action.payload.sortAndFilter.activeSort',
+        action.payload.sortAndFilter.activeSort
+      )
+      return {
+        ...state,
+        sortAndFilter: {
+          ...state.sortAndFilter,
+          activeSort: action.payload.sortAndFilter.activeSort,
+        },
+      }
+
+    case SORT_LISTINGS_ASCENDING:
+      return {
+        ...state,
+      }
+
+    case SORT_LISTINGS_DESCENDING:
+      return {
+        ...state,
       }
 
     default:

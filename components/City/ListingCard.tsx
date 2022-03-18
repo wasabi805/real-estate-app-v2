@@ -3,7 +3,6 @@ import { Row, Col, Card } from 'antd'
 import { SpecRowTwo, SpecColTwo } from './styles'
 
 const ListingCard = ({ houseData }) => {
-  console.log(houseData)
   return (
     <Card cover={<img src={houseData.photo}></img>} style={{ width: '50%' }}>
       <Row>
@@ -20,7 +19,7 @@ const ListingCard = ({ houseData }) => {
               {houseData.sqft_raw} Sq.Ft
             </SpecColTwo>
           </SpecRowTwo>
-          <Row></Row>
+          <Row> {houseData.address} </Row>
         </Col>
 
         <Col span={6}>Heart</Col>

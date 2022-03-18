@@ -13,9 +13,7 @@ const Listings = () => {
   const { state, dispatch } = appContext
   const { searchResults } = state
 
-  useEffect(() => {
-    console.log(state)
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <ListingsContainer className={'start-HERE'}>
