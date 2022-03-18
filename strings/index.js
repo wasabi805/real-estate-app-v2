@@ -5,7 +5,7 @@ export const SORT_LISTING_CATEGORIES = [
   'Price',
   'Beds',
   'Baths',
-  'Square Feet ',
+  'Square Feet',
   '$/Square Feet',
   'Address',
   'Location',

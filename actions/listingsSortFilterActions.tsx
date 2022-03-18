@@ -10,22 +10,28 @@ export const setActiveSortCategory = (category: string) => {
   }
 }
 
-export const SORT_LISTINGS_ASCENDING = 'SORT_LISTINGS_ASCENDING'
-export const sortListingsAscending = (category: string, data) => {
-  return {
-    type: SORT_LISTINGS_ASCENDING,
-  }
-}
+export const UPDATE_LISTINGS_BY_ASC_OR_DESC = 'UPDATE_LISTINGS_BY_ASC_OR_DESC'
 
-export const SORT_LISTINGS_DESCENDING = 'SORT_LISTINGS_DESCENDING'
-export const sortListingsDescending = (
+export const updateListingsByAscOrDesc = (
   isAsc: boolean,
   category: string,
-  data
+  data: any
 ) => {
-  // var res = myarray.sort((a, b) => b.age-a.age);
-  console.log(isAsc)
-  return {
-    type: SORT_LISTINGS_DESCENDING,
+  const sortByQuantity = (isAsc: Boolean, key: string, data: any) =>
+    data.sort((a: string, b: string) =>
+      isAsc ? a[key] - b[key] : b[key] - a[key]
+    )
+
+  switch (category) {
+    case 'Price':
+      return {
+        type: UPDATE_LISTINGS_BY_ASC_OR_DESC,
+        payload: {
+          data: sortByQuantity(isAsc, 'price_raw', data),
+        },
+      }
+
+    default:
+      return
   }
 }

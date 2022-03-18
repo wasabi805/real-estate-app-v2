@@ -16,11 +16,8 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
-const {
-  SET_ACTIVE_SORT_CATEGORY,
-  SORT_LISTINGS_ASCENDING,
-  SORT_LISTINGS_DESCENDING,
-} = ListingsSortFilterActions
+const { SET_ACTIVE_SORT_CATEGORY, UPDATE_LISTINGS_BY_ASC_OR_DESC } =
+  ListingsSortFilterActions
 
 export interface IinitialState {
   state: {
@@ -182,14 +179,14 @@ const appReducer = (state = initialState, action: IAction) => {
         },
       }
 
-    case SORT_LISTINGS_ASCENDING:
+    case UPDATE_LISTINGS_BY_ASC_OR_DESC:
+      console.log(action.payload.data, '&&&&&')
       return {
         ...state,
-      }
-
-    case SORT_LISTINGS_DESCENDING:
-      return {
-        ...state,
+        searchResults: {
+          ...state.searchResults,
+          data: action.payload.data,
+        },
       }
 
     default:
