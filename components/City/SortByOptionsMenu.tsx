@@ -3,7 +3,6 @@ import AppContext from 'context/appContext'
 import { Menu, Dropdown, Tabs } from 'antd'
 import { SortByOptionsContainer } from './styles'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
-import { SORT_LISTING_CATEGORIES } from 'strings'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 
 const { TabPane } = Tabs
@@ -11,16 +10,13 @@ const { TabPane } = Tabs
 const AscendDescendTab = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { setIsAscending, updateListingsByAscOrDesc } =
+  const { setIsAscending } =
     ListingsSortFilterActions
 
+  /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
-    // const { data } = state.searchResults
-    // const { activeSort } = state.sortAndFilter
     let isAsc = key === 'sort-listings-ascending'
-    alert('asc desc tab clicked')
     dispatch(setIsAscending(isAsc))
-    // dispatch(updateListingsByAscOrDesc(isAsc, activeSort, data))
   }
 
   return (
@@ -39,9 +35,9 @@ const SortByOptionsMenu = () => {
 
   const activeSortCAtegory = state.sortAndFilter.activeSort
   const handleSetActive = (e: string) => {
-    alert('i menu item was clicked')
-    console.log('what is state when menu clicked', state)
-    dispatch(setActiveSortCategory(e.key, state.sortAndFilter, state.searchResults))
+    dispatch(
+      setActiveSortCategory(e.key, state.sortAndFilter, state.searchResults)
+    )
   }
 
   const menu = (

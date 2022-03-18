@@ -21,7 +21,7 @@ const Listings = () => {
       'isAscending updated with value:',
       state.sortAndFilter.isAscending
     )
-    if(state.sortAndFilter.isAscending !==null){
+    if (state.sortAndFilter.isAscending !== null) {
       dispatch(sortListings(state.sortAndFilter, state.searchResults))
     }
   }, [state.sortAndFilter.isAscending])
