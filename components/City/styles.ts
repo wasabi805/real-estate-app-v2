@@ -30,14 +30,14 @@ export const ListingsContainer = styled.div`
     }
   }
 
-  .listings-card-col{
-    .ant-tabs{
-      .ant-tabs-content-holder{
-        overflow-y: scroll;
-        height: 78vh;
-      }
-    }
-  }
+  // .listings-card-col{
+  //   .ant-tabs{
+  //     .ant-tabs-content-holder{
+  //       overflow-y: scroll;
+  //       height: 78vh;
+  //     }
+  //   }
+  // }
 `
 
 export const SortByOptionsContainer = styled.div`
