@@ -15,7 +15,7 @@ const PageHeader = () => {
   const { dispatch } = appContext
   const { renderLoginModal } = LoginModalActions
 
-  const handleShowLoginModal = () => dispatch(renderLoginModal)
+  const handleShowLoginModal = () => dispatch(renderLoginModal())
 
   return (
     <Header>

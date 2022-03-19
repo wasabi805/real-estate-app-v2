@@ -1,0 +1,30 @@
+import { IModalAction, IUserLoginData } from './interfaces'
+export const RENDER_LOGIN_MODLE = 'RENDER_LOGIN_MODLE'
+export const renderLoginModal = () => ({
+  type: RENDER_LOGIN_MODLE,
+  payload: { renderLoginModal: true },
+})
+
+export const DISMISS_LOGIN_MODLE = 'DISMISS_LOGIN_MODLE'
+export const dismissLoginModal = (): IModalAction => ({
+  type: DISMISS_LOGIN_MODLE,
+  payload: { dismissLoginModal: false },
+})
+
+export const SET_IS_LOGIN = 'SET_IS_LOGIN'
+export const setIsLogin = (bool: boolean): IModalAction => ({
+  type: SET_IS_LOGIN,
+  payload: {
+    isLogin: bool,
+  },
+})
+
+export const SET_LOGIN_FORM_CHANGE = 'SET_LOGIN_FORM_CHANGE'
+export const setLoginFormChange = (
+  userLoginData: IUserLoginData
+): IModalAction => ({
+  type: SET_LOGIN_FORM_CHANGE,
+  payload: {
+    userLoginData,
+  },
+})

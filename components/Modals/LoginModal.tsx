@@ -15,8 +15,8 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
   const { dismissLoginModal, setLoginFormChange, setIsLogin } =
     LoginModalActions
 
-  const onCancel = () => {
-    dispatch(dismissLoginModal)
+  const handleCancelModal = () => {
+    return dispatch(dismissLoginModal())
   }
 
   const handleLoginFormChange = (
@@ -49,7 +49,7 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
       title="Welcome to QuikSeek"
       visible={state.isLoginModalVisibile}
       onOk={() => alert('hi there')}
-      onCancel={onCancel}
+      onCancel={handleCancelModal}
     >
       <div>
         {/* LOGIN EXISTING USER */}
