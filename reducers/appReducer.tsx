@@ -205,13 +205,15 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SORT_LISTINGS:
-      console.log('actionAction', action)
       return {
         ...state,
         searchResults: {
           ...state.searchResults,
+          // data: {
+          //   listings: action.payload.searchResults.data,
+          // },
           data: {
-            listings: action.payload.searchResults.data,
+            ...action.payload.searchResults.data,
           },
         },
       }
