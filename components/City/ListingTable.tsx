@@ -1,44 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from 'context/appContext'
 import { Table, Tag, Space } from 'antd'
 import 'antd/dist/antd.css'
 
 const ListingTable = () => {
+  const appContext = useContext(AppContext)
+  const { state, dispatch } = appContext
+  const { searchResults } = state
+  console.log(searchResults, 'searchResults')
+
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Adddress',
+      dataIndex: 'address',
+      key: 'address',
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Beds',
+      dataIndex: 'beds',
+      key: 'beds',
     },
     {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (tags) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green'
-            if (tag === 'loser') {
-              color = 'volcano'
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            )
-          })}
-        </>
-      ),
+      title: 'Baths',
+      key: 'baths',
+      dataIndex: 'baths',
     },
     {
       title: 'Action',
@@ -52,13 +43,13 @@ const ListingTable = () => {
     },
   ]
 
-  const data = [
+  const people = [
     {
       key: '1',
-      name: 'Ric Flair',
-      age: 32,
+      price: '$1,7000,000',
+      beds: 32,
       address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
+      baths: 333,
     },
     {
       key: '2',
@@ -131,7 +122,7 @@ const ListingTable = () => {
   ]
   return (
     <>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={people} />
     </>
   )
 }
