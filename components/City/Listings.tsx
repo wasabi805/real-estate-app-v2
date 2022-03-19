@@ -21,10 +21,10 @@ const Listings = () => {
   }, [state.sortAndFilter.isAscending])
 
   return (
-    <ListingsContainer className={'start-HERE'}>
+    <ListingsContainer className={'listings-container'}>
       <SortByOptionsMenu />
 
-      <Col span={24}>
+      <Col span={24} className='listings-card-col'>
         <Tabs
           className={'photo-and-table-tab'}
           onTabClick={(key) => console.log(key)}

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import Image from 'next/image'
 import 'antd/dist/antd.css'
+import { CityWrapper } from './styles'
 import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from '../../public/mockMap.jpeg'
@@ -17,7 +18,7 @@ const CityDetails = () => {
   }, [])
 
   return (
-    <div className={'city-wrapper'}>
+    <CityWrapper>
       <Row>
         <Col>
           <input placeholder="uncomment this to get back auto search"></input>
@@ -37,7 +38,7 @@ const CityDetails = () => {
           <Listings />
         </Col>
       </Row>
-    </div>
+    </CityWrapper>
   )
 }
 

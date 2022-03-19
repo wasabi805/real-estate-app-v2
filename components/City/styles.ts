@@ -29,11 +29,29 @@ export const ListingsContainer = styled.div`
       }
     }
   }
+
+  .listings-card-col{
+    .ant-tabs{
+      .ant-tabs-content-holder{
+        overflow-y: scroll;
+        height: 78vh;
+      }
+    }
+  }
 `
 
 export const SortByOptionsContainer = styled.div`
   position: absolute;
   z-index: 100;
+
+  .ant-col {
+    .ant-tabs {
+      .ant-tabs-content-holder{
+        overflow-y: scroll;
+        height: 100vh;
+      }
+    }
+  }
 `
 
 export const SpecRowTwo = styled(Row)`
