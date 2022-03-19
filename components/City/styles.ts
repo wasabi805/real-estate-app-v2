@@ -46,7 +46,7 @@ export const SortByOptionsContainer = styled.div`
 
   .ant-col {
     .ant-tabs {
-      .ant-tabs-content-holder{
+      .ant-tabs-content-holder {
         overflow-y: scroll;
         height: 100vh;
       }

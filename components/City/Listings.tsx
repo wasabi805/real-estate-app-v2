@@ -5,6 +5,7 @@ import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCard from './ListingCard'
+import ListingTable from './ListingTable'
 
 const { sortListings } = ListingsSortFilterActions
 const { TabPane } = Tabs
@@ -24,11 +25,12 @@ const Listings = () => {
     <ListingsContainer className={'listings-container'}>
       <SortByOptionsMenu />
 
-      <Col span={24} className='listings-card-col'>
+      <Col span={24} className="listings-card-col">
         <Tabs
           className={'photo-and-table-tab'}
           onTabClick={(key) => console.log(key)}
         >
+          {/* LISTINGS PRESENTED WITH CARDS VIEW */}
           <TabPane tab="Photos" key="Photos">
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {searchResults.data.listings.map((house) => (
@@ -37,8 +39,9 @@ const Listings = () => {
             </div>
           </TabPane>
 
+          {/* LISTINGS PRESENTED WITH TABLE VIEW */}
           <TabPane tab="Table" key="Table">
-            <div>Tables</div>
+            <ListingTable />
           </TabPane>
         </Tabs>{' '}
       </Col>
