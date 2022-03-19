@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
-import { Row, Col, Tabs, Card, Menu, Dropdown } from 'antd'
+import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCard from './ListingCard'
 
 const { sortListings } = ListingsSortFilterActions
-
 const { TabPane } = Tabs
-const { Meta } = Card
 
 const Listings = () => {
   const appContext = useContext(AppContext)
@@ -17,10 +15,6 @@ const Listings = () => {
   const { searchResults } = state
 
   useEffect(() => {
-    console.log(
-      'isAscending updated with value:',
-      state.sortAndFilter.isAscending
-    )
     if (state.sortAndFilter.isAscending !== null) {
       dispatch(sortListings(state.sortAndFilter, state.searchResults))
     }
@@ -35,9 +29,10 @@ const Listings = () => {
           className={'photo-and-table-tab'}
           onTabClick={(key) => console.log(key)}
         >
+          {console.log('YEEEEEE', searchResults)}
           <TabPane tab="Photos" key="Photos">
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {searchResults.data.map((house) => (
+              {searchResults.data.listings.map((house) => (
                 <ListingCard key={house.property_id} houseData={house} />
               ))}
             </div>

@@ -14,9 +14,8 @@ export const setActiveSortCategory = (
     ? (rSortAndFilter = true)
     : (rSortAndFilter = sortAndFilter.isAscending)
 
-  const listingsToSort = [...searchResults?.data]
-
-  const clickedTab = sortAndFilter.activeSort
+  console.log(searchResults)
+  const listingsToSort = [...searchResults?.data.listings]
 
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
     (item) => item?.value === sortAndFilter?.activeSort
@@ -28,9 +27,14 @@ export const setActiveSortCategory = (
       sortAndFilter: {
         activeSort: category,
       },
-
       searchResults: {
-        data: sortByAscendOrDescend(rSortAndFilter, sortKey, listingsToSort),
+        data: {
+          listings: sortByAscendOrDescend(
+            rSortAndFilter,
+            sortKey,
+            listingsToSort
+          ),
+        },
       },
     },
   }
@@ -51,7 +55,7 @@ export const setIsAscending = (bool: boolean) => {
 /** ----- FIRES WHEN THE MENU TABS ARE CLICKED ----- */
 export const SORT_LISTINGS = 'SORT_LISTINGS'
 export const sortListings = (sortAndFilter, searchResults) => {
-  const listingsToSort = [...searchResults?.data]
+  const listingsToSort = [...searchResults?.data?.listings]
 
   const clickedTab = sortAndFilter.activeSort
 
@@ -68,11 +72,13 @@ export const sortListings = (sortAndFilter, searchResults) => {
         type: SORT_LISTINGS,
         payload: {
           searchResults: {
-            data: sortByAscendOrDescend(
-              sortAndFilter.isAscending,
-              sortKey,
-              listingsToSort
-            ),
+            data: {
+              listings: sortByAscendOrDescend(
+                sortAndFilter.isAscending,
+                sortKey,
+                listingsToSort
+              ),
+            },
           },
         },
       }

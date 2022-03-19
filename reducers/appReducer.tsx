@@ -16,12 +16,8 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
-const {
-  SORT_LISTINGS,
-  SET_IS_ASCENDING,
-  SET_ACTIVE_SORT_CATEGORY,
-  UPDATE_LISTINGS_BY_ASC_OR_DESC,
-} = ListingsSortFilterActions
+const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
+  ListingsSortFilterActions
 
 export interface IinitialState {
   state: {
@@ -36,7 +32,9 @@ export interface IinitialState {
     }
     fetchProperty: boolean
     searchResults: {
-      data: []
+      data: {
+        listings: []
+      }
       initialData: []
     }
     sortAndFilter: {
@@ -88,7 +86,9 @@ export const initialState = {
   },
   fetchProperty: false,
   searchResults: {
-    data: mockListings,
+    data: {
+      listings: mockListings,
+    },
     initialData: mockListings,
   },
   sortAndFilter: {
@@ -106,7 +106,6 @@ export const initialState = {
 }
 
 const appReducer = (state = initialState, action: IAction) => {
-  console.log('what is the type in the REDUCER', action)
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
@@ -181,6 +180,7 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SET_ACTIVE_SORT_CATEGORY:
+      console.log('statestatestate', state)
       return {
         ...state,
         sortAndFilter: {
@@ -189,17 +189,9 @@ const appReducer = (state = initialState, action: IAction) => {
         },
         searchResults: {
           ...state.searchResults,
-          data: action.payload.searchResults.data,
-        },
-      }
-
-    case UPDATE_LISTINGS_BY_ASC_OR_DESC:
-      console.log(action.payload.data, '&&&&&')
-      return {
-        ...state,
-        searchResults: {
-          ...state.searchResults,
-          data: action.payload.data,
+          data: {
+            listings: action.payload.searchResults.data,
+          },
         },
       }
 
@@ -213,11 +205,14 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SORT_LISTINGS:
+      console.log('actionAction', action)
       return {
         ...state,
         searchResults: {
           ...state.searchResults,
-          data: action.payload.searchResults.data,
+          data: {
+            listings: action.payload.searchResults.data,
+          },
         },
       }
 

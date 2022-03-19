@@ -57,6 +57,7 @@ const SearchSection: React.FC = () => {
           'AutoComplete results or Suggested places from google api'
         )
         // update state with search results
+        console.log('what is this ', response.data)
         dispatch(updateStateWithSearchResults(response.data))
         router.push(`/city/${city}/${state}`)
       })
