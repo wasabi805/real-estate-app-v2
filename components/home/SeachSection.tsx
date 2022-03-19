@@ -35,12 +35,14 @@ const SearchSection: React.FC = () => {
   const { search } = state
   const router = useRouter()
 
-  useEffect(() => {
-    if (state.fetchProperty) {
-      handleFetchPropertyData()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.fetchProperty])
+  // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
+
+  // useEffect(() => {
+  //   if (state.fetchProperty) {
+  //     handleFetchPropertyData()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state.fetchProperty])
 
   const handleFetchPropertyData = async () => {
     await axios
