@@ -180,7 +180,6 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SET_ACTIVE_SORT_CATEGORY:
-      console.log('statestatestate', state)
       return {
         ...state,
         sortAndFilter: {
@@ -189,9 +188,10 @@ const appReducer = (state = initialState, action: IAction) => {
         },
         searchResults: {
           ...state.searchResults,
-          data: {
-            listings: action.payload.searchResults.data,
-          },
+          // data: {
+          //   listings: action.payload.searchResults.data,
+          // },
+          data: action.payload.searchResults.data,
         },
       }
 

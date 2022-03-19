@@ -29,7 +29,6 @@ const Listings = () => {
           className={'photo-and-table-tab'}
           onTabClick={(key) => console.log(key)}
         >
-          {console.log('YEEEEEE', searchResults)}
           <TabPane tab="Photos" key="Photos">
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {searchResults.data.listings.map((house) => (

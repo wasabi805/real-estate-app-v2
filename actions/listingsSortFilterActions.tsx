@@ -14,7 +14,6 @@ export const setActiveSortCategory = (
     ? (rSortAndFilter = true)
     : (rSortAndFilter = sortAndFilter.isAscending)
 
-  console.log(searchResults)
   const listingsToSort = [...searchResults?.data.listings]
 
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
