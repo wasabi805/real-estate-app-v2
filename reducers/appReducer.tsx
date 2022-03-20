@@ -4,6 +4,8 @@ import * as SearchActions from 'actions/searchActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 import { mockListings } from 'mockListings'
+import { TDismissLoginModal } from 'actions/modalActions/interfaces'
+import { IAction } from 'actions/interface'
 
 const {
   RENDER_LOGIN_MODLE,
@@ -51,30 +53,6 @@ export interface IinitialState {
     }
   }
   dispatch: React.Dispatch<IAction>
-}
-
-export interface IAction {
-  type: string
-  payload: {
-    renderLoginModal?: boolean
-    dismissLoginModal?: boolean
-    userLoginData?: any
-    search?: {
-      value: string
-      isAutoComplete: boolean
-    }
-    value: string
-    data?: []
-    searchQueryString?: string
-    isLogin: boolean
-    addressObject: IGooglePlacesAddressObj
-
-    sortAndFilter: {
-      activeSort?: string
-      sortedProperties?: []
-      isAscending?: boolean
-    }
-  }
 }
 
 export const initialState = {
