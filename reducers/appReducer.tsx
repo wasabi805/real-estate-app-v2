@@ -46,13 +46,11 @@ export const initialState = {
     password: '',
   },
 }
-
-const appReducer = (args: { state: IinitialState; action: IAction }) => {
-  let { state = initialState, action } = args
-
+const appReducer = ( state: IinitialState , action: IAction ) => {
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
+      console.log('what is action', action)
       return {
         ...state,
         isLoginModalVisibile: action.payload?.renderLoginModal,
