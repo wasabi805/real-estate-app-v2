@@ -8,6 +8,7 @@ export interface IinitialState {
       email: string
       passsword: string
     }
+
     search: {
       value: string
       isAutoComplete: boolean

@@ -1,13 +1,19 @@
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
+import { sortByAscendOrDescend } from 'actions/helpers'
+
 export const SET_ACTIVE_SORT_CATEGORY = 'SET_ACTIVE_SORT_CATEGORY'
 
-import { sortByAscendOrDescend } from './helpers'
-
+interface ISortAndFilter {
+  activeSort: string
+  isAscending: boolean
+  sortedProperties: []
+}
 export const setActiveSortCategory = (
   category: string,
-  sortAndFilter,
+  sortAndFilter: ISortAndFilter,
   searchResults
 ) => {
+  console.log(searchResults, 'what is searchResults')
   const { isAscending } = sortAndFilter
   let rSortAndFilter
   isAscending === null || undefined

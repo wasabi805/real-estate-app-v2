@@ -2,6 +2,7 @@ import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/searchActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { mockListings } from 'mockListings'
+import { IinitialState } from './interface'
 import { IAction } from 'actions/interface'
 
 const {
@@ -46,7 +47,9 @@ export const initialState = {
   },
 }
 
-const appReducer = (state = initialState, action: IAction) => {
+const appReducer = (args: { state: IinitialState; action: IAction }) => {
+  let { state = initialState, action } = args
+
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
@@ -62,6 +65,7 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SET_IS_LOGIN:
+      console.log('what is state', state)
       return {
         ...state,
         loginModal: {
