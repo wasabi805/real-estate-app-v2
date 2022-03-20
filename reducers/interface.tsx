@@ -2,6 +2,20 @@ import React from 'react'
 import { IAction } from 'actions/interface'
 
 export interface IinitialState {
+  //TODO: loginModal, sortAndFilter, and searchResults works correctly.
+  // These are also nested inside state inside this interface. Will need to remove the other keys nested in state
+  //inside this interface and get rid of state. 
+  //
+  loginModal:{
+    email: string
+  }
+  sortAndFilter:{
+    activeSort:any
+  }
+  searchResults:any,
+
+
+
   state: {
     isLoginModalVisibile: boolean
     user: {
