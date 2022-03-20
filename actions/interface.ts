@@ -16,11 +16,30 @@ export interface IAction {
       value?: string
       isAutoComplete?: boolean
     }
+
+    searchResults?: {
+      data: []
+    }
+
+    addressObject?: {
+      formatted_address: string
+      geometry: {
+        location: {
+          '_.Ee': {
+            lat: () => void
+            lng: () => void
+          }
+        }
+      }
+      html_attributions: []
+      name: string
+      place_id: string
+    }
+
     value?: string
     data?: []
     searchQueryString?: string
     isLogin?: boolean
-    addressObject?: IGooglePlacesAddressObj
 
     sortAndFilter?: {
       activeSort?: string

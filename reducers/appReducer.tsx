@@ -71,8 +71,6 @@ const appReducer = (state = initialState, action: IAction) => {
       }
 
     case SET_LOGIN_FORM_CHANGE:
-      const loginData = action.payload?.userLoginData
-
       return {
         ...state,
         loginModal: action.payload?.userLoginData,
@@ -94,9 +92,9 @@ const appReducer = (state = initialState, action: IAction) => {
         search: {
           ...state.search,
           value:
-            action.payload.addressObject.formatted_address ||
-            action.payload.addressObject.name,
-          isAutoComplete: action.payload.addressObject.formatted_address
+            action.payload?.addressObject?.formatted_address ||
+            action.payload?.addressObject?.name,
+          isAutoComplete: action.payload?.addressObject?.formatted_address
             ? true
             : false,
         },
@@ -106,8 +104,8 @@ const appReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         searchResults: {
-          data: { ...action.payload.data },
-          initialData: { ...action.payload.data },
+          data: { ...action.payload?.data },
+          initialData: { ...action.payload?.data },
         },
         fetchProperty: false,
       }
@@ -117,11 +115,11 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         sortAndFilter: {
           ...state.sortAndFilter,
-          activeSort: action.payload.sortAndFilter.activeSort,
+          activeSort: action.payload?.sortAndFilter?.activeSort,
         },
         searchResults: {
           ...state.searchResults,
-          data: action.payload.searchResults.data,
+          data: action.payload?.searchResults?.data,
         },
       }
 
@@ -130,7 +128,7 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         sortAndFilter: {
           ...state.sortAndFilter,
-          isAscending: action.payload.sortAndFilter.isAscending,
+          isAscending: action.payload?.sortAndFilter?.isAscending,
         },
       }
 
@@ -140,7 +138,7 @@ const appReducer = (state = initialState, action: IAction) => {
         searchResults: {
           ...state.searchResults,
           data: {
-            ...action.payload.searchResults.data,
+            ...action.payload?.searchResults?.data,
           },
         },
       }
