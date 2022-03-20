@@ -21,7 +21,9 @@ const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
 
 export const initialState = {
   isLoginModalVisibile: false,
-  user: { password: '', email: '' },
+  user: { 
+    password: '', 
+    email: '' },
   search: {
     value: '',
     isAutoComplete: false,
@@ -38,7 +40,6 @@ export const initialState = {
     sortedProperties: [],
     isAscending: null,
   },
-
   loginModal: {
     isLogin: true,
     email: '',
@@ -50,7 +51,6 @@ const appReducer = ( state: IinitialState , action: IAction ) => {
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
-      console.log('what is action', action)
       return {
         ...state,
         isLoginModalVisibile: action.payload?.renderLoginModal,
@@ -63,7 +63,6 @@ const appReducer = ( state: IinitialState , action: IAction ) => {
       }
 
     case SET_IS_LOGIN:
-      console.log('what is state', state)
       return {
         ...state,
         loginModal: {
