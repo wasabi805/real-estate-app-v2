@@ -1,10 +1,7 @@
-import React from 'react'
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/searchActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
-import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
 import { mockListings } from 'mockListings'
-import { TDismissLoginModal } from 'actions/modalActions/interfaces'
 import { IAction } from 'actions/interface'
 
 const {
@@ -20,40 +17,6 @@ const {
 } = SearchActions
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
-
-export interface IinitialState {
-  state: {
-    isLoginModalVisibile: boolean
-    user: {
-      email: string
-      passsword: string
-    }
-    search: {
-      value: string
-      isAutoComplete: boolean
-    }
-    fetchProperty: boolean
-    searchResults: {
-      data: {
-        listings: []
-      }
-      initialData: []
-    }
-    sortAndFilter: {
-      activeSort: string
-      sortedProperties: []
-      isAscending: boolean
-    }
-
-    loginModal: {
-      isLogin: true
-      email: string
-      password: string
-      confirmPassword: string
-    }
-  }
-  dispatch: React.Dispatch<IAction>
-}
 
 export const initialState = {
   isLoginModalVisibile: false,
@@ -87,18 +50,15 @@ const appReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:
-      const { renderLoginModal } = action.payload
-
       return {
         ...state,
-        isLoginModalVisibile: renderLoginModal,
+        isLoginModalVisibile: action.payload?.renderLoginModal,
       }
 
     case DISMISS_LOGIN_MODLE:
-      const { dismissLoginModal } = action.payload
       return {
         ...state,
-        isLoginModalVisibile: dismissLoginModal,
+        isLoginModalVisibile: action.payload?.dismissLoginModal,
       }
 
     case SET_IS_LOGIN:
@@ -106,21 +66,16 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         loginModal: {
           email: state.loginModal.email,
-          isLogin: action.payload.isLogin,
+          isLogin: action.payload?.isLogin,
         },
       }
 
     case SET_LOGIN_FORM_CHANGE:
-      const { userLoginData } = action.payload
-
-      const name = Object.keys(userLoginData).pop()
+      const loginData = action.payload?.userLoginData
 
       return {
         ...state,
-        loginModal: {
-          ...state.loginModal,
-          [name]: Object.values(userLoginData).pop(),
-        },
+        loginModal: action.payload?.userLoginData,
       }
 
     case SET_SEARCH_FIELD:
@@ -129,7 +84,7 @@ const appReducer = (state = initialState, action: IAction) => {
         fetchProperty: false,
         search: {
           ...state.search,
-          value: action.payload.value,
+          value: action.payload?.value,
         },
       }
 
@@ -166,9 +121,6 @@ const appReducer = (state = initialState, action: IAction) => {
         },
         searchResults: {
           ...state.searchResults,
-          // data: {
-          //   listings: action.payload.searchResults.data,
-          // },
           data: action.payload.searchResults.data,
         },
       }
@@ -187,9 +139,6 @@ const appReducer = (state = initialState, action: IAction) => {
         ...state,
         searchResults: {
           ...state.searchResults,
-          // data: {
-          //   listings: action.payload.searchResults.data,
-          // },
           data: {
             ...action.payload.searchResults.data,
           },

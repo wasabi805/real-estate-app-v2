@@ -23,7 +23,12 @@ const LoginModal: React.FC<ILoginModalProps> = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const { name, value } = e.target
-    dispatch(setLoginFormChange({ [name]: value }))
+
+    const userLoginData = {
+      ...state.loginModal,
+      [name]: value,
+    }
+    dispatch(setLoginFormChange(userLoginData))
   }
 
   const handleTabClick = (key: string) => {

@@ -8,6 +8,9 @@ export interface IAction {
     userLoginData?: {
       isLogin?: boolean
       dismissLoginModal?: boolean
+      email?: string
+      password?: string
+      foo?: string
     }
     search?: {
       value?: string
