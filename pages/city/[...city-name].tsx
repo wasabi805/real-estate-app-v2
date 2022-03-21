@@ -3,6 +3,7 @@ import AppContext from 'context/appContext'
 import Image from 'next/image'
 import 'antd/dist/antd.css'
 import { CityWrapper } from './styles'
+import { MapColumnContainer, ListingsColumnContainer } from './styles'
 import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from '../../public/mockMap.jpeg'
@@ -26,17 +27,17 @@ const CityDetails = () => {
         </Col>
       </Row>
       <Row>
-        <Col span={14} style={{ border: '2px solid orange' }}>
+        <MapColumnContainer span={14}>
           <Image src={mockMap} alt="the-five-kingdoms" />
-        </Col>
-        <Col span={10} style={{ border: '2px solid plum' }}>
+        </MapColumnContainer>
+
+        <ListingsColumnContainer span={10}>
           <Row>
             <h3>Santa Monica Homes For Sale</h3>
           </Row>
           <Row> Search Filters live here</Row>
-
           <Listings />
-        </Col>
+        </ListingsColumnContainer>
       </Row>
     </CityWrapper>
   )
