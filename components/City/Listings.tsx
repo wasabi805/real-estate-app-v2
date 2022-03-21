@@ -5,7 +5,7 @@ import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCard from './ListingCard'
-import ListingsTable from 'components/City/ListingTable'
+import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
 
 const { sortListings } = ListingsSortFilterActions
