@@ -37,15 +37,14 @@ const ListingTable = () => {
     } else {
       alert('this is false')
       console.log(record.key)
-      setSelectedRowKey([...selectedRowKeys, record.key]);
+      setSelectedRowKey([record.key]);
     }
   }
 
   useEffect(()=>{
     console.log('the selected row key' , selectedRowKeys)
   },[selectedRowKeys])
-
-
+  
   const onSelectedRowKeysChange =(selectedRowKeys)=>{
     setSelectedRowKey(selectedRowKeys)
   }
