@@ -10,19 +10,21 @@ interface ISortAndFilter {
   isAscending?: null | boolean
 }
 type test = Pick<IinitialState, 'searchResults'>
+
 export const setActiveSortCategory = (
   category: string,
   sortAndFilter: ISortAndFilter,
-  searchResults
+  searchResults: test
 ) => {
-  console.log(searchResults.data, 'what is searchResults')
+  console.log(Object.keys(searchResults), 'what is searchResults')
+  console.log(searchResults.data)
   const { isAscending } = sortAndFilter
   let rSortAndFilter
   isAscending === null || undefined
     ? (rSortAndFilter = true)
     : (rSortAndFilter = sortAndFilter.isAscending)
 
-  const listingsToSort = [...searchResults?.data.listings]
+  const listingsToSort = [...searchResults.data.listings]
 
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
     (item) => item?.value === sortAndFilter?.activeSort

@@ -19,7 +19,7 @@ const {
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
 
-export const initialState = {
+export const initialState: IinitialState = {
   isLoginModalVisibile: false,
   user: {
     password: '',
@@ -32,8 +32,10 @@ export const initialState = {
   fetchProperty: false,
   searchResults: {
     data: {
+      // listings: [],
       listings: mockListings,
     },
+    // initialData: [],
     initialData: mockListings,
   },
   sortAndFilter: {
