@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext , useState, useEffect} from 'react'
 import AppContext from 'context/appContext'
-import { Table,} from 'antd'
+import { Table, Radio} from 'antd'
 import 'antd/dist/antd.css'
 import { columnNames } from './Listings/ListingTable/columnNames'
 
@@ -10,6 +10,8 @@ const ListingTable = () => {
   const { searchResults } = state
   console.log(searchResults, 'searchResults')
   const {listings} = searchResults.data
+
+  
 
   const homeListings = listings.map( home=>{
     const {property_id, price, beds, address, baths} =home
@@ -22,9 +24,52 @@ const ListingTable = () => {
     }
   })
 
+  const [selectedRowKeys, setSelectedRowKey] = useState([]);
+
+  const selectRow = (record) => {
+    console.log('what is record', record)
+    const test = [...selectedRowKeys];
+    if (test.indexOf(record.key) >= 0) {
+      alert('this is true')
+      let x = test.splice(selectedRowKeys.indexOf(record.key), 0);
+      console.log('what is x?? ', x)
+      setSelectedRowKey(x)
+    } else {
+      alert('this is false')
+      console.log(record.key)
+      setSelectedRowKey([...selectedRowKeys, record.key]);
+    }
+  }
+
+  useEffect(()=>{
+    console.log('the selected row key' , selectedRowKeys)
+  },[selectedRowKeys])
+
+
+  const onSelectedRowKeysChange =(selectedRowKeys)=>{
+    setSelectedRowKey(selectedRowKeys)
+  }
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectedRowKeysChange,
+  };
+
+
   return (
     <>
-      <Table columns={columnNames} dataSource={homeListings} />
+      <Table 
+      columns={columnNames} 
+      dataSource={homeListings}
+    
+      rowSelection={rowSelection}  
+      onRow={(record) => ({
+        onClick: () => {
+          selectRow(record);
+        },
+      })}
+      />
+      
     </>
   )
 }

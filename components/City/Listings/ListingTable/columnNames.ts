@@ -21,3 +21,22 @@ export const columnNames = [
     },
 
   ]
+
+  export const mockSample =[
+      {
+          property_id: '123',
+          address: '222 main',
+          price: '$100,000',
+          beds: 3,
+          bath:2
+      },
+
+      {
+        property_id: '456',
+        address: '987 Elm',
+        price: '$1,025,000',
+        beds: 3,
+        bath:2
+    },
+
+  ]
