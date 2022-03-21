@@ -4,6 +4,7 @@ import { Menu, Dropdown, Tabs } from 'antd'
 import { SortByOptionsContainer } from './styles'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
+import { IantDesignEventObj } from 'interfaces/IantDesign'
 
 const { TabPane } = Tabs
 
@@ -33,7 +34,7 @@ const SortByOptionsMenu = () => {
   const { setActiveSortCategory } = ListingsSortFilterActions
 
   const activeSortCAtegory = state.sortAndFilter.activeSort
-  const handleSetActive = (e: string) => {
+  const handleSetActive = (e: IantDesignEventObj) => {
     dispatch(
       setActiveSortCategory(e.key, state.sortAndFilter, state.searchResults)
     )

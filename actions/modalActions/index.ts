@@ -1,14 +1,12 @@
 import { IUserLoginData } from './interfaces'
 import { IAction } from 'actions/interface'
 export const RENDER_LOGIN_MODLE = 'RENDER_LOGIN_MODLE'
-export const renderLoginModal = () => {
-  alert('action fired')
-  
+export const renderLoginModal = (): Pick<IAction, 'type' | 'payload'> => {
   return {
     type: RENDER_LOGIN_MODLE,
-    payload: { 
-      renderLoginModal: true
-     },
+    payload: {
+      renderLoginModal: true,
+    },
   }
 }
 

@@ -21,9 +21,10 @@ const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
 
 export const initialState = {
   isLoginModalVisibile: false,
-  user: { 
-    password: '', 
-    email: '' },
+  user: {
+    password: '',
+    email: '',
+  },
   search: {
     value: '',
     isAutoComplete: false,
@@ -47,7 +48,7 @@ export const initialState = {
     password: '',
   },
 }
-const appReducer = ( state: IinitialState , action: IAction ) => {
+const appReducer = (state: IinitialState, action: IAction) => {
   switch (action.type) {
     //  LOGIN MODAL
     case RENDER_LOGIN_MODLE:

@@ -18,17 +18,17 @@ export interface IinitialState {
     }
     initialData: []
   }
-  sortAndFilter:{
-    activeSort: string,
-    sortedProperties: [],
-    isAscending: null | boolean,
+  sortAndFilter: {
+    activeSort: string
+    sortedProperties: []
+    isAscending: null | boolean
   }
   loginModal: {
-    isLogin: boolean,
+    isLogin: boolean
     email: string
     confirmEmail: string
     password: string
-  },
-  
+  }
+
   dispatch: React.Dispatch<IAction>
 }
