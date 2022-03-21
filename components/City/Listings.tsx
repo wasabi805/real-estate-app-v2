@@ -6,20 +6,21 @@ import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCard from './ListingCard'
 import ListingTable from './ListingTable'
+import { Ilisting } from 'actions/propertySearchBarActions/interface'
 
 const { sortListings } = ListingsSortFilterActions
 const { TabPane } = Tabs
 
-const Listings = () => {
+const Listings: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { searchResults } = state
+  const { searchResults, sortAndFilter } = state
 
   useEffect(() => {
     if (state.sortAndFilter.isAscending !== null) {
-      dispatch(sortListings(state.sortAndFilter, state.searchResults))
+      dispatch(sortListings(sortAndFilter, searchResults))
     }
-  }, [state.sortAndFilter.isAscending])
+  }, [sortAndFilter.isAscending])
 
   return (
     <ListingsContainer className={'listings-container'}>
@@ -33,7 +34,7 @@ const Listings = () => {
           {/* LISTINGS PRESENTED WITH CARDS VIEW */}
           <TabPane tab="Photos" key="Photos">
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {searchResults.data.listings.map((house) => (
+              {searchResults.data.listings.map((house: Ilisting) => (
                 <ListingCard key={house.property_id} houseData={house} />
               ))}
             </div>

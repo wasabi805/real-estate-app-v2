@@ -3,7 +3,7 @@ import { SEARCH_PLACEHOLDER } from '../../strings'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
-import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
+import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/interface'
 
 const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
   SearchActions
