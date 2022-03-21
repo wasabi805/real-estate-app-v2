@@ -16,21 +16,21 @@ const ListingTable = () => {
       key: 'address',
       render: (text) => <a>{text}</a>,
     },
-    // {
-    //   title: 'Price',
-    //   dataIndex: 'price',
-    //   key: 'price',
-    // },
-    // {
-    //   title: 'Beds',
-    //   dataIndex: 'beds',
-    //   key: 'beds',
-    // },
-    // {
-    //   title: 'Baths',
-    //   key: 'baths',
-    //   dataIndex: 'baths',
-    // },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      title: 'Beds',
+      dataIndex: 'beds',
+      key: 'beds',
+    },
+    {
+      title: 'Baths',
+      key: 'baths',
+      dataIndex: 'baths',
+    },
   ]
 
   const people = [
