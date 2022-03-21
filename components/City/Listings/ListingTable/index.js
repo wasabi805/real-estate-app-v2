@@ -1,4 +1,4 @@
-import ListingTable from './ListingTable.tsx'
+import ListingTable from './ListingsTable.tsx'
 
 export {
     ListingTable

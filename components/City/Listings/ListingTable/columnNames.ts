@@ -34,7 +34,7 @@ export const columnNames = [
       {
         property_id: '456',
         address: '987 Elm',
-        price: '$1,025,000',
+        price: '$1025,000',
         beds: 3,
         bath:2
     },

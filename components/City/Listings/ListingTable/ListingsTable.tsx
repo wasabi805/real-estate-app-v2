@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import { Table, Tag, Space } from 'antd'
 import 'antd/dist/antd.css'
+import {ListingsTableContainer} from 'components/City/Listings/ListingTable/styles'
 
-const ListingTable = () => {
+const ListingsTable = () => {
   const appContext = useContext(AppContext)
   const { state } = appContext
   const { searchResults } = state
@@ -44,10 +45,10 @@ const ListingTable = () => {
 
   ]
   return (
-    <>
-      <Table columns={columns} dataSource={people} />
-    </>
+   
+      <Table className='START-HERE-TABLE' columns={columns} dataSource={people} />
+
   )
 }
 
-export default ListingTable
+export default ListingsTable

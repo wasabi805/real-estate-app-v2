@@ -4,7 +4,7 @@ import { Table, Radio} from 'antd'
 import 'antd/dist/antd.css'
 import { columnNames } from './Listings/ListingTable/columnNames'
 
-const ListingTable = () => {
+const ListingsTable = () => {
   const appContext = useContext(AppContext)
   const { state } = appContext
   const { searchResults } = state
@@ -27,16 +27,11 @@ const ListingTable = () => {
   const [selectedRowKeys, setSelectedRowKey] = useState([]);
 
   const selectRow = (record) => {
-    console.log('what is record', record)
-    const test = [...selectedRowKeys];
-    if (test.indexOf(record.key) >= 0) {
-      alert('this is true')
-      let x = test.splice(selectedRowKeys.indexOf(record.key), 0);
-      console.log('what is x?? ', x)
-      setSelectedRowKey(x)
+    const allProperties = [...selectedRowKeys];
+    if (allProperties.indexOf( record.key ) >= 0) {
+      let selectedPropertyRow = allProperties.splice(selectedRowKeys.indexOf(record.key), 0);
+      setSelectedRowKey(selectedPropertyRow)
     } else {
-      alert('this is false')
-      console.log(record.key)
       setSelectedRowKey([record.key]);
     }
   }
@@ -73,4 +68,4 @@ const ListingTable = () => {
   )
 }
 
-export default ListingTable
+export default ListingsTable
