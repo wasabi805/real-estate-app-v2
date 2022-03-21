@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SEARCH_PLACEHOLDER } from '../../strings'
-import * as SearchActions from 'actions/searchActions'
+import * as SearchActions from 'actions/propertySearchBarActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
-import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
+import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
 
 const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
   SearchActions

@@ -2,12 +2,13 @@ import React from 'react'
 import { Row, Col, Card } from 'antd'
 import { SpecRowTwo, SpecColTwo } from './styles'
 
+import { Ilisting } from 'actions/propertySearchBarActions/interface'
+
 interface IProps {
-  houseData: any
+  houseData: Ilisting
 }
 
 const ListingCard: React.FC<IProps> = ({ houseData }) => {
-  console.log('what is props?', houseData)
   return (
     <Card cover={<img src={houseData.photo}></img>} style={{ width: '50%' }}>
       <Row>

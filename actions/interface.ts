@@ -1,4 +1,4 @@
-import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
+import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
 
 export interface IAction {
   type: string

@@ -1,5 +1,5 @@
-import { IGooglePlacesAddressObj } from 'interfaces/IPropertySearchBar'
-import { IAction } from './interface'
+import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
+import { IAction } from '../interface'
 export const SET_SEARCH_FIELD = 'SET_SEARCH_FIELD'
 export const setSearchField = (
   char: string

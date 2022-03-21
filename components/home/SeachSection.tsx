@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import AppContext from 'context/appContext'
-import * as SearchActions from 'actions/searchActions'
+import * as SearchActions from 'actions/propertySearchBarActions'
 import SectionContainer from '@components/common/SectionContainer'
 
 import img from 'images/banner-living-room-teal_1000.jpg'
@@ -34,7 +34,6 @@ const SearchSection: React.FC = () => {
   const { state, dispatch } = appContext
   const router = useRouter()
 
-  console.log('what is state when loads', state)
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
 
   // useEffect(() => {
@@ -59,7 +58,7 @@ const SearchSection: React.FC = () => {
           'AutoComplete results or Suggested places from google api'
         )
         // update state with search results
-        console.log('what is this ', response.data)
+        console.log('what is response ', response)
         dispatch(updateStateWithSearchResults(response.data))
         router.push(`/city/${city}/${state}`)
       })

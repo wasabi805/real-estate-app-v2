@@ -121,3 +121,74 @@ export interface IGooglePlacesAddressObj {
   name: string
   place_id: string
 }
+
+export interface Iresponse {
+  data: {
+    meta: {
+      build: string // ex.) "3.23.180"
+      schema: string
+      tracking_params: {
+        channel: string
+        siteSection: string
+        city: string
+        county: string
+        neighborhood: string
+        searchCityState: string
+        state: string
+        zip: string
+        srpPropertyStatus: string // ex.) "srp:for_sale"
+        listingActivity: string
+        propertyStatus: string
+        propertyType: string
+        searchBathrooms: string
+        searchBedrooms: string
+        searchMaxPrice: string
+        searchMinPrice: string
+        searchRadius: string
+        searchHouseSqft: string
+        searchLotSqft: string
+        searchResults: string // ex.) '1'
+        sortResults: string
+        searchCoordinates: string
+        version: string
+      }
+      tracking: string // ex.) 'type|meta|data|resource_type|property_list|query|schema|mapsearch|client_id|rdc_mobile_native,10.33.1|limit|offset|city|Belmont|state_code|CA|sort|relevance|prop_status|for_sale|count|total^1|0|1|1C^^$0|1|2|$3|4|5|$6|7|8|9|A|M|B|N|C|D|E|F|G|H]|I|J|K|O|L|P]]'
+    }
+    returned_rows: number
+    matching_rows: number
+    listings: Ilisting[]
+  }
+  status: number
+  statusText: string
+  headers: {
+    connection: string
+    'content-length': string //ex.) '3872'
+    date: string // ex.) 'Mon, 21 Mar 2022 03:37:05 GMT'
+    etag: string // ex.) "f20-/bxvYt69Mo3g+wBNNBPycBcpsgA"
+    'keep-alive': string // ex.) 'timeout=5'
+  }
+  config: {
+    transitional: {
+      silentJSONParsing: boolean
+      forcedJSONParsing: boolean
+      clarifyTimeoutError: boolean
+    }
+    transformRequest: [] // ex.) [null]
+    transformResponse: [] // ex.) [null]
+    timeout: 0
+    xsrfCookieName: string
+    xsrfHeaderName: string
+    maxContentLength: number
+    maxBodyLength: number
+    headers: {
+      Accept: string
+    }
+    params: {
+      location: string
+      isAutoComplete: boolean
+    }
+    method: string
+    url: string
+  }
+  request: {}
+}
