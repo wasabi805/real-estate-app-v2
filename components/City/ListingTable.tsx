@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 
 const ListingTable = () => {
   const appContext = useContext(AppContext)
-  const { state, dispatch } = appContext
+  const { state } = appContext
   const { searchResults } = state
   console.log(searchResults, 'searchResults')
 

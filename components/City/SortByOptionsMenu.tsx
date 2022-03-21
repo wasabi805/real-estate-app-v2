@@ -8,7 +8,7 @@ import { IantDesignEventObj } from 'interfaces/IantDesign'
 
 const { TabPane } = Tabs
 
-const AscendDescendTab = () => {
+const AscendDescendTab: React.FC = () => {
   const appContext = useContext(AppContext)
   const { dispatch } = appContext
   const { setIsAscending } = ListingsSortFilterActions
@@ -28,16 +28,15 @@ const AscendDescendTab = () => {
 }
 
 //----------------------------------------------------------------
-const SortByOptionsMenu = () => {
+const SortByOptionsMenu: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { setActiveSortCategory } = ListingsSortFilterActions
+  const { sortAndFilter, searchResults } = state
 
-  const activeSortCAtegory = state.sortAndFilter.activeSort
+  const activeSortCAtegory = sortAndFilter.activeSort
   const handleSetActive = (e: IantDesignEventObj) => {
-    dispatch(
-      setActiveSortCategory(e.key, state.sortAndFilter, state.searchResults)
-    )
+    dispatch(setActiveSortCategory(e.key, sortAndFilter, searchResults))
   }
 
   const menu = (
