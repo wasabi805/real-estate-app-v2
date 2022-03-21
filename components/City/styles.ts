@@ -75,8 +75,17 @@ export const ListingsTableContainer= styled.div`
         .ant-table{
           .ant-table-container{
             .ant-table-content{
+              
               & table{
-
+                
+                .ant-table-thead > tr > th {
+                  //  This is to hide the radio button within the header
+                  //  TODO come back here later to change the font and colors for the header
+                  .ant-checkbox{
+                    visibility: hidden;
+                  }
+                }
+                
                 .ant-table-tbody{
                   &:hover{
                     cursor: pointer;
