@@ -1,6 +1,3 @@
-import React from 'react'
-import { IAction } from 'actions/interface'
-
 export interface IinitialState {
   isLoginModalVisibile: boolean
   user: {
@@ -29,6 +26,4 @@ export interface IinitialState {
     confirmEmail: string
     password: string
   }
-
-  dispatch: React.Dispatch<IAction>
 }

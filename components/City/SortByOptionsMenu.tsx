@@ -10,7 +10,7 @@ const { TabPane } = Tabs
 
 const AscendDescendTab = () => {
   const appContext = useContext(AppContext)
-  const { state, dispatch } = appContext
+  const { dispatch } = appContext
   const { setIsAscending } = ListingsSortFilterActions
 
   /* Tracks the active tab in reducer state */

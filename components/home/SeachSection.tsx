@@ -32,9 +32,9 @@ const BackgroundImage = styled.div(({ children }) => {
 const SearchSection: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { search } = state
   const router = useRouter()
 
+  console.log('what is state when loads', state)
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
 
   // useEffect(() => {

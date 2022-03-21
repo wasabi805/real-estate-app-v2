@@ -13,7 +13,7 @@ type test = Pick<IinitialState, 'searchResults'>
 export const setActiveSortCategory = (
   category: string,
   sortAndFilter: ISortAndFilter,
-  searchResults: test
+  searchResults
 ) => {
   console.log(searchResults.data, 'what is searchResults')
   const { isAscending } = sortAndFilter
