@@ -31,16 +31,6 @@ const ListingTable = () => {
       key: 'baths',
       dataIndex: 'baths',
     },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      ),
-    },
   ]
 
   const people = [
@@ -121,7 +111,7 @@ const ListingTable = () => {
     },
   ]
   return (
-    <>
+    <>{{]}}
       <Table columns={columns} dataSource={people} />
     </>
   )
