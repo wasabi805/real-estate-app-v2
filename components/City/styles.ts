@@ -67,7 +67,7 @@ export const SpecRowTwo = styled(Row)`
 
 export const ListingsTableContainer= styled.div`
 // This is to hide the radio button within the table
-//  TODO come back here later to change the font and colors for the table
+//  TODO come back here later to change the font and colors for the
 
   .ant-table-wrapper{
     .ant-spin-nested-loading{
@@ -77,15 +77,13 @@ export const ListingsTableContainer= styled.div`
             .ant-table-content{
               & table{
                 .ant-table-tbody{
-              
+                  color: purple;
                   & tr{
-                  
+                    color: red;
                     & td{
-                     
+                      color: blue;
                       .ant-checkbox-wrapper{
-                        .ant-checkbox{
-                          display: none;
-                        }
+                        visibility: hidden;
                       }
                     }
                   }
