@@ -76,12 +76,13 @@ export const ListingsTableContainer= styled.div`
           .ant-table-container{
             .ant-table-content{
               & table{
+
                 .ant-table-tbody{
-                  color: purple;
+                  &:hover{
+                    cursor: pointer;
+                  }
                   & tr{
-                    color: red;
                     & td{
-                      color: blue;
                       .ant-checkbox-wrapper{
                         visibility: hidden;
                       }
