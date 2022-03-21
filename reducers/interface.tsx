@@ -1,3 +1,5 @@
+import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
+
 export interface IinitialState {
   isLoginModalVisibile: boolean
   user: {
@@ -11,7 +13,7 @@ export interface IinitialState {
   fetchProperty: boolean
   searchResults: {
     data: {
-      listings: []
+      listings: Ilisting[]
     }
     initialData: []
   }

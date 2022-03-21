@@ -1,5 +1,5 @@
 import * as LoginModalActions from 'actions/modalActions'
-import * as SearchActions from 'actions/searchActions'
+import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { mockListings } from 'mockListings'
 import { IinitialState } from './interface'

@@ -16,8 +16,6 @@ export const setActiveSortCategory = (
   sortAndFilter: ISortAndFilter,
   searchResults: test
 ) => {
-  console.log(Object.keys(searchResults), 'what is searchResults')
-  console.log(searchResults.data)
   const { isAscending } = sortAndFilter
   let rSortAndFilter
   isAscending === null || undefined

@@ -2,7 +2,12 @@ import React from 'react'
 import { Row, Col, Card } from 'antd'
 import { SpecRowTwo, SpecColTwo } from './styles'
 
-const ListingCard = ({ houseData }) => {
+interface IProps {
+  houseData: any
+}
+
+const ListingCard: React.FC<IProps> = ({ houseData }) => {
+  console.log('what is props?', houseData)
   return (
     <Card cover={<img src={houseData.photo}></img>} style={{ width: '50%' }}>
       <Row>
