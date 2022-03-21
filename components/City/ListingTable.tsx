@@ -2,6 +2,7 @@ import React, { useContext , useState, useEffect} from 'react'
 import AppContext from 'context/appContext'
 import { Table, Radio} from 'antd'
 import 'antd/dist/antd.css'
+import {ListingsTableContainer} from 'components/City/styles'
 import { columnNames } from './Listings/ListingTable/columnNames'
 
 const ListingsTable = () => {
@@ -51,8 +52,8 @@ const ListingsTable = () => {
 
 
   return (
-    <>
-      <Table 
+    <ListingsTableContainer>
+      <Table className='foo'
       columns={columnNames} 
       dataSource={homeListings}
     
@@ -64,7 +65,7 @@ const ListingsTable = () => {
       })}
       />
       
-    </>
+    </ListingsTableContainer>
   )
 }
 
