@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import ListingCard from 'components/City/ListingCard' 
+import Card from '@components/City/Listings/ListingCards/Card' 
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
 const { sortListings } = ListingsSortFilterActions
@@ -19,7 +19,7 @@ const ListingCards = ()=>{
     return(
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {searchResults.data.listings.map((house: Ilisting) => (
-          <ListingCard key={house.property_id} houseData={house} />
+          <Card key={house.property_id} houseData={house} />
         ))}
       </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col, Card } from 'antd'
-import { SpecRowTwo, SpecColTwo } from './styles'
+import { SpecRowTwo, SpecColTwo } from '../../styles'
 
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
 
