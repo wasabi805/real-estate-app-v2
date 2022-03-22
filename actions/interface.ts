@@ -46,8 +46,8 @@ export interface IAction {
       sortedProperties?: []
       isAscending?: boolean
     }
-    listingTable: {
-      currentHome: string[]
+    listingTable?: {
+      currentHome?: string[]
     }
   }
 }

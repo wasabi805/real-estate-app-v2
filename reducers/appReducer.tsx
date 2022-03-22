@@ -1,6 +1,7 @@
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
+import * as ListingTableActions from 'actions/listingsTableActions'
 import { mockListings } from 'mockListings'
 import { IinitialState } from './interface'
 import { IAction } from 'actions/interface'
@@ -18,6 +19,8 @@ const {
 } = SearchActions
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
+
+const { SET_CLICKED_ROW } = ListingTableActions
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -149,6 +152,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
           data: {
             ...action.payload?.searchResults?.data,
           },
+        },
+      }
+
+    case SET_CLICKED_ROW:
+      console.log('what is action?', action)
+      return {
+        ...state,
+        listingTable: {
+          ...state.listingTable,
+          currentHome: action?.payload?.listingTable?.currentHome,
         },
       }
 

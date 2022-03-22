@@ -54,7 +54,7 @@ const ListingsTable = () => {
 
   /* Dispatches action to reducer when a row is is clicked and home is selected for display at the top of the table  */
   useEffect(() => {
-    if (selectedRowKey.length > 0) {
+    if (selectedRowKey !== ['']) {
       dispatch(setClickedRow(selectedRowKey))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
