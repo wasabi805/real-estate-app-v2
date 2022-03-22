@@ -5,10 +5,8 @@ import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
-
-import SelectedHome from './Listings/ListingsTable/SelectedHome'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
-
+import SelectedHome from 'components/City/SelectedHome'
 const { sortListings } = ListingsSortFilterActions
 const { TabPane } = Tabs
 
@@ -27,6 +25,7 @@ const Listings: React.FC = () => {
     <ListingsContainer className={'listings-container'}>
       <SortByOptionsMenu />
 
+      <SelectedHome />
       <Col span={24} className="listings-card-col">
         <Tabs
           className={'photo-and-table-tab'}
@@ -39,7 +38,6 @@ const Listings: React.FC = () => {
 
           {/* LISTINGS PRESENTED WITH TABLE VIEW */}
           <TabPane tab="Table" key="Table">
-            <SelectedHome />
             <ListingsTable />
           </TabPane>
         </Tabs>{' '}

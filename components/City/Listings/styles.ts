@@ -4,7 +4,7 @@ import { Row } from 'antd'
 export const ListingsContainer = styled.div`
   // background: #e2e2e8;
   display: flex;
-  border: 24px solid blue;
+  // border: 24px solid blue;
 
   .ant-col {
     // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.

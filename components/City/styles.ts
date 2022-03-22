@@ -4,6 +4,7 @@ import { Row } from 'antd'
 export const ListingsContainer = styled.div`
   // background: #e2e2e8;
   display: flex;
+  flex-direction: column;
   border: 2px solid magenta;
 
   .ant-col {
@@ -106,3 +107,7 @@ export const ListingsTableContainer = styled.div`
 `
 
 export const SpecColTwo = styled(Row)``
+
+export const SelectedHomesContainer = styled.div`
+  margin-top: 3em;
+`

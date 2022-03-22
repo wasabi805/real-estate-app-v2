@@ -8,10 +8,10 @@ export const CityWrapper = styled.div`
 `
 
 export const MapColumnContainer = styled((props) => <Col {...props} />)`
-  border: 2px solid orange;
+  border: 2px solid lime;
 `
 
 export const ListingsColumnContainer = styled((props) => <Col {...props} />)`
-  border: 2px solid plum;
+  border: 2px solid yellow;
   width: 100vw;
 `
