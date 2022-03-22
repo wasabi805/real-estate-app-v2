@@ -22,6 +22,9 @@ export interface IinitialState {
     sortedProperties: []
     isAscending: null | boolean
   }
+  listingTable: {
+    currentHome: string[]
+  }
   loginModal: {
     isLogin: boolean
     email: string

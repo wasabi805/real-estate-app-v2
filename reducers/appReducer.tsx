@@ -43,6 +43,11 @@ export const initialState: IinitialState = {
     sortedProperties: [],
     isAscending: null,
   },
+
+  listingTable: {
+    currentHome: [],
+  },
+
   loginModal: {
     isLogin: true,
     email: '',
