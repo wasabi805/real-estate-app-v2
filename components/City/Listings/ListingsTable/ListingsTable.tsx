@@ -60,6 +60,15 @@ const ListingsTable = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRowKey])
 
+  // sets a deafult home to load in SelectedHome component
+  useEffect(() => {
+    let initialHome
+    if (state.searchResults.initialData.length > 0) {
+      initialHome = state.searchResults.initialData[0].property_id
+      dispatch(setClickedRow(initialHome))
+    }
+  }, [])
+
   return (
     <ListingsTableContainer>
       <Table

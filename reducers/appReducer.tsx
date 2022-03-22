@@ -120,6 +120,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
           initialData: { ...action.payload?.data },
         },
         fetchProperty: false,
+        // listingTable:{
+        //   currentHome:['foo']
+        // }
       }
 
     case SET_ACTIVE_SORT_CATEGORY:
@@ -156,7 +159,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_CLICKED_ROW:
-      console.log('what is action?', action)
       return {
         ...state,
         listingTable: {

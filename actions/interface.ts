@@ -10,7 +10,6 @@ export interface IAction {
       dismissLoginModal?: boolean
       email?: string
       password?: string
-      foo?: string
     }
     search?: {
       value?: string
