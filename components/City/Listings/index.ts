@@ -1,5 +1,5 @@
-import ListingCard from '@components/City/Listings/ListingCards/ListingCard'
+import ListingCard from 'components/City/Listings/ListingCards/Card'
 import Listings from 'components/City/Listings/Listings'
-import ListingsTable from '@components/City/Listings/ListingTable/ListingsTable'
+import ListingsTable from 'components/City/Listings/ListingsTable'
 
-export { ListingCard, Listings, ListingsTable as ListingTable }
+export { ListingCard, Listings, ListingsTable }
