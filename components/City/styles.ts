@@ -10,6 +10,7 @@ export const ListingsContainer = styled.div`
   .ant-col {
     // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.
     .photo-and-table-tab {
+      height: 45vh;
       .ant-tabs-nav {
         .ant-tabs-nav-wrap {
           // Overrides the Ant design library style tag placement of tabs
