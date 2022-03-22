@@ -26,37 +26,33 @@ const ListingsTable = () => {
     }
   })
 
-  const [selectedRowKeys, setSelectedRowKey] = useState([])
-
+  /* NOTE: This adds custom functionality for the highlighting added to a table row in Ant Design when a table row is clicked since Ant Design provides no such 
+  functionality out of the box for a table row to become highlighted/foccused. 
+  It also removes the default radio button required which is typical for this type of radio selection behavior. */
+  const [selectedRowKey, setSelectedRowKey] = useState('')
   const selectRow = (record) => {
-    const currentSelectedHome = [...selectedRowKeys]
-    if (currentSelectedHome.indexOf(record.key) >= 0) {
-      let selectedPropertyRow = currentSelectedHome.splice(
-        selectedRowKeys.indexOf(record.key),
-        0
-      )
-      setSelectedRowKey(selectedPropertyRow)
+    const currentSelectedHome = selectedRowKey
+    // do not replace if it's the same row clicked again
+    if (currentSelectedHome.indexOf(record.key) === 0) {
+      setSelectedRowKey(currentSelectedHome)
     } else {
+      // replace the current with the new table row clicked
       setSelectedRowKey([record.key])
     }
   }
-  useEffect(() => {
-    console.log('what is state.listingTable', state.listingTable)
-  }, [])
 
   useEffect(() => {
-    console.log('the selected row key', selectedRowKeys)
-    if (selectedRowKeys.length > 0) {
-      dispatch(setClickedRow(selectedRowKeys))
+    if (selectedRowKey.length > 0) {
+      dispatch(setClickedRow(selectedRowKey))
     }
-  }, [selectedRowKeys])
+  }, [selectedRowKey])
 
   const onSelectedRowKeysChange = (selectedRowKeys) => {
     setSelectedRowKey(selectedRowKeys)
   }
 
   const rowSelection = {
-    selectedRowKeys,
+    selectedRowKeys: selectedRowKey,
     onChange: onSelectedRowKeysChange,
   }
 
