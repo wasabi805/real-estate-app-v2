@@ -45,7 +45,7 @@ export const initialState: IinitialState = {
   },
 
   listingTable: {
-    currentHome: [],
+    currentHome: [''],
   },
 
   loginModal: {

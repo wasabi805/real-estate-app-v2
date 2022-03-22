@@ -26,35 +26,39 @@ const ListingsTable = () => {
     }
   })
 
-  /* NOTE: This adds custom functionality for the highlighting added to a table row in Ant Design when a table row is clicked since Ant Design provides no such 
-  functionality out of the box for a table row to become highlighted/foccused. 
-  It also removes the default radio button required which is typical for this type of radio selection behavior. */
-  const [selectedRowKey, setSelectedRowKey] = useState('')
-  const selectRow = (record) => {
+  interface Irecord {
+    key: string
+  }
+  /* NOTE: This adds custom functionality for the highlighting added to a table row in Ant Design 
+  when a table row is clicked since Ant Design provides no such functionality out of the box 
+  for a table row to become highlighted/foccused. 
+  It also removes the default required radio button which is typical for this type of radio selection behavior. */
+  const [selectedRowKey, setSelectedRowKey] = useState([''])
+  const selectRow = (record: Irecord) => {
     const currentSelectedHome = selectedRowKey
-    // do not replace if it's the same row clicked again
+    // do not replace if the same row clicked again.
     if (currentSelectedHome.indexOf(record.key) === 0) {
       setSelectedRowKey(currentSelectedHome)
     } else {
-      // replace the current with the new table row clicked
+      // replace the current displayed home with the new home when a different table row is clicked.
       setSelectedRowKey([record.key])
     }
   }
-
-  useEffect(() => {
-    if (selectedRowKey.length > 0) {
-      dispatch(setClickedRow(selectedRowKey))
-    }
-  }, [selectedRowKey])
-
-  const onSelectedRowKeysChange = (selectedRowKeys) => {
+  const onSelectedRowKeysChange = (selectedRowKeys: string[]) => {
     setSelectedRowKey(selectedRowKeys)
   }
-
   const rowSelection = {
     selectedRowKeys: selectedRowKey,
     onChange: onSelectedRowKeysChange,
   }
+
+  /* Dispatches action to reducer when a row is is clicked and home is selected for display at the top of the table  */
+  useEffect(() => {
+    if (selectedRowKey.length > 0) {
+      dispatch(setClickedRow(selectedRowKey))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedRowKey])
 
   return (
     <ListingsTableContainer>
