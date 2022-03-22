@@ -51,16 +51,16 @@ const SortByOptionsMenu: React.FC = () => {
   )
 
   return (
-   <>
-     <SortByOptionsContainer>
-      <span>40 of 132 homes•</span>
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={handleSetActive}>
-          Sort: {activeSortCAtegory}
-        </a>
-      </Dropdown>
-    </SortByOptionsContainer>
-   </>
+    <>
+      <SortByOptionsContainer>
+        <span>40 of 132 homes•</span>
+        <Dropdown overlay={menu}>
+          <a className="ant-dropdown-link" onClick={handleSetActive}>
+            Sort: {activeSortCAtegory}
+          </a>
+        </Dropdown>
+      </SortByOptionsContainer>
+    </>
   )
 }
 

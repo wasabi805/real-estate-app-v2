@@ -7,7 +7,6 @@ export const ListingsContainer = styled.div`
   border: 2px solid magenta;
 
   .ant-col {
-
     // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.
     .photo-and-table-tab {
       .ant-tabs-nav {
@@ -29,14 +28,10 @@ export const ListingsContainer = styled.div`
         }
       }
     }
-
-   
-
   }
 
   .listings-card-col {
     .ant-tabs {
-      
       .ant-tabs-content-holder {
         overflow-y: scroll;
         height: 78vh;

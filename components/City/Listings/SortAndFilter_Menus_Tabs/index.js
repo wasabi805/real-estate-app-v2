@@ -1,5 +1,3 @@
 import SortByOptionsMenu from './SortByOptionsMenu.tsx'
 
-export{
-    SortByOptionsMenu
-}
+export { SortByOptionsMenu }

@@ -65,34 +65,32 @@ export const SpecRowTwo = styled(Row)`
   }
 `
 
-export const ListingsTableContainer= styled.div`
-// This is to hide the radio button within the table
-//  TODO come back here later to change the font and colors for the
+export const ListingsTableContainer = styled.div`
+  // This is to hide the radio button within the table
+  //  TODO come back here later to change the font and colors for the
 
-  .ant-table-wrapper{
-    .ant-spin-nested-loading{
-      .ant-spin-container{
-        .ant-table{
-          .ant-table-container{
-            .ant-table-content{
-              
-              & table{
-                
+  .ant-table-wrapper {
+    .ant-spin-nested-loading {
+      .ant-spin-container {
+        .ant-table {
+          .ant-table-container {
+            .ant-table-content {
+              & table {
                 .ant-table-thead > tr > th {
                   //  This is to hide the radio button within the header
                   //  TODO come back here later to change the font and colors for the header
-                  .ant-checkbox{
+                  .ant-checkbox {
                     visibility: hidden;
                   }
                 }
-                
-                .ant-table-tbody{
-                  &:hover{
+
+                .ant-table-tbody {
+                  &:hover {
                     cursor: pointer;
                   }
-                  & tr{
-                    & td{
-                      .ant-checkbox-wrapper{
+                  & tr {
+                    & td {
+                      .ant-checkbox-wrapper {
                         visibility: hidden;
                       }
                     }

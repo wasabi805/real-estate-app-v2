@@ -7,7 +7,6 @@ import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
 
-
 const { sortListings } = ListingsSortFilterActions
 const { TabPane } = Tabs
 
@@ -33,7 +32,7 @@ const Listings: React.FC = () => {
         >
           {/* LISTINGS PRESENTED WITH CARDS VIEW */}
           <TabPane tab="Photos" key="Photos">
-          <ListingCards/>
+            <ListingCards />
           </TabPane>
 
           {/* LISTINGS PRESENTED WITH TABLE VIEW */}
