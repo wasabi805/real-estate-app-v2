@@ -1,5 +1,3 @@
-import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
-
 export interface IAction {
   type: string
   payload?: {
@@ -46,6 +44,7 @@ export interface IAction {
       isAscending?: boolean
     }
     listingTable?: {
+      isTableView?: boolean
       currentHome?: string[]
     }
   }

@@ -7,19 +7,24 @@ import { SelectedHomesContainer } from 'components/City/styles'
 const SelectedHome = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { searchResults } = state
+  const { searchResults, listingTable } = state
 
   const selectedHome = state.listingTable.currentHome
 
   console.log('state from SELECTED HOME', selectedHome)
+  console.log('state loaded', state)
 
   return (
-    <SelectedHomesContainer>
-      The selected home!!!!!!
-      <div style={{ width: '25%' }}>
-        <Image alt="fullHouse" src={fullHouse} />
-      </div>
-    </SelectedHomesContainer>
+    <>
+      {listingTable.isTableView && (
+        <SelectedHomesContainer>
+          The selected home!!!!!!
+          <div style={{ width: '25%' }}>
+            <Image alt="fullHouse" src={fullHouse} />
+          </div>
+        </SelectedHomesContainer>
+      )}
+    </>
   )
 }
 export default SelectedHome

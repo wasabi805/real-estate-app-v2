@@ -1,5 +1,6 @@
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
+import * as ListingTabActions from 'actions/listingTabActions.ts'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import { mockListings } from 'mockListings'
@@ -12,15 +13,18 @@ const {
   SET_IS_LOGIN,
   SET_LOGIN_FORM_CHANGE,
 } = LoginModalActions
+
 const {
   SET_SEARCH_FIELD,
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
+
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
 
 const { SET_CLICKED_ROW } = ListingTableActions
+const { HOMES_VIEW_TAB_CLICKED } = ListingTabActions
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -48,6 +52,7 @@ export const initialState: IinitialState = {
   },
 
   listingTable: {
+    isTableView: false,
     currentHome: [''],
   },
 
@@ -123,6 +128,15 @@ const appReducer = (state: IinitialState, action: IAction) => {
         // listingTable:{
         //   currentHome:['foo']
         // }
+      }
+
+    case HOMES_VIEW_TAB_CLICKED:
+      return {
+        ...state,
+        listingTable: {
+          ...state.listingTable,
+          isTableView: action.payload?.listingTable?.isTableView,
+        },
       }
 
     case SET_ACTIVE_SORT_CATEGORY:

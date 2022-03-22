@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
+import * as ListingTabActions from 'actions/listingTabActions.ts'
 import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
@@ -8,6 +9,8 @@ import ListingCards from 'components/City/Listings/ListingCards'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
 import SelectedHome from 'components/City/SelectedHome'
 const { sortListings } = ListingsSortFilterActions
+const { homesViewTabClicked } = ListingTabActions
+
 const { TabPane } = Tabs
 
 const Listings: React.FC = () => {
@@ -26,10 +29,11 @@ const Listings: React.FC = () => {
       <SortByOptionsMenu />
 
       <SelectedHome />
+
       <Col span={24} className="listings-card-col">
         <Tabs
           className={'photo-and-table-tab'}
-          onTabClick={(key) => console.log(key)}
+          onTabClick={(key) => dispatch(homesViewTabClicked(key))}
         >
           {/* LISTINGS PRESENTED WITH CARDS VIEW */}
           <TabPane tab="Photos" key="Photos">

@@ -23,7 +23,8 @@ export interface IinitialState {
     isAscending: null | boolean
   }
   listingTable: {
-    currentHome?: string[]
+    isTableView: boolean
+    currentHome: string[]
   }
   loginModal: {
     isLogin: boolean
