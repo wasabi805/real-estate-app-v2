@@ -4,9 +4,9 @@ import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
-import ListingCard from './ListingCard'
+import ListingCards from 'components/City/Listings/ListingCards'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
-import { Ilisting } from 'actions/propertySearchBarActions/interface'
+
 
 const { sortListings } = ListingsSortFilterActions
 const { TabPane } = Tabs
@@ -33,11 +33,7 @@ const Listings: React.FC = () => {
         >
           {/* LISTINGS PRESENTED WITH CARDS VIEW */}
           <TabPane tab="Photos" key="Photos">
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {searchResults.data.listings.map((house: Ilisting) => (
-                <ListingCard key={house.property_id} houseData={house} />
-              ))}
-            </div>
+          <ListingCards/>
           </TabPane>
 
           {/* LISTINGS PRESENTED WITH TABLE VIEW */}

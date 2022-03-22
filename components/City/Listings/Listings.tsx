@@ -4,7 +4,7 @@ import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { Col, Tabs } from 'antd'
 import { ListingsContainer } from './styles'
 import {SortByOptionsMenu} from 'components/City/Listings/SortAndFilter_Menus_Tabs'
-import ListingCard from './ListingCard'
+import ListingCard from './ListingCards/ListingCard'
 import { ListingTable } from './ListingsTable/ListingsTable'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
 
