@@ -33,7 +33,9 @@ const ListingsTable = () => {
   when a table row is clicked since Ant Design provides no such functionality out of the box 
   for a table row to become highlighted/foccused. 
   It also removes the default required radio button which is typical for this type of radio selection behavior. */
-  const [selectedRowKey, setSelectedRowKey] = useState([''])
+  const [selectedRowKey, setSelectedRowKey] = useState(
+    state.listingTable.currentHome
+  )
   const selectRow = (record: Irecord) => {
     const currentSelectedHome = selectedRowKey
     // do not replace if the same row clicked again.
@@ -61,13 +63,13 @@ const ListingsTable = () => {
   }, [selectedRowKey])
 
   // sets a deafult home to load in SelectedHome component
-  useEffect(() => {
-    let initialHome
-    if (state.searchResults.initialData.length > 0) {
-      initialHome = state.searchResults.initialData[0].property_id
-      dispatch(setClickedRow(initialHome))
-    }
-  }, [])
+  // useEffect(() => {
+  //   let initialHome
+  //   if (state.searchResults.initialData.length > 0) {
+  //     initialHome = state.searchResults.initialData[0].property_id
+  //     dispatch(setClickedRow(initialHome))
+  //   }
+  // }, [])
 
   return (
     <ListingsTableContainer>

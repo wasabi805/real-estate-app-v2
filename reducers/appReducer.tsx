@@ -53,7 +53,8 @@ export const initialState: IinitialState = {
 
   listingTable: {
     isTableView: false,
-    currentHome: [''],
+    // currentHome: [''],
+    currentHome: ['2892620475'],
   },
 
   loginModal: {
@@ -173,6 +174,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_CLICKED_ROW:
+      console.log(
+        'action?.payload?.listingTable?.currentHome',
+        action?.payload?.listingTable
+      )
       return {
         ...state,
         listingTable: {
