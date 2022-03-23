@@ -126,9 +126,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
           initialData: { ...action.payload?.data },
         },
         fetchProperty: false,
-        // listingTable:{
-        //   currentHome:['foo']
-        // }
+        listingTable: {
+          currentHome: [action.payload?.data.listings[0].property_id], //set the first property for the Listing table view
+        },
       }
 
     case HOMES_VIEW_TAB_CLICKED:
