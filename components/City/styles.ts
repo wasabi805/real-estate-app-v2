@@ -10,7 +10,7 @@ export const ListingsContainer = styled.div`
   .ant-col {
     // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.
     .photo-and-table-tab {
-      height: 45vh;
+      // height: 45vh;
       .ant-tabs-nav {
         .ant-tabs-nav-wrap {
           // Overrides the Ant design library style tag placement of tabs
@@ -35,8 +35,8 @@ export const ListingsContainer = styled.div`
   .listings-card-col {
     .ant-tabs {
       .ant-tabs-content-holder {
-        overflow-y: scroll;
-        height: 78vh;
+        // overflow-y: scroll;
+        // height: 78vh;
       }
     }
   }
@@ -49,8 +49,8 @@ export const SortByOptionsContainer = styled.div`
   .ant-col {
     .ant-tabs {
       .ant-tabs-content-holder {
-        overflow-y: scroll;
-        height: 100vh;
+        // overflow-y: scroll;
+        // height: 100vh;
       }
     }
   }
@@ -78,6 +78,8 @@ export const ListingsTableContainer = styled.div`
           .ant-table-container {
             .ant-table-content {
               & table {
+                margin-top: 18em;
+
                 .ant-table-thead > tr > th {
                   //  This is to hide the radio button within the header
                   //  TODO come back here later to change the font and colors for the header
@@ -110,5 +112,9 @@ export const ListingsTableContainer = styled.div`
 export const SpecColTwo = styled(Row)``
 
 export const SelectedHomesContainer = styled.div`
+  position: absolute;
+  width: 100%;
   margin-top: 3em;
+
+  z-index: 10;
 `

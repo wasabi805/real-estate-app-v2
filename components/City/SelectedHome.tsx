@@ -4,6 +4,8 @@ import fullHouse from 'public/fullHouse.jpg'
 import AppContext from 'context/appContext'
 import { SelectedHomesContainer } from 'components/City/styles'
 
+import { Row, Col } from 'antd'
+
 const SelectedHome = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
@@ -24,10 +26,19 @@ const SelectedHome = () => {
     <>
       {listingTable.isTableView && (
         <SelectedHomesContainer>
-          The selected home!!!!!!
-          <div style={{ width: '25%' }}>
-            <img alt="fullHouse" src={selectedHome[0].photo} />
-          </div>
+          <Row style={{ marginTop: '1.45em' }}>
+            <Col span={12}>
+              <img
+                alt="fullHouse"
+                src={selectedHome[0].photo}
+                style={{ width: '100%' }}
+              />
+            </Col>
+
+            <Col span={12} style={{ background: 'azure' }}>
+              house data
+            </Col>
+          </Row>
         </SelectedHomesContainer>
       )}
     </>

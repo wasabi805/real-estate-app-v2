@@ -14,4 +14,7 @@ export const MapColumnContainer = styled((props) => <Col {...props} />)`
 export const ListingsColumnContainer = styled((props) => <Col {...props} />)`
   border: 2px solid yellow;
   width: 100vw;
+  height: 89vh;
+  // overflow: scroll;
+  overflow: hidden;
 `

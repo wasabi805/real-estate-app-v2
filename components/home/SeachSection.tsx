@@ -36,12 +36,12 @@ const SearchSection: React.FC = () => {
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
 
-  useEffect(() => {
-    if (state.fetchProperty) {
-      handleFetchPropertyData()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.fetchProperty])
+  // useEffect(() => {
+  //   if (state.fetchProperty) {
+  //     handleFetchPropertyData()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state.fetchProperty])
 
   const handleFetchPropertyData = async () => {
     await axios
