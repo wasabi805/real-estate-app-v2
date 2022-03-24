@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Menu, Dropdown, Row, Divider } from 'antd'
 import { FilterDropdownsContainer } from 'components/City/FilterDropdowns/styles'
-import { DropDownButton } from 'components/City/FilterDropdowns/styles'
+import { DropDownMenuButton } from 'components/common/DropDownMenuButton'
 
 const StyleDiv = styled.div``
 
@@ -24,7 +24,7 @@ const fakeState = {
 const FilterDropdowns = () => {
   return (
     <FilterDropdownsContainer>
-      <DropDownButton
+      <DropDownMenuButton
         buttonName={'testMe'}
         component={<TestComponent fakeState={fakeState} />}
       />
