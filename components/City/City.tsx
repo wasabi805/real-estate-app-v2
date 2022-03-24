@@ -7,6 +7,7 @@ import { ListingsContainer } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
+import { ListingsTableBody } from './Listings/ListingsTable/styles'
 import SelectedHome from 'components/City/SelectedHome'
 const { sortListings } = ListingsSortFilterActions
 const { homesViewTabClicked } = ListingTabActions
@@ -46,7 +47,8 @@ const Listings: React.FC = () => {
           </TabPane> */}
         </Tabs>
 
-        {state.listingTable.isTableView ? <ListingsTable /> : <ListingCards />}
+        {state.listingTable.isTableView ? 
+        <ListingsTableBody /> : <ListingCards />}
       </Col>
     </ListingsContainer>
   )

@@ -13,6 +13,15 @@ const ListingTableHeaderContainer = () => {
   )
 }
 
+const ListingTableBodyContainer = () => {
+  return (
+    <div id="scrollable-listing-body">
+      <ListingsTable />
+    </div>
+  )
+}
+
 /* NOTE: Work around for styling in orrder to break up the Table elements from Ant Design 
 can be found in styled component SelectedHomesContainer  */
 export const ListingsTableHeader = styled(ListingTableHeaderContainer)``
+export const ListingsTableBody = styled(ListingTableBodyContainer)``
