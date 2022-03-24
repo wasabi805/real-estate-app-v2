@@ -4,4 +4,4 @@ import HomeType from 'components/City/FilterDropdowns/MenuComponents/HomeType'
 import BedsBaths from 'components/City/FilterDropdowns/MenuComponents/BedsBath'
 import AllFilters from 'components/City/FilterDropdowns/MenuComponents/AllFilters'
 
-export { ForSaleRentSold, Price, HomeType, BedsBaths, AllFilters}
+export { ForSaleRentSold, Price, HomeType, BedsBaths, AllFilters }

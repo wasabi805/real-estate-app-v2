@@ -27,7 +27,7 @@ const FilterDropdowns = () => {
       />
 
       <DropDownMenuButton
-        buttonName={'All Filter'}
+        buttonName={'All Filters'}
         component={<AllFilters />}
       />
     </FilterDropdownsContainer>

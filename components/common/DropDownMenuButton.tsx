@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Menu, Dropdown } from 'antd'
+import { FilterButtonWrapper } from 'components/City/FilterDropdowns/styles'
 import 'antd/dist/antd.css'
 
 interface ImenuItem {
@@ -28,13 +29,12 @@ export const DropDownMenuButton = styled((props: Iprops) => {
   )
   return (
     <Dropdown overlay={menu}>
-      <span
-        style={{ cursor: 'pointer' }}
+      <FilterButtonWrapper
         className="ant-dropdown-link"
         onClick={(e) => e.preventDefault()}
       >
         {props.buttonName}
-      </span>
+      </FilterButtonWrapper>
     </Dropdown>
   )
 })``
