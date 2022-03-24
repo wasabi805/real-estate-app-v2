@@ -5,6 +5,7 @@ export const homesViewTabClicked = (
   string: string
 ): Pick<IAction, 'type' | 'payload'> => {
   const isTableView = string === 'Table'
+  console.log('what is string', string)
 
   return {
     type: HOMES_VIEW_TAB_CLICKED,

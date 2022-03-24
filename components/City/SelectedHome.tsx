@@ -3,8 +3,9 @@ import Image from 'next/image'
 import fullHouse from 'public/fullHouse.jpg'
 import AppContext from 'context/appContext'
 import { SelectedHomesContainer } from 'components/City/styles'
+import { ListingsTableHeader } from 'components/City/Listings/ListingsTable/styles'
 
-import { Row, Col } from 'antd'
+import { Row, Col, Table } from 'antd'
 
 const SelectedHome = () => {
   const appContext = useContext(AppContext)
@@ -39,6 +40,8 @@ const SelectedHome = () => {
               house data
             </Col>
           </Row>
+
+          <ListingsTableHeader />
         </SelectedHomesContainer>
       )}
     </>

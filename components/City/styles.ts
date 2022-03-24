@@ -43,14 +43,9 @@ export const ListingsContainer = styled.div`
 `
 
 export const SortByOptionsContainer = styled.div`
-  position: absolute;
-  z-index: 100;
-
   .ant-col {
     .ant-tabs {
       .ant-tabs-content-holder {
-        // overflow-y: scroll;
-        // height: 100vh;
       }
     }
   }
@@ -72,20 +67,23 @@ export const ListingsTableContainer = styled.div`
   //  TODO come back here later to change the font and colors for the
 
   .ant-table-wrapper {
+    height: 45vh;
+    overflow: hidden;
+    overflow-y: scroll;
+
     .ant-spin-nested-loading {
       .ant-spin-container {
         .ant-table {
           .ant-table-container {
             .ant-table-content {
               & table {
-                margin-top: 18em;
-
                 .ant-table-thead > tr > th {
                   //  This is to hide the radio button within the header
                   //  TODO come back here later to change the font and colors for the header
                   .ant-checkbox {
                     visibility: hidden;
                   }
+                  // display: none;
                 }
 
                 .ant-table-tbody {
@@ -112,9 +110,32 @@ export const ListingsTableContainer = styled.div`
 export const SpecColTwo = styled(Row)``
 
 export const SelectedHomesContainer = styled.div`
-  position: absolute;
   width: 100%;
-  margin-top: 3em;
 
-  z-index: 10;
+  #fixed-listing-header {
+    .edvbjrl2 {
+      .ant-table-wrapper {
+        height: 6vh;
+        .ant-spin-nested-loading {
+          .ant-spin-container {
+            ul {
+              display: none;
+            }
+
+            .ant-table {
+              .ant-table-container {
+                .ant-table-content {
+                  table {
+                    .ant-table-tbody {
+                      visibility: hidden;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `

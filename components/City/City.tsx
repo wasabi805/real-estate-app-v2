@@ -36,15 +36,17 @@ const Listings: React.FC = () => {
           onTabClick={(key) => dispatch(homesViewTabClicked(key))}
         >
           {/* LISTINGS PRESENTED WITH CARDS VIEW */}
-          <TabPane tab="Photos" key="Photos">
+          {/* <TabPane tab="Photos" key="Photos">
             <ListingCards />
-          </TabPane>
+          </TabPane> */}
 
           {/* LISTINGS PRESENTED WITH TABLE VIEW */}
-          <TabPane tab="Table" key="Table">
+          {/* <TabPane tab="Table" key="Table">
             <ListingsTable />
-          </TabPane>
-        </Tabs>{' '}
+          </TabPane> */}
+        </Tabs>
+
+        {state.listingTable.isTableView ? <ListingsTable /> : <ListingCards />}
       </Col>
     </ListingsContainer>
   )
