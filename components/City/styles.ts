@@ -141,6 +141,10 @@ export const SelectedHomesContainer = styled.div`
 `
 
 export const ListingCardsAndTableCol = styled(Col)`
+  overflow-y: scroll;
+  height: 100vh;
+
+
   #scrollable-listing-body {
     .edvbjrl3 {
       .ant-table-wrapper {
