@@ -21,12 +21,18 @@ const fakeState = {
   },
 }
 
+const fakeState2 = [
+  { id: '1', name: 'eject', onClick: () => console.log('Ejection seats') },
+  { id: '2', name: 'laser', onClick: () => console.log('fire laser') },
+]
+
 const FilterDropdowns = () => {
   return (
     <FilterDropdownsContainer>
       <DropDownMenuButton
         buttonName={'testMe'}
-        component={<TestComponent fakeState={fakeState} />}
+        menuList={fakeState2}
+        // component={<TestComponent fakeState={fakeState} />}
       />
     </FilterDropdownsContainer>
   )
