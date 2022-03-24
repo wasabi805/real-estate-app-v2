@@ -15,3 +15,10 @@ export const FilterButtonWrapper = styled.span`
   margin-right: 1em;
   border-radius: 4px;
 `
+
+export const BedBathsContainer = styled.div`
+  h3 {
+    display: inline-block;
+    color: red;
+  }
+`
