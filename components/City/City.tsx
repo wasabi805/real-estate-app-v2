@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { ListingsContainer, ListingCardsAndTableCol } from './styles'
+import { FilterDropdowns } from './FilterDropdowns'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
 import { ListingsTableBody } from './Listings/ListingsTable/styles'
 import SelectedHome from 'components/City/SelectedHome'
 const { sortListings } = ListingsSortFilterActions
-
 
 const Listings: React.FC = () => {
   const appContext = useContext(AppContext)
@@ -22,6 +22,7 @@ const Listings: React.FC = () => {
 
   return (
     <ListingsContainer className={'listings-container'}>
+      <FilterDropdowns />
       <SortByOptionsMenu />
 
       <SelectedHome />
@@ -33,7 +34,6 @@ const Listings: React.FC = () => {
           <ListingCards />
         )}
       </ListingCardsAndTableCol>
-
     </ListingsContainer>
   )
 }
