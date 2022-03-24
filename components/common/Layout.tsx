@@ -5,6 +5,7 @@ import FormInput from '../common/FormInput'
 import { formInputStyles } from './styles'
 import AppContext from 'context/appContext'
 import * as LoginModalActions from 'actions/modalActions'
+import AllFiltersDrawer from '@components/City/FilterDropdowns/MenuComponents/AllFiltersDrawer'
 
 import LoginModal from '@components/Modals/LoginModal'
 
@@ -58,6 +59,7 @@ const PageLayout: React.FC<IPageLayoutProps> = ({ children }) => {
       <PageHeader />
       {children}
       <LoginModal />
+      <AllFiltersDrawer />
       <PageFooter />
     </Layout>
   )

@@ -7,6 +7,7 @@ import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
 import { ListingsTableBody } from './Listings/ListingsTable/styles'
 import SelectedHome from 'components/City/SelectedHome'
+
 const { sortListings } = ListingsSortFilterActions
 
 const Listings: React.FC = () => {
@@ -21,20 +22,22 @@ const Listings: React.FC = () => {
   }, [sortAndFilter.isAscending])
 
   return (
-    <ListingsContainer className={'listings-container'}>
-      <FilterDropdowns />
-      <SortByOptionsMenu />
+    <>
+      <ListingsContainer className={'listings-container'}>
+        <FilterDropdowns />
+        <SortByOptionsMenu />
 
-      <SelectedHome />
+        <SelectedHome />
 
-      <ListingCardsAndTableCol>
-        {state.listingTable.isTableView ? (
-          <ListingsTableBody />
-        ) : (
-          <ListingCards />
-        )}
-      </ListingCardsAndTableCol>
-    </ListingsContainer>
+        <ListingCardsAndTableCol>
+          {state.listingTable.isTableView ? (
+            <ListingsTableBody />
+          ) : (
+            <ListingCards />
+          )}
+        </ListingCardsAndTableCol>
+      </ListingsContainer>
+    </>
   )
 }
 

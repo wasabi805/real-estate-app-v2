@@ -22,6 +22,10 @@ export interface IinitialState {
     sortedProperties: []
     isAscending: null | boolean
   }
+  listingsFilters?: {
+    isDrawerOpen?: boolean
+  }
+
   listingTable: {
     isTableView: boolean
     currentHome: string[]

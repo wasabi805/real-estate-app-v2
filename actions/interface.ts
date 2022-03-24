@@ -43,6 +43,11 @@ export interface IAction {
       sortedProperties?: []
       isAscending?: boolean
     }
+
+    listingsFilters?: {
+      isDrawerOpen: boolean
+    }
+
     listingTable?: {
       isTableView?: boolean
       currentHome?: string[]

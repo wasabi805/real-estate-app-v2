@@ -1,6 +1,7 @@
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
+import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import { mockListings } from 'mockListings'
@@ -19,6 +20,8 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
+
+const { SET_FILTER_DRAWER_OPEN } = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
@@ -45,6 +48,11 @@ export const initialState: IinitialState = {
     // initialData: [],
     initialData: mockListings,
   },
+
+  listingsFilters: {
+    isDrawerOpen: false,
+  },
+
   sortAndFilter: {
     activeSort: 'Price',
     sortedProperties: [],
@@ -137,6 +145,15 @@ const appReducer = (state: IinitialState, action: IAction) => {
         listingTable: {
           ...state.listingTable,
           isTableView: action.payload?.listingTable?.isTableView,
+        },
+      }
+
+    case SET_FILTER_DRAWER_OPEN:
+      return {
+        ...state,
+        listingsFilters: {
+          ...state.listingsFilters,
+          isDrawerOpen: action.payload?.listingsFilters?.isDrawerOpen,
         },
       }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { FilterDropdownsContainer } from 'components/City/FilterDropdowns/styles'
 import { DropDownMenuButton } from 'components/common/DropDownMenuButton'
+import AllFiltersButton from 'components/City/FilterDropdowns/MenuComponents/AllFiltersButton'
 import {
   ForSaleRentSold,
   Price,
@@ -26,10 +27,7 @@ const FilterDropdowns = () => {
         component={<BedsBaths />}
       />
 
-      <DropDownMenuButton
-        buttonName={'All Filters'}
-        component={<AllFilters />}
-      />
+      <AllFiltersButton />
     </FilterDropdownsContainer>
   )
 }
