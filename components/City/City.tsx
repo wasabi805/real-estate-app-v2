@@ -3,7 +3,7 @@ import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
 import { Col, Tabs } from 'antd'
-import { ListingsContainer } from './styles'
+import { ListingsContainer, ListingCardsAndTableCol } from './styles'
 import SortByOptionsMenu from './SortByOptionsMenu'
 import ListingCards from 'components/City/Listings/ListingCards'
 import ListingsTable from '@components/City/Listings/ListingsTable/ListingsTable'
@@ -31,25 +31,18 @@ const Listings: React.FC = () => {
 
       <SelectedHome />
 
-      <Col span={24} className="listings-card-col">
+      <ListingCardsAndTableCol>
         <Tabs
           className={'photo-and-table-tab'}
           onTabClick={(key) => dispatch(homesViewTabClicked(key))}
-        >
-          {/* LISTINGS PRESENTED WITH CARDS VIEW */}
-          {/* <TabPane tab="Photos" key="Photos">
-            <ListingCards />
-          </TabPane> */}
+        ></Tabs>
 
-          {/* LISTINGS PRESENTED WITH TABLE VIEW */}
-          {/* <TabPane tab="Table" key="Table">
-            <ListingsTable />
-          </TabPane> */}
-        </Tabs>
-
-        {state.listingTable.isTableView ? 
-        <ListingsTableBody /> : <ListingCards />}
-      </Col>
+        {state.listingTable.isTableView ? (
+          <ListingsTableBody />
+        ) : (
+          <ListingCards />
+        )}
+      </ListingCardsAndTableCol>
     </ListingsContainer>
   )
 }

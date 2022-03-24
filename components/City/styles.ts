@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Row } from 'antd'
+import { Row, Col } from 'antd'
 
 export const ListingsContainer = styled.div`
   // background: #e2e2e8;
@@ -67,9 +67,9 @@ export const ListingsTableContainer = styled.div`
   //  TODO come back here later to change the font and colors for the
 
   .ant-table-wrapper {
-    height: 45vh;
-    overflow: hidden;
-    overflow-y: scroll;
+    // height: 45vh;
+    // overflow: hidden;
+    // overflow-y: scroll;
 
     .ant-spin-nested-loading {
       .ant-spin-container {
@@ -113,8 +113,7 @@ export const SelectedHomesContainer = styled.div`
   width: 100%;
 
   #fixed-listing-header {
-    border: 3px solid cyan;
-    .edvbjrl2 {
+    .edvbjrl3 {
       .ant-table-wrapper {
         height: 6vh;
         .ant-spin-nested-loading {
@@ -129,6 +128,33 @@ export const SelectedHomesContainer = styled.div`
                   table {
                     .ant-table-tbody {
                       visibility: hidden;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const ListingCardsAndTableCol = styled(Col)`
+  #scrollable-listing-body {
+    .edvbjrl3 {
+      .ant-table-wrapper {
+        height: 40vh;
+        overflow: hidden;
+        overflow-y: scroll;
+        .ant-spin-nested-loading {
+          .ant-spin-container {
+            .ant-table {
+              .ant-table-container {
+                .ant-table-content {
+                  table {
+                    .ant-table-thead {
+                      display: none;
                     }
                   }
                 }
