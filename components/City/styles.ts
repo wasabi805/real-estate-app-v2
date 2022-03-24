@@ -113,6 +113,7 @@ export const SelectedHomesContainer = styled.div`
   width: 100%;
 
   #fixed-listing-header {
+    border: 3px solid cyan;
     .edvbjrl2 {
       .ant-table-wrapper {
         height: 6vh;
