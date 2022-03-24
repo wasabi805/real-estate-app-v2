@@ -8,14 +8,17 @@ export const FilterDropdownsContainer = styled.div`
   height: 5vh;
 `
 
-// export const DropDownMenu = styled((props)=>{
-//     return <Dropdown overlay={menu}/>
-// })``
-
-export const DropDownButton = styled((props) => (
-  <Dropdown {...props}>
-    <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-      Hover me
-    </a>
-  </Dropdown>
-))``
+export const DropDownButton = styled((props) => {
+  const menu = (
+    <Menu>
+      <Menu.Item>{props.component}</Menu.Item>
+    </Menu>
+  )
+  return (
+    <Dropdown overlay={menu}>
+      <text className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+        {props.buttonName}
+      </text>
+    </Dropdown>
+  )
+})``
