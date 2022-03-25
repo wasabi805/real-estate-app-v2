@@ -1,3 +1,4 @@
+import { IfilterButtons } from 'utils/dictionaries'
 export interface IAction {
   type: string
   payload?: {
@@ -45,7 +46,9 @@ export interface IAction {
     }
 
     listingsFilters?: {
-      isDrawerOpen: boolean
+      isDrawerOpen?: boolean
+      bedsButtons?: IfilterButtons[]
+      bathsButtons?: IfilterButtons[]
     }
 
     listingTable?: {

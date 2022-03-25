@@ -1,4 +1,5 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
+import { IfilterButtons } from 'utils/dictionaries'
 
 export interface IinitialState {
   isLoginModalVisibile: boolean
@@ -24,6 +25,8 @@ export interface IinitialState {
   }
   listingsFilters?: {
     isDrawerOpen?: boolean
+    bedsButtons?: IfilterButtons[]
+    bathsButtons?: IfilterButtons[]
   }
 
   listingTable: {

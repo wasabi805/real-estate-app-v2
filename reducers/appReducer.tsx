@@ -5,7 +5,11 @@ import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import { mockListings } from 'mockListings'
-import { IinitialState } from './interface'
+import {
+  LISTINGS_FILTERS_BUTTONS_BEDS,
+  LISTINGS_FILTERS_BUTTONS_BATHS,
+} from 'utils/dictionaries'
+import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
 
 const {
@@ -21,7 +25,11 @@ const {
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
 
-const { SET_FILTER_DRAWER_OPEN } = ListingsFilterActions
+const {
+  SET_FILTER_DRAWER_OPEN,
+  HANDLE_CLICK_BEDS_FILTER_BUTTON,
+  HANDLE_CLICK_BATHS_FILTER_BUTTON,
+} = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
@@ -51,6 +59,8 @@ export const initialState: IinitialState = {
 
   listingsFilters: {
     isDrawerOpen: false,
+    bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
+    bathsButtons: LISTINGS_FILTERS_BUTTONS_BATHS || [],
   },
 
   sortAndFilter: {
@@ -155,6 +165,17 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.listingsFilters,
           isDrawerOpen: action.payload?.listingsFilters?.isDrawerOpen,
         },
+      }
+
+    case HANDLE_CLICK_BEDS_FILTER_BUTTON:
+      console.log(action)
+      return {
+        ...state,
+      }
+    case HANDLE_CLICK_BATHS_FILTER_BUTTON:
+      console.log(action)
+      return {
+        ...state,
       }
 
     case SET_ACTIVE_SORT_CATEGORY:
