@@ -19,6 +19,24 @@ export const handleClickBedsFilterButton = (
 ): Pick<IAction, 'type' | 'payload'> => {
   let currentRange = state.listingsFilters?.currentRange.sort()
 
+  const handleBedsNumAction = (
+    currentRange,
+    bedsButtons,
+    clickedFilterName
+  ) => {
+    return {
+      type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+      payload: {
+        listingsFilters: {
+          ...state.listingsFilters,
+          currentRange: currentRange,
+          bedsButtons: bedsButtons,
+          clickedFilterName: clickedFilterName,
+        },
+      },
+    }
+  }
+
   if (key === 'any') {
     return {
       type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
@@ -52,17 +70,7 @@ export const handleClickBedsFilterButton = (
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
 
-      return {
-        type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
-        payload: {
-          listingsFilters: {
-            ...state.listingsFilters,
-            currentRange: returnRange,
-            bedsButtons: bedsButtons,
-            clickedFilterName: keyNum,
-          },
-        },
-      }
+      return handleBedsNumAction(returnRange, bedsButtons, keyNum)
     }
 
     //a range exists
@@ -80,22 +88,11 @@ export const handleClickBedsFilterButton = (
         //get the new range of numbers
         const currentRange = range.slice(range.indexOf(keyNum), lastValue)
 
-        return {
-          type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
-          payload: {
-            listingsFilters: {
-              ...state.listingsFilters,
-              currentRange: currentRange,
-              bedsButtons: bedsButtons,
-              clickedFilterName: keyNum,
-            },
-          },
-        }
+        return handleBedsNumAction(currentRange, bedsButtons, keyNum)
       }
 
       // range exists and number in range is clicked
       if (isKeyNumPresent && keyNum > previousBtnClicked) {
-        alert('remove the higher number')
         const currentRange = range.slice(
           range.indexOf(previousBtnClicked),
           keyNum
@@ -112,18 +109,7 @@ export const handleClickBedsFilterButton = (
             return bedBtn
           }
         )
-
-        return {
-          type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
-          payload: {
-            listingsFilters: {
-              ...state.listingsFilters,
-              currentRange: currentRange,
-              bedsButtons: deactivateBedButtons,
-              clickedFilterName: keyNum,
-            },
-          },
-        }
+        return handleBedsNumAction(currentRange, deactivateBedButtons, keyNum)
       }
     }
   }
