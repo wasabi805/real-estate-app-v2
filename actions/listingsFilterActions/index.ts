@@ -5,7 +5,7 @@ import {
   handleBedsNumAction,
   setInitialButtonsActive,
   deactivateBedButtons,
-  activateBedButton,
+  activateBedButtons,
 } from './helpers'
 export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
 export const setFilterDrawerOpen = (
@@ -46,7 +46,7 @@ export const handleClickBedsFilterButton = (
     }
 
     // a range exists
-    if (currentRange.length >= 2) {
+    if (currentRange && currentRange.length >= 2) {
       const rangeInReducer = state.listingsFilters?.currentRange
       const lastNumInRangeIdx = state.listingsFilters?.currentRange.length - 1
       const lastValue = state.listingsFilters?.currentRange[lastNumInRangeIdx]
@@ -87,7 +87,7 @@ export const handleClickBedsFilterButton = (
         return handleBedsNumAction(
           state,
           newRange,
-          activateBedButton(state, keyNum),
+          activateBedButtons(state, keyNum),
           keyNum
         )
       }

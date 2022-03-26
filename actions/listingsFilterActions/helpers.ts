@@ -43,7 +43,7 @@ export const deactivateBedButtons = (state, newRange) => {
   })
 }
 
-const activateBedButton = (state, key) =>
+export const activateBedButtons = (state, keyNum) =>
   state.listingsFilters?.bedsButtons.map((bedBtn) => {
     if (bedBtn.value === keyNum) {
       bedBtn.isActive = true
