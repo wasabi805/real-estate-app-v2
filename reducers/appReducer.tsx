@@ -59,7 +59,7 @@ export const initialState: IinitialState = {
 
   listingsFilters: {
     isDrawerOpen: false,
-    clickedFilterName: '',
+    clickedFilterName: null,
     currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
     bathsButtons: LISTINGS_FILTERS_BUTTONS_BATHS || [],

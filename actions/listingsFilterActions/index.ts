@@ -45,14 +45,9 @@ export const handleClickBedsFilterButton = (
       }
       return bedBtn
     })
-
-
-
     // CONFIRMED - DO NOT CHANGE
     //if a range hasnt been set yet...
     if (!isKeyNumPresent && currentRange.length === 0) {
-      
-
       const range = [1, 2, 3, 4, 5]
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
@@ -64,6 +59,7 @@ export const handleClickBedsFilterButton = (
             ...state.listingsFilters,
             currentRange: returnRange,
             bedsButtons: bedsButtons,
+            clickedFilterName: keyNum,
           },
         },
       }
@@ -75,9 +71,11 @@ export const handleClickBedsFilterButton = (
       const lastNumInRangeIdx = state.listingsFilters?.currentRange.length - 1
       const lastValue = state.listingsFilters?.currentRange[lastNumInRangeIdx]
       const firstValue = state.listingsFilters?.currentRange[0]
+      const previousBtnClicked = state.listingsFilters?.clickedFilterName
 
       const range = [1, 2, 3, 4, 5]
 
+      // if the clicked value is less than the lowest range number in the reducer...
       if (keyNum < firstValue) {
         //get the new range of numbers
         const currentRange = range.slice(range.indexOf(keyNum), lastValue)
@@ -89,6 +87,40 @@ export const handleClickBedsFilterButton = (
               ...state.listingsFilters,
               currentRange: currentRange,
               bedsButtons: bedsButtons,
+              clickedFilterName: keyNum,
+            },
+          },
+        }
+      }
+
+      // range exists and number in range is clicked
+      if (isKeyNumPresent && keyNum > previousBtnClicked) {
+        alert('remove the higher number')
+        const currentRange = range.slice(
+          range.indexOf(previousBtnClicked),
+          keyNum
+        )
+
+        const deactivateBedButtons = state.listingsFilters?.bedsButtons.map(
+          (bedBtn) => {
+            // find the bedButtons that corespond to the new range
+            if (currentRange.indexOf(bedBtn.value) >= 0) {
+              bedBtn.isActive = true
+              return bedBtn
+            }
+            bedBtn.isActive = false
+            return bedBtn
+          }
+        )
+
+        return {
+          type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+          payload: {
+            listingsFilters: {
+              ...state.listingsFilters,
+              currentRange: currentRange,
+              bedsButtons: deactivateBedButtons,
+              clickedFilterName: keyNum,
             },
           },
         }
