@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import {Button} from 'antd'
 
 export const FilterDropdownsContainer = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const FilterDropdownsContainer = styled.div`
   align-items: vertical;
   height: 4vh;
 `
-export const FilterButtonWrapper = styled.span`
+export const FilterButtonWrapper = styled(Button)`
   cursor: pointer;
   display: flex;
   align-items: center;
