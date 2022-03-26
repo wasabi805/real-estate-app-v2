@@ -66,6 +66,7 @@ export const handleClickBedsFilterButton = (
     // CONFIRMED - DO NOT CHANGE
     //if a range hasnt been set yet...
     if (!isKeyNumPresent && currentRange.length === 0) {
+      alert('case initial')
       const range = [1, 2, 3, 4, 5]
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
@@ -101,7 +102,7 @@ export const handleClickBedsFilterButton = (
       }
 
       // range exists and number in range is clicked
-      if (isKeyNumPresent && keyNum >= previousBtnClicked) {
+      if (isKeyNumPresent && keyNum > previousBtnClicked) {
         alert('case 2')
         const currentRange = range.slice(
           range.indexOf(previousBtnClicked),
@@ -123,21 +124,23 @@ export const handleClickBedsFilterButton = (
       }
 
       //range exists but, clicked number is not in the range(set button active)
-      if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
+      if (!isKeyNumPresent && keyNum >previousBtnClicked) {
         alert('case 3')
         const currentRange = rangeInReducer?.concat(keyNum)
+        console.log('what is the range in case 3', currentRange)
+        if(currentRange[0]=== currentRange[1]){
+          alert('this is true')
+          currentRange[1] = currentRange[0]+1
+        }
+        console.log('what is the current range now?' , currentRange)
        
-
         const activateButton = state.listingsFilters?.bedsButtons.map(
           (bedBtn) => {
-            if (bedBtn.value === keyNum) {
+            if ( currentRange?.indexOf(bedBtn.value) >=0) {
               bedBtn.isActive = true
               return bedBtn
             }
-            if (bedBtn.value > keyNum) {
-              bedBtn.isActive = false
-              return bedBtn
-            }
+            bedBtn.isActive = false
             return bedBtn
           }
         )
@@ -147,6 +150,7 @@ export const handleClickBedsFilterButton = (
 
       // if range exists, number is in range, clicked number value  is less that previously clicked button
       if(isKeyNumPresent && keyNum < previousBtnClicked){
+        alert('case 4')
         const currentRange = range.slice(range.indexOf(keyNum), range[lastNumInRangeIdx])
         
         const deactivateButtons = state.listingsFilters?.bedsButtons.map( bedBtn =>{
@@ -160,6 +164,23 @@ export const handleClickBedsFilterButton = (
 
         return handleBedsNumAction(currentRange, deactivateButtons, keyNum)
       }
+
+      // if range exists, number clicked is equal to the previous number clicked 
+      if(isKeyNumPresent && keyNum === previousBtnClicked){
+        alert('case 4')
+        const currentRange = [keyNum, keyNum]
+        const deactivateButtons = state.listingsFilters?.bedsButtons.map( bedBtn =>{
+          if(currentRange.indexOf( bedBtn.value )>=0){
+            bedBtn.isActive = true
+            return bedBtn
+          }
+          bedBtn.isActive = false
+          return bedBtn
+        })
+
+        return handleBedsNumAction(currentRange, deactivateButtons, keyNum)
+      }
+      
 
     }
   }
