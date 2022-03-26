@@ -59,6 +59,8 @@ export const initialState: IinitialState = {
 
   listingsFilters: {
     isDrawerOpen: false,
+    clickedFilterName: '',
+    currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
     bathsButtons: LISTINGS_FILTERS_BUTTONS_BATHS || [],
   },
@@ -171,6 +173,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
       console.log(action)
       return {
         ...state,
+        listingsFilters: action.payload?.listingsFilters,
       }
     case HANDLE_CLICK_BATHS_FILTER_BUTTON:
       console.log(action)
@@ -212,16 +215,17 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_CLICKED_ROW:
-      console.log(
-        'action?.payload?.listingTable?.currentHome',
-        action?.payload?.listingTable
-      )
       return {
         ...state,
         listingTable: {
           ...state.listingTable,
           currentHome: action?.payload?.listingTable?.currentHome,
         },
+      }
+
+    case 'TESTING':
+      return {
+        ...state,
       }
 
     default:

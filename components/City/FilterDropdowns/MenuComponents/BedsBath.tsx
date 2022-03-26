@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from 'components/City/FilterDropdowns/styles'
 import ButtonComp from 'components/common/ButtonComp'
@@ -13,12 +13,15 @@ const BedsBath = () => {
   const { state, dispatch } = appContext
   console.log('what is listingsFilters', state.listingsFilters?.bedsButtons)
 
-  const bedsButtonClicked = (name: string, state: IinitialState) =>
-    dispatch(handleClickBedsFilterButton(name, state))
+  const bedsButtonClicked = (key: string, state: IinitialState) =>
+    dispatch(handleClickBedsFilterButton(key, state))
 
-  const bathsButtonClicked = (name: string) => {
-    console.log(name)
+  const bathsButtonClicked = (key: string) => {
+    console.log(key)
   }
+
+  console.log('CURRENT_RANGE AT COMPONENT', state.listingsFilters?.currentRange)
+
   return (
     <BedBathsContainer>
       <div>
@@ -29,7 +32,8 @@ const BedsBath = () => {
           <ButtonComp
             key={btn.key}
             name={btn.value}
-            onClick={() => bedsButtonClicked(btn.value, state)}
+            onClick={() => bedsButtonClicked(btn.key, state)}
+            type={btn.isActive ? 'primary' : 'default'}
           />
         ))}
       </div>
@@ -42,6 +46,7 @@ const BedsBath = () => {
               key={btn.key}
               name={btn.value}
               onClick={() => bathsButtonClicked(btn.value)}
+              type={btn.isActive ? 'primary' : 'default'}
             />
           ))}
         </div>

@@ -25,6 +25,8 @@ export interface IinitialState {
   }
   listingsFilters?: {
     isDrawerOpen?: boolean
+    clickedFilterName: string
+    currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
     bathsButtons?: IfilterButtons[]
   }

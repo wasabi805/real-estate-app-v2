@@ -14,24 +14,98 @@ export const setFilterDrawerOpen = (
 
 export const HANDLE_CLICK_BEDS_FILTER_BUTTON = 'HANDLE_CLICK_BEDS_FILTER_BUTTON'
 export const handleClickBedsFilterButton = (
-  name: string,
+  key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-  console.log('what is allBedsButtons', { name, state })
-  return {
-    type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
-    payload: {
-      listingsFilters: {
-        bedsButtons: [],
+  let currentRange = state.listingsFilters?.currentRange.sort()
+
+  if (key === 'any') {
+    return {
+      type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+      payload: {
+        listingsFilters: {
+          ...state.listingsFilters,
+          currentRange: [],
+        },
       },
-    },
+    }
+  }
+  const isStudio = key === 'studio'
+  const isAny = key === 'any'
+
+  if (!isStudio && !isAny) {
+    let keyNum = parseInt(key[key.length - 1], 10)
+    const isKeyNumPresent = currentRange.indexOf(keyNum) >= 0
+    console.log('keyNum', keyNum)
+
+    const bedsButtons = state.listingsFilters?.bedsButtons.map((bedBtn) => {
+      if (keyNum <= bedBtn.value) {
+        bedBtn.isActive = true
+        return bedBtn
+      }
+      return bedBtn
+    })
+
+
+
+    // CONFIRMED - DO NOT CHANGE
+    //if a range hasnt been set yet...
+    if (!isKeyNumPresent && currentRange.length === 0) {
+      
+
+      const range = [1, 2, 3, 4, 5]
+      const startRange = range.indexOf(keyNum)
+      const returnRange = range.slice(startRange)
+
+      return {
+        type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+        payload: {
+          listingsFilters: {
+            ...state.listingsFilters,
+            currentRange: returnRange,
+            bedsButtons: bedsButtons,
+          },
+        },
+      }
+    }
+
+    //a range exists
+    if (currentRange.length >= 2) {
+      const rangeInReducer = state.listingsFilters?.currentRange
+      const lastNumInRangeIdx = state.listingsFilters?.currentRange.length - 1
+      const lastValue = state.listingsFilters?.currentRange[lastNumInRangeIdx]
+      const firstValue = state.listingsFilters?.currentRange[0]
+
+      const range = [1, 2, 3, 4, 5]
+
+      if (keyNum < firstValue) {
+        //get the new range of numbers
+        const currentRange = range.slice(range.indexOf(keyNum), lastValue)
+
+        return {
+          type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+          payload: {
+            listingsFilters: {
+              ...state.listingsFilters,
+              currentRange: currentRange,
+              bedsButtons: bedsButtons,
+            },
+          },
+        }
+      }
+    }
+  }
+
+  //---------------------------
+  return {
+    type: 'TESTING',
   }
 }
 
 export const HANDLE_CLICK_BATHS_FILTER_BUTTON =
   'HANDLE_CLICK_BATHS_FILTER_BUTTON'
 export const handleClickBathsFilterButton = (
-  name: string,
+  key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
   return {
