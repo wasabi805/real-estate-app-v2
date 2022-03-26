@@ -111,6 +111,27 @@ export const handleClickBedsFilterButton = (
         )
         return handleBedsNumAction(currentRange, deactivateBedButtons, keyNum)
       }
+
+      //range exists but, clicked number is not in the range(set button active)
+      if (!isKeyNumPresent && keyNum > previousBtnClicked) {
+        const currentRange = rangeInReducer?.concat(keyNum)
+
+        const activateButton = state.listingsFilters?.bedsButtons.map(
+          (bedBtn) => {
+            if (bedBtn.value === keyNum) {
+              bedBtn.isActive = true
+              return bedBtn
+            }
+            if (bedBtn.value > keyNum) {
+              bedBtn.isActive = false
+              return bedBtn
+            }
+            return bedBtn
+          }
+        )
+
+        return handleBedsNumAction(currentRange, activateButton, keyNum)
+      }
     }
   }
 
