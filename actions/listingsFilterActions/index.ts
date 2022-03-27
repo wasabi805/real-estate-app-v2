@@ -1,5 +1,6 @@
 import { IAction } from 'actions/interface'
 import { IinitialState } from 'reducers/interface'
+import { LISTINGS_FILTERS_BUTTONS_BEDS } from 'utils/dictionaries'
 import {
   range,
   handleBedsNumAction,
@@ -26,11 +27,22 @@ export const handleClickBedsFilterButton = (
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
   let currentRange = state.listingsFilters?.currentRange.sort()
-  const isStudio = key === 'studio'
   const isAny = key === 'any'
+  let keyNum = parseInt(key[key.length - 1], 10)
 
-  if (!isStudio && !isAny) {
-    let keyNum = parseInt(key[key.length - 1], 10)
+  if (isAny) {
+    alert('is')
+    let currentRange = [...state.listingsFilters?.currentRange]
+
+    return handleBedsNumAction(
+      state,
+      currentRange,
+      LISTINGS_FILTERS_BUTTONS_BEDS,
+      keyNum
+    )
+  }
+
+  if (!isAny) {
     const isKeyNumPresent = currentRange.indexOf(keyNum) >= 0
 
     //if a range hasnt been set yet...
@@ -45,26 +57,26 @@ export const handleClickBedsFilterButton = (
       )
     }
     // if 5+ button is clicked
-    if (keyNum === 5) {
-      alert('5+ was clicked')
-      const newRange = [5]
-      const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
-        (bedBtn) => {
-          if (newRange.indexOf(bedBtn.value) >= 0) {
-            bedBtn.isActive = true
-            return bedBtn
-          }
-          bedBtn.isActive = false
-          return bedBtn
-        }
-      )
-      return handleBedsNumAction(
-        state,
-        newRange,
-        addAddtionalActiveBtns,
-        keyNum
-      )
-    }
+    // if (keyNum === 5) {
+    //   alert('5+ was clicked')
+    //   const newRange = [5]
+    //   const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+    //     (bedBtn) => {
+    //       if (newRange.indexOf(bedBtn.value) >= 0) {
+    //         bedBtn.isActive = true
+    //         return bedBtn
+    //       }
+    //       bedBtn.isActive = false
+    //       return bedBtn
+    //     }
+    //   )
+    //   return handleBedsNumAction(
+    //     state,
+    //     newRange,
+    //     addAddtionalActiveBtns,
+    //     keyNum
+    //   )
+    // }
 
     // if only one value in the range..
     if (currentRange.length === 1) {
@@ -231,17 +243,6 @@ export const handleClickBedsFilterButton = (
           addAddtionalActiveBtns,
           keyNum
         )
-      }
-
-      //bigger than prevClicked and is in the range
-      if (isKeyNumPresent && keyNum > previousBtnClicked) {
-        console.log('-----CASE:5------')
-        const startSlice = range.indexOf(
-          state.listingsFilters.clickedFilterName
-        )
-        const endSlice = range.indexOf(keyNum)
-        const newRange = range.slice(startSlice, endSlice)
-        console.log('what is the newRange', newRange)
       }
     }
   }

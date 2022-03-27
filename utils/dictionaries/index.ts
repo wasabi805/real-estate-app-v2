@@ -19,7 +19,7 @@ export interface IfilterButtons extends IdictionaryEntry {
 
 export const LISTINGS_FILTERS_BUTTONS_BEDS: IfilterButtons[] = [
   { key: 'any', value: 'Any', isActive: true },
-  { key: 'studio', value: 'Studio', isActive: false },
+  // { key: 'studio', value: 'Studio', isActive: false },
   { key: 'beds-fltr-1', value: 1, isActive: false },
   { key: 'beds-fltr-2', value: 2, isActive: false },
   { key: 'beds-fltr-3', value: 3, isActive: false },
