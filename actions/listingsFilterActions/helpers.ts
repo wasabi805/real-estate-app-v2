@@ -55,3 +55,11 @@ export const activateBedButtons = (state, keyNum) =>
     }
     return bedBtn
   })
+
+export const setSingleButtonActive = (state, keyNum) =>
+  state.listingsFilters?.bedsButtons?.map((bedBtn) => {
+    bedBtn.value === keyNum
+      ? (bedBtn.isActive = true)
+      : (bedBtn.isActive = false)
+    return bedBtn
+  })

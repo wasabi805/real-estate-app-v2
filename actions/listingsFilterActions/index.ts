@@ -6,6 +6,7 @@ import {
   setInitialButtonsActive,
   deactivateBedButtons,
   activateBedButtons,
+  setSingleButtonActive,
 } from './helpers'
 export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
 export const setFilterDrawerOpen = (
@@ -46,6 +47,63 @@ export const handleClickBedsFilterButton = (
       )
     }
 
+    // if only one value in the range..
+    if (currentRange.length === 1) {
+      if (keyNum < state.listingsFilters?.currentRange[0]) {
+        //grab the new range
+        const newRange = range.slice(
+          range.indexOf(keyNum),
+          state.listingsFilters?.currentRange[0]
+        )
+        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+          (bedBtn) => {
+            if (newRange.indexOf(bedBtn.value) >= 0) {
+              bedBtn.isActive = true
+              return bedBtn
+            }
+            bedBtn.isActive = false
+            return bedBtn
+          }
+        )
+
+        return handleBedsNumAction(
+          state,
+          newRange,
+          addAddtionalActiveBtns,
+          keyNum
+        )
+      }
+
+      if (keyNum > state.listingsFilters?.currentRange[0]) {
+        //grab the new range
+        const newRange = range.slice(
+          range.indexOf(state.listingsFilters?.currentRange[0]),
+          keyNum
+        )
+
+        alert('only one number in the range')
+
+        console.log('WHAT IS newRange???', newRange)
+        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+          (bedBtn) => {
+            if (newRange.indexOf(bedBtn.value) >= 0) {
+              bedBtn.isActive = true
+              return bedBtn
+            }
+            bedBtn.isActive = false
+            return bedBtn
+          }
+        )
+
+        return handleBedsNumAction(
+          state,
+          newRange,
+          addAddtionalActiveBtns,
+          keyNum
+        )
+      }
+    }
+
     // a range exists
     if (currentRange && currentRange.length >= 2) {
       const rangeInReducer = state.listingsFilters?.currentRange
@@ -53,6 +111,18 @@ export const handleClickBedsFilterButton = (
       const lastValue = state.listingsFilters?.currentRange[lastNumInRangeIdx]
       const firstValue = state.listingsFilters?.currentRange[0]
       const previousBtnClicked = state.listingsFilters?.clickedFilterName
+
+      // if a number in the range is clicked twice in a row
+      if (keyNum == previousBtnClicked) {
+        const newRange = [keyNum]
+
+        return handleBedsNumAction(
+          state,
+          newRange,
+          setSingleButtonActive(state, keyNum),
+          keyNum
+        )
+      }
 
       // if the clicked value is less than the lowest range number in the reducer...
       if (!isKeyNumPresent && keyNum < firstValue) {
@@ -70,11 +140,14 @@ export const handleClickBedsFilterButton = (
       }
 
       // range exists and number in range is clicked
-      if (isKeyNumPresent && keyNum >= previousBtnClicked) {
+      if (keyNum > previousBtnClicked) {
         alert('case 2')
         console.log('-----CASE:2------')
 
-        const newRange = range.slice(range.indexOf(previousBtnClicked), keyNum)
+        const newRange = range.slice(
+          range.indexOf(state.listingsFilters?.currentRange[0]),
+          keyNum
+        )
         console.log('first', range.indexOf(previousBtnClicked))
         console.log('last : ', range.indexOf(keyNum))
         console.log('what is newRange for case 2', newRange)
