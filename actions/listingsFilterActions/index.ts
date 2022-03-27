@@ -32,11 +32,9 @@ export const handleClickBedsFilterButton = (
   if (!isStudio && !isAny) {
     let keyNum = parseInt(key[key.length - 1], 10)
     const isKeyNumPresent = currentRange.indexOf(keyNum) >= 0
-    console.log('keyNum', keyNum)
 
     //if a range hasnt been set yet...
     if (!isKeyNumPresent && currentRange.length === 0) {
-      alert('case initial')
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
       return handleBedsNumAction(
@@ -81,9 +79,6 @@ export const handleClickBedsFilterButton = (
           keyNum
         )
 
-        alert('only one number in the range')
-
-        console.log('WHAT IS newRange???', newRange)
         const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
           (bedBtn) => {
             if (newRange.indexOf(bedBtn.value) >= 0) {
@@ -126,7 +121,6 @@ export const handleClickBedsFilterButton = (
 
       // if the clicked value is less than the lowest range number in the reducer...
       if (!isKeyNumPresent && keyNum < firstValue) {
-        alert('case 1')
         console.log('-----CASE:1------')
         //get the new range of numbers
         const newRange = range.slice(range.indexOf(keyNum), lastValue)
@@ -141,16 +135,12 @@ export const handleClickBedsFilterButton = (
 
       // range exists and number in range is clicked
       if (keyNum > previousBtnClicked) {
-        alert('case 2')
         console.log('-----CASE:2------')
 
         const newRange = range.slice(
           range.indexOf(state.listingsFilters?.currentRange[0]),
           keyNum
         )
-        console.log('first', range.indexOf(previousBtnClicked))
-        console.log('last : ', range.indexOf(keyNum))
-        console.log('what is newRange for case 2', newRange)
 
         return handleBedsNumAction(
           state,
@@ -162,7 +152,6 @@ export const handleClickBedsFilterButton = (
 
       //range exists but, clicked number is not in the range(set button active)
       if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
-        alert('case 3')
         console.log('-----CASE:3------')
 
         const firstVal = rangeInReducer[0]
@@ -192,26 +181,40 @@ export const handleClickBedsFilterButton = (
       }
 
       // if range exists, number is in range, clicked number value  is less that previously clicked button
-      if (isKeyNumPresent && keyNum < previousBtnClicked) {
-        alert('case 4')
+      if (keyNum < previousBtnClicked) {
         console.log('-----CASE:4------')
         const newRange = range.slice(
           range.indexOf(keyNum),
-          range[lastNumInRangeIdx]
+          range.indexOf(
+            range[
+              state.listingsFilters?.currentRange[
+                state.listingsFilters?.currentRange.length - 1
+              ]
+            ]
+          )
         )
+        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+          (bedBtn) => {
+            if (newRange.indexOf(bedBtn.value) >= 0) {
+              bedBtn.isActive = true
+              return bedBtn
+            }
+            bedBtn.isActive = false
+            return bedBtn
+          }
+        )
+
         return handleBedsNumAction(
           state,
           newRange,
-          deactivateBedButtons(state, newRange),
+          addAddtionalActiveBtns,
           keyNum
         )
       }
 
       //bigger than prevClicked and is in the range
       if (isKeyNumPresent && keyNum > previousBtnClicked) {
-        alert('case 5')
         console.log('-----CASE:5------')
-        alert('replace ')
         const startSlice = range.indexOf(
           state.listingsFilters.clickedFilterName
         )
