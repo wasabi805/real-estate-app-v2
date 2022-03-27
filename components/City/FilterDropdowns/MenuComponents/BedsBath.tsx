@@ -11,8 +11,7 @@ import { IinitialState } from 'reducers/interface'
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  console.log('what is listingsFilters', state.listingsFilters?.bedsButtons)
-
+  
   const bedsButtonClicked = (key: string, state: IinitialState) =>
     dispatch(handleClickBedsFilterButton(key, state))
 
@@ -20,11 +19,6 @@ const BedsBath = () => {
     console.log(key)
   }
 
-  console.log('CURRENT_RANGE AT COMPONENT', state.listingsFilters?.currentRange)
-  console.log(
-    'is this mapping correctly????',
-    state.listingsFilters?.bedsButtons
-  )
   return (
     <BedBathsContainer>
       <div>

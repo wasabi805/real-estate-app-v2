@@ -170,13 +170,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:
-      console.log(action)
       return {
         ...state,
         listingsFilters: action.payload?.listingsFilters,
       }
     case HANDLE_CLICK_BATHS_FILTER_BUTTON:
-      console.log(action)
       return {
         ...state,
       }
