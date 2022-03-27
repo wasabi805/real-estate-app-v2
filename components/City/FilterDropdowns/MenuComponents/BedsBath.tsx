@@ -21,7 +21,10 @@ const BedsBath = () => {
   }
 
   console.log('CURRENT_RANGE AT COMPONENT', state.listingsFilters?.currentRange)
-
+  console.log(
+    'is this mapping correctly????',
+    state.listingsFilters?.bedsButtons
+  )
   return (
     <BedBathsContainer>
       <div>
