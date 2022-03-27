@@ -44,6 +44,27 @@ export const handleClickBedsFilterButton = (
         keyNum
       )
     }
+    // if 5+ button is clicked
+    if (keyNum === 5) {
+      alert('5+ was clicked')
+      const newRange = [5]
+      const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+        (bedBtn) => {
+          if (newRange.indexOf(bedBtn.value) >= 0) {
+            bedBtn.isActive = true
+            return bedBtn
+          }
+          bedBtn.isActive = false
+          return bedBtn
+        }
+      )
+      return handleBedsNumAction(
+        state,
+        newRange,
+        addAddtionalActiveBtns,
+        keyNum
+      )
+    }
 
     // if only one value in the range..
     if (currentRange.length === 1) {
