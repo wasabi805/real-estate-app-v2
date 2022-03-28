@@ -14,6 +14,10 @@ export const RangedSliderInputsRow = styled.div`
   position: relative;
   display: flex;
   margin-bottom: 2em;
+
+  .ant-input-number {
+    width: 15rem;
+  }
 `
 
 export const PriceSliderButtonContainer = styled.div`

@@ -1,10 +1,31 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import 'antd/dist/antd.css'
-import { Input } from 'antd'
+import { Input, InputNumber } from 'antd'
 
-const InputComp = styled(({ placeHolder }) => {
-  return <Input placeholder={placeHolder} />
+const InputComp = styled(({ placeHolder, size, format, onChange }) => {
+  console.log('what is format? : ', format)
+  const handleOnChange = (value) => {
+    console.log(value)
+    // return onChange()
+  }
+
+  if (format && format === 'dollars') {
+    return (
+      <InputNumber
+        placeholder={placeHolder}
+        size={size}
+        defaultValue={1000}
+        formatter={(value) =>
+          `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        }
+        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+        onChange={(value) => handleOnChange(value)}
+      />
+    )
+  }
+
+  return <Input placeholder={placeHolder} size={size} />
 })``
 
 export default InputComp

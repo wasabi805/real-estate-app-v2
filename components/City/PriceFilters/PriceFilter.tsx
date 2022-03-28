@@ -23,7 +23,8 @@ const PriceFilter = () => {
       </RangedSliderRow>
 
       <RangedSliderInputsRow onClick={(e) => e.stopPropagation()}>
-        <InputComp placeHolder={'min'} /> - <InputComp placeHolder={'max'} />
+        <InputComp format={'dollars'} placeHolder={'min'} size={'small'} /> -{' '}
+        <InputComp format={'dollars'} placeHolder={'max'} size={'small'} />
       </RangedSliderInputsRow>
 
       <PriceSliderButtonContainer>
