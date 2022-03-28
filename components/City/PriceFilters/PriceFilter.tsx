@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
+import AppContext from 'context/appContext'
 import RangedSlider from 'components/common/RangedSlider'
 import InputComp from 'components/common/InputComp'
 import ButtonComp from 'components/common/ButtonComp'
@@ -12,6 +13,11 @@ import {
 } from 'components/City/PriceFilters/styles'
 
 const PriceFilter = () => {
+  const appContext = useContext(AppContext)
+  const { state, dispatch } = appContext
+  const { range } = state.priceFilter
+
+  console.log('is range all good?', range)
   return (
     <PriceFilterContainer onClick={(e) => e.stopPropagation()}>
       <div>
@@ -19,7 +25,7 @@ const PriceFilter = () => {
       </div>
 
       <RangedSliderRow>
-        <RangedSlider />
+        <RangedSlider sliderRange={range} />
       </RangedSliderRow>
 
       <RangedSliderInputsRow onClick={(e) => e.stopPropagation()}>

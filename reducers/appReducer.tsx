@@ -50,11 +50,11 @@ export const initialState: IinitialState = {
   fetchProperty: false,
   searchResults: {
     data: {
-      // listings: [],
-      listings: mockListings,
+      listings: [],
+      // listings: mockListings,
     },
-    // initialData: [],
-    initialData: mockListings,
+    initialData: [],
+    // initialData: mockListings,
   },
 
   listingsFilters: {
@@ -142,12 +142,17 @@ const appReducer = (state: IinitialState, action: IAction) => {
       return {
         ...state,
         searchResults: {
-          data: { ...action.payload?.data },
-          initialData: { ...action.payload?.data },
+          data: { ...action.payload?.searchResults?.data },
+          initialData: { ...action.payload?.searchResults?.data },
         },
         fetchProperty: false,
         listingTable: {
-          currentHome: [action.payload?.data.listings[0].property_id], //set the first property for the Listing table view
+          currentHome: [
+            action.payload?.searchResults?.data.listings[0].property_id,
+          ], //set the first property for the Listing table view
+        },
+        priceFilter: {
+          range: action.payload?.priceFilter.range,
         },
       }
 

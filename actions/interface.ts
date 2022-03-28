@@ -19,6 +19,10 @@ export interface IAction {
       data: []
     }
 
+    priceFilter: {
+      range: number[]
+    }
+
     addressObject?: {
       formatted_address: string
       geometry: {

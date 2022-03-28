@@ -18,6 +18,11 @@ export interface IinitialState {
     }
     initialData: []
   }
+
+  priceFilter: {
+    range: number[]
+  }
+
   sortAndFilter: {
     activeSort: string
     sortedProperties: []

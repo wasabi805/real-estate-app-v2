@@ -1,5 +1,7 @@
 import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IAction } from '../interface'
+import { defineFilterPriceSliderData } from 'actions/listingsFilterActions/helpers'
+import { sortIntergersAscending, sortByAscendOrDescend } from 'utils'
 export const SET_SEARCH_FIELD = 'SET_SEARCH_FIELD'
 export const setSearchField = (
   char: string
@@ -30,10 +32,20 @@ export const UPDATE_STATE_WITH_SEARCH_RESULTS =
 export const updateStateWithSearchResults = (
   data
 ): Pick<IAction, 'type' | 'payload'> => {
+  const prices = data.listings.map((h) => {
+    return h.price_raw
+  })
+  const sortedPrices = sortIntergersAscending(prices)
+
   return {
     type: UPDATE_STATE_WITH_SEARCH_RESULTS,
     payload: {
-      data,
+      searchResults: {
+        data,
+      },
+      priceFilter: {
+        range: sortedPrices,
+      },
     },
   }
 }
