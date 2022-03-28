@@ -15,7 +15,7 @@ const InputComp = styled(({ placeHolder, size, format, onChange }) => {
       <InputNumber
         placeholder={placeHolder}
         size={size}
-        defaultValue={1000}
+        defaultValue={0}
         formatter={(value) =>
           `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         }
