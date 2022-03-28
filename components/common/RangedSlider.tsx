@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Divider, Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const RangedSlider = styled(({ sliderRange }) => {
+const RangedSlider = styled(({ sliderRange,onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
 
   const [minMax, setMinMax] = useState([0, 1000000])
@@ -22,15 +22,10 @@ const RangedSlider = styled(({ sliderRange }) => {
   }
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
-  console.log('what is sliderRange', sliderRange)
+  // console.log('what is sliderRange', sliderRange)
   const sliderMin = sliderRange[0]
   const sliderMax = sliderRange[sliderRange.length - 1]
-
-  console.log({ sliderMin, sliderMax })
-
-  const handleAfterChange = (value) => {
-    console.log('onAfterChange: ', value)
-  }
+  // console.log({ sliderMin, sliderMax })
 
   return (
     <Slider
@@ -40,10 +35,10 @@ const RangedSlider = styled(({ sliderRange }) => {
       max={sliderMax}
       defaultValue={[0, sliderMax]}
       onChange={(minMaxRange) => handleChange(minMaxRange)}
-      onAfterChange={handleAfterChange}
+      onAfterChange={onAfterChange}
       tipFormatter={(e) => (
         <div>
-          {/* This is so dumb but hey it works,
+          {/* This is not ideal but hey it works,
            Ant library doesn't provide an event object for onChange for it Slider comp, this is a hacky way around that :/  */}
           {(() => {
             handleShowMinOrMaxInToolTip(document.activeElement?.className)
