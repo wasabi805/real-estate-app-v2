@@ -29,6 +29,8 @@ const {
   SET_FILTER_DRAWER_OPEN,
   HANDLE_CLICK_BEDS_FILTER_BUTTON,
   HANDLE_CLICK_BATHS_FILTER_BUTTON,
+  SET_MIN_PRICE_FILTER_FIELD,
+  SET_MAX_PRICE_FILTER_FIELD,
 } = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -55,6 +57,12 @@ export const initialState: IinitialState = {
     },
     initialData: [],
     // initialData: mockListings,
+  },
+
+  priceFilter: {
+    range: [],
+    minField: null,
+    maxField: null,
   },
 
   listingsFilters: {
@@ -182,6 +190,24 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case HANDLE_CLICK_BATHS_FILTER_BUTTON:
       return {
         ...state,
+      }
+
+    case SET_MIN_PRICE_FILTER_FIELD:
+      return {
+        ...state,
+        priceFilter: {
+          ...state.priceFilter,
+          minField: action.payload?.priceFilter?.minField,
+        },
+      }
+
+    case SET_MAX_PRICE_FILTER_FIELD:
+      return {
+        ...state,
+        priceFilter: {
+          ...state.priceFilter,
+          maxField: action.payload?.priceFilter?.maxField,
+        },
       }
 
     case SET_ACTIVE_SORT_CATEGORY:

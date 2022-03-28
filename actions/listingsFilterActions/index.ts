@@ -251,3 +251,31 @@ export const handleClickBathsFilterButton = (
     },
   }
 }
+
+export const SET_MIN_PRICE_FILTER_FIELD = 'SET_MIN_PRICE_FILTER_FIELD'
+export const setMinPriceFilterField = (
+  num: number
+): Pick<IAction, 'type' | 'payload'> => {
+  return {
+    type: 'SET_MIN_PRICE_FILTER_FIELD',
+    payload: {
+      priceFilter: {
+        minField: num,
+      },
+    },
+  }
+}
+
+export const SET_MAX_PRICE_FILTER_FIELD = 'SET_MAX_PRICE_FILTER_FIELD'
+export const setMaxPriceFilterField = (
+  num: number
+): Pick<IAction, 'type' | 'payload'> => {
+  return {
+    type: 'SET_MAX_PRICE_FILTER_FIELD',
+    payload: {
+      priceFilter: {
+        maxField: num,
+      },
+    },
+  }
+}

@@ -19,8 +19,10 @@ export interface IAction {
       data: []
     }
 
-    priceFilter: {
-      range: number[]
+    priceFilter?: {
+      range?: number[]
+      minField?: number
+      maxField?: number
     }
 
     addressObject?: {

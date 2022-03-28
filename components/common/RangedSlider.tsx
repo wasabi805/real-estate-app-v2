@@ -36,9 +36,9 @@ const RangedSlider = styled(({ sliderRange }) => {
     <Slider
       range={true}
       step={25000}
-      min={sliderMin}
+      min={0}
       max={sliderMax}
-      defaultValue={[sliderMin, sliderMax]}
+      defaultValue={[0, sliderMax]}
       onChange={(minMaxRange) => handleChange(minMaxRange)}
       onAfterChange={handleAfterChange}
       tipFormatter={(e) => (

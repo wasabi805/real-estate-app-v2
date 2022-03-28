@@ -19,8 +19,10 @@ export interface IinitialState {
     initialData: []
   }
 
-  priceFilter: {
-    range: number[]
+  priceFilter?: {
+    range?: number[]
+    minField?: null | number
+    maxField?: null | number
   }
 
   sortAndFilter: {

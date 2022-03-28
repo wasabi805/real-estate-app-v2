@@ -4,6 +4,7 @@ import AppContext from 'context/appContext'
 import RangedSlider from 'components/common/RangedSlider'
 import InputComp from 'components/common/InputComp'
 import ButtonComp from 'components/common/ButtonComp'
+import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import mockHistogram from 'public/mockHistogram.png'
 import {
   PriceFilterContainer,
@@ -12,12 +13,18 @@ import {
   PriceSliderButtonContainer,
 } from 'components/City/PriceFilters/styles'
 
+const { setMinPriceFilterField, setMaxPriceFilterField } = ListingsFilterActions
+
 const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { range } = state.priceFilter
 
-  console.log('is range all good?', range)
+  const handleMinPriceField = (value: number) =>
+    dispatch(setMinPriceFilterField(value))
+
+  const handleMaxPriceField = (value: number) =>
+    dispatch(setMaxPriceFilterField(value))
+
   return (
     <PriceFilterContainer onClick={(e) => e.stopPropagation()}>
       <div>
@@ -25,12 +32,28 @@ const PriceFilter = () => {
       </div>
 
       <RangedSliderRow>
-        <RangedSlider sliderRange={range} />
+        <RangedSlider sliderRange={state.priceFilter?.range} />
       </RangedSliderRow>
 
       <RangedSliderInputsRow onClick={(e) => e.stopPropagation()}>
-        <InputComp format={'dollars'} placeHolder={'min'} size={'small'} /> -{' '}
-        <InputComp format={'dollars'} placeHolder={'max'} size={'small'} />
+        {/* MIN PRICE FIELD */}
+        <InputComp
+          format={'dollars'}
+          placeHolder={'min'}
+          name={'minField'}
+          value={state.priceFilter?.minField}
+          onChange={handleMinPriceField}
+          size={'small'}
+        />{' '}
+        -{/* MAX PRICE FIELD */}
+        <InputComp
+          format={'dollars'}
+          placeHolder={'max'}
+          name={'maxField'}
+          value={state.priceFilter?.maxField}
+          onChange={handleMaxPriceField}
+          size={'small'}
+        />
       </RangedSliderInputsRow>
 
       <PriceSliderButtonContainer>
