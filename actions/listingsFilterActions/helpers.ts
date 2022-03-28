@@ -9,7 +9,6 @@ export const handleBedsNumAction = (
   bedsButtons,
   clickedFilterName
 ) => {
-  
   return {
     type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
     payload: {

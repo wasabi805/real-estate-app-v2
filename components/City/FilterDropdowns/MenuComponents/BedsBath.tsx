@@ -11,7 +11,7 @@ import { IinitialState } from 'reducers/interface'
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  
+
   const bedsButtonClicked = (key: string, state: IinitialState) =>
     dispatch(handleClickBedsFilterButton(key, state))
 
