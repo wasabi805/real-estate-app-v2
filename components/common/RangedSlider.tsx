@@ -5,11 +5,11 @@ import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { Divider, Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const { setPriceRangeSliderMaxMin} = ListingsFilterActions
+const { setPriceRangeSliderMaxMin } = ListingsFilterActions
 
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
-  const {state, dispatch} = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const [minMax, setMinMax] = useState([0, 1000000])
   const [showMin, setShowMin] = useState(false)
 
@@ -21,12 +21,14 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
 
   const handleChange = (minMaxRange) => {
     //TODO store these values in the reducer and flip
-    dispatch(setPriceRangeSliderMaxMin(minMaxRange, document.activeElement?.className)) //this should also change the input field vals
+    dispatch(
+      setPriceRangeSliderMaxMin(minMaxRange, document.activeElement?.className)
+    ) //this should also change the input field vals
 
     console.log('what is minMaxRange', minMaxRange)
     //state is verified its getting passed in actual state
     console.log('i fired state in ranged slider', state)
-    
+
     // const min = minMaxRange[0]
     // const max = minMaxRange[1]
     // setMinMax([min, max])
@@ -34,7 +36,7 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
   // console.log('what is sliderRange', sliderRange)
-  const sliderMin = sliderRange[0] ||0
+  const sliderMin = sliderRange[0] || 0
   const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
 
   // console.log({ sliderMin, sliderMax })

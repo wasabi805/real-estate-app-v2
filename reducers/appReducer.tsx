@@ -32,8 +32,7 @@ const {
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
   ACTIVATE_PRICE_FILTER_SLIDER,
-  SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN
-
+  SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -69,14 +68,14 @@ export const initialState: IinitialState = {
 
     //slider
     range: [],
-    moveMin:{
+    moveMin: {
       move: false,
-      value: ''
+      value: '',
     },
-    moveMax:{
+    moveMax: {
       move: false,
-      value: ''
-    }
+      value: '',
+    },
   },
 
   listingsFilters: {
@@ -175,14 +174,14 @@ const appReducer = (state: IinitialState, action: IAction) => {
         },
         priceFilter: {
           range: action.payload?.priceFilter.range,
-          moveMin:{
+          moveMin: {
             move: false,
-            value: ''
+            value: '',
           },
-          moveMax:{
+          moveMax: {
             move: false,
-            value: ''
-          }
+            value: '',
+          },
         },
       }
 
@@ -215,35 +214,37 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_MIN_PRICE_FILTER_FIELD:
-      console.log('verify reducer changes' , action)
+      console.log('verify reducer changes', action)
       return {
         ...state,
         priceFilter: {
           ...state.priceFilter,
           minField: action.payload?.priceFilter?.minField,
-          moveMin:{
+          moveMin: {
             move: action.payload?.priceFilter?.moveMin.move,
-            value: action.payload?.priceFilter?.moveMin.value
-          }
+            value: action.payload?.priceFilter?.moveMin.value,
+          },
         },
       }
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
       console.log('SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN FIRED ', action)
-      
-      return{
+
+      return {
         ...state,
         priceFilter: {
           ...state.priceFilter,
-          minField: action.payload?.priceFilter?.range[0] || state.priceFilter?.minField,
+          minField:
+            action.payload?.priceFilter?.range[0] ||
+            state.priceFilter?.minField,
           maxField: action.payload?.priceFilter?.range[1],
           //TODO: THE OR array after range needs to not be hard coded
-          range: action.payload?.priceFilter?.range || state.priceFilter?.range ||[1, 12345678],
-          moveMin : action.payload?.priceFilter?.moveMin,
+          range: action.payload?.priceFilter?.range ||
+            state.priceFilter?.range || [1, 12345678],
+          moveMin: action.payload?.priceFilter?.moveMin,
           moveMax: action.payload?.priceFilter?.moveMax,
-        }
+        },
       }
-
 
     case SET_MAX_PRICE_FILTER_FIELD:
       return {

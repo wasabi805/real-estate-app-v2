@@ -23,8 +23,8 @@ export interface IAction {
       range?: number[]
       minField?: null | number
       maxField?: null | number
-      moveMin:{
-        move: boolean,
+      moveMin: {
+        move: boolean
         value: string
       }
     }

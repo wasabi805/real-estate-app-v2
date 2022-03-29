@@ -27,25 +27,23 @@ const PriceFilter = () => {
   const handleMaxPriceField = (value: number) =>
     dispatch(setMaxPriceFilterField(value))
 
-  const getMinMaxFromSliderCb = async(value: number[]) => {
-   
+  const getMinMaxFromSliderCb = async (value: number[]) => {
     const result = await value[0]
     console.log(result, 'what is result')
 
-    dispatch(setMinPriceFilterField(result , state))
+    dispatch(setMinPriceFilterField(result, state))
     // dispatch(setMaxPriceFilterField(result[1], state))
   }
 
-  useEffect( ()=>{
+  useEffect(() => {
     // alert('i loaded')
     console.log('WHAT IS STATE RIGHT NOW', state)
-  },[
-    state
-  ] )
+  }, [state])
   return (
     <PriceFilterContainer
-        moveMin={state.priceFilter?.moveMin}
-        onClick={(e) => e.stopPropagation()}>
+      moveMin={state.priceFilter?.moveMin}
+      onClick={(e) => e.stopPropagation()}
+    >
       <div>
         <Image src={mockHistogram} alt="mockHistogram" />
       </div>

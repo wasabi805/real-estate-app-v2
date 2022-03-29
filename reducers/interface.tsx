@@ -20,18 +20,18 @@ export interface IinitialState {
   }
 
   priceFilter?: {
-     //inputs
+    //inputs
     minField?: null | number
     maxField?: null | number
 
     //slider
     range?: number[]
-    moveMin:{
-      move: boolean,
+    moveMin: {
+      move: boolean
       value: string
     }
-    moveMax:{
-      move: boolean,
+    moveMax: {
+      move: boolean
       value: string
     }
   }

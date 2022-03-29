@@ -20,7 +20,7 @@ const FilterDropdowns = () => {
         component={<ForSaleRentSold />}
       />
       <DropDownMenuButton buttonName={'Price'} component={<Price />} />
-    
+
       <DropDownMenuButton buttonName={'Home Type'} component={<HomeType />} />
 
       <DropDownMenuButton

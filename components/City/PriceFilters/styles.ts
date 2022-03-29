@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 
-interface IsilderProps{
-  move:boolean,
-  value: string,
+interface IsilderProps {
+  move: boolean
+  value: string
 }
 
 export const PriceFilterContainer = styled.div`
@@ -12,18 +12,17 @@ export const PriceFilterContainer = styled.div`
 
   .eb7m8382 {
     .ant-slider {
-
       //min slider:
 
       //PUT THE COMMENTED OUTCODE AT THE BOTTOM BELOW THIS LINE
       div:nth-of-type(4) {
-        background: ${props => props?.moveMin?.move? 'red': 'green'};
-         left: ${(props: {moveMin: IsilderProps})=>{
-           console.log('what is props in the styled component', props)
-          return props?.moveMin?.move ? props?.moveMin?.value: ''
-         }  };
+        background: ${(props) => (props?.moveMin?.move ? 'red' : 'green')};
+        left: ${(props: { moveMin: IsilderProps }) => {
+          console.log('what is props in the styled component', props)
+          return props?.moveMin?.move ? props?.moveMin?.value : ''
+        }};
       }
-      
+
       //min slider: max slider
       div:nth-child(5) {
         background: blue;
