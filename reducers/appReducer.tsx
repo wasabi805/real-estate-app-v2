@@ -63,6 +63,7 @@ export const initialState: IinitialState = {
     range: [],
     minField: null,
     maxField: null,
+    changeMinSliderPos: null,
   },
 
   listingsFilters: {
@@ -198,6 +199,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
         priceFilter: {
           ...state.priceFilter,
           minField: action.payload?.priceFilter?.minField,
+          changeMinSliderPos: action.payload?.priceFilter?.minField,
         },
       }
 

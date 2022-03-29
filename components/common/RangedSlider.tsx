@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Divider, Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const RangedSlider = styled(({ sliderRange,onAfterChange }) => {
+const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
 
   const [minMax, setMinMax] = useState([0, 1000000])
@@ -24,7 +24,8 @@ const RangedSlider = styled(({ sliderRange,onAfterChange }) => {
 
   // console.log('what is sliderRange', sliderRange)
   const sliderMin = sliderRange[0]
-  const sliderMax = sliderRange[sliderRange.length - 1]
+  const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
+
   // console.log({ sliderMin, sliderMax })
 
   return (
@@ -33,7 +34,7 @@ const RangedSlider = styled(({ sliderRange,onAfterChange }) => {
       step={25000}
       min={0}
       max={sliderMax}
-      defaultValue={[0, sliderMax]}
+      defaultValue={[100000, 6000000]}
       onChange={(minMaxRange) => handleChange(minMaxRange)}
       onAfterChange={onAfterChange}
       tipFormatter={(e) => (

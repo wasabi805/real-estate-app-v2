@@ -19,13 +19,15 @@ const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  const handleMinPriceField = (value: number) =>
+  const handleMinPriceField = (value: number) => {
     dispatch(setMinPriceFilterField(value))
+    //TODO: RESET DEAFAULT VALUE
+  }
 
   const handleMaxPriceField = (value: number) =>
     dispatch(setMaxPriceFilterField(value))
 
-  const getMinMaxFromSliderCb=(value: number[])=>{
+  const getMinMaxFromSliderCb = (value: number[]) => {
     dispatch(setMinPriceFilterField(value[0]))
     dispatch(setMaxPriceFilterField(value[1]))
   }
@@ -37,10 +39,11 @@ const PriceFilter = () => {
       </div>
 
       <RangedSliderRow>
-        <RangedSlider 
-        sliderRange={state.priceFilter?.range}
-        onAfterChange={getMinMaxFromSliderCb}
-         />
+        <RangedSlider
+          sliderRange={state.priceFilter?.range}
+          changeMinSliderPos={state.priceFilter?.changeMinSliderPos}
+          onAfterChange={getMinMaxFromSliderCb}
+        />
       </RangedSliderRow>
 
       <RangedSliderInputsRow onClick={(e) => e.stopPropagation()}>

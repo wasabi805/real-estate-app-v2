@@ -4,7 +4,23 @@ export const PriceFilterContainer = styled.div`
   width: 30vw;
   padding: 0 2rem;
   padding-top: 1em;
-  //   border: 2px solid red;
+
+  .eb7m8382 {
+    .ant-slider {
+      //min slider:
+      div:nth-child(4) {
+        background: red;
+        left: 50% !important;
+      }
+
+      //min slider: max slider
+      div:nth-child(5) {
+        background: blue;
+        left: 75% !important;
+      }
+    }
+  }
+  border: 2px solid orange;
 `
 
 export const RangedSliderRow = styled.div`
