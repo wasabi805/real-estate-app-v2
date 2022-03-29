@@ -252,7 +252,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.priceFilter,
           minField: action.payload?.priceFilter?.range[0] || state.priceFilter?.minField,
           maxField: action.payload?.priceFilter?.range[1],
-          range: action.payload?.priceFilter?.range || [1, 999000000],
+          range: action.payload?.priceFilter?.range || [1, 10000000],
           moveMin : action.payload?.priceFilter?.moveMin,
           moveMax: action.payload?.priceFilter?.moveMax,
         }
