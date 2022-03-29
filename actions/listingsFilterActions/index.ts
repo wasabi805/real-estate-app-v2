@@ -262,9 +262,9 @@ export const setMinPriceFilterField = (
 
   const highestPrice = range[highestPriceIdx]
   const minPrice = num
-  const percent = minPrice/highestPrice *100
+  const percent = minPrice/highestPrice 
   
-
+  console.log('CALCULATING PERECNT', percent)
   return {
     type: SET_MIN_PRICE_FILTER_FIELD,
     payload: {
@@ -272,7 +272,7 @@ export const setMinPriceFilterField = (
         minField: num,
         moveMin:{
           move: true,
-          value: `${percent}% !important`
+          value: `${percent*100}% !important`
         }
       },
     },
