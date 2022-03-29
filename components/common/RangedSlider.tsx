@@ -5,7 +5,7 @@ import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { Divider, Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const {activatePriceSliderFilter, setPriceRangeSliderMaxMin} = ListingsFilterActions
+const { setPriceRangeSliderMaxMin} = ListingsFilterActions
 
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
@@ -34,8 +34,8 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
   // console.log('what is sliderRange', sliderRange)
-  // const sliderMin = sliderRange[0] ||0
-  // const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
+  const sliderMin = sliderRange[0] ||0
+  const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
 
   // console.log({ sliderMin, sliderMax })
 
@@ -43,9 +43,9 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
     <Slider
       range={true}
       step={25000}
-      min={0}
-      max={6000000}
-      defaultValue={[100000, 6000000]}
+      min={sliderMin}
+      max={sliderMax}
+      defaultValue={[sliderMin, sliderMax]}
       onChange={(minMaxRange) => handleChange(minMaxRange)}
       onAfterChange={onAfterChange}
       tipFormatter={(e) => (

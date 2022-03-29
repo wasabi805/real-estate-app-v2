@@ -294,25 +294,7 @@ export const setMaxPriceFilterField = (
       },
     },
   }
-}
-
-export const ACTIVATE_PRICE_FILTER_SLIDER='ACTIVATE_PRICE_FILTER_SLIDER'
-export const activatePriceSliderFilter =()=>{
-  return {
-    type: 'ACTIVATE_PRICE_FILTER_SLIDER',
-    payload: {
-      priceFilter: {
-        moveMin:{
-          move: false,
-        },
-        moveMax:{
-          move: false,
-        }
-      },
-    },
-  }
-}
-
+} 
 export const SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN = 'SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN'
 
 export const setPriceRangeSliderMaxMin = (array: number[], handleClassName: string)=>{
@@ -321,7 +303,7 @@ export const setPriceRangeSliderMaxMin = (array: number[], handleClassName: stri
  
   const min = array[0]
   const max = array[1]
-
+  console.log('RANGE withing setPRICESLIDER ACTION')
   return{
     type: SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
     payload:{
