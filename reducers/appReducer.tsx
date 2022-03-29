@@ -63,7 +63,10 @@ export const initialState: IinitialState = {
     range: [],
     minField: null,
     maxField: null,
-    changeMinSliderPos: null,
+    moveMin:{
+      move: false,
+      value: ''
+    }
   },
 
   listingsFilters: {
@@ -162,6 +165,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
         },
         priceFilter: {
           range: action.payload?.priceFilter.range,
+          moveMin:{
+            move: false,
+            value: ''
+          }
         },
       }
 
@@ -199,7 +206,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
         priceFilter: {
           ...state.priceFilter,
           minField: action.payload?.priceFilter?.minField,
-          changeMinSliderPos: action.payload?.priceFilter?.minField,
+          moveMin:{
+            move: action.payload?.priceFilter?.moveMin.move,
+            value: action.payload?.priceFilter?.moveMin.value
+          }
         },
       }
 

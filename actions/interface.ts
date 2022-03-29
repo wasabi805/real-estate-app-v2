@@ -21,8 +21,12 @@ export interface IAction {
 
     priceFilter?: {
       range?: number[]
-      minField?: number
-      maxField?: number
+      minField?: null | number
+      maxField?: null | number
+      moveMin:{
+        move: boolean,
+        value: string
+      }
     }
 
     addressObject?: {

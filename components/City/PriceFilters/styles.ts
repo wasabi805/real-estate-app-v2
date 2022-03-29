@@ -1,5 +1,10 @@
 import styled from '@emotion/styled'
 
+interface IsilderProps{
+  move:boolean,
+  value: string,
+}
+
 export const PriceFilterContainer = styled.div`
   width: 30vw;
   padding: 0 2rem;
@@ -7,16 +12,20 @@ export const PriceFilterContainer = styled.div`
 
   .eb7m8382 {
     .ant-slider {
+
       //min slider:
       div:nth-child(4) {
-        background: red;
-        left: 50% !important;
+        background: ${props => props.someColor? props.someColor: 'yellow'};
+         left: ${(props: {moveMin: IsilderProps})=>{
+           console.log('what is props in the styled component', props)
+          return props.moveMin.move ? props.moveMin.value: ''
+         }  };
       }
 
       //min slider: max slider
       div:nth-child(5) {
         background: blue;
-        left: 75% !important;
+        // left: 75% !important;
       }
     }
   }

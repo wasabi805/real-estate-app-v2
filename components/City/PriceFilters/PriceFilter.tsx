@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Image from 'next/image'
 import AppContext from 'context/appContext'
 import RangedSlider from 'components/common/RangedSlider'
@@ -20,7 +20,7 @@ const PriceFilter = () => {
   const { state, dispatch } = appContext
 
   const handleMinPriceField = (value: number) => {
-    dispatch(setMinPriceFilterField(value))
+    dispatch(setMinPriceFilterField(value, state))
     //TODO: RESET DEAFAULT VALUE
   }
 
@@ -32,8 +32,16 @@ const PriceFilter = () => {
     dispatch(setMaxPriceFilterField(value[1]))
   }
 
+  useEffect( ()=>{
+    // alert('i loaded')
+    console.log('WHAT IS STATE RIGHT NOW', state)
+  },[
+    state
+  ] )
   return (
-    <PriceFilterContainer onClick={(e) => e.stopPropagation()}>
+    <PriceFilterContainer
+        moveMin={state.priceFilter?.moveMin}
+        onClick={(e) => e.stopPropagation()}>
       <div>
         <Image src={mockHistogram} alt="mockHistogram" />
       </div>

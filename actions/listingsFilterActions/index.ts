@@ -254,13 +254,30 @@ export const handleClickBathsFilterButton = (
 
 export const SET_MIN_PRICE_FILTER_FIELD = 'SET_MIN_PRICE_FILTER_FIELD'
 export const setMinPriceFilterField = (
-  num: number
+  num: number, state : any
 ): Pick<IAction, 'type' | 'payload'> => {
+
+  const range = state.priceFilter.range
+  const highestPriceIdx = state.priceFilter.range.length-1
+
+  const highestPrice = range[highestPriceIdx]
+  const minPrice = num
+  const percent = minPrice/highestPrice *100
+  
+  console.log('what is the state to calculate', {highestPrice, num})
+ 
+
+
+
   return {
     type: 'SET_MIN_PRICE_FILTER_FIELD',
     payload: {
       priceFilter: {
         minField: num,
+        moveMin:{
+          move: true,
+          value: `${percent}% !important`
+        }
       },
     },
   }

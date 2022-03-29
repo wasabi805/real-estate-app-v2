@@ -23,7 +23,10 @@ export interface IinitialState {
     range?: number[]
     minField?: null | number
     maxField?: null | number
-    changeMinSliderPos: null | number
+    moveMin:{
+      move: boolean,
+      value: string
+    }
   }
 
   sortAndFilter: {

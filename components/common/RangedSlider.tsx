@@ -16,6 +16,15 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   }
 
   const handleChange = (minMaxRange) => {
+    //TODO store these values in the reducer and flip
+    
+    // priceFilter: {
+    //   moveMin:{
+    //     move: false,
+    //     value: ''
+    //   }
+    // },
+    console.log('i fired')
     const min = minMaxRange[0]
     const max = minMaxRange[1]
     setMinMax([min, max])
