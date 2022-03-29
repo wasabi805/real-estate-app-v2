@@ -10,34 +10,31 @@ const { setPriceRangeSliderMaxMin } = ListingsFilterActions
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
   const { state, dispatch } = useContext(AppContext)
-  const [minMax, setMinMax] = useState([0, 1000000])
+  const [minMax, setMinMax] = useState(state.priceFilter?.range)
   const [showMin, setShowMin] = useState(false)
 
   const handleShowMinOrMaxInToolTip = (activeElement) => {
-    const activeRangeMarker = activeElement.split(' ')[1]
+    const activeRangeMarker = activeElement.split(' ')[1] //handler className, min or max
+    console.log('activeElement', activeElement)
     const displayMin = activeRangeMarker === 'ant-slider-handle-1'
     setShowMin(displayMin)
+
   }
 
   const handleChange = (minMaxRange) => {
     //TODO store these values in the reducer and flip
     dispatch(
       setPriceRangeSliderMaxMin(minMaxRange, document.activeElement?.className)
-    ) //this should also change the input field vals
-
-    console.log('what is minMaxRange', minMaxRange)
-    //state is verified its getting passed in actual state
-    console.log('i fired state in ranged slider', state)
-
-    // const min = minMaxRange[0]
-    // const max = minMaxRange[1]
-    // setMinMax([min, max])
+    ) 
+    const min = minMaxRange[0]
+    const max = minMaxRange[1]
+    setMinMax([min, max])
   }
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
   // console.log('what is sliderRange', sliderRange)
   const sliderMin = sliderRange[0] || 0
-  const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
+  const sliderMax = sliderRange[sliderRange.length - 1] || 12345678
 
   // console.log({ sliderMin, sliderMax })
 
@@ -57,8 +54,8 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
           {(() => {
             handleShowMinOrMaxInToolTip(document.activeElement?.className)
           })()}
-
-          {showMin ? `$someMinVal` : `$someMaxVal`}
+          {console.log('showMin', minMax)}
+          {showMin ? `$${minMax[0]}` : `$someMaxVal`}
         </div>
       )}
     />
