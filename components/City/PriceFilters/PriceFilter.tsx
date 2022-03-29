@@ -19,17 +19,21 @@ const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
+  console.log('WHAT IS STATE WHEN UPDATES', state)
   const handleMinPriceField = (value: number) => {
     dispatch(setMinPriceFilterField(value, state))
-    //TODO: RESET DEAFAULT VALUE
   }
 
   const handleMaxPriceField = (value: number) =>
     dispatch(setMaxPriceFilterField(value))
 
-  const getMinMaxFromSliderCb = (value: number[]) => {
-    dispatch(setMinPriceFilterField(value[0]))
-    dispatch(setMaxPriceFilterField(value[1]))
+  const getMinMaxFromSliderCb = async(value: number[]) => {
+   
+    const result = await value[0]
+    console.log(result, 'what is result')
+
+    dispatch(setMinPriceFilterField(result , state))
+    // dispatch(setMaxPriceFilterField(result[1], state))
   }
 
   useEffect( ()=>{

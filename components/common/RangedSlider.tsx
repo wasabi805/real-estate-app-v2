@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import AppContext from 'context/appContext'
 import styled from '@emotion/styled'
+import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { Divider, Slider } from 'antd'
 import 'antd/dist/antd.css'
 
+const {activatePriceSliderFilter, setPriceRangeSliderMaxMin} = ListingsFilterActions
+
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
-
+  const {state, dispatch} = useContext(AppContext)
   const [minMax, setMinMax] = useState([0, 1000000])
   const [showMin, setShowMin] = useState(false)
 
@@ -17,23 +21,21 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
 
   const handleChange = (minMaxRange) => {
     //TODO store these values in the reducer and flip
+    dispatch(setPriceRangeSliderMaxMin(minMaxRange, document.activeElement?.className)) //this should also change the input field vals
+
+    console.log('what is minMaxRange', minMaxRange)
+    //state is verified its getting passed in actual state
+    console.log('i fired state in ranged slider', state)
     
-    // priceFilter: {
-    //   moveMin:{
-    //     move: false,
-    //     value: ''
-    //   }
-    // },
-    console.log('i fired')
-    const min = minMaxRange[0]
-    const max = minMaxRange[1]
-    setMinMax([min, max])
+    // const min = minMaxRange[0]
+    // const max = minMaxRange[1]
+    // setMinMax([min, max])
   }
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
   // console.log('what is sliderRange', sliderRange)
-  const sliderMin = sliderRange[0]
-  const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
+  // const sliderMin = sliderRange[0] ||0
+  // const sliderMax = sliderRange[sliderRange.length - 1] || 6000000
 
   // console.log({ sliderMin, sliderMax })
 
@@ -42,7 +44,7 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
       range={true}
       step={25000}
       min={0}
-      max={sliderMax}
+      max={6000000}
       defaultValue={[100000, 6000000]}
       onChange={(minMaxRange) => handleChange(minMaxRange)}
       onAfterChange={onAfterChange}
@@ -54,7 +56,7 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
             handleShowMinOrMaxInToolTip(document.activeElement?.className)
           })()}
 
-          {showMin ? `$${minMax[0]}` : `$${minMax[1]}`}
+          {showMin ? `$someMinVal` : `$someMaxVal`}
         </div>
       )}
     />

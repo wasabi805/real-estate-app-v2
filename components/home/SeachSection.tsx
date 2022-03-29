@@ -59,6 +59,10 @@ const SearchSection: React.FC = () => {
         )
         // update state with search results
         console.log('what is response ', response)
+          
+
+
+
         dispatch(updateStateWithSearchResults(response.data))
         router.push(`/city/${city}/${state}`)
       })

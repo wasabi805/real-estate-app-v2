@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { FilterDropdownsContainer } from 'components/City/FilterDropdowns/styles'
 import { DropDownMenuButton } from 'components/common/DropDownMenuButton'
 import AllFiltersButton from 'components/City/FilterDropdowns/MenuComponents/AllFiltersButton'
+import SelectDropdown from 'components/common/SelectDropdown'
 import {
   ForSaleRentSold,
   Price,
@@ -19,7 +20,7 @@ const FilterDropdowns = () => {
         component={<ForSaleRentSold />}
       />
       <DropDownMenuButton buttonName={'Price'} component={<Price />} />
-
+    
       <DropDownMenuButton buttonName={'Home Type'} component={<HomeType />} />
 
       <DropDownMenuButton

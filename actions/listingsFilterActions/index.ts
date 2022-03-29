@@ -256,7 +256,7 @@ export const SET_MIN_PRICE_FILTER_FIELD = 'SET_MIN_PRICE_FILTER_FIELD'
 export const setMinPriceFilterField = (
   num: number, state : any
 ): Pick<IAction, 'type' | 'payload'> => {
-
+  console.log('DEBUGGING', state)
   const range = state.priceFilter.range
   const highestPriceIdx = state.priceFilter.range.length-1
 
@@ -264,13 +264,9 @@ export const setMinPriceFilterField = (
   const minPrice = num
   const percent = minPrice/highestPrice *100
   
-  console.log('what is the state to calculate', {highestPrice, num})
- 
-
-
 
   return {
-    type: 'SET_MIN_PRICE_FILTER_FIELD',
+    type: SET_MIN_PRICE_FILTER_FIELD,
     payload: {
       priceFilter: {
         minField: num,
@@ -291,8 +287,56 @@ export const setMaxPriceFilterField = (
     type: 'SET_MAX_PRICE_FILTER_FIELD',
     payload: {
       priceFilter: {
-        maxField: num,
+        moveMin:{
+          move: true,
+          value: `${percent}% !important`
+        }
       },
     },
+  }
+}
+
+export const ACTIVATE_PRICE_FILTER_SLIDER='ACTIVATE_PRICE_FILTER_SLIDER'
+export const activatePriceSliderFilter =()=>{
+  return {
+    type: 'ACTIVATE_PRICE_FILTER_SLIDER',
+    payload: {
+      priceFilter: {
+        moveMin:{
+          move: false,
+        },
+        moveMax:{
+          move: false,
+        }
+      },
+    },
+  }
+}
+
+export const SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN = 'SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN'
+
+export const setPriceRangeSliderMaxMin = (array: number[], handleClassName: string)=>{
+  const handleName = handleClassName.split(' ')[1]
+  const isSliderActive = handleName === 'ant-slider-handle-1'
+ 
+  const min = array[0]
+  const max = array[1]
+
+  return{
+    type: SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
+    payload:{
+      priceFliter:{
+        range: [min, max],
+        moveMin:{
+          move: isSliderActive,
+          value: min
+        },
+        moveMax:{
+          move: !isSliderActive,
+          value: max
+        }
+      },
+      
+    }
   }
 }

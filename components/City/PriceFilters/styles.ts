@@ -14,14 +14,16 @@ export const PriceFilterContainer = styled.div`
     .ant-slider {
 
       //min slider:
-      div:nth-child(4) {
-        background: ${props => props.someColor? props.someColor: 'yellow'};
+
+      //PUT THE COMMENTED OUTCODE AT THE BOTTOM BELOW THIS LINE
+      div:nth-of-type(4) {
+        background: ${props => props?.moveMin?.move? 'red': 'green'};
          left: ${(props: {moveMin: IsilderProps})=>{
            console.log('what is props in the styled component', props)
-          return props.moveMin.move ? props.moveMin.value: ''
+          return props?.moveMin?.move ? props?.moveMin?.value: ''
          }  };
       }
-
+      
       //min slider: max slider
       div:nth-child(5) {
         background: blue;
@@ -50,3 +52,11 @@ export const PriceSliderButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `
+
+// div:nth-child(4) {
+//   background: ${props => props?.moveMin.move? 'red': 'green'};
+//    left: ${(props: {moveMin: IsilderProps})=>{
+//      console.log('what is props in the styled component', props)
+//     return props?.moveMin.move ? props.moveMin.value: ''
+//    }  };
+// }
