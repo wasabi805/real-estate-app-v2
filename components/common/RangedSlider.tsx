@@ -15,17 +15,16 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
 
   const handleShowMinOrMaxInToolTip = (activeElement) => {
     const activeRangeMarker = activeElement.split(' ')[1] //handler className, min or max
-    console.log('activeElement', activeElement)
+
     const displayMin = activeRangeMarker === 'ant-slider-handle-1'
     setShowMin(displayMin)
-
   }
 
   const handleChange = (minMaxRange) => {
     //TODO store these values in the reducer and flip
     dispatch(
       setPriceRangeSliderMaxMin(minMaxRange, document.activeElement?.className)
-    ) 
+    )
     const min = minMaxRange[0]
     const max = minMaxRange[1]
     setMinMax([min, max])
@@ -54,8 +53,10 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
           {(() => {
             handleShowMinOrMaxInToolTip(document.activeElement?.className)
           })()}
-          {console.log('showMin', minMax)}
-          {showMin ? `$${minMax[0]}` : `$someMaxVal`}
+
+          {showMin
+            ? `$${minMax[0]}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            : `$someMaxVal`}
         </div>
       )}
     />

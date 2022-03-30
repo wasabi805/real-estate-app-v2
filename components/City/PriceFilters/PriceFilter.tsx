@@ -19,7 +19,6 @@ const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  console.log('WHAT IS STATE WHEN UPDATES', state)
   const handleMinPriceField = (value: number) => {
     dispatch(setMinPriceFilterField(value, state))
   }
@@ -29,16 +28,10 @@ const PriceFilter = () => {
 
   const getMinMaxFromSliderCb = async (value: number[]) => {
     const result = await value[0]
-    console.log(result, 'what is result')
 
     dispatch(setMinPriceFilterField(result, state))
-    // dispatch(setMaxPriceFilterField(result[1], state))
   }
 
-  useEffect(() => {
-    // alert('i loaded')
-    console.log('WHAT IS STATE RIGHT NOW', state)
-  }, [state])
   return (
     <PriceFilterContainer
       moveMin={state.priceFilter?.moveMin}

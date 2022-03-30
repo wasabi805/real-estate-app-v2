@@ -12,7 +12,6 @@ export const PriceFilterContainer = styled.div`
 
   .eb7m8382 {
     .ant-slider {
-
       //min slider:
       div:nth-of-type(4) {
         background: ${(props) => (props?.moveMin?.move ? 'red' : 'green')};

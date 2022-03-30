@@ -308,7 +308,7 @@ export const setPriceRangeSliderMaxMin = (
 
   const min = array[0]
   const max = array[1]
-  console.log('RANGE withing setPRICESLIDER ACTION')
+
   return {
     type: SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
     payload: {

@@ -9,7 +9,7 @@ const ListingCards = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { searchResults, sortAndFilter } = state
-  console.log('what is state at LISTING CARDS', state)
+
   useEffect(() => {
     if (state.sortAndFilter.isAscending !== null) {
       dispatch(sortListings(sortAndFilter, searchResults))

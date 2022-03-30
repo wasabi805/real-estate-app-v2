@@ -67,7 +67,6 @@ const SearchSection: React.FC = () => {
 
   return (
     <SectionContainer>
-      {console.log('what is state', state)}
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
         <PropertySearchBar />

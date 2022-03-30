@@ -214,7 +214,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_MIN_PRICE_FILTER_FIELD:
-      console.log('verify reducer changes', action)
       return {
         ...state,
         priceFilter: {
@@ -228,8 +227,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
-      console.log('SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN FIRED ', action)
-
       return {
         ...state,
         priceFilter: {
