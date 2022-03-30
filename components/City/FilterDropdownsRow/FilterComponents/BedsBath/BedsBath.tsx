@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
-import ButtonComp from 'components/common/ButtonComp'
+import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 const { handleClickBedsFilterButton, handleClickBathsFilterButton } =
   ListingsFilterActions

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { Layout, Menu, Row, Col } from 'antd'
 import 'antd/dist/antd.css'
-import FormInput from '../common/FormInput'
+import FormInput from './FormInput'
 import { formInputStyles } from './styles'
 import AppContext from 'context/appContext'
 import * as LoginModalActions from 'actions/modalActions'
 import { AllFiltersDrawer } from '@components/City/FilterDropdownsRow/FilterComponents/AllFilters'
 
-import LoginModal from '@components/Modals/LoginModal'
+import LoginModal from '@components/_common/modals/LoginModal'
 
 const { Header, Footer } = Layout
 

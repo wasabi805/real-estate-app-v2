@@ -3,7 +3,7 @@ import { Modal, Tabs, Button } from 'antd'
 import 'antd/dist/antd.css'
 import AppContext from 'context/appContext'
 import * as LoginModalActions from 'actions/modalActions'
-import FormInput from 'components/common/FormInput'
+import FormInput from '@components/_common/FormInput'
 import { LoginModaContentWrapper, LoginModalContainer } from './styles'
 
 const { TabPane } = Tabs

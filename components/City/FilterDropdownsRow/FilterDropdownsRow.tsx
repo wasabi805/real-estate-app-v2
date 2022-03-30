@@ -1,6 +1,6 @@
 import React from 'react'
 import { FilterDropdownsContainer } from '@components/City/FilterDropdownsRow/styles'
-import { DropDownMenuButton } from 'components/common/DropDownMenuButton'
+import { DropDownMenuButton } from '@components/_common/DropDownMenuButton'
 import AllFiltersButton from '@components/City/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersButton'
 
 import {

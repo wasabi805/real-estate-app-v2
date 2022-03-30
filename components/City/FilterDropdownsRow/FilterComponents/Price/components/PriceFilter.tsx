@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import Image from 'next/image'
 import AppContext from 'context/appContext'
-import RangedSlider from 'components/common/RangedSlider'
-import InputComp from 'components/common/InputComp'
-import ButtonComp from 'components/common/ButtonComp'
+import RangedSlider from '@components/_common/RangedSlider'
+import InputComp from '@components/_common/InputComp'
+import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import mockHistogram from 'public/mockHistogram.png'
 import {

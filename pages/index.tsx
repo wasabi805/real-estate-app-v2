@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import axios from 'axios'
 import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
-import { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
+import { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
 import AppContext from '../context/appContext'
-import { SearchSection } from '../components/home'
+import { SearchSection } from '../components/Landing'
 
 interface IHomeProps {
   res: any

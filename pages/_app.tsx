@@ -4,7 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0'
 import React, { useReducer } from 'react'
 import AppContext from 'context/appContext'
 import appReducer, { initialState } from 'reducers/appReducer'
-import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/common/Layout'
+import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
 
 interface IAppProps extends AppProps {
   AppData: any

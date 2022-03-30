@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import AppContext from 'context/appContext'
 import * as SearchActions from 'actions/propertySearchBarActions'
-import SectionContainer from '@components/common/SectionContainer'
+import SectionContainer from '@components/_common/SectionContainer'
 
 import img from 'images/banner-living-room-teal_1000.jpg'
 import styled from '@emotion/styled'
