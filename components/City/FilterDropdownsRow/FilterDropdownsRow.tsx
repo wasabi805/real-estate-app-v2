@@ -12,7 +12,7 @@ import {
   AllFilters,
 } from '@components/City/FilterDropdownsRow/FilterComponents'
 
-const FilterDropdowns = () => {
+const FilterDropdownsRow = () => {
   return (
     <FilterDropdownsContainer>
       <DropDownMenuButton
@@ -33,4 +33,4 @@ const FilterDropdowns = () => {
   )
 }
 
-export default FilterDropdowns
+export default FilterDropdownsRow

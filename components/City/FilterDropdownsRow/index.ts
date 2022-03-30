@@ -1,3 +1,3 @@
-import FilterDropdowns from './FilterDropdownsRow'
+import FilterDropdownsRow from './FilterDropdownsRow'
 
-export { FilterDropdowns }
+export { FilterDropdownsRow as FilterDropdowns }

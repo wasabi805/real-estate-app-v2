@@ -1,4 +1,4 @@
-import AllFiltersDrawer from "components/City/FilterDropdownsRow/FilterComponents/AllFilters";
+import AllFiltersDrawer from "components/City/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersDrawer";
 import AllFiltersButton from './AllFiltersButton'
 
 export{
