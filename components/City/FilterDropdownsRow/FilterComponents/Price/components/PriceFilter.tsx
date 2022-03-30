@@ -40,10 +40,6 @@ const PriceFilter = () => {
       moveMax={state.priceFilter?.moveMax}
       onClick={(e) => e.stopPropagation()}
     >
-      <div>
-        <Image src={mockHistogram} alt="mockHistogram" />
-      </div>
-
       <RangedSliderRow>
         <RangedSlider
           sliderRange={state.priceFilter?.range}

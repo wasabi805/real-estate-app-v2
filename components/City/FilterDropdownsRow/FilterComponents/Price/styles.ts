@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 
+export const PriceContainer = styled.div``
+
 interface IsilderProps {
   move: boolean
   value: string
@@ -7,8 +9,6 @@ interface IsilderProps {
 
 export const PriceFilterContainer = styled.div`
   width: 30vw;
-  padding: 0 2rem;
-  padding-top: 1em;
 
   // RangedSliderRow component class below
   .e1a75ba32 {
