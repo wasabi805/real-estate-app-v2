@@ -3,10 +3,10 @@ import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { ListingsContainer, ListingCardsAndTableCol } from './styles'
 import { FilterDropdowns } from 'components/City/FilterDropdownsRow'
-import SortByOptionsMenu from './SortByOptionsMenu'
-import ListingCards from 'components/City/Listings/ListingCards'
-import { ListingsTableBody } from './Listings/ListingsTable/styles'
-import SelectedHome from 'components/City/SelectedHome'
+import SortingRow from './SortingRow/SortingRow'
+import ListingCards from 'components/City/ListingsColumn/ListingCards'
+import { ListingsTableBody } from 'components/City/ListingsColumn/ListingsTable/styles'
+import SelectedHome from '@components/City/ListingsColumn/SelectedHome/SelectedHome'
 
 const { sortListings } = ListingsSortFilterActions
 
@@ -25,7 +25,7 @@ const Listings: React.FC = () => {
     <>
       <ListingsContainer className={'listings-container'}>
         <FilterDropdowns />
-        <SortByOptionsMenu />
+        <SortingRow />
 
         <SelectedHome />
 

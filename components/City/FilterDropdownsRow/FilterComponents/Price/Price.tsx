@@ -1,5 +1,5 @@
 import React from 'react'
-import PriceFilter from '@components/City/FilterDropdownsRow/FilterComponents/Price/PriceFilter'
+import PriceFilter from '@components/City/FilterDropdownsRow/FilterComponents/Price/components/PriceFilter'
 
 const Price = () => {
   // THIS IS THE MAIN MENU WRAPPER

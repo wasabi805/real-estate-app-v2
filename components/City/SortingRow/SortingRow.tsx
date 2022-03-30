@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import { Menu, Dropdown, Tabs } from 'antd'
-import { SortByOptionsContainer } from './styles'
+import { SortByOptionsContainer } from '../styles'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
@@ -9,7 +9,7 @@ import { IantDesignEventObj } from 'interfaces/IantDesign'
 
 const { TabPane } = Tabs
 
-const AscendDescendTab: React.FC = () => {
+export const AscendDescendTab: React.FC = () => {
   const appContext = useContext(AppContext)
   const { dispatch } = appContext
   const { setIsAscending } = ListingsSortFilterActions
@@ -29,7 +29,7 @@ const AscendDescendTab: React.FC = () => {
 }
 
 //----------------------------------------------------------------
-const SortByOptionsMenu: React.FC = () => {
+const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { setActiveSortCategory } = ListingsSortFilterActions
@@ -59,7 +59,7 @@ const SortByOptionsMenu: React.FC = () => {
 
   return (
     <SortByOptionsContainer
-      style={{ border: '3px solid purple ', width: '100vw' }}
+      style={{ border: '2px solid purple ', width: '100vw' }}
     >
       <span>40 of 132 homes•</span>
       <Dropdown overlay={menu}>
@@ -80,4 +80,4 @@ const SortByOptionsMenu: React.FC = () => {
   )
 }
 
-export default SortByOptionsMenu
+export default SortingRow

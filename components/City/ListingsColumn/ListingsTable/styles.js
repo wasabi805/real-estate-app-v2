@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { ListingsTable } from 'components/City/Listings/ListingsTable'
+import { ListingsTable } from 'components/City/ListingsColumn/ListingsTable'
 
 export const ListingsTableContainer = styled.div`
   padding: 5rem;
