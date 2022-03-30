@@ -1,5 +1,3 @@
 import HomeType from './HomeType'
 
-export{
-    HomeType
-}
+export { HomeType }

@@ -1,5 +1,3 @@
-import ForSaleRentSold from "./ForSaleRentSold";
+import ForSaleRentSold from './ForSaleRentSold'
 
-export{
-    ForSaleRentSold
-}
+export { ForSaleRentSold }

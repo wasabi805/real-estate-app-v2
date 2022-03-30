@@ -1,7 +1,4 @@
-import AllFiltersDrawer from "components/City/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersDrawer";
+import AllFiltersDrawer from 'components/City/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersDrawer'
 import AllFiltersButton from './AllFiltersButton'
 
-export{
-    AllFiltersDrawer,
-    AllFiltersButton
-}
+export { AllFiltersDrawer, AllFiltersButton }

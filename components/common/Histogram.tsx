@@ -1,8 +1,6 @@
-import styled from "@emotion/styled";
-import Plot from 'react-plotly.js';
+import styled from '@emotion/styled'
+import Plot from 'react-plotly.js'
 
- const Histogram = styled((prop)=>{
-     return(<Plot/>)
- })``
-
- 
+const Histogram = styled((prop) => {
+  return <Plot />
+})``
