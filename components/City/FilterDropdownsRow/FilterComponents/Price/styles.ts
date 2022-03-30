@@ -10,7 +10,8 @@ export const PriceFilterContainer = styled.div`
   padding: 0 2rem;
   padding-top: 1em;
 
-  .eb7m8382 {
+  // RangedSliderRow component class below
+  .e1a75ba32 {
     .ant-slider {
       //min slider:
       div:nth-of-type(4) {
