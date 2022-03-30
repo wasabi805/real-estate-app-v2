@@ -225,7 +225,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
             state.priceFilter?.maxField,
           //TODO: THE OR array after range needs to not be hard coded
           range: action.payload?.priceFilter?.range ||
-            state.priceFilter?.range || [1, 12345678],
+            state.priceFilter?.range || [0, 12345678],
           moveMin: action.payload?.priceFilter?.moveMin,
           moveMax: action.payload?.priceFilter?.moveMax,
         },
