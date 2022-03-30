@@ -261,6 +261,7 @@ export const setMinPriceFilterField = (
   const range = state.priceFilter.range
   const highestPriceIdx = state.priceFilter.range.length - 1
 
+  console.log('WHAT IS NUM???', num)
   const highestPrice = range[highestPriceIdx]
   const minPrice = num
   const percent = minPrice / highestPrice
@@ -282,15 +283,24 @@ export const setMinPriceFilterField = (
 
 export const SET_MAX_PRICE_FILTER_FIELD = 'SET_MAX_PRICE_FILTER_FIELD'
 export const setMaxPriceFilterField = (
-  num: number
+  num: number,
+  state: any
 ): Pick<IAction, 'type' | 'payload'> => {
+  const range = state.priceFilter.range
+  const highestPriceIdx = state.priceFilter.range.length - 1
+
+  const highestPrice = range[highestPriceIdx]
+  const maxPrice = num
+  const percent = maxPrice / highestPrice
+
   return {
-    type: 'SET_MAX_PRICE_FILTER_FIELD',
+    type: SET_MAX_PRICE_FILTER_FIELD,
     payload: {
       priceFilter: {
-        moveMin: {
+        maxField: num,
+        moveMax: {
           move: true,
-          value: `${percent}% !important`,
+          value: `${percent * 100}% !important`,
         },
       },
     },

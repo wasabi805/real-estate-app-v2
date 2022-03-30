@@ -21,10 +21,13 @@ export const PriceFilterContainer = styled.div`
         }};
       }
 
-      //min slider: max slider
-      div:nth-child(5) {
-        background: blue;
-        // left: 75% !important;
+      //max slider:
+      div:nth-of-type(5) {
+        background: ${(props) => (props?.moveMax?.move ? 'blue' : 'cyan')};
+        left: ${(props: { moveMax: IsilderProps }) => {
+          console.log('what is props in the styled component', props)
+          return props?.moveMax?.move ? props?.moveMax?.value : ''
+        }};
       }
     }
   }

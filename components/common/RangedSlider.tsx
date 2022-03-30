@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import AppContext from 'context/appContext'
 import styled from '@emotion/styled'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
-import { Divider, Slider } from 'antd'
+import { Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const { setPriceRangeSliderMaxMin } = ListingsFilterActions
+const { setPriceRangeSliderMaxMin, setMaxPriceFilterField } =
+  ListingsFilterActions
 
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
@@ -31,11 +32,8 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   }
   // --- Required | END-  ANT Design markup for tool tip data display -----
 
-  // console.log('what is sliderRange', sliderRange)
   const sliderMin = sliderRange[0] || 0
   const sliderMax = sliderRange[sliderRange.length - 1] || 12345678
-
-  // console.log({ sliderMin, sliderMax })
 
   return (
     <Slider
@@ -56,7 +54,7 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
 
           {showMin
             ? `$${minMax[0]}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-            : `$someMaxVal`}
+            : `$${minMax[1]}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
         </div>
       )}
     />

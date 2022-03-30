@@ -31,7 +31,6 @@ const {
   HANDLE_CLICK_BATHS_FILTER_BUTTON,
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
-  ACTIVATE_PRICE_FILTER_SLIDER,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = ListingsFilterActions
 
@@ -213,6 +212,25 @@ const appReducer = (state: IinitialState, action: IAction) => {
         ...state,
       }
 
+    case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
+      return {
+        ...state,
+        priceFilter: {
+          ...state.priceFilter,
+          minField:
+            action.payload?.priceFilter?.range[0] ||
+            state.priceFilter?.minField,
+          maxField:
+            action.payload?.priceFilter?.range[1] ||
+            state.priceFilter?.maxField,
+          //TODO: THE OR array after range needs to not be hard coded
+          range: action.payload?.priceFilter?.range ||
+            state.priceFilter?.range || [1, 12345678],
+          moveMin: action.payload?.priceFilter?.moveMin,
+          moveMax: action.payload?.priceFilter?.moveMax,
+        },
+      }
+
     case SET_MIN_PRICE_FILTER_FIELD:
       return {
         ...state,
@@ -226,29 +244,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
         },
       }
 
-    case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
-      return {
-        ...state,
-        priceFilter: {
-          ...state.priceFilter,
-          minField:
-            action.payload?.priceFilter?.range[0] ||
-            state.priceFilter?.minField,
-          maxField: action.payload?.priceFilter?.range[1],
-          //TODO: THE OR array after range needs to not be hard coded
-          range: action.payload?.priceFilter?.range ||
-            state.priceFilter?.range || [1, 12345678],
-          moveMin: action.payload?.priceFilter?.moveMin,
-          moveMax: action.payload?.priceFilter?.moveMax,
-        },
-      }
-
     case SET_MAX_PRICE_FILTER_FIELD:
       return {
         ...state,
         priceFilter: {
           ...state.priceFilter,
           maxField: action.payload?.priceFilter?.maxField,
+          moveMax: {
+            move: action.payload?.priceFilter?.moveMax.move,
+            value: action.payload?.priceFilter?.moveMax.value,
+          },
         },
       }
 

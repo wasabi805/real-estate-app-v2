@@ -24,17 +24,20 @@ const PriceFilter = () => {
   }
 
   const handleMaxPriceField = (value: number) =>
-    dispatch(setMaxPriceFilterField(value))
+    dispatch(setMaxPriceFilterField(value, state))
 
   const getMinMaxFromSliderCb = async (value: number[]) => {
-    const result = await value[0]
+    const minResult = await value[0]
+    const maxResult = await value[1]
 
-    dispatch(setMinPriceFilterField(result, state))
+    dispatch(setMinPriceFilterField(minResult, state))
+    dispatch(setMaxPriceFilterField(maxResult, state))
   }
 
   return (
     <PriceFilterContainer
       moveMin={state.priceFilter?.moveMin}
+      moveMax={state.priceFilter?.moveMax}
       onClick={(e) => e.stopPropagation()}
     >
       <div>
@@ -44,7 +47,6 @@ const PriceFilter = () => {
       <RangedSliderRow>
         <RangedSlider
           sliderRange={state.priceFilter?.range}
-          changeMinSliderPos={state.priceFilter?.changeMinSliderPos}
           onAfterChange={getMinMaxFromSliderCb}
         />
       </RangedSliderRow>
