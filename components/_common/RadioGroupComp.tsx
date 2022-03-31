@@ -19,9 +19,9 @@ const RadioGroupComp = styled(
       <span className={className}>
         <Radio.Group onChange={onChange}>
           {radioButtons.map((btn) => (
-            <Radio key={btn.value} value={btn.value}>
-              {btn.name}
-            </Radio>
+            <div key={btn.value}>
+              <Radio value={btn.value}>{btn.name}</Radio>
+            </div>
           ))}
         </Radio.Group>
       </span>

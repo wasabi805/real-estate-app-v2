@@ -14,7 +14,7 @@ const ForSaleRentSold = () => {
 
   return (
     <RadioGroupComp
-      radioButtons={tempGroup}
+      radioButtons={state.forSaleRentSold.buttons}
       className="for-sale-rent-solid-radio-group"
       onChange={handleOnChange}
     ></RadioGroupComp>

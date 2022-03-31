@@ -60,6 +60,14 @@ export const initialState: IinitialState = {
     // initialData: mockListings,
   },
 
+  forSaleRentSold: {
+    buttons: [
+      { name: 'sale', value: 'sale' },
+      { name: 'rent', value: 'rent' },
+      { name: 'sold', value: 'sold' },
+    ],
+  },
+
   priceFilter: {
     //inputs
     minField: null,

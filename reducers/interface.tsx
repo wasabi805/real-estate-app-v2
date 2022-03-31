@@ -19,6 +19,14 @@ export interface IinitialState {
     initialData: []
   }
 
+  forSaleRentSold: {
+    buttons?: [
+      { name: string; value: string },
+      { name: string; value: string },
+      { name: string; value: string }
+    ]
+  }
+
   priceFilter?: {
     //inputs
     minField?: null | number
