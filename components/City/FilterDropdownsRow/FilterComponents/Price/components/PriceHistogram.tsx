@@ -51,7 +51,9 @@ const PriceHistogram = () => {
           </div>
         )}
       >
-        <BarSeries rawData={state.priceFilter?.range /* or binnedData={...} */} />
+        <BarSeries
+          rawData={state.priceFilter?.range /* or binnedData={...} */}
+        />
         <XAxis />
         {/* <YAxis /> */}
       </ResponsiveHistogram>
