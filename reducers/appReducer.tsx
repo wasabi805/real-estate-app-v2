@@ -4,7 +4,7 @@ import * as ListingTabActions from 'actions/listingTabActions.ts'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
-import { mockListings } from 'mockListings'
+import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import {
   LISTINGS_FILTERS_BUTTONS_BEDS,
   LISTINGS_FILTERS_BUTTONS_BATHS,
@@ -53,11 +53,11 @@ export const initialState: IinitialState = {
   fetchProperty: false,
   searchResults: {
     data: {
-      listings: [],
-      // listings: mockListings,
+      // listings: [],
+      listings: mockListings,
     },
-    initialData: [],
-    // initialData: mockListings,
+    // initialData: [],
+    initialData: mockListings,
   },
 
   forSaleRentSold: {
@@ -74,7 +74,10 @@ export const initialState: IinitialState = {
     maxField: null,
 
     //slider
-    range: [],
+
+    // range: [],
+    range: mockAscendingPriceRange,
+
     moveMin: {
       move: false,
       value: '',

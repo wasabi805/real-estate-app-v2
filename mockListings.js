@@ -1,3 +1,5 @@
+import { sortIntergersAscending } from 'utils'
+
 export const mockListings = [
   {
     property_id: '2892620475',
@@ -25038,3 +25040,6 @@ export const mockListings = [
     ],
   },
 ]
+const mockRange = mockListings.map((home) => home.price_raw)
+
+export const mockAscendingPriceRange = sortIntergersAscending(mockRange)

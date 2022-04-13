@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { ListingsContainer, ListingCardsAndTableCol } from './styles'
-import { FilterDropdowns } from 'components/City/FilterDropdownsRow'
+import { FilterDropdownsRow } from 'components/City/FilterDropdownsRow'
 import SortingRow from './SortingRow/SortingRow'
 import ListingCards from 'components/City/ListingsColumn/ListingCards'
 import { ListingsTableBody } from 'components/City/ListingsColumn/ListingsTable/styles'
@@ -24,7 +24,6 @@ const Listings: React.FC = () => {
   return (
     <>
       <ListingsContainer className={'listings-container'}>
-        <FilterDropdowns />
         <SortingRow />
 
         <SelectedHome />

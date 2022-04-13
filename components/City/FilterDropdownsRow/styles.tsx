@@ -5,7 +5,17 @@ export const FilterDropdownsContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: vertical;
-  height: 4vh;
+  .e1m7jdwn0 {
+    background: blue;
+    .ant-collapse {
+      .MAKETHISZINDEXLARGE {
+        .ant-collapse-content {
+          z-index: 100;
+          background: magenta;
+        }
+      }
+    }
+  }
 `
 export const FilterButtonWrapper = styled(Button)`
   cursor: pointer;

@@ -7,6 +7,7 @@ import { MapColumnContainer, ListingsColumnContainer } from './styles'
 import Listings from 'components/City/City'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
+import { FilterDropdownsRow } from '@components/City/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 
@@ -32,10 +33,12 @@ const CityDetails = () => {
         </MapColumnContainer>
 
         <ListingsColumnContainer span={10}>
-          <Row>
+          <div>
             <h3>Santa Monica Homes For Sale</h3>
-          </Row>
-          <Row> Search Filters live here</Row>
+            <div>
+              <FilterDropdownsRow />
+            </div>
+          </div>
           <Listings />
         </ListingsColumnContainer>
       </Row>
