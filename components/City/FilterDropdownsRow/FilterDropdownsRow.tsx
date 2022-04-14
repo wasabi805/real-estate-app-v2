@@ -40,7 +40,7 @@ const FilterDropdownsRow = () => {
 
       <DropdownButton
         btnKey={'1'}
-        buttonName={'Home Tyepe'}
+        buttonName={'For Sale'}
         activeKey={activePannel}
         onChange={() => handleSetActivePannel('1')}
         component={<div>Hello</div>}
