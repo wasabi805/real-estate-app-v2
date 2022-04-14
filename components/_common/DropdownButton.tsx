@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, Collapse } from 'antd'
+import { Collapse } from 'antd'
 import { DropdownButtonContainer } from 'components/_common/styles'
 
 const { Panel } = Collapse
@@ -10,9 +10,10 @@ const DropdownButton = ({
   onChange,
   activeKey,
   btnKey,
+  buttonStyles,
 }) => {
   return (
-    <DropdownButtonContainer>
+    <DropdownButtonContainer buttonStyles={buttonStyles}>
       <Collapse onChange={onChange} activeKey={activeKey}>
         <Panel className="MAKETHISZINDEXLARGE" header={buttonName} key={btnKey}>
           <div>{component}</div>

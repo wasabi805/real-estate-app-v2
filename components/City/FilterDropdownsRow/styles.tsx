@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 import { Button } from 'antd'
 
+export const FilterDropdownsRowStyles = styled.div`
+  display: flex;
+`
+
 export const FilterDropdownsContainer = styled.div`
   display: flex;
   justify-content: start;

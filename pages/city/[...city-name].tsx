@@ -35,9 +35,7 @@ const CityDetails = () => {
         <ListingsColumnContainer span={10}>
           <div>
             <h3>Santa Monica Homes For Sale</h3>
-            <div>
-              <FilterDropdownsRow />
-            </div>
+            <FilterDropdownsRow />
           </div>
           <Listings />
         </ListingsColumnContainer>

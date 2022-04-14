@@ -15,8 +15,17 @@ export const ModalFormLabel = ({ text }) => {
 export const DropdownButtonContainer = styled.div`
   position: relative;
 
+  // Tab button header
+  [class^='ant-collapse-header'] {
+    background: yellowgreen;
+    padding: 4px 0px !important;
+    width: ${(props) => {
+      return props?.buttonStyles?.width ? props.buttonStyles.width : '100%'
+    }};
+  }
+
   // Tab button
-  div[class^='ant-collapse ant-collapse-icon-position-left'] {
+  div[class^='ant-collapse'] {
     background: cyan;
   }
 
