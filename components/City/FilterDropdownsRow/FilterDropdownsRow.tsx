@@ -38,6 +38,7 @@ const FilterDropdownsRow = () => {
 
       {/* NEW */}
 
+      {/* BUTTON ONE */}
       <DropdownButton
         btnKey={'1'}
         buttonName={'For Sale'}
@@ -46,6 +47,7 @@ const FilterDropdownsRow = () => {
         component={<div>Hello</div>}
       />
 
+      {/* BUTTON TWO */}
       <DropdownButton
         btnKey={'2'}
         buttonName={'Price'}
@@ -55,16 +57,29 @@ const FilterDropdownsRow = () => {
       />
 
       {/* BUTTON THREE */}
-      {/* <DropDownMenuButton buttonName={'Home Type'} component={<HomeType />} /> */}
+      <DropdownButton
+        btnKey={'3'}
+        buttonName={'Home-Type'}
+        activeKey={activePannel}
+        onChange={() => handleSetActivePannel('3')}
+        component={<HomeType />}
+      />
 
       {/* BUTTON FOUR */}
       {/* <DropDownMenuButton
         buttonName={'Beds / Baths'}
         component={<BedsBaths />}
       /> */}
+      <DropdownButton
+        btnKey={'4'}
+        buttonName={'Beds / Baths'}
+        activeKey={activePannel}
+        onChange={() => handleSetActivePannel('4')}
+        component={<BedsBaths />}
+      />
 
       {/* BUTTON FIVE */}
-      {/* <AllFiltersButton /> */}
+      <AllFiltersButton />
     </FilterDropdownsContainer>
   )
 }

@@ -14,10 +14,6 @@ export const ModalFormLabel = ({ text }) => {
 //TODO: will accept props for right side alignent
 export const DropdownButtonContainer = styled.div`
   position: relative;
-  width: 10vw;
-  .ant-collapse-item {
-    width: 3rem;
-  }
 
   // Tab button
   div[class^='ant-collapse ant-collapse-icon-position-left'] {
