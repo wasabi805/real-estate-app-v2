@@ -10,7 +10,7 @@ export const FilterDropdownsContainer = styled.div`
   justify-content: start;
   align-items: vertical;
   .e1m7jdwn0 {
-    background: blue;
+    background: azure;
     width: 100%;
     .ant-collapse {
       .MAKETHISZINDEXLARGE {

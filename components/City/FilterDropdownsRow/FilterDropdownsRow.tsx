@@ -29,6 +29,7 @@ const FilterDropdownsRow = () => {
       <FilterDropdownsContainer>
         {/* BUTTON ONE */}
         <DropdownButton
+          className={'ant-btn'}
           btnKey={'1'}
           buttonName={'For Sale'}
           activeKey={activePannel}
@@ -41,6 +42,7 @@ const FilterDropdownsRow = () => {
 
         {/* BUTTON TWO */}
         <DropdownButton
+          className={'ant-btn'}
           btnKey={'2'}
           buttonName={'Price'}
           activeKey={activePannel}
@@ -53,6 +55,7 @@ const FilterDropdownsRow = () => {
 
         {/* BUTTON THREE */}
         <DropdownButton
+          className={'ant-btn'}
           btnKey={'3'}
           buttonName={'Home-Type'}
           activeKey={activePannel}
@@ -65,13 +68,14 @@ const FilterDropdownsRow = () => {
 
         {/* BUTTON FOUR */}
         <DropdownButton
+          className={'ant-btn'}
           btnKey={'4'}
           buttonName={'Beds / Baths'}
           activeKey={activePannel}
           onChange={() => handleSetActivePannel('4')}
           component={<BedsBaths />}
           buttonStyles={{
-            width: '7rem',
+            width: '7.5rem',
           }}
         />
 
