@@ -16,6 +16,9 @@ export const DropdownButtonContainer = styled.div`
   position: relative;
   margin-right: 0.5em;
 
+  .MAKETHISZINDEXLARGE {
+  }
+
   // Tab button header
   [class^='ant-collapse-header'] {
     // background: yellowgreen;
@@ -56,12 +59,45 @@ export const DropdownButtonContainer = styled.div`
 
   // Tab content
   div[class^='ant-collapse-content'] {
-    background: lightgray;
     position: absolute;
+    z-index: 10;
+
+    box-shadow: -0.8px 0.25px 3px 2.5px rgb(0 0 0 / 15%);
+    background-color: #fff;
+    font-size: 0.875rem;
+    line-height: 1.25;
+
+    font-weight: 400;
+    color: #585858;
+    border-radius: 2px;
   }
 
-  // RIGHT ALIGNMENT
-  div[class^='ant-collapse-content-box'] {
-    transform: translate(-69%, 0);
+  .home-type-content {
+    // RIGHT ALIGNMENT
+    div[class^='ant-collapse-content-box'] {
+      transform: translate(-66%, 0);
+    }
+  }
+  .beds-bath-content {
+    // RIGHT ALIGNMENT
+    div[class^='ant-collapse-content-box'] {
+      transform: translate(-70.5%, 0);
+    }
+  }
+`
+
+export const TileIconButton = styled.span`
+  padding: 1rem;
+
+  & button{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 6rem;
+    height: 6rem;
+    line-height: 1.5rem;
+    border-radius: 4px;
+    font weight: 200;
   }
 `

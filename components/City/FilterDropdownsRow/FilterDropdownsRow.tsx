@@ -55,7 +55,7 @@ const FilterDropdownsRow = () => {
 
         {/* BUTTON THREE */}
         <DropdownButton
-          className={'ant-btn'}
+          className={'ant-btn home-type-content'}
           btnKey={'3'}
           buttonName={'Home-Type'}
           activeKey={activePannel}
@@ -68,7 +68,7 @@ const FilterDropdownsRow = () => {
 
         {/* BUTTON FOUR */}
         <DropdownButton
-          className={'ant-btn'}
+          className={'ant-btn beds-bath-content'}
           btnKey={'4'}
           buttonName={'Beds / Baths'}
           activeKey={activePannel}
