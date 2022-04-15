@@ -17,7 +17,12 @@ const ListingCards = () => {
   }, [sortAndFilter.isAscending])
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
       {searchResults.data.listings.map((house: Ilisting) => (
         <Card key={house.property_id} houseData={house} />
       ))}

@@ -23,7 +23,7 @@ const SelectedHome = () => {
     <>
       {listingTable.isTableView && (
         <SelectedHomesContainer>
-          <Row style={{ marginTop: '1.45em' }}>
+          <Row>
             <Col span={12}>
               <img
                 alt="fullHouse"

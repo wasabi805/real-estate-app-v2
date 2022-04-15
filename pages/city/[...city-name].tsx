@@ -23,7 +23,7 @@ const CityDetails = () => {
     <CityWrapper>
       <Row>
         <Col>
-          <input placeholder="uncomment this to get back auto search"></input>
+          {/* <input placeholder="uncomment this to get back auto search"></input> */}
           {/* <PropertySearchBar /> */}
         </Col>
       </Row>
@@ -34,9 +34,9 @@ const CityDetails = () => {
 
         <ListingsColumnContainer span={10}>
           <div>
-            <h3>Santa Monica Homes For Sale</h3>
-            <FilterDropdownsRow />
+            <h2>Santa Monica Homes For Sale</h2>
           </div>
+          <FilterDropdownsRow />
           <Listings />
         </ListingsColumnContainer>
       </Row>

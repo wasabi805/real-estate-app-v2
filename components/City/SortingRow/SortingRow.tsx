@@ -58,9 +58,7 @@ const SortingRow: React.FC = () => {
   }
 
   return (
-    <SortByOptionsContainer
-      style={{ border: '2px solid purple ', width: '100vw' }}
-    >
+    <SortByOptionsContainer>
       <span>40 of 132 homes•</span>
       <Dropdown overlay={menu}>
         <a className="ant-dropdown-link" onClick={handleSetActive}>
@@ -68,14 +66,14 @@ const SortingRow: React.FC = () => {
         </a>
       </Dropdown>
 
-      <div>
+      <span className="photo-tables-buttons">
         <button name="Photo" onClick={handlePhotoTableButtonClick}>
-          newPhotos
+          Photos
         </button>
         <button name="Table" onClick={handlePhotoTableButtonClick}>
-          newTables
+          Table
         </button>
-      </div>
+      </span>
     </SortByOptionsContainer>
   )
 }
