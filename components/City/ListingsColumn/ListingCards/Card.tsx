@@ -6,11 +6,12 @@ import { Ilisting } from 'actions/propertySearchBarActions/interface'
 
 interface IProps {
   houseData: Ilisting
+  className: string
 }
 
-const ListingCard: React.FC<IProps> = ({ houseData }) => {
+const ListingCard: React.FC<IProps> = ({ houseData, className }) => {
   return (
-    <Card cover={<img src={houseData.photo}></img>} style={{ width: '50%' }}>
+    <Card className={className} cover={<img src={houseData.photo}></img>}>
       <Row>
         <Col span={18}>
           <h3>{houseData.price}</h3>

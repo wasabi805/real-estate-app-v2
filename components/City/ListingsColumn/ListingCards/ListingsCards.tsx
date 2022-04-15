@@ -3,6 +3,7 @@ import AppContext from 'context/appContext'
 import Card from '@components/City/ListingsColumn/ListingCards/Card'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
+import { ListingsCardWrapper } from 'components/City/ListingsColumn/ListingCards/styles'
 const { sortListings } = ListingsSortFilterActions
 
 const ListingCards = () => {
@@ -17,16 +18,15 @@ const ListingCards = () => {
   }, [sortAndFilter.isAscending])
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-      }}
-    >
+    <ListingsCardWrapper>
       {searchResults.data.listings.map((house: Ilisting) => (
-        <Card key={house.property_id} houseData={house} />
+        <Card
+          key={house.property_id}
+          className={'listing-card'}
+          houseData={house}
+        />
       ))}
-    </div>
+    </ListingsCardWrapper>
   )
 }
 
