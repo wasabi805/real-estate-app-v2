@@ -18,6 +18,9 @@ export interface IAction {
     searchResults?: {
       data: []
     }
+    forSaleRentSold?: {
+      filterBy: string[]
+    }
 
     priceFilter?: {
       range?: number[]

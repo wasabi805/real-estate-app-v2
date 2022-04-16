@@ -20,6 +20,7 @@ export interface IinitialState {
   }
 
   forSaleRentSold: {
+    filterBy?: []
     buttons?: [
       { name: string; value: string },
       { name: string; value: string },

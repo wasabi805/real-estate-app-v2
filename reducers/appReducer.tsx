@@ -32,6 +32,7 @@ const {
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
+  SET_FILTER_BY_PROPERTY_TYPE,
 } = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -61,6 +62,8 @@ export const initialState: IinitialState = {
   },
 
   forSaleRentSold: {
+    filterBy: [],
+
     buttons: [
       { name: 'sale', value: 'sale' },
       { name: 'rent', value: 'rent' },
@@ -210,6 +213,15 @@ const appReducer = (state: IinitialState, action: IAction) => {
         listingsFilters: {
           ...state.listingsFilters,
           isDrawerOpen: action.payload?.listingsFilters?.isDrawerOpen,
+        },
+      }
+
+    case SET_FILTER_BY_PROPERTY_TYPE:
+      return {
+        ...state,
+        forSaleRentSold: {
+          ...state.forSaleRentSold,
+          filterBy: action.payload?.forSaleRentSold?.filterBy,
         },
       }
 
