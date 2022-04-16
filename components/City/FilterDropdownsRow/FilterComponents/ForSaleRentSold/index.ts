@@ -24,5 +24,23 @@ export const ForSaleRentSoldTableFormat = {
       listingFilterCategory: 'Sold',
     },
   ],
+
+  soldDatePeriodColumn: [
+    {
+      title: 'Sold Date Period',
+      dataIndex: 'soldDatePeriod',
+    },
+  ],
+
+  soldDatePeriodRows: [
+    {
+      key: 'sold-last-1-week',
+      soldDatePeriod: 'Last 1 Week',
+    },
+    {
+      key: 'sold-last-1-month',
+      soldDatePeriod: 'Last 1 Month',
+    },
+  ],
 }
 export { ForSaleRentSold }

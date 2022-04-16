@@ -12,9 +12,32 @@ import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/F
 const { setFilterByPropertyType } = ListingsFilterActions
 
 const ForSaleRentSold = () => {
-  const { columns, saleRent, soldExpandable } = ForSaleRentSoldTableFormat
+  const {
+    columns,
+    saleRent,
+    soldExpandable,
+    soldDatePeriodColumn,
+    soldDatePeriodRows,
+  } = ForSaleRentSoldTableFormat
 
   const { state, dispatch } = useContext(AppContext)
+
+  const ForSaleDateRange = () => {
+    return (
+      <div>
+      
+        <Table pagination={false} showHeader={false}
+        columns={soldDatePeriodColumn}
+        dataSource={soldDatePeriodRows}
+        rowSelection={{
+          type: 'radio',
+          // selectedRowKeys: state.forSaleRentSold.filterBy,
+        }}
+         />
+        
+      </div>
+    )
+  }
 
   return (
     <ForSaleRentSoldContainer>
@@ -51,9 +74,7 @@ const ForSaleRentSold = () => {
           })}
           expandable={{
             expandedRowKeys: state.forSaleRentSold.filterBy,
-            expandedRowRender: (record) => (
-              <p style={{ margin: 0 }}>OTHER RADIO BUTTONS GO HERE</p>
-            ),
+            expandedRowRender: (record) => <ForSaleDateRange />,
             onExpand: (expanded, record) =>
               console.log('onExpand: ', record, expanded),
           }}
