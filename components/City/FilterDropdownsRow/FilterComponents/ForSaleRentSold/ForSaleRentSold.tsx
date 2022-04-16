@@ -25,16 +25,16 @@ const ForSaleRentSold = () => {
   const ForSaleDateRange = () => {
     return (
       <div>
-      
-        <Table pagination={false} showHeader={false}
-        columns={soldDatePeriodColumn}
-        dataSource={soldDatePeriodRows}
-        rowSelection={{
-          type: 'radio',
-          // selectedRowKeys: state.forSaleRentSold.filterBy,
-        }}
-         />
-        
+        <Table
+          pagination={false}
+          showHeader={false}
+          columns={soldDatePeriodColumn}
+          dataSource={soldDatePeriodRows}
+          rowSelection={{
+            type: 'radio',
+            // selectedRowKeys: state.forSaleRentSold.filterBy,
+          }}
+        />
       </div>
     )
   }

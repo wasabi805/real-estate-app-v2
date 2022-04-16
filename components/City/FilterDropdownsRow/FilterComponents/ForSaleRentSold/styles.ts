@@ -1,23 +1,30 @@
 import styled from '@emotion/styled'
 
 export const ForSaleRentSoldContainer = styled.div`
-  width: 25rem;
+  //   width: 24rem;
 `
 
 export const SoldRadioWrapper = styled.div`
   [class^='ant-table-tbody'] {
-    & tr {
-      display: flex;
+    .ant-table-row {
       width: 25rem;
-
-      td: nth-of-type(1) {
+      display: flex;
+      .ant-table-row-expand-icon-cell {
         order: 3;
-        // margin-left: auto;
+        margin-left: auto;
       }
     }
   }
 
-  [class^='ant-table-cell ant-table-row-expand-icon-cell'] {
-    margin-left: auto;
+  [class^='ant-table-tbody'] .ant-table-row .ant-table-row-expand-icon-cell {
+    background: transparent;
+  }
+
+  [class^='ant-table-tbody'] .ant-table-row .ant-table-selection-column {
+    background: transparent;
+  }
+
+  [class^='ant-table-tbody'] .ant-table-row .ant-table-cell {
+    background: transparent;
   }
 `
