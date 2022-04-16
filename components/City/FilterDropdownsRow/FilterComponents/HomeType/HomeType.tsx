@@ -4,36 +4,38 @@ import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 
-const tileDimensions = {
+const tileProps = {
+  names: ['House', 'Multi Family', 'Condo'],
   width: '20',
   height: '20',
 }
 
 const HomeType = () => {
-  const { width, height } = tileDimensions
+  const { names, width, height } = tileProps
+
   return (
     <div>
       <div style={{ display: 'flex' }}>
         <ButtonComp
+          name={names[0]}
           instance={{
             name: 'tile-top-icon',
             icon: <House width={width} height={height} />,
           }}
-          name={'House'}
         />
         <ButtonComp
+          name={names[1]}
           instance={{
             name: 'tile-top-icon',
             icon: <MultiFamilyHome width={width} height={height} />,
           }}
-          name={'Multi Family'}
         />
         <ButtonComp
+          name={names[2]}
           instance={{
             name: 'tile-top-icon',
             icon: <Condo width={width} height={height} />,
           }}
-          name={'Condo'}
         />
       </div>
 
