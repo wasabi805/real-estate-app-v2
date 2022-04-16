@@ -29,7 +29,7 @@ const FilterDropdownsRow = () => {
       <FilterDropdownsContainer>
         {/* BUTTON ONE */}
         <DropdownButton
-          className={'ant-btn'}
+          className={'ant-btn for-sale-filter'}
           btnKey={'1'}
           buttonName={'For Sale'}
           activeKey={activePannel}
