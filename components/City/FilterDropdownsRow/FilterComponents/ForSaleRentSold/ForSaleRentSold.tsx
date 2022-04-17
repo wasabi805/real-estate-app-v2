@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { Table } from 'antd'
 import 'antd/dist/antd.css'
@@ -9,8 +10,11 @@ import {
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
 import ButtonComp from '@components/_common/ButtonComp'
+import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 
 const { setFilterByPropertyType } = ListingsFilterActions
+const { setActiveFilterPanel} = FilterDropdownsActions
+const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const ForSaleRentSold = () => {
   const {
@@ -22,6 +26,9 @@ const ForSaleRentSold = () => {
   } = ForSaleRentSoldTableFormat
 
   const { state, dispatch } = useContext(AppContext)
+
+  const handleClickDone = () =>
+    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   const ForSaleDateRange = () => {
     return (
@@ -92,7 +99,7 @@ const ForSaleRentSold = () => {
           },
           {
             text: 'Done',
-            onClick: () => console.log(' Done'),
+            onClick: handleClickDone,
             type: 'primary',
           },
         ]}

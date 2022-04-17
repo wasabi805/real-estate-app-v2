@@ -7,7 +7,7 @@ const SectionContainer = styled.div(({ children }) => {
     justifyContent: 'center',
     alignItems: 'center',
     height: '35rem',
-    border: '1px solid magenta',
+    // border: '1px solid magenta',
   }
 })
 

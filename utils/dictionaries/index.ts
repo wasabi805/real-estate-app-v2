@@ -35,3 +35,17 @@ export const LISTINGS_FILTERS_BUTTONS_BATHS: IfilterButtons[] = [
   { key: 'three', value: '3+', isActive: false },
   { key: 'four', value: '4+', isActive: false },
 ]
+
+export const FILTER_DROPDOWNS_PANEL_KEYS = {
+  CLOSE_ALL_PANELS: '0',
+  FOR_SALE_PANEL: '1',
+  PRICE_PANEL: '2',
+  HOME_TYPE_PANEL: '3',
+  BEDS_BATH_PANEL: '4',
+}
+
+export const PROPERTY_TYPE_TILE_PROPS = {
+  names: ['House', 'Multi Family', 'Condo'],
+  width: '20',
+  height: '20',
+}

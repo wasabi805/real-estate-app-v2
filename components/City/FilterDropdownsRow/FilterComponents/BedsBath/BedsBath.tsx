@@ -1,12 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+import { IinitialState } from 'reducers/interface'
+import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
+
 const { handleClickBedsFilterButton, handleClickBathsFilterButton } =
   ListingsFilterActions
-import { IinitialState } from 'reducers/interface'
-// export const Beds
+const { setActiveFilterPanel } = FilterDropdownsActions
+const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
@@ -18,6 +22,9 @@ const BedsBath = () => {
   const bathsButtonClicked = (key: string) => {
     console.log(key)
   }
+
+  const handleClickDone = () =>
+    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <BedBathsContainer>
@@ -59,7 +66,7 @@ const BedsBath = () => {
           },
           {
             text: 'Done',
-            onClick: () => console.log(' Done'),
+            onClick: handleClickDone,
             type: 'primary',
           },
         ]}

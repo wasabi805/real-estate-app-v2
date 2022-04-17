@@ -18,6 +18,11 @@ export interface IAction {
     searchResults?: {
       data: []
     }
+
+    filterDropdownsRow?: {
+      activeFilterPanel?: string
+    }
+
     forSaleRentSold?: {
       filterBy: string[]
     }

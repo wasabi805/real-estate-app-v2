@@ -4,6 +4,7 @@ import * as ListingTabActions from 'actions/listingTabActions.ts'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import {
   LISTINGS_FILTERS_BUTTONS_BEDS,
@@ -24,6 +25,8 @@ const {
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
+
+const { SET_ACTIVE_FILTER_PANEL } = FilterDropdownsActions
 
 const {
   SET_FILTER_DRAWER_OPEN,
@@ -59,6 +62,10 @@ export const initialState: IinitialState = {
     },
     // initialData: [],
     initialData: mockListings,
+  },
+
+  filterDropdownsRow: {
+    activeFilterPanel: '0',
   },
 
   forSaleRentSold: {
@@ -195,6 +202,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
             move: false,
             value: '',
           },
+        },
+      }
+
+    case SET_ACTIVE_FILTER_PANEL:
+      return {
+        ...state,
+        filterDropdownsRow: {
+          ...state.filterDropdownsRow,
+          activeFilterPanel:
+            action.payload?.filterDropdownsRow?.activeFilterPanel,
         },
       }
 

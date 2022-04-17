@@ -1,17 +1,21 @@
-import React, { useContext, useEffect } from 'react'
-import Image from 'next/image'
+import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import RangedSlider from '@components/_common/RangedSlider'
 import InputComp from '@components/_common/InputComp'
 import ButtonComp from '@components/_common/ButtonComp'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
-import mockHistogram from 'public/mockHistogram.png'
+
 import {
   PriceFilterContainer,
   RangedSliderRow,
   RangedSliderInputsRow,
   PriceSliderButtonContainer,
 } from '@components/City/FilterDropdownsRow/FilterComponents/Price/styles'
+import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
+
+const { setActiveFilterPanel} = FilterDropdownsActions
+const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const { setMinPriceFilterField, setMaxPriceFilterField } = ListingsFilterActions
 
@@ -33,6 +37,9 @@ const PriceFilter = () => {
     dispatch(setMinPriceFilterField(minResult, state))
     dispatch(setMaxPriceFilterField(maxResult, state))
   }
+
+  const handleClickDone = () =>
+  dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <PriceFilterContainer
@@ -79,7 +86,7 @@ const PriceFilter = () => {
             },
             {
               text: 'Done',
-              onClick: () => console.log(' Done'),
+              onClick: handleClickDone,
               type: 'primary',
             },
           ]}

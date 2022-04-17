@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from 'context/appContext'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 
-const tileProps = {
-  names: ['House', 'Multi Family', 'Condo'],
-  width: '20',
-  height: '20',
-}
+import {
+  FILTER_DROPDOWNS_PANEL_KEYS,
+  PROPERTY_TYPE_TILE_PROPS,
+} from 'utils/dictionaries'
 
 const HomeType = () => {
-  const { names, width, height } = tileProps
+  const { dispatch } = useContext(AppContext)
+  const { names, width, height } = PROPERTY_TYPE_TILE_PROPS
+
+  const { setActiveFilterPanel } = FilterDropdownsActions
+  const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
+
+  const handleClickDone = () =>
+    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <div>
@@ -49,7 +57,7 @@ const HomeType = () => {
           },
           {
             text: 'Done',
-            onClick: () => console.log(' Done'),
+            onClick: handleClickDone,
             type: 'primary',
           },
         ]}

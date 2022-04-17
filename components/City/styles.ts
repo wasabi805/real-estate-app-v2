@@ -5,7 +5,6 @@ export const ListingsContainer = styled.div`
   // background: #e2e2e8;
   display: flex;
   flex-direction: column;
-  border: 2px solid magenta;
 
   .ant-col {
     // Styling below overides the default left alignment of tabs from Ant Design componet library that uses inline style tags within the library.

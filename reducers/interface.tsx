@@ -19,6 +19,10 @@ export interface IinitialState {
     initialData: []
   }
 
+  filterDropdownsRow: {
+    activeFilterPanel: string
+  }
+
   forSaleRentSold: {
     filterBy?: []
     buttons?: [

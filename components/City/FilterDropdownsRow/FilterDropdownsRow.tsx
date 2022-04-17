@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import AppContext from 'context/appContext'
+import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import {
   FilterDropdownsContainer,
   FilterDropdownsRowStyles,
@@ -14,14 +16,27 @@ import {
   Price,
 } from '@components/City/FilterDropdownsRow/FilterComponents'
 
+const { setActiveFilterPanel } = FilterDropdownsActions
+import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
+
+const {
+  CLOSE_ALL_PANELS,
+  FOR_SALE_PANEL,
+  PRICE_PANEL,
+  HOME_TYPE_PANEL,
+  BEDS_BATH_PANEL,
+} = FILTER_DROPDOWNS_PANEL_KEYS
+
+//  ROW CONTAINING ALL FILTER BUTTONS
 const FilterDropdownsRow = () => {
-  //  ROW CONTAINING ALL FILTER BUTTONS
-  const [activePannel, setActivePannel] = useState('0')
-  const handleSetActivePannel = (key) => {
-    if (activePannel === key) {
-      return setActivePannel('0')
+  const { state, dispatch } = useContext(AppContext)
+
+  const handleSetActivePanel = (key: string) => {
+    if (state.filterDropdownsRow.activeFilterPanel === key) {
+      return dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
     }
-    return setActivePannel(key)
+
+    dispatch(setActiveFilterPanel(key))
   }
 
   return (
@@ -30,10 +45,10 @@ const FilterDropdownsRow = () => {
         {/* BUTTON ONE */}
         <DropdownButton
           className={'ant-btn for-sale-filter'}
-          btnKey={'1'}
+          btnKey={FOR_SALE_PANEL}
           buttonName={'For Sale'}
-          activeKey={activePannel}
-          onChange={() => handleSetActivePannel('1')}
+          activeKey={state.filterDropdownsRow.activeFilterPanel}
+          onChange={() => handleSetActivePanel(FOR_SALE_PANEL)}
           component={<ForSaleRentSold />}
           buttonStyles={{
             width: '6rem',
@@ -43,10 +58,10 @@ const FilterDropdownsRow = () => {
         {/* BUTTON TWO */}
         <DropdownButton
           className={'ant-btn'}
-          btnKey={'2'}
+          btnKey={PRICE_PANEL}
           buttonName={'Price'}
-          activeKey={activePannel}
-          onChange={() => handleSetActivePannel('2')}
+          activeKey={state.filterDropdownsRow.activeFilterPanel}
+          onChange={() => handleSetActivePanel(PRICE_PANEL)}
           component={<Price />}
           buttonStyles={{
             width: '6rem',
@@ -56,10 +71,10 @@ const FilterDropdownsRow = () => {
         {/* BUTTON THREE */}
         <DropdownButton
           className={'ant-btn home-type-content'}
-          btnKey={'3'}
+          btnKey={HOME_TYPE_PANEL}
           buttonName={'Home-Type'}
-          activeKey={activePannel}
-          onChange={() => handleSetActivePannel('3')}
+          activeKey={state.filterDropdownsRow.activeFilterPanel}
+          onChange={() => handleSetActivePanel(HOME_TYPE_PANEL)}
           component={<HomeType />}
           buttonStyles={{
             width: '7rem',
@@ -69,10 +84,10 @@ const FilterDropdownsRow = () => {
         {/* BUTTON FOUR */}
         <DropdownButton
           className={'ant-btn beds-bath-content'}
-          btnKey={'4'}
+          btnKey={BEDS_BATH_PANEL}
           buttonName={'Beds / Baths'}
-          activeKey={activePannel}
-          onChange={() => handleSetActivePannel('4')}
+          activeKey={state.filterDropdownsRow.activeFilterPanel}
+          onChange={() => handleSetActivePanel(BEDS_BATH_PANEL)}
           component={<BedsBaths />}
           buttonStyles={{
             width: '7.5rem',
