@@ -70,14 +70,7 @@ const ButtonComp = styled(
 
       default:
         return (
-          <Button
-            key={id}
-            id={id}
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-            type={type}
-          >
+          <Button key={id} id={id} onClick={onClick} type={type}>
             {name}
           </Button>
         )

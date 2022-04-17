@@ -13,7 +13,7 @@ import ButtonComp from '@components/_common/ButtonComp'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 
 const { setFilterByPropertyType } = ListingsFilterActions
-const { setActiveFilterPanel} = FilterDropdownsActions
+const { setActiveFilterPanel } = FilterDropdownsActions
 const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const ForSaleRentSold = () => {
@@ -27,8 +27,7 @@ const ForSaleRentSold = () => {
 
   const { state, dispatch } = useContext(AppContext)
 
-  const handleClickDone = () =>
-    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   const ForSaleDateRange = () => {
     return (

@@ -6,6 +6,7 @@ import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { IinitialState } from 'reducers/interface'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
+import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 
 const { handleClickBedsFilterButton, handleClickBathsFilterButton } =
   ListingsFilterActions
@@ -16,22 +17,22 @@ const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  const bedsButtonClicked = (key: string, state: IinitialState) =>
+  const bedsButtonClicked = (key: string, state: IinitialState) => {
     dispatch(handleClickBedsFilterButton(key, state))
+  }
 
   const bathsButtonClicked = (key: string) => {
     console.log(key)
   }
 
-  const handleClickDone = () =>
-    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <BedBathsContainer>
-      <div>
-        <h3> Beds </h3> <span>Tap 2 numbers to select a range</span>
+      <div style={{ display: 'flex' }}>
+        <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
-      <div>
+      <BedsBathButtonContainer>
         {state.listingsFilters?.bedsButtons?.map((btn) => (
           <ButtonComp
             key={btn.key}
@@ -40,10 +41,11 @@ const BedsBath = () => {
             type={btn.isActive ? 'primary' : 'default'}
           />
         ))}
-      </div>
+      </BedsBathButtonContainer>
 
       <div>
-        <h3> Baths </h3>
+        <h4 style={{ display: 'flex' }}> Baths </h4>
+
         <div>
           {state.listingsFilters?.bathsButtons?.map((btn) => (
             <ButtonComp

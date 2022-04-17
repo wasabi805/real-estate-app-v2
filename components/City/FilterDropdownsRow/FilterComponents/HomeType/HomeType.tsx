@@ -18,8 +18,7 @@ const HomeType = () => {
   const { setActiveFilterPanel } = FilterDropdownsActions
   const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
-  const handleClickDone = () =>
-    dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <div>

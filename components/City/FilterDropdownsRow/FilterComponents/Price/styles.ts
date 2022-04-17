@@ -32,7 +32,6 @@ export const PriceFilterContainer = styled.div`
       }
     }
   }
-  border: 2px solid orange;
 `
 
 export const RangedSliderRow = styled.div`

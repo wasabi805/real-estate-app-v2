@@ -14,7 +14,7 @@ import {
 } from '@components/City/FilterDropdownsRow/FilterComponents/Price/styles'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 
-const { setActiveFilterPanel} = FilterDropdownsActions
+const { setActiveFilterPanel } = FilterDropdownsActions
 const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const { setMinPriceFilterField, setMaxPriceFilterField } = ListingsFilterActions
@@ -38,8 +38,7 @@ const PriceFilter = () => {
     dispatch(setMaxPriceFilterField(maxResult, state))
   }
 
-  const handleClickDone = () =>
-  dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <PriceFilterContainer
