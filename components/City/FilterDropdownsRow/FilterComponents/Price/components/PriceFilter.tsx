@@ -69,8 +69,21 @@ const PriceFilter = () => {
       </RangedSliderInputsRow>
 
       <PriceSliderButtonContainer>
-        <ButtonComp name={'Clear'} />
-        <ButtonComp name={'Done'} type={'primary'} />
+        <ButtonComp
+          instance={{ name: 'button-row' }}
+          align="right"
+          buttonGroup={[
+            {
+              text: 'Clear',
+              onClick: () => console.log(' Clear clicked'),
+            },
+            {
+              text: 'Done',
+              onClick: () => console.log(' Done'),
+              type: 'primary',
+            },
+          ]}
+        />
       </PriceSliderButtonContainer>
     </PriceFilterContainer>
   )

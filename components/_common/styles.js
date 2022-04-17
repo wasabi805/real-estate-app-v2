@@ -101,3 +101,27 @@ export const TileIconButton = styled.span`
     font weight: 200;
   }
 `
+
+export const ButtonRowContainer = styled.div`
+  display: flex;
+  padding: 1rem 0 1rem 0;
+  & button {
+    margin: ${(props) => {
+      switch (props.align) {
+        case 'right':
+          return '0px .25rem 0px 0px'
+      }
+      return '0'
+    }};
+  }
+  justify-content: ${(props) => {
+    switch (props.align) {
+      case 'center':
+        return 'center'
+      case 'right':
+        return 'flex-end'
+      default:
+        return 'flex-start'
+    }
+  }};
+`

@@ -39,10 +39,21 @@ const HomeType = () => {
         />
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <ButtonComp name={'Clear'} />
-        <ButtonComp name={'Done'} type="primary" />
-      </div>
+      <ButtonComp
+        instance={{ name: 'button-row' }}
+        align="right"
+        buttonGroup={[
+          {
+            text: 'Clear',
+            onClick: () => console.log(' Clear clicked'),
+          },
+          {
+            text: 'Done',
+            onClick: () => console.log(' Done'),
+            type: 'primary',
+          },
+        ]}
+      />
     </div>
   )
 }

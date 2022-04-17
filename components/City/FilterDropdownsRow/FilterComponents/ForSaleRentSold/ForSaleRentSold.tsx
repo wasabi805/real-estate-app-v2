@@ -8,6 +8,7 @@ import {
   SoldRadioWrapper,
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
+import ButtonComp from '@components/_common/ButtonComp'
 
 const { setFilterByPropertyType } = ListingsFilterActions
 
@@ -80,6 +81,22 @@ const ForSaleRentSold = () => {
           }}
         />
       </SoldRadioWrapper>
+
+      <ButtonComp
+        instance={{ name: 'button-row' }}
+        align="right"
+        buttonGroup={[
+          {
+            text: 'Clear',
+            onClick: () => console.log(' Clear clicked'),
+          },
+          {
+            text: 'Done',
+            onClick: () => console.log(' Done'),
+            type: 'primary',
+          },
+        ]}
+      />
     </ForSaleRentSoldContainer>
   )
 }
