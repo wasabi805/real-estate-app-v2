@@ -57,22 +57,6 @@ const BedsBath = () => {
           ))}
         </div>
       </div>
-
-      <ButtonComp
-        instance={{ name: 'button-row' }}
-        align="right"
-        buttonGroup={[
-          {
-            text: 'Clear',
-            onClick: () => console.log(' Clear clicked'),
-          },
-          {
-            text: 'Done',
-            onClick: handleClickDone,
-            type: 'primary',
-          },
-        ]}
-      />
     </BedBathsContainer>
   )
 }

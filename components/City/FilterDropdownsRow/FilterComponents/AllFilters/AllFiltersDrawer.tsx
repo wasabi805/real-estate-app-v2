@@ -31,7 +31,7 @@ const AllFiltersDrawer = () => {
           <div className="all-filters-drawer-row for-sale-rent-sold">
             <ButtonComp
               instance={{ name: 'button-row' }}
-              align="right"
+              align="center"
               buttonGroup={[
                 {
                   text: 'For Sale',
@@ -50,7 +50,7 @@ const AllFiltersDrawer = () => {
           </div>
 
           {/* ----- PRICE ----- */}
-          <div className="all-filters-drawer-row">
+          <div className="all-filters-drawer-row price">
             <h3>Price</h3>
             <PriceFilter />
           </div>
@@ -62,9 +62,8 @@ const AllFiltersDrawer = () => {
 
           {/* ----- HomeType ----- */}
           <div className="all-filters-drawer-row">
-            <HomeType/>
+            <HomeType />
           </div>
-
         </DrawerCotent>
       </Drawer>
     </AllFiltersDrawerContainer>

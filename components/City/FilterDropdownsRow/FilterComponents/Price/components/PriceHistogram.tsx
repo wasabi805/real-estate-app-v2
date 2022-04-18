@@ -22,7 +22,7 @@ const PriceHistogram = () => {
   console.log('----- PriceHistogram ------', 'Raw data', rawData)
 
   return (
-    <div style={{ position: 'relative', height: '25vh', width: '30vw' }}>
+    <div className="price-filter-histogram">
       <ResponsiveHistogram
         ariaLabel="My histogram of ..."
         orientation="vertical"

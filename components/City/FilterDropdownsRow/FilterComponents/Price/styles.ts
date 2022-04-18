@@ -1,14 +1,24 @@
 import styled from '@emotion/styled'
 
-export const PriceContainer = styled.div``
-
+export const PriceContainer = styled.div`
+  .price-filter-histogram {
+    div: first-child {
+      div[style] {
+        //prevents infinite growth of height
+        height: 12rem !important;
+      }
+    }
+  }
+`
 interface IsilderProps {
   move: boolean
   value: string
 }
 
 export const PriceFilterContainer = styled.div`
-  width: 30vw;
+  .price-filter-histogram {
+    background: red;
+  }
 
   // RangedSliderRow component class below
   .e1a75ba32 {
@@ -16,19 +26,14 @@ export const PriceFilterContainer = styled.div`
       //min slider:
       div:nth-of-type(4) {
         background: ${(props) => (props?.moveMin?.move ? 'red' : 'green')};
-        left: ${(props: { moveMin: IsilderProps }) => {
-          console.log('what is props in the styled component', props)
-          return props?.moveMin?.move ? props?.moveMin?.value : ''
-        }};
+        left: ${(props) => (props?.moveMin?.move ? props?.moveMin?.value : '')};
       }
 
       //max slider:
       div:nth-of-type(5) {
         background: ${(props) => (props?.moveMax?.move ? 'blue' : 'cyan')};
-        left: ${(props: { moveMax: IsilderProps }) => {
-          console.log('what is props in the styled component', props)
-          return props?.moveMax?.move ? props?.moveMax?.value : ''
-        }};
+        left: ${(props: { moveMax: IsilderProps }) =>
+          props?.moveMax?.move ? props?.moveMax?.value : ''};
       }
     }
   }

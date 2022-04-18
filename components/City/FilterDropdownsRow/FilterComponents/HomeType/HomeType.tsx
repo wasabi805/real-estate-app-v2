@@ -5,6 +5,7 @@ import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
+import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
 
 import {
   FILTER_DROPDOWNS_PANEL_KEYS,
@@ -21,47 +22,29 @@ const HomeType = () => {
   const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <ButtonComp
-          name={names[0]}
-          instance={{
-            name: 'tile-top-icon',
-            icon: <House width={width} height={height} />,
-          }}
-        />
-        <ButtonComp
-          name={names[1]}
-          instance={{
-            name: 'tile-top-icon',
-            icon: <MultiFamilyHome width={width} height={height} />,
-          }}
-        />
-        <ButtonComp
-          name={names[2]}
-          instance={{
-            name: 'tile-top-icon',
-            icon: <Condo width={width} height={height} />,
-          }}
-        />
-      </div>
-
+    <HomeTypeButtonsContainer>
       <ButtonComp
-        instance={{ name: 'button-row' }}
-        align="right"
-        buttonGroup={[
-          {
-            text: 'Clear',
-            onClick: () => console.log(' Clear clicked'),
-          },
-          {
-            text: 'Done',
-            onClick: handleClickDone,
-            type: 'primary',
-          },
-        ]}
+        name={names[0]}
+        instance={{
+          name: 'tile-top-icon',
+          icon: <House width={width} height={height} />,
+        }}
       />
-    </div>
+      <ButtonComp
+        name={names[1]}
+        instance={{
+          name: 'tile-top-icon',
+          icon: <MultiFamilyHome width={width} height={height} />,
+        }}
+      />
+      <ButtonComp
+        name={names[2]}
+        instance={{
+          name: 'tile-top-icon',
+          icon: <Condo width={width} height={height} />,
+        }}
+      />
+    </HomeTypeButtonsContainer>
   )
 }
 

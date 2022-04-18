@@ -61,7 +61,7 @@ const PriceFilter = () => {
           name={'minField'}
           value={state.priceFilter?.minField}
           onChange={handleMinPriceField}
-          size={'small'}
+          size={'large'}
         />{' '}
         -{/* MAX PRICE FIELD */}
         <InputComp
@@ -70,27 +70,9 @@ const PriceFilter = () => {
           name={'maxField'}
           value={state.priceFilter?.maxField}
           onChange={handleMaxPriceField}
-          size={'small'}
+          size={'large'}
         />
       </RangedSliderInputsRow>
-
-      <PriceSliderButtonContainer>
-        <ButtonComp
-          instance={{ name: 'button-row' }}
-          align="right"
-          buttonGroup={[
-            {
-              text: 'Clear',
-              onClick: () => console.log(' Clear clicked'),
-            },
-            {
-              text: 'Done',
-              onClick: handleClickDone,
-              type: 'primary',
-            },
-          ]}
-        />
-      </PriceSliderButtonContainer>
     </PriceFilterContainer>
   )
 }

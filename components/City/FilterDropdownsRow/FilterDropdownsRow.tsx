@@ -15,9 +15,10 @@ import {
   BedsBaths,
   Price,
 } from '@components/City/FilterDropdownsRow/FilterComponents'
+import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
+import ButtonComp from '@components/_common/ButtonComp'
 
 const { setActiveFilterPanel } = FilterDropdownsActions
-import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 
 const {
   CLOSE_ALL_PANELS,
@@ -39,6 +40,26 @@ const FilterDropdownsRow = () => {
     dispatch(setActiveFilterPanel(key))
   }
 
+  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+
+  const ClearDoneButtons = ({ doneFn }) => (
+    <ButtonComp
+      instance={{ name: 'button-row' }}
+      align="right"
+      buttonGroup={[
+        {
+          text: 'Clear',
+          onClick: () => console.log(' Clear clicked'),
+        },
+        {
+          text: 'Done',
+          onClick: doneFn,
+          type: 'primary',
+        },
+      ]}
+    />
+  )
+
   return (
     <FilterDropdownsRowStyles>
       <FilterDropdownsContainer>
@@ -49,7 +70,12 @@ const FilterDropdownsRow = () => {
           buttonName={'For Sale'}
           activeKey={state.filterDropdownsRow.activeFilterPanel}
           onChange={() => handleSetActivePanel(FOR_SALE_PANEL)}
-          component={<ForSaleRentSold />}
+          component={
+            <>
+              <ForSaleRentSold />
+              <ClearDoneButtons doneFn={handleClickDone} />
+            </>
+          }
           buttonStyles={{
             width: '6rem',
           }}
@@ -62,7 +88,12 @@ const FilterDropdownsRow = () => {
           buttonName={'Price'}
           activeKey={state.filterDropdownsRow.activeFilterPanel}
           onChange={() => handleSetActivePanel(PRICE_PANEL)}
-          component={<Price />}
+          component={
+            <>
+              <Price />
+              <ClearDoneButtons doneFn={handleClickDone} />
+            </>
+          }
           buttonStyles={{
             width: '6rem',
           }}
@@ -75,7 +106,12 @@ const FilterDropdownsRow = () => {
           buttonName={'Home-Type'}
           activeKey={state.filterDropdownsRow.activeFilterPanel}
           onChange={() => handleSetActivePanel(HOME_TYPE_PANEL)}
-          component={<HomeType />}
+          component={
+            <>
+              <HomeType />
+              <ClearDoneButtons doneFn={handleClickDone} />
+            </>
+          }
           buttonStyles={{
             width: '7rem',
           }}
@@ -88,7 +124,12 @@ const FilterDropdownsRow = () => {
           buttonName={'Beds / Baths'}
           activeKey={state.filterDropdownsRow.activeFilterPanel}
           onChange={() => handleSetActivePanel(BEDS_BATH_PANEL)}
-          component={<BedsBaths />}
+          component={
+            <>
+              <BedsBaths />
+              <ClearDoneButtons doneFn={handleClickDone} />
+            </>
+          }
           buttonStyles={{
             width: '7.5rem',
           }}
