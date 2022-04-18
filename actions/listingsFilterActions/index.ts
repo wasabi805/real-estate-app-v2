@@ -236,6 +236,22 @@ export const handleClickBedsFilterButton = (
   }
 }
 
+export const SET_FILTER_CURRENT_BATHS_AMOUNT = 'SET_FILTER_CURRENT_BATHS_AMOUNT'
+export const setFilterCurrentBathsAmount = (
+  amount: string
+): Pick<IAction, 'type' | 'payload'> => {
+  return {
+    type: SET_FILTER_CURRENT_BATHS_AMOUNT,
+    payload: {
+      listingsFilters: {
+        bedsBaths: {
+          currentBaths: amount,
+        },
+      },
+    },
+  }
+}
+
 export const HANDLE_CLICK_BATHS_FILTER_BUTTON =
   'HANDLE_CLICK_BATHS_FILTER_BUTTON'
 export const handleClickBathsFilterButton = (

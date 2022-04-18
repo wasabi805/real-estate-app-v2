@@ -7,16 +7,13 @@ import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
 
-import {
-  FILTER_DROPDOWNS_PANEL_KEYS,
-  PROPERTY_TYPE_TILE_PROPS,
-} from 'utils/dictionaries'
+import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 
 const { setSelectedHomeType } = FilterDropdownsActions
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
-  const { names, width, height } = PROPERTY_TYPE_TILE_PROPS
+  const { width, height } = PROPERTY_TYPE_TILE_PROPS
 
   const handleHomeTypeButtonClick = (id) => {
     console.log('what is id', id)

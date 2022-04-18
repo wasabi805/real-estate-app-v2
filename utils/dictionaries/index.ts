@@ -45,7 +45,6 @@ export const FILTER_DROPDOWNS_PANEL_KEYS = {
 }
 
 export const PROPERTY_TYPE_TILE_PROPS = {
-  names: ['House', 'Multi Family', 'Condo'],
   width: '20',
   height: '20',
 }

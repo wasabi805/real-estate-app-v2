@@ -69,10 +69,13 @@ export interface IAction {
 
     listingsFilters?: {
       isDrawerOpen?: boolean
-      clickedFilterName: ''
-      currentRange: number[] | []
+      clickedFilterName?: ''
+      currentRange?: number[] | []
       bedsButtons?: IfilterButtons[]
       bathsButtons?: IfilterButtons[]
+      bedsBaths?: {
+        currentBaths?: string
+      }
     }
 
     listingTable?: {

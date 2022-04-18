@@ -64,6 +64,9 @@ export interface IinitialState {
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
     bathsButtons?: IfilterButtons[]
+    bedsBaths: {
+      currentBaths: string
+    }
   }
 
   listingTable: {

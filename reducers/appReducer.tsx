@@ -37,6 +37,7 @@ const {
   SET_MAX_PRICE_FILTER_FIELD,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
   SET_FILTER_BY_PROPERTY_TYPE,
+  SET_FILTER_CURRENT_BATHS_AMOUNT,
 } = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -103,12 +104,17 @@ export const initialState: IinitialState = {
     selected: '',
   },
 
+  //TODO : move all filters into listinsgFilters
   listingsFilters: {
     isDrawerOpen: false,
     clickedFilterName: null,
     currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
     bathsButtons: LISTINGS_FILTERS_BUTTONS_BATHS || [],
+
+    bedsBaths: {
+      currentBaths: '',
+    },
   },
 
   sortAndFilter: {
@@ -264,6 +270,20 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case HANDLE_CLICK_BATHS_FILTER_BUTTON:
       return {
         ...state,
+      }
+
+    case SET_FILTER_CURRENT_BATHS_AMOUNT:
+      console.log('what is the action', action)
+      return {
+        ...state,
+        listingsFilters: {
+          ...state.listingsFilters,
+          bedsBaths: {
+            ...state.listingsFilters?.bedsBaths,
+            currentBaths:
+              action.payload?.listingsFilters?.bedsBaths?.currentBaths,
+          },
+        },
       }
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:

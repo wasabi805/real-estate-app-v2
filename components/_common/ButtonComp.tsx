@@ -74,7 +74,7 @@ const ButtonComp = styled(
                 id={btn.id}
                 key={btn.id}
                 onClick={btn.onClick}
-                type={btn?.type}
+                type={activeButton === btn.id ? 'primary' : ''}
                 size={btn.size}
               >
                 {btn.text}
