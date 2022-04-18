@@ -46,7 +46,7 @@ const BedsBath = () => {
       <div>
         <h4 style={{ display: 'flex' }}> Baths </h4>
 
-        <div>
+        <BedsBathButtonContainer>
           {state.listingsFilters?.bathsButtons?.map((btn) => (
             <ButtonComp
               key={btn.key}
@@ -55,7 +55,7 @@ const BedsBath = () => {
               type={btn.isActive ? 'primary' : 'default'}
             />
           ))}
-        </div>
+        </BedsBathButtonContainer>
       </div>
     </BedBathsContainer>
   )
