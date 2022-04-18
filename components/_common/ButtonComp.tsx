@@ -37,6 +37,7 @@ const ButtonComp = styled(
     instance,
     buttonGroup,
     align,
+    buttonStyle,
   }: IButtonCompProps) => {
     switch (instance?.name) {
       case 'tile-top-icon':
@@ -59,9 +60,15 @@ const ButtonComp = styled(
 
       case 'button-row':
         return (
-          <ButtonRowContainer align={align}>
+          <ButtonRowContainer align={align} buttonStyle={buttonStyle}>
             {buttonGroup.map((btn) => (
-              <Button key={'1'} onClick={btn.onClick} type={btn?.type}>
+              <Button
+                id={btn.id}
+                key={btn.id}
+                onClick={btn.onClick}
+                type={btn?.type}
+                size={btn.size}
+              >
                 {btn.text}
               </Button>
             ))}

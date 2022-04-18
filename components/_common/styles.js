@@ -105,7 +105,21 @@ export const TileIconButton = styled.span`
 export const ButtonRowContainer = styled.div`
   display: flex;
   padding: 1rem 0 1rem 0;
+
   & button {
+    width: ${(props) => {
+      if (props?.buttonStyle?.width) {
+        return props?.buttonStyle?.width
+      }
+      return ''
+    }};
+
+    height: ${(props) => {
+      if (props?.buttonStyle?.height) {
+        return props?.buttonStyle?.height
+      }
+      return ''
+    }};
     margin: ${(props) => {
       switch (props.align) {
         case 'right':

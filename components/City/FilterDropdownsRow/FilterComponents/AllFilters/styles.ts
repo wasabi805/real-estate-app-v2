@@ -13,6 +13,16 @@ export const DrawerCotent = styled.div`
       flex: 0 0 auto;
     }
   }
+  .all-filters-drawer-row.for-sale-rent-sold {
+    .e1m7jdwn0 {
+      button: first-of-type {
+        border-radius: 8px 0 0 8px;
+      }
+      button: last-of-type {
+        border-radius: 0 8px 8px 0;
+      }
+    }
+  }
 
   .all-filters-drawer-row.price {
     .e1a75ba33 {

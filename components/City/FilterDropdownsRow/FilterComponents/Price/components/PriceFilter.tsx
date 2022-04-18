@@ -61,7 +61,7 @@ const PriceFilter = () => {
           name={'minField'}
           value={state.priceFilter?.minField}
           onChange={handleMinPriceField}
-          size={'large'}
+          size={'middle'}
         />{' '}
         -{/* MAX PRICE FIELD */}
         <InputComp
@@ -70,7 +70,7 @@ const PriceFilter = () => {
           name={'maxField'}
           value={state.priceFilter?.maxField}
           onChange={handleMaxPriceField}
-          size={'large'}
+          size={'middle'}
         />
       </RangedSliderInputsRow>
     </PriceFilterContainer>

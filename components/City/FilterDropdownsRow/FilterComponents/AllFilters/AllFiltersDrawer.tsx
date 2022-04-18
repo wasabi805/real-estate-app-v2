@@ -32,18 +32,25 @@ const AllFiltersDrawer = () => {
             <ButtonComp
               instance={{ name: 'button-row' }}
               align="center"
+              buttonStyle={{ width: '12rem' }}
               buttonGroup={[
                 {
+                  id: 'all-filters-btn-for-sale',
                   text: 'For Sale',
                   onClick: () => console.log(' Clear clicked'),
+                  size: 'large',
                 },
                 {
+                  id: 'all-filters-btn-for-rent',
                   text: 'For Rent',
                   onClick: () => console.log(' Clear clicked'),
+                  size: 'large',
                 },
                 {
+                  id: 'all-filters-btn-sold',
                   text: 'Sold',
                   onClick: () => console.log('placeholder'),
+                  size: 'large',
                 },
               ]}
             />
