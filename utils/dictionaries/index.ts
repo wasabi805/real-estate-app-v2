@@ -1,3 +1,5 @@
+import { IButton, IButtonWithIcon } from '../interfaces/buttons'
+
 interface IdictionaryEntry {
   key: string
   value: Number
@@ -33,34 +35,62 @@ export const LISTINGS_FILTERS_BUTTONS_BEDS: IfilterButtonsBeds[] = [
   { key: 'beds-fltr-5', value: 5, isActive: false },
 ]
 
-export const LISTINGS_FILTERS_BUTTONS_BATHS: IfilterButtons[] = [
+export const HOME_TYPE_BUTTONS: IButtonWithIcon[] = [
+  {
+    id: 'home-type-house',
+    text: 'Home',
+    onClick: null,
+    icon: null,
+  },
+  {
+    id: 'home-type-multiFamily',
+    text: 'Multi Family',
+    onClick: null,
+    icon: null,
+  },
+  {
+    id: 'home-type-condo',
+    text: 'condo',
+    onClick: null,
+    icon: null,
+  },
+]
+
+export const LISTINGS_FILTERS_BUTTONS_BATHS: IButton[] = [
   {
     id: 'baths-filter-btn-any',
     text: 'Any',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-one-plus',
     text: '1+',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-one-and-half-plus',
     text: '1.5+',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-two-plus',
     text: '2+',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-two-and-half-plus',
     text: '2.5+',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-three-plus',
     text: '3+',
+    onClick: null,
   },
   {
     id: 'baths-filter-btn-four-plus',
     text: '4+',
+    onClick: null,
   },
 ]
 

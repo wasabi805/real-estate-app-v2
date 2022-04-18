@@ -9,6 +9,7 @@ import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import {
   LISTINGS_FILTERS_BUTTONS_BEDS,
   LISTINGS_FILTERS_BUTTONS_BATHS,
+  HOME_TYPE_BUTTONS,
 } from 'utils/dictionaries'
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
@@ -100,6 +101,7 @@ export const initialState: IinitialState = {
     },
   },
 
+  //TODO : REMOVE THIS
   homeType: {
     selected: '',
   },
@@ -112,6 +114,7 @@ export const initialState: IinitialState = {
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
 
     homeType: {
+      homeTypeButtons: HOME_TYPE_BUTTONS,
       selected: '',
     },
 

@@ -8,6 +8,7 @@ import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
 
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
+import { IButtonWithIcon } from 'utils/interfaces/buttons'
 
 const { setSelectedHomeType } = HomeTypeActions
 
@@ -15,36 +16,46 @@ const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
   const { width, height } = PROPERTY_TYPE_TILE_PROPS
 
-  const handleHomeTypeButtonClick = (id) => {
-    console.log('what is id', id)
+  const handleHomeTypeButtonClick = (id: string) => {
     dispatch(setSelectedHomeType(id))
   }
+
+  const { homeTypeButtons } = state.listingsFilters?.homeType
+
+  const buttonGroup = homeTypeButtons.map((btn: IButtonWithIcon) => {
+    const iconType = btn.id.split('-')
+    const iconName = iconType[iconType.length - 1]
+
+    let icon
+    switch (iconName) {
+      case 'house':
+        icon = <House width={width} height={height} />
+        break
+
+      case 'multiFamily':
+        icon = <MultiFamilyHome width={width} height={height} />
+        break
+
+      case 'condo':
+        icon = <Condo width={width} height={height} />
+        break
+
+      default:
+        icon = null
+    }
+
+    btn.onClick = () => handleHomeTypeButtonClick(btn.id)
+    btn.icon = icon
+
+    return btn
+  })
 
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp
         activeButton={state.homeType?.selected}
         groupType={'tile-top-icon'}
-        buttonGroup={[
-          {
-            id: 'home-type-house',
-            text: 'Home',
-            icon: <House width={width} height={height} />,
-            onClick: () => handleHomeTypeButtonClick('home-type-house'),
-          },
-          {
-            id: 'home-type-multi-family',
-            text: 'Multi Family',
-            icon: <MultiFamilyHome width={width} height={height} />,
-            onClick: () => handleHomeTypeButtonClick('home-type-multi-family'),
-          },
-          {
-            id: 'home-type-condo',
-            text: 'condo',
-            icon: <Condo width={width} height={height} />,
-            onClick: () => handleHomeTypeButtonClick('home-type-condo'),
-          },
-        ]}
+        buttonGroup={buttonGroup}
       />
     </HomeTypeButtonsContainer>
   )

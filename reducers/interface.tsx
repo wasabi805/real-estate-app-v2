@@ -54,6 +54,7 @@ export interface IinitialState {
     }
   }
 
+  //TODO REMOVE THIS
   homeType?: {
     selected?: string
   }
@@ -69,6 +70,10 @@ export interface IinitialState {
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
 
+    homeType?: {
+      homeTypeButtons: []
+      selected?: string
+    }
     bedsBaths?: {
       bathButtons?: IBedsButton[]
       currentBaths?: string
