@@ -26,7 +26,8 @@ const {
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
 
-const { SET_ACTIVE_FILTER_PANEL } = FilterDropdownsActions
+const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
+  FilterDropdownsActions
 
 const {
   SET_FILTER_DRAWER_OPEN,
@@ -234,6 +235,15 @@ const appReducer = (state: IinitialState, action: IAction) => {
         listingsFilters: {
           ...state.listingsFilters,
           isDrawerOpen: action.payload?.listingsFilters?.isDrawerOpen,
+        },
+      }
+
+    case SET_SELECTED_HOME_TYPE:
+      return {
+        ...state,
+        homeType: {
+          ...state.homeType,
+          selected: action.payload?.homeType?.selected,
         },
       }
 

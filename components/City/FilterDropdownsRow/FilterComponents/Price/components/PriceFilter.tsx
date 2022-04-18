@@ -44,7 +44,7 @@ const PriceFilter = () => {
     <PriceFilterContainer
       moveMin={state.priceFilter?.moveMin}
       moveMax={state.priceFilter?.moveMax}
-      onClick={(e) => e.stopPropagation()}
+      // onClick={(e) => e.stopPropagation()}
     >
       <RangedSliderRow>
         <RangedSlider
@@ -53,7 +53,9 @@ const PriceFilter = () => {
         />
       </RangedSliderRow>
 
-      <RangedSliderInputsRow onClick={(e) => e.stopPropagation()}>
+      <RangedSliderInputsRow
+      // onClick={(e) => e.stopPropagation()}
+      >
         {/* MIN PRICE FIELD */}
         <InputComp
           format={'dollars'}

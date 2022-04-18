@@ -44,7 +44,7 @@ const FilterDropdownsRow = () => {
 
   const ClearDoneButtons = ({ doneFn }) => (
     <ButtonComp
-      instance={{ name: 'button-row' }}
+      groupType="button-row"
       align="right"
       buttonGroup={[
         {

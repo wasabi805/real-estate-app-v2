@@ -87,9 +87,8 @@ export const DropdownButtonContainer = styled.div`
 `
 
 export const TileIconButton = styled.span`
-  padding: 1rem;
-
   & button{
+    padding: 1rem;
     display: flex;
     justify-content: center;
     flex-direction: column;

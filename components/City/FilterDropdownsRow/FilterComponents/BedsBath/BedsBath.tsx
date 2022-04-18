@@ -10,8 +10,6 @@ import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/Filt
 
 const { handleClickBedsFilterButton, handleClickBathsFilterButton } =
   ListingsFilterActions
-const { setActiveFilterPanel } = FilterDropdownsActions
-const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
@@ -24,8 +22,6 @@ const BedsBath = () => {
   const bathsButtonClicked = (key: string) => {
     console.log(key)
   }
-
-  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <BedBathsContainer>
@@ -46,7 +42,7 @@ const BedsBath = () => {
       <div>
         <h4 style={{ display: 'flex' }}> Baths </h4>
 
-        <BedsBathButtonContainer>
+        <div>
           {state.listingsFilters?.bathsButtons?.map((btn) => (
             <ButtonComp
               key={btn.key}
@@ -55,7 +51,7 @@ const BedsBath = () => {
               type={btn.isActive ? 'primary' : 'default'}
             />
           ))}
-        </BedsBathButtonContainer>
+        </div>
       </div>
     </BedBathsContainer>
   )

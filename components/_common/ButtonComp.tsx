@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from '@emotion/styled'
 import { Button } from 'antd'
 import { TileIconButton, ButtonRowContainer } from 'components/_common/styles'
@@ -17,6 +18,7 @@ interface IButtonCompProps {
     icon?: any
   }
   align?: string
+  groupType?: string
   buttonGroup: IButtonGroup[]
   type?:
     | 'link'
@@ -35,27 +37,33 @@ const ButtonComp = styled(
     onClick,
     type,
     instance,
+    groupType,
     buttonGroup,
     align,
     buttonStyle,
+    activeButton,
   }: IButtonCompProps) => {
-    switch (instance?.name) {
+    switch (groupType) {
       case 'tile-top-icon':
         return (
-          <TileIconButton>
-            <Button
-              key={id}
-              id={id}
-              onClick={(e) => {
-                e.stopPropagation()
-                onClick()
-              }}
-              type={type}
-            >
-              {instance.icon}
-              {name}
-            </Button>
-          </TileIconButton>
+          <ButtonRowContainer>
+            {buttonGroup &&
+              buttonGroup.map((btn) => {
+                console.log('activeButton in button comp', activeButton)
+                return (
+                  <TileIconButton key={btn.id}>
+                    <Button
+                      id={btn.id}
+                      onClick={btn.onClick}
+                      type={btn.id === activeButton ? 'primary' : ''}
+                    >
+                      {btn.icon}
+                      {btn.text}
+                    </Button>
+                  </TileIconButton>
+                )
+              })}
+          </ButtonRowContainer>
         )
 
       case 'button-row':
