@@ -49,6 +49,10 @@ export interface IinitialState {
     }
   }
 
+  homeType?: {
+    selected?: string
+  }
+
   sortAndFilter: {
     activeSort: string
     sortedProperties: []

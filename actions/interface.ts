@@ -37,6 +37,10 @@ export interface IAction {
       }
     }
 
+    homeType?: {
+      selected?: string
+    }
+
     addressObject?: {
       formatted_address: string
       geometry: {

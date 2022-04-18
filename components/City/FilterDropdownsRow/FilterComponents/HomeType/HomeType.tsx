@@ -12,14 +12,15 @@ import {
   PROPERTY_TYPE_TILE_PROPS,
 } from 'utils/dictionaries'
 
+const { setSelectedHomeType } = FilterDropdownsActions
+
 const HomeType = () => {
-  const { dispatch } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const { names, width, height } = PROPERTY_TYPE_TILE_PROPS
 
-  const { setActiveFilterPanel } = FilterDropdownsActions
-  const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
-
-  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
+  const handleHomeTypeButtonClick = (e) => {
+    console.log('what is e', e)
+  }
 
   return (
     <HomeTypeButtonsContainer>
@@ -28,6 +29,8 @@ const HomeType = () => {
         instance={{
           name: 'tile-top-icon',
           icon: <House width={width} height={height} />,
+          onClick: handleHomeTypeButtonClick,
+          type: '',
         }}
       />
       <ButtonComp
@@ -35,6 +38,8 @@ const HomeType = () => {
         instance={{
           name: 'tile-top-icon',
           icon: <MultiFamilyHome width={width} height={height} />,
+          onClick: handleHomeTypeButtonClick,
+          type: '',
         }}
       />
       <ButtonComp
@@ -42,6 +47,8 @@ const HomeType = () => {
         instance={{
           name: 'tile-top-icon',
           icon: <Condo width={width} height={height} />,
+          onClick: handleHomeTypeButtonClick,
+          type: '',
         }}
       />
     </HomeTypeButtonsContainer>

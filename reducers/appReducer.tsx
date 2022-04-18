@@ -98,6 +98,10 @@ export const initialState: IinitialState = {
     },
   },
 
+  homeType: {
+    selected: '',
+  },
+
   listingsFilters: {
     isDrawerOpen: false,
     clickedFilterName: null,
