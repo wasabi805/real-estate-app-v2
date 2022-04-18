@@ -68,7 +68,7 @@ export interface IinitialState {
     clickedFilterName: string
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
-    bathsButtons?: IfilterButtons[]
+
     bedsBaths?: {
       bathButtons?: IBedsButton[]
       currentBaths?: string

@@ -72,7 +72,7 @@ export interface IAction {
       clickedFilterName?: ''
       currentRange?: number[] | []
       bedsButtons?: IfilterButtons[]
-      bathsButtons?: IfilterButtons[]
+
       bedsBaths?: {
         currentBaths?: string
       }

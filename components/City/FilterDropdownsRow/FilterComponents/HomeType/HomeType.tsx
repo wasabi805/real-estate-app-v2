@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+import * as HomeTypeActions from 'actions/listingsFilterActions/homeTypeActions'
 import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
@@ -9,7 +9,7 @@ import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/Fil
 
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 
-const { setSelectedHomeType } = FilterDropdownsActions
+const { setSelectedHomeType } = HomeTypeActions
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)

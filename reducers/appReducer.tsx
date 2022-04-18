@@ -111,6 +111,10 @@ export const initialState: IinitialState = {
     currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
 
+    homeType: {
+      selected: '',
+    },
+
     bedsBaths: {
       bathButtons: LISTINGS_FILTERS_BUTTONS_BATHS,
       currentBaths: '',

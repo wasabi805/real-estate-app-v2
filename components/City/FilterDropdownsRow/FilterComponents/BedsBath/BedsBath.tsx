@@ -51,10 +51,12 @@ const BedsBath = () => {
           <ButtonComp
             activeButton={currentBaths}
             groupType="button-row"
-            buttonGroup={bathButtons?.map(( btn : {id: string , text: string}) => {
-              btn.onClick = () => handleBathsButtonClicked(btn.id)
-              return btn
-            })}
+            buttonGroup={bathButtons?.map(
+              (btn: { id: string; text: string }) => {
+                btn.onClick = () => handleBathsButtonClicked(btn.id)
+                return btn
+              }
+            )}
           />
         </div>
       </div>
