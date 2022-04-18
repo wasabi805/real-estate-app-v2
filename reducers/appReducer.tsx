@@ -110,9 +110,9 @@ export const initialState: IinitialState = {
     clickedFilterName: null,
     currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
-    bathsButtons: LISTINGS_FILTERS_BUTTONS_BATHS || [],
 
     bedsBaths: {
+      bathButtons: LISTINGS_FILTERS_BUTTONS_BATHS,
       currentBaths: '',
     },
   },

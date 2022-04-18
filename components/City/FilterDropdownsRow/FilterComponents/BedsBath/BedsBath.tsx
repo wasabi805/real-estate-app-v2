@@ -26,6 +26,8 @@ const BedsBath = () => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
+  const { bathButtons, currentBaths } = state.listingsFilters?.bedsBaths
+
   return (
     <BedBathsContainer>
       <div style={{ display: 'flex' }}>
@@ -46,57 +48,13 @@ const BedsBath = () => {
         <h4 style={{ display: 'flex' }}> Baths </h4>
 
         <div>
-         
           <ButtonComp
-            activeButton={state.listingsFilters?.bedsBaths.currentBaths}
+            activeButton={currentBaths}
             groupType="button-row"
-            buttonGroup={[
-              {
-                id: 'baths-filter-btn-any',
-                text: 'Any',
-                onClick: () => handleBathsButtonClicked('baths-filter-btn-any'),
-              },
-              {
-                id: 'baths-filter-btn-one-plus',
-                text: '1+',
-                onClick: () =>
-                  handleBathsButtonClicked('baths-filter-btn-one-plus'),
-              },
-              {
-                id: 'baths-filter-btn-one-and-half-plus',
-                text: '1.5+',
-                onClick: () =>
-                  handleBathsButtonClicked(
-                    'baths-filter-btn-one-and-half-plus'
-                  ),
-              },
-              {
-                id: 'baths-filter-btn-two-plus',
-                text: '2+',
-                onClick: () =>
-                  handleBathsButtonClicked('baths-filter-btn-two-plus'),
-              },
-              {
-                id: 'baths-filter-btn-two-and-half-plus',
-                text: '2.5+',
-                onClick: () =>
-                  handleBathsButtonClicked(
-                    'baths-filter-btn-two-and-half-plus'
-                  ),
-              },
-              {
-                id: 'baths-filter-btn-three-plus',
-                text: '3+',
-                onClick: () =>
-                  handleBathsButtonClicked('baths-filter-btn-three-plus'),
-              },
-              {
-                id: 'baths-filter-btn-four-plus',
-                text: '4+',
-                onClick: () =>
-                  handleBathsButtonClicked('baths-filter-btn-four-plus'),
-              },
-            ]}
+            buttonGroup={bathButtons?.map(( btn : {id: string , text: string}) => {
+              btn.onClick = () => handleBathsButtonClicked(btn.id)
+              return btn
+            })}
           />
         </div>
       </div>

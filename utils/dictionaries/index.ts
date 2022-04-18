@@ -13,11 +13,18 @@ export const SORT_BY_LISTING_CATEGORIES: IdictionaryEntry[] = [
   { key: 'calculate_location', value: 'Location' }, //might use neighborhoods for this
 ]
 
-export interface IfilterButtons extends IdictionaryEntry {
-  isActive: boolean
+export interface IfilterButtons {
+  id: string
+  text: string
 }
 
-export const LISTINGS_FILTERS_BUTTONS_BEDS: IfilterButtons[] = [
+export interface IfilterButtonsBeds {
+  key: string
+  value: string | Number
+  isActive: Boolean
+}
+
+export const LISTINGS_FILTERS_BUTTONS_BEDS: IfilterButtonsBeds[] = [
   { key: 'any', value: 'Any', isActive: true },
   { key: 'beds-fltr-1', value: 1, isActive: false },
   { key: 'beds-fltr-2', value: 2, isActive: false },
@@ -27,13 +34,34 @@ export const LISTINGS_FILTERS_BUTTONS_BEDS: IfilterButtons[] = [
 ]
 
 export const LISTINGS_FILTERS_BUTTONS_BATHS: IfilterButtons[] = [
-  { key: 'any', value: 'Any', isActive: false },
-  { key: 'one', value: '1+', isActive: false },
-  { key: 'one-point-five', value: '1.5+', isActive: false },
-  { key: 'two', value: '2+', isActive: false },
-  { key: 'two-point-five', value: '2.5+', isActive: false },
-  { key: 'three', value: '3+', isActive: false },
-  { key: 'four', value: '4+', isActive: false },
+  {
+    id: 'baths-filter-btn-any',
+    text: 'Any',
+  },
+  {
+    id: 'baths-filter-btn-one-plus',
+    text: '1+',
+  },
+  {
+    id: 'baths-filter-btn-one-and-half-plus',
+    text: '1.5+',
+  },
+  {
+    id: 'baths-filter-btn-two-plus',
+    text: '2+',
+  },
+  {
+    id: 'baths-filter-btn-two-and-half-plus',
+    text: '2.5+',
+  },
+  {
+    id: 'baths-filter-btn-three-plus',
+    text: '3+',
+  },
+  {
+    id: 'baths-filter-btn-four-plus',
+    text: '4+',
+  },
 ]
 
 export const FILTER_DROPDOWNS_PANEL_KEYS = {

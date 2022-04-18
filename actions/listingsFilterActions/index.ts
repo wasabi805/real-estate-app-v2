@@ -261,9 +261,7 @@ export const handleClickBathsFilterButton = (
   return {
     type: HANDLE_CLICK_BATHS_FILTER_BUTTON,
     payload: {
-      listingsFilters: {
-        bathsButtons: [],
-      },
+      listingsFilters: {},
     },
   }
 }

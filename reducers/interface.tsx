@@ -1,6 +1,11 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IfilterButtons } from 'utils/dictionaries'
 
+interface IBedsButton {
+  id: string
+  text: string
+}
+
 export interface IinitialState {
   isLoginModalVisibile: boolean
   user: {
@@ -64,8 +69,9 @@ export interface IinitialState {
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
     bathsButtons?: IfilterButtons[]
-    bedsBaths: {
-      currentBaths: string
+    bedsBaths?: {
+      bathButtons?: IBedsButton[]
+      currentBaths?: string
     }
   }
 
