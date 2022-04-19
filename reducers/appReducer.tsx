@@ -1,3 +1,4 @@
+import { Map } from 'immutable'
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
@@ -157,6 +158,10 @@ export const initialState: IinitialState = {
     password: '',
   },
 }
+
+const immutableState = Map(initialState)
+const updatedState =(path: string[], updateValue: any)=> immutableState.setIn(path, updateValue).toJS()
+
 const appReducer = (state: IinitialState, action: IAction) => {
   switch (action.type) {
     //  LOGIN MODAL
@@ -238,15 +243,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_ACTIVE_FILTER_PANEL:
-      return {
-        ...state,
-        filterDropdownsRow: {
-          ...state.filterDropdownsRow,
-          activeFilterPanel:
-            action.payload?.filterDropdownsRow?.activeFilterPanel,
-        },
-      }
-
+      const { activeFilterPanel } = action.payload?.filterDropdownsRow
+      return updatedState(['filterDropdownsRow', 'activeFilterPanel'], activeFilterPanel)
+     
     case HOMES_VIEW_TAB_CLICKED:
       return {
         ...state,
@@ -266,13 +265,19 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_SELECTED_HOME_TYPE:
+      const { selected } = action.payload?.listingsFilters?.homeType
+     
+      // console.log(
+      //  immutableState.setIn(['listingsFilters', 'homeType', 'selected'], 
+      //  selected).toJS())
+
       return {
         ...state,
         listingsFilters: {
           ...state.listingsFilters,
           homeType: {
             ...state.listingsFilters?.homeType,
-            selected: action.payload?.listingsFilters?.homeType?.selected,
+            selected: selected,
           },
         },
       }
