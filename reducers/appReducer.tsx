@@ -53,9 +53,6 @@ const { SET_CLICKED_ROW } = ListingTableActions
 const { HOMES_VIEW_TAB_CLICKED } = ListingTabActions
 const { SET_SOLD_DATE_RANGE } = ForSaleRentSoldActions
 
-
-// NOTE : WILL MAKE A NEW BRANCH FROM HERE TO TEST IMPLEMENT IMMUTABLE.js
-
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
   user: {
