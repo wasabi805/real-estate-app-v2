@@ -101,11 +101,6 @@ export const initialState: IinitialState = {
     },
   },
 
-  //TODO : REMOVE THIS
-  homeType: {
-    selected: '',
-  },
-
   //TODO : move all filters into listinsgFilters
   listingsFilters: {
     isDrawerOpen: false,
@@ -254,9 +249,12 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_SELECTED_HOME_TYPE:
       return {
         ...state,
-        homeType: {
-          ...state.homeType,
-          selected: action.payload?.homeType?.selected,
+        listingsFilters: {
+          ...state.listingsFilters,
+          homeType: {
+            ...state.listingsFilters?.homeType,
+            selected: action.payload?.listingsFilters?.homeType?.selected,
+          },
         },
       }
 

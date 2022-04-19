@@ -53,7 +53,7 @@ const HomeType = () => {
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp
-        activeButton={state.homeType?.selected}
+        activeButton={state.listingsFilters?.homeType?.selected}
         groupType={'tile-top-icon'}
         buttonGroup={buttonGroup}
       />

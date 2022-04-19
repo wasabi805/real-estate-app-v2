@@ -7,8 +7,10 @@ export const setSelectedHomeType = (
   return {
     type: SET_SELECTED_HOME_TYPE,
     payload: {
-      homeType: {
-        selected: homeType,
+      listingsFilters: {
+        homeType: {
+          selected: homeType,
+        },
       },
     },
   }

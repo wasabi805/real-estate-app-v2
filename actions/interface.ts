@@ -37,10 +37,6 @@ export interface IAction {
       }
     }
 
-    homeType?: {
-      selected?: string
-    }
-
     addressObject?: {
       formatted_address: string
       geometry: {
@@ -72,6 +68,10 @@ export interface IAction {
       clickedFilterName?: ''
       currentRange?: number[] | []
       bedsButtons?: IfilterButtons[]
+
+      homeType?: {
+        selected?: string
+      }
 
       bedsBaths?: {
         currentBaths?: string
