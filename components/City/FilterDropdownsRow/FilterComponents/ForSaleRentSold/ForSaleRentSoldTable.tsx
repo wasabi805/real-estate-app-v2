@@ -54,11 +54,16 @@ const ForSaleRentSold = () => {
         <Table
           pagination={false}
           showHeader={false}
-          columns={newColumns}
-          dataSource={newSaleRentRows}
+          columns={soldDatePeriodColumn}
+          dataSource={soldDatePeriodRows}
           rowSelection={{
             type: 'radio',
             // selectedRowKeys: state.forSaleRentSold.filterBy,
+          }}
+          onRow={() => {
+            return {
+              onClick: () => alert('change the date range that was clicked'),
+            }
           }}
         />
       </div>
@@ -93,9 +98,15 @@ const ForSaleRentSold = () => {
             selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
           }}
           columns={columns}
-          dataSource={soldExpandable}
+          dataSource={[
+            {
+              key: 'all-filters-btn-sold',
+              listingFilterCategory: 'Sold',
+            },
+          ]}
           onRow={(record, rowIndex) => ({
             onClick: () => {
+              alert('clicked')
               dispatch(setFilterByPropertyType([record.key]))
             },
           })}
