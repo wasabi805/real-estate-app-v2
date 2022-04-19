@@ -1,5 +1,5 @@
 import { HANDLE_CLICK_BEDS_FILTER_BUTTON } from '.'
-import { LISTINGS_FILTERS_BUTTONS_BEDS } from 'utils/dictionaries'
+import { bedsButtons } from 'reducers/initialValues'
 
 export const range = [1, 2, 3, 4, 5]
 
@@ -23,7 +23,7 @@ export const handleBedsNumAction = (
 }
 
 export const setInitialButtonsActive = (state, keyNum: number) => {
-  return LISTINGS_FILTERS_BUTTONS_BEDS.map((bedBtn) => {
+  return bedsButtons.map((bedBtn) => {
     if (bedBtn.value === 'Any') {
       bedBtn.isActive = false
       return bedBtn

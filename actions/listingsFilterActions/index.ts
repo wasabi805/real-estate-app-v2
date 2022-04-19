@@ -1,6 +1,6 @@
 import { IAction } from 'actions/interface'
 import { IinitialState } from 'reducers/interface'
-import { LISTINGS_FILTERS_BUTTONS_BEDS } from 'utils/dictionaries'
+
 import {
   range,
   handleBedsNumAction,

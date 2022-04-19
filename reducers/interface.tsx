@@ -1,6 +1,6 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IfilterButtons } from 'utils/dictionaries'
-import { IButtonWithIcon } from 'utils/interfaces/buttons'
+import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
 
 interface IBedsButton {
   id: string
@@ -60,11 +60,7 @@ export interface IinitialState {
 
     forSaleRentSold?: {
       filterBy?: []
-      buttons?: [
-        { id: string; text: string; size: string },
-        { id: string; text: string; size: string },
-        { id: string; text: string; size: string }
-      ]
+      buttons?: IButton[]
     }
 
     homeType?: {

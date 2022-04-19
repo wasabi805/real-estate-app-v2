@@ -7,13 +7,17 @@ import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
-import {
-  LISTINGS_FILTERS_BUTTONS_BEDS,
-  LISTINGS_FILTERS_BUTTONS_BATHS,
-  HOME_TYPE_BUTTONS,
-} from 'utils/dictionaries'
+
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
+import {
+  forSaleRentSoldButtons,
+  soldDateRangeColumns,
+  soldDateRangeRows,
+  homeTypeButtons,
+  bedsButtons,
+  bathButtons,
+} from 'reducers/initialValues'
 
 const {
   RENDER_LOGIN_MODLE,
@@ -110,67 +114,26 @@ export const initialState: IinitialState = {
     isDrawerOpen: false,
     clickedFilterName: null,
     currentRange: [],
-    bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
+    bedsButtons: bedsButtons,
 
     forSaleRentSold: {
       filterBy: [],
-      buttons: [
-        { id: 'all-filters-btn-for-sale', text: 'For Sale', size: 'large' },
-        { id: 'all-filters-btn-for-rent', text: 'For Rent', size: 'large' },
-        { id: 'all-filters-btn-sold', text: 'Sold', size: 'large' },
-      ],
+      buttons: forSaleRentSoldButtons,
 
+      //TODO VERIFY action and reducer interfaces
       soldDateRange: '',
-      soldDateRangeColumns: [
-        {
-          title: 'Sold Date Period',
-          dataIndex: 'soldDatePeriod',
-        },
-      ],
 
-      soldDateRangeRows: [
-        {
-          key: 'sold-last-1-week',
-          soldDatePeriod: 'Last 1 Week',
-        },
-        {
-          key: 'sold-last-1-month',
-          soldDatePeriod: 'Last 1 Month',
-        },
-        {
-          key: 'sold-last-3-months',
-          soldDatePeriod: 'Last 3 Months',
-        },
-        {
-          key: 'sold-last-6-months',
-          soldDatePeriod: 'Last 6 Months',
-        },
-        {
-          key: 'sold-last-1-year',
-          soldDatePeriod: 'Last 1 Year',
-        },
-        {
-          key: 'sold-last-2-years',
-          soldDatePeriod: 'Last 2 Years',
-        },
-        {
-          key: 'sold-last-3-years',
-          soldDatePeriod: 'Last 3 Years',
-        },
-        {
-          key: 'sold-last-5-years',
-          soldDatePeriod: 'Last 5 Years',
-        },
-      ],
+      soldDateRangeColumns: soldDateRangeColumns,
+      soldDateRangeRows: soldDateRangeRows,
     },
 
     homeType: {
-      homeTypeButtons: HOME_TYPE_BUTTONS,
+      homeTypeButtons: homeTypeButtons,
       selected: '',
     },
 
     bedsBaths: {
-      bathButtons: LISTINGS_FILTERS_BUTTONS_BATHS,
+      bathButtons: bathButtons,
       currentBaths: '',
     },
   },
