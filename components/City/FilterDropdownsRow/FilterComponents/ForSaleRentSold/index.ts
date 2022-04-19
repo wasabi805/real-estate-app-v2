@@ -1,4 +1,4 @@
-import ForSaleRentSold from './ForSaleRentSold'
+import ForSaleRentSold from './ForSaleRentSoldTable'
 
 export const ForSaleRentSoldTableFormat = {
   columns: [

@@ -7,7 +7,6 @@ import {
   AllFiltersDrawerContainer,
   DrawerCotent,
 } from 'components/City/FilterDropdownsRow/FilterComponents/AllFilters/styles'
-import ButtonComp from '@components/_common/ButtonComp'
 import PriceFilter from '../Price/components/PriceFilter'
 import BedsBath from '../BedsBath/BedsBath'
 import HomeType from '../HomeType/HomeType'
@@ -33,34 +32,6 @@ const AllFiltersDrawer = () => {
           <div className="all-filters-drawer-row for-sale-rent-sold">
             <ForSaleRentSoldButtons />
           </div>
-
-          {/* ORIGINAL  */}
-
-          {/* <div className="all-filters-drawer-row for-sale-rent-sold">
-            <ButtonComp
-              groupType='button-row'
-              instance={{ name: 'button-row' }}
-              align="center"
-              buttonStyle={{ width: '12rem' }}
-              buttonGroup={[
-                {id: 'all-filters-btn-for-sale',
-                 text: 'For Sale' , 
-                 size: 'large',
-                //  onClick: ''
-                },
-                {id: 'all-filters-btn-for-rent', 
-                text: 'For Rent', 
-                size: 'large',
-                //  onClick: ''
-               },
-                {id: 'all-filters-btn-sold',
-                 text: 'Sold', 
-                 size: 'large',
-                 //  onClick: ''
-                 }
-              ]}
-            />
-          </div> */}
 
           {/* ----- PRICE ----- */}
           <div className="all-filters-drawer-row price">

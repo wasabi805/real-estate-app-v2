@@ -23,14 +23,39 @@ const ForSaleRentSold = () => {
 
   const { state, dispatch } = useContext(AppContext)
 
+  const newColumns = [
+    {
+      title: 'Listing Category',
+      dataIndex: 'listingFilterCategory',
+    },
+  ]
+
+  console.log(
+    state.listingsFilters?.forSaleRentSold?.filterBy,
+    'filterBy FORSALTEREENTSOLDTABLE'
+  )
+
+  const newSaleRentRows = [
+    {
+      key: 'all-filters-btn-for-sale',
+      // key: state.listingsFilters?.forSaleRentSold?.buttons[0].id,
+      listingFilterCategory: 'For sale',
+    },
+    {
+      key: 'all-filters-btn-for-rent',
+      // key: state.listingsFilters?.forSaleRentSold?.buttons[1].id,
+      listingFilterCategory: 'For rent',
+    },
+  ]
+
   const ForSaleDateRange = () => {
     return (
       <div>
         <Table
           pagination={false}
           showHeader={false}
-          columns={soldDatePeriodColumn}
-          dataSource={soldDatePeriodRows}
+          columns={newColumns}
+          dataSource={newSaleRentRows}
           rowSelection={{
             type: 'radio',
             // selectedRowKeys: state.forSaleRentSold.filterBy,
@@ -50,8 +75,8 @@ const ForSaleRentSold = () => {
           type: 'radio',
           selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
         }}
-        columns={columns}
-        dataSource={saleRent}
+        columns={newColumns}
+        dataSource={newSaleRentRows}
         onRow={(record, rowIndex) => ({
           onClick: () => {
             dispatch(setFilterByPropertyType([record.key]))

@@ -10,15 +10,16 @@ const ForSaleRentSoldButtons = () => {
   const handleClickListingClass = (id: string[]) =>
     dispatch(setFilterByPropertyType(id))
 
-  const { buttons} = state.listingsFilters?.forSaleRentSold
-  const buttonGroup = buttons.map( (btn)=>{
-      btn.onClick = ()=> handleClickListingClass(btn.id)
-      return btn
+  const { buttons } = state.listingsFilters?.forSaleRentSold
+  const buttonGroup = buttons.map((btn) => {
+    btn.onClick = () => handleClickListingClass([btn.id])
+    return btn
   })
 
   return (
     <ButtonComp
-      activeButton={state.listingsFilters?.forSaleRentSold?.filterBy}
+      // Note: filterBy string id has to be in an array since it is also driving Ant design table radio focus used in ForSaleRentSoldTable component
+      activeButton={state.listingsFilters?.forSaleRentSold?.filterBy[0]}
       groupType="button-row"
       instance={{ name: 'button-row' }}
       align="center"

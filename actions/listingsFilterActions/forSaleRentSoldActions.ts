@@ -13,7 +13,6 @@ export const setFilterByPropertyType = (
         },
       },
 
-      //TODO: remove below
       forSaleRentSold: {
         filterBy: propertyType,
       },

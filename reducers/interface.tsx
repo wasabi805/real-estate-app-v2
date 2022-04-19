@@ -61,9 +61,9 @@ export interface IinitialState {
     forSaleRentSold?: {
       filterBy?: []
       buttons?: [
-        { id: string; text: string, size: string },
-        { id: string; text: string, size: string },
-        { id: string; text: string, size: string }
+        { id: string; text: string; size: string },
+        { id: string; text: string; size: string },
+        { id: string; text: string; size: string }
       ]
     }
 
@@ -81,7 +81,7 @@ export interface IinitialState {
     isTableView: boolean
     currentHome: string[]
   }
-  
+
   loginModal: {
     isLogin: boolean
     email: string

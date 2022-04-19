@@ -271,6 +271,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_FILTER_BY_PROPERTY_TYPE:
+      console.log(action)
       return {
         ...state,
         listingsFilters: {
@@ -280,11 +281,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
             filterBy: action.payload?.forSaleRentSold?.filterBy,
           },
         },
-        // TODO : REMOVE WHEN confirmerd forSaleRentSold works nested in listingsFilters
-        // forSaleRentSold: {
-        //   ...state.forSaleRentSold,
-        //   filterBy: action.payload?.forSaleRentSold?.filterBy,
-        // },
       }
 
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:
