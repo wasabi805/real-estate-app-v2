@@ -10,16 +10,10 @@ import {
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
 
-const { setFilterByPropertyType } = ForSaleRentSoldActions
+const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 
 const ForSaleRentSold = () => {
-  const {
-    columns,
-    saleRent,
-    soldExpandable,
-    soldDatePeriodColumn,
-    soldDatePeriodRows,
-  } = ForSaleRentSoldTableFormat
+  const { columns, saleRent, soldExpandable } = ForSaleRentSoldTableFormat
 
   const { state, dispatch } = useContext(AppContext)
 
@@ -29,40 +23,41 @@ const ForSaleRentSold = () => {
       dataIndex: 'listingFilterCategory',
     },
   ]
-
-  console.log(
-    state.listingsFilters?.forSaleRentSold?.filterBy,
-    'filterBy FORSALTEREENTSOLDTABLE'
-  )
-
   const newSaleRentRows = [
     {
       key: 'all-filters-btn-for-sale',
-      // key: state.listingsFilters?.forSaleRentSold?.buttons[0].id,
       listingFilterCategory: 'For sale',
     },
     {
       key: 'all-filters-btn-for-rent',
-      // key: state.listingsFilters?.forSaleRentSold?.buttons[1].id,
       listingFilterCategory: 'For rent',
     },
   ]
 
+  const handleSoldDateRangeClick = (dateRange: any) => {
+    dispatch(setSoldDateRange(dateRange))
+  }
+
   const ForSaleDateRange = () => {
     return (
       <div>
+        {console.log(
+          'YEEEEE',
+          state.listingsFilters?.forSaleRentSold?.soldDateRange
+        )}
         <Table
           pagination={false}
           showHeader={false}
-          columns={soldDatePeriodColumn}
-          dataSource={soldDatePeriodRows}
+          columns={state.listingsFilters?.forSaleRentSold?.soldDateRangeColumns}
+          dataSource={state.listingsFilters?.forSaleRentSold?.soldDateRangeRows}
           rowSelection={{
             type: 'radio',
-            // selectedRowKeys: state.forSaleRentSold.filterBy,
+            selectedRowKeys:
+              state.listingsFilters?.forSaleRentSold?.soldDateRange,
           }}
-          onRow={() => {
+          onRow={(record) => {
             return {
-              onClick: () => alert('change the date range that was clicked'),
+              onClick: () => handleSoldDateRangeClick(record.key),
             }
           }}
         />
@@ -106,7 +101,6 @@ const ForSaleRentSold = () => {
           ]}
           onRow={(record, rowIndex) => ({
             onClick: () => {
-              alert('clicked')
               dispatch(setFilterByPropertyType([record.key]))
             },
           })}

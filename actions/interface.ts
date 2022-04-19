@@ -71,6 +71,8 @@ export interface IAction {
 
       forSaleRentSold?: {
         filterBy?: string[]
+        soldDateRange?: any
+        filterSoldDateRangeBy: any
       }
 
       homeType?: {

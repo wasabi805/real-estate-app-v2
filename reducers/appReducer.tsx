@@ -5,6 +5,7 @@ import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import {
   LISTINGS_FILTERS_BUTTONS_BEDS,
@@ -46,6 +47,7 @@ const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
 
 const { SET_CLICKED_ROW } = ListingTableActions
 const { HOMES_VIEW_TAB_CLICKED } = ListingTabActions
+const { SET_SOLD_DATE_RANGE } = ForSaleRentSoldActions
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -112,11 +114,53 @@ export const initialState: IinitialState = {
 
     forSaleRentSold: {
       filterBy: [],
-
       buttons: [
         { id: 'all-filters-btn-for-sale', text: 'For Sale', size: 'large' },
         { id: 'all-filters-btn-for-rent', text: 'For Rent', size: 'large' },
         { id: 'all-filters-btn-sold', text: 'Sold', size: 'large' },
+      ],
+
+      soldDateRange: '',
+      soldDateRangeColumns: [
+        {
+          title: 'Sold Date Period',
+          dataIndex: 'soldDatePeriod',
+        },
+      ],
+
+      soldDateRangeRows: [
+        {
+          key: 'sold-last-1-week',
+          soldDatePeriod: 'Last 1 Week',
+        },
+        {
+          key: 'sold-last-1-month',
+          soldDatePeriod: 'Last 1 Month',
+        },
+        {
+          key: 'sold-last-3-months',
+          soldDatePeriod: 'Last 3 Months',
+        },
+        {
+          key: 'sold-last-6-months',
+          soldDatePeriod: 'Last 6 Months',
+        },
+        {
+          key: 'sold-last-1-year',
+          soldDatePeriod: 'Last 1 Year',
+        },
+        {
+          key: 'sold-last-2-years',
+          soldDatePeriod: 'Last 2 Years',
+        },
+        {
+          key: 'sold-last-3-years',
+          soldDatePeriod: 'Last 3 Years',
+        },
+        {
+          key: 'sold-last-5-years',
+          soldDatePeriod: 'Last 5 Years',
+        },
       ],
     },
 
@@ -283,6 +327,20 @@ const appReducer = (state: IinitialState, action: IAction) => {
         },
       }
 
+    case SET_SOLD_DATE_RANGE:
+      console.log('what is action', action)
+      return {
+        ...state,
+        listingsFilters: {
+          ...state.listingsFilters,
+          forSaleRentSold: {
+            ...state.listingsFilters?.forSaleRentSold,
+            soldDateRange:
+              action.payload?.listingsFilters?.forSaleRentSold?.soldDateRange,
+          },
+        },
+      }
+
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:
       return {
         ...state,
@@ -294,7 +352,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
-      console.log('what is the action', action)
       return {
         ...state,
         listingsFilters: {

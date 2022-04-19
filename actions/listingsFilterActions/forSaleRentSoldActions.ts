@@ -19,3 +19,19 @@ export const setFilterByPropertyType = (
     },
   }
 }
+
+export const SET_SOLD_DATE_RANGE = 'SET_SOLD_DATE_RANGE'
+export const setSoldDateRange = (
+  data: any
+): Pick<IAction, 'type' | 'payload'> => {
+  return {
+    type: SET_SOLD_DATE_RANGE,
+    payload: {
+      listingsFilters: {
+        forSaleRentSold: {
+          soldDateRange: [data],
+        },
+      },
+    },
+  }
+}
