@@ -2,8 +2,7 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import RangedSlider from '@components/_common/RangedSlider'
 import InputComp from '@components/_common/InputComp'
-import ButtonComp from '@components/_common/ButtonComp'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 
 import {
@@ -12,10 +11,6 @@ import {
   RangedSliderInputsRow,
   PriceSliderButtonContainer,
 } from '@components/City/FilterDropdownsRow/FilterComponents/Price/styles'
-import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
-
-const { setActiveFilterPanel } = FilterDropdownsActions
-const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const { setMinPriceFilterField, setMaxPriceFilterField } = ListingsFilterActions
 
@@ -34,17 +29,15 @@ const PriceFilter = () => {
     const minResult = await value[0]
     const maxResult = await value[1]
 
+    //TODO : step 1 start here : change where this updates in reducer
     dispatch(setMinPriceFilterField(minResult, state))
     dispatch(setMaxPriceFilterField(maxResult, state))
   }
-
-  const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
   return (
     <PriceFilterContainer
       moveMin={state.priceFilter?.moveMin}
       moveMax={state.priceFilter?.moveMax}
-      // onClick={(e) => e.stopPropagation()}
     >
       <RangedSliderRow>
         <RangedSlider
@@ -53,9 +46,7 @@ const PriceFilter = () => {
         />
       </RangedSliderRow>
 
-      <RangedSliderInputsRow
-      // onClick={(e) => e.stopPropagation()}
-      >
+      <RangedSliderInputsRow>
         {/* MIN PRICE FIELD */}
         <InputComp
           format={'dollars'}
@@ -65,7 +56,7 @@ const PriceFilter = () => {
           onChange={handleMinPriceField}
           size={'middle'}
         />{' '}
-        -{/* MAX PRICE FIELD */}
+        - {/* MAX PRICE FIELD */}
         <InputComp
           format={'dollars'}
           placeHolder={'max'}

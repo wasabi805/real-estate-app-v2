@@ -69,6 +69,10 @@ export interface IAction {
       currentRange?: number[] | []
       bedsButtons?: IfilterButtons[]
 
+      forSaleRentSold?: {
+        filterBy?: string[]
+      }
+
       homeType?: {
         selected?: string
       }

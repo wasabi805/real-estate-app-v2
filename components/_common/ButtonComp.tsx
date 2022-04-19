@@ -49,7 +49,6 @@ const ButtonComp = styled(
           <ButtonRowContainer>
             {buttonGroup &&
               buttonGroup.map((btn) => {
-                console.log('activeButton in button comp', activeButton)
                 return (
                   <TileIconButton key={btn.id}>
                     <Button

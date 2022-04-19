@@ -71,6 +71,7 @@ export const initialState: IinitialState = {
     activeFilterPanel: '0',
   },
 
+  //ToDO: delete this
   forSaleRentSold: {
     filterBy: [],
 
@@ -81,6 +82,7 @@ export const initialState: IinitialState = {
     ],
   },
 
+  //TODO : nest priceFilter in listingsFilters
   priceFilter: {
     //inputs
     minField: null,
@@ -107,6 +109,16 @@ export const initialState: IinitialState = {
     clickedFilterName: null,
     currentRange: [],
     bedsButtons: LISTINGS_FILTERS_BUTTONS_BEDS || [],
+
+    forSaleRentSold: {
+      filterBy: [],
+
+      buttons: [
+        { id: 'all-filters-btn-for-sale', text: 'For Sale', size: 'large' },
+        { id: 'all-filters-btn-for-rent', text: 'For Rent', size: 'large' },
+        { id: 'all-filters-btn-sold', text: 'Sold', size: 'large' },
+      ],
+    },
 
     homeType: {
       homeTypeButtons: HOME_TYPE_BUTTONS,
@@ -261,10 +273,18 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_FILTER_BY_PROPERTY_TYPE:
       return {
         ...state,
-        forSaleRentSold: {
-          ...state.forSaleRentSold,
-          filterBy: action.payload?.forSaleRentSold?.filterBy,
+        listingsFilters: {
+          ...state.listingsFilters,
+          forSaleRentSold: {
+            ...state.listingsFilters?.forSaleRentSold,
+            filterBy: action.payload?.forSaleRentSold?.filterBy,
+          },
         },
+        // TODO : REMOVE WHEN confirmerd forSaleRentSold works nested in listingsFilters
+        // forSaleRentSold: {
+        //   ...state.forSaleRentSold,
+        //   filterBy: action.payload?.forSaleRentSold?.filterBy,
+        // },
       }
 
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:

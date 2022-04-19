@@ -11,6 +11,8 @@ import ButtonComp from '@components/_common/ButtonComp'
 import PriceFilter from '../Price/components/PriceFilter'
 import BedsBath from '../BedsBath/BedsBath'
 import HomeType from '../HomeType/HomeType'
+import ForSaleRentSoldButtons from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/ForSaleRentSoldButtons'
+
 const { setFilterDrawerOpen } = ListingsFilterActions
 
 const AllFiltersDrawer = () => {
@@ -29,32 +31,36 @@ const AllFiltersDrawer = () => {
         <DrawerCotent>
           {/* ----- FOR SALE FOR RENT SOLD ----- */}
           <div className="all-filters-drawer-row for-sale-rent-sold">
+            <ForSaleRentSoldButtons />
+          </div>
+
+          {/* ORIGINAL  */}
+
+          {/* <div className="all-filters-drawer-row for-sale-rent-sold">
             <ButtonComp
+              groupType='button-row'
               instance={{ name: 'button-row' }}
               align="center"
               buttonStyle={{ width: '12rem' }}
               buttonGroup={[
-                {
-                  id: 'all-filters-btn-for-sale',
-                  text: 'For Sale',
-                  onClick: () => console.log(' Clear clicked'),
-                  size: 'large',
+                {id: 'all-filters-btn-for-sale',
+                 text: 'For Sale' , 
+                 size: 'large',
+                //  onClick: ''
                 },
-                {
-                  id: 'all-filters-btn-for-rent',
-                  text: 'For Rent',
-                  onClick: () => console.log(' Clear clicked'),
-                  size: 'large',
-                },
-                {
-                  id: 'all-filters-btn-sold',
-                  text: 'Sold',
-                  onClick: () => console.log('placeholder'),
-                  size: 'large',
-                },
+                {id: 'all-filters-btn-for-rent', 
+                text: 'For Rent', 
+                size: 'large',
+                //  onClick: ''
+               },
+                {id: 'all-filters-btn-sold',
+                 text: 'Sold', 
+                 size: 'large',
+                 //  onClick: ''
+                 }
               ]}
             />
-          </div>
+          </div> */}
 
           {/* ----- PRICE ----- */}
           <div className="all-filters-drawer-row price">

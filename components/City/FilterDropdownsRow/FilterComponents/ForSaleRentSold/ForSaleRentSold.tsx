@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
+
+import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
 import { Table } from 'antd'
 import 'antd/dist/antd.css'
 import {
@@ -9,7 +10,7 @@ import {
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
 
-const { setFilterByPropertyType } = ListingsFilterActions
+const { setFilterByPropertyType } = ForSaleRentSoldActions
 
 const ForSaleRentSold = () => {
   const {
@@ -41,12 +42,13 @@ const ForSaleRentSold = () => {
 
   return (
     <ForSaleRentSoldContainer>
+      {/* TODO : step 1: setFilterByPropertyType */}
       <Table
         pagination={false}
         showHeader={false}
         rowSelection={{
           type: 'radio',
-          selectedRowKeys: state.forSaleRentSold.filterBy,
+          selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
         }}
         columns={columns}
         dataSource={saleRent}
@@ -63,7 +65,7 @@ const ForSaleRentSold = () => {
           showHeader={false}
           rowSelection={{
             type: 'radio',
-            selectedRowKeys: state.forSaleRentSold.filterBy,
+            selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
           }}
           columns={columns}
           dataSource={soldExpandable}
@@ -73,7 +75,7 @@ const ForSaleRentSold = () => {
             },
           })}
           expandable={{
-            expandedRowKeys: state.forSaleRentSold.filterBy,
+            expandedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
             expandedRowRender: (record) => <ForSaleDateRange />,
             onExpand: (expanded, record) =>
               console.log('onExpand: ', record, expanded),

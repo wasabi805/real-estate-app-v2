@@ -1,5 +1,6 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IfilterButtons } from 'utils/dictionaries'
+import { IButtonWithIcon } from 'utils/interfaces/buttons'
 
 interface IBedsButton {
   id: string
@@ -28,15 +29,6 @@ export interface IinitialState {
     activeFilterPanel: string
   }
 
-  forSaleRentSold: {
-    filterBy?: []
-    buttons?: [
-      { name: string; value: string },
-      { name: string; value: string },
-      { name: string; value: string }
-    ]
-  }
-
   priceFilter?: {
     //inputs
     minField?: null | number
@@ -54,24 +46,29 @@ export interface IinitialState {
     }
   }
 
-  //TODO REMOVE THIS
-  homeType?: {
-    selected?: string
-  }
-
   sortAndFilter: {
     activeSort: string
     sortedProperties: []
     isAscending: null | boolean
   }
+
   listingsFilters?: {
     isDrawerOpen?: boolean
     clickedFilterName: string
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
 
+    forSaleRentSold?: {
+      filterBy?: []
+      buttons?: [
+        { id: string; text: string, size: string },
+        { id: string; text: string, size: string },
+        { id: string; text: string, size: string }
+      ]
+    }
+
     homeType?: {
-      homeTypeButtons: []
+      homeTypeButtons: IButtonWithIcon[]
       selected?: string
     }
     bedsBaths?: {
@@ -84,6 +81,7 @@ export interface IinitialState {
     isTableView: boolean
     currentHome: string[]
   }
+  
   loginModal: {
     isLogin: boolean
     email: string
