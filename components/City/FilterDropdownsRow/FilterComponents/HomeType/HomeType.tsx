@@ -8,7 +8,7 @@ import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
 
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
-import { IButtonWithIcon } from 'utils/interfaces/buttons'
+import { IButton } from 'utils/interfaces/buttons'
 
 const { setSelectedHomeType } = HomeTypeActions
 
@@ -20,11 +20,14 @@ const HomeType = () => {
     dispatch(setSelectedHomeType(id))
   }
 
-  const { homeTypeButtons } = state.listingsFilters?.homeType
+  const homeTypeButtons = state.listingsFilters?.homeType?.homeTypeButtons
+  const selectedButton = state.listingsFilters?.homeType?.selected
 
-  const buttonGroup = homeTypeButtons.map((btn: IButtonWithIcon) => {
-    const iconType = btn.id.split('-')
-    const iconName = iconType[iconType.length - 1]
+  console.log('*********', 'selectedButton at HomeType', selectedButton)
+
+  const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
+    const iconType = btn.id?.split('-')
+    const iconName = iconType && iconType[iconType.length - 1]
 
     let icon
     switch (iconName) {
@@ -44,7 +47,7 @@ const HomeType = () => {
         icon = null
     }
 
-    btn.onClick = () => handleHomeTypeButtonClick(btn.id)
+    btn.onClick = () => handleHomeTypeButtonClick(btn.id!)
     btn.icon = icon
 
     return btn
@@ -53,7 +56,7 @@ const HomeType = () => {
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp
-        activeButton={state.listingsFilters?.homeType?.selected}
+        activeButton={selectedButton}
         groupType={'tile-top-icon'}
         buttonGroup={buttonGroup}
       />

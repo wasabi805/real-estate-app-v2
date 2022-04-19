@@ -1,4 +1,5 @@
 import { Map } from 'immutable'
+
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
@@ -160,7 +161,8 @@ export const initialState: IinitialState = {
 }
 
 const immutableState = Map(initialState)
-const updatedState =(path: string[], updateValue: any)=> immutableState.setIn(path, updateValue).toJS()
+const updatedState = (path: string[], updateValue: any) =>
+  immutableState.setIn(path, updateValue).toJS()
 
 const appReducer = (state: IinitialState, action: IAction) => {
   switch (action.type) {
@@ -243,47 +245,46 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_ACTIVE_FILTER_PANEL:
-      const { activeFilterPanel } = action.payload?.filterDropdownsRow
-      return updatedState(['filterDropdownsRow', 'activeFilterPanel'], activeFilterPanel)
-     
+      const activeFilterPanel =
+        action.payload?.filterDropdownsRow?.activeFilterPanel
+      return updatedState(
+        ['filterDropdownsRow', 'activeFilterPanel'],
+        activeFilterPanel
+      )
+
     case HOMES_VIEW_TAB_CLICKED:
-      return {
-        ...state,
-        listingTable: {
-          ...state.listingTable,
-          isTableView: action.payload?.listingTable?.isTableView,
-        },
-      }
+      const isTableView = action.payload?.listingTable?.isTableView
+      return updatedState(['listingTable', 'isTableView'], isTableView)
 
     case SET_FILTER_DRAWER_OPEN:
-      return {
-        ...state,
-        listingsFilters: {
-          ...state.listingsFilters,
-          isDrawerOpen: action.payload?.listingsFilters?.isDrawerOpen,
-        },
-      }
+      const isDrawerOpen = action.payload?.listingsFilters?.isDrawerOpen
+      return updatedState(['listingsFilters', 'isDrawerOpen'], isDrawerOpen)
 
     case SET_SELECTED_HOME_TYPE:
-      const { selected } = action.payload?.listingsFilters?.homeType
-     
-      // console.log(
-      //  immutableState.setIn(['listingsFilters', 'homeType', 'selected'], 
-      //  selected).toJS())
+      const selected = action.payload?.listingsFilters?.homeType?.selected
 
-      return {
-        ...state,
-        listingsFilters: {
-          ...state.listingsFilters,
-          homeType: {
-            ...state.listingsFilters?.homeType,
-            selected: selected,
-          },
-        },
-      }
+      console.log('what is selected?', selected)
+
+      //TODO: See why it wont stay open
+      return updatedState(['listingsFilters', 'homeType', 'selected'], selected)
+
+    // return {
+    //   ...state,
+    //   listingsFilters: {
+    //     ...state.listingsFilters,
+    //     homeType: {
+    //       ...state.listingsFilters?.homeType,
+    //       selected: selected,
+    //     },
+    //   },
+    // }
 
     case SET_FILTER_BY_PROPERTY_TYPE:
-      console.log(action)
+      //TODO: GET THIS TO WORK WITH ANT Lib
+
+      // const filterBy = action.payload?.forSaleRentSold?.filterBy
+      // return updatedState(['listingsFilters', 'forSaleRentSold', 'filterBy'], filterBy)
+
       return {
         ...state,
         listingsFilters: {
