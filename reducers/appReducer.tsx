@@ -123,6 +123,13 @@ export const initialState: IinitialState = {
       },
   
       bedsBaths: {
+        // clickedFilterName: null,
+        // currentRange: [],
+        // bedsButtons: bedsButtons,
+
+
+
+
         bathButtons: bathButtons,
         currentBaths: '',
       },
@@ -265,11 +272,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
         soldDateRange
       )(state)
 
+        //TODO VERIFY
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:
       return {
         ...state,
-        listingsFilters: action.payload?.listingsFilters,
+        listings: action.payload?.listings,
       }
+      // return {
+      //   ...state,
+      //   listings: action.payload?.listings,
+      // }
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
       const currentBaths = action.payload?.listings?.filters.bedsBaths?.currentBaths

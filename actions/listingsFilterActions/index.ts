@@ -26,6 +26,9 @@ export const handleClickBedsFilterButton = (
   key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
+
+  console.log('&&&&&&',{key, state})
+
   let currentRange = state.listings?.currentRange.sort()
   const isAny = key === 'any'
   let keyNum = parseInt(key[key.length - 1], 10)
@@ -51,8 +54,18 @@ export const handleClickBedsFilterButton = (
 
     //if a range hasnt been set yet...
     if (!isKeyNumPresent && currentRange.length === 0) {
+      alert('no range')
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
+
+
+      console.log({
+        startRange,
+        returnRange, 
+        keyNum, 
+        setInitialButtonsActive: setInitialButtonsActive(state, keyNum) })
+
+
       return handleBedsNumAction(
         state,
         returnRange,
@@ -126,7 +139,7 @@ export const handleClickBedsFilterButton = (
       // if a number in the range is clicked twice in a row
       if (keyNum == previousBtnClicked) {
         const newRange = [keyNum]
-
+        alert('same')
         return handleBedsNumAction(
           state,
           newRange,
@@ -140,6 +153,16 @@ export const handleClickBedsFilterButton = (
         console.log('-----CASE:1------')
         //get the new range of numbers
         const newRange = range.slice(range.indexOf(keyNum), lastValue)
+
+        console.log('case1',
+          {
+            state,
+          newRange,
+          deactivateBedButtons:deactivateBedButtons(state, newRange),
+          keyNum
+          }
+        )
+
 
         return handleBedsNumAction(
           state,

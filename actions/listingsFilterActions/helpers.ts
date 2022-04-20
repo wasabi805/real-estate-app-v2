@@ -11,9 +11,18 @@ export const handleBedsNumAction = (
 ) => {
   return {
     type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+    // payload: {
+    //   listingsFilters: {
+    //     ...state.listings,
+    //     currentRange: newRange,
+    //     bedsButtons: bedsButtons,
+    //     clickedFilterName: clickedFilterName,
+    //   },
+    // },
+
     payload: {
-      listingsFilters: {
-        ...state.listingsFilters,
+      listings: {
+        ...state.listings,
         currentRange: newRange,
         bedsButtons: bedsButtons,
         clickedFilterName: clickedFilterName,
@@ -38,7 +47,8 @@ export const setInitialButtonsActive = (state, keyNum: number) => {
 }
 
 export const deactivateBedButtons = (state, newRange) => {
-  return state.listingsFilters?.bedsButtons.map((bedBtn) => {
+  console.log('deactivateBedButtons', state, newRange)
+  return state.listings?.bedsButtons.map((bedBtn) => {
     // find the bedButtons that corespond to the new range
     if (newRange.indexOf(bedBtn.value) >= 0) {
       bedBtn.isActive = true
@@ -50,7 +60,7 @@ export const deactivateBedButtons = (state, newRange) => {
 }
 
 export const activateBedButtons = (state, keyNum) =>
-  state.listingsFilters?.bedsButtons.map((bedBtn) => {
+  state.listings?.bedsButtons.map((bedBtn) => {
     if (bedBtn.value === keyNum) {
       bedBtn.isActive = true
       return bedBtn
@@ -63,7 +73,7 @@ export const activateBedButtons = (state, keyNum) =>
   })
 
 export const setSingleButtonActive = (state, keyNum) =>
-  state.listingsFilters?.bedsButtons?.map((bedBtn) => {
+  state.listings?.bedsButtons?.map((bedBtn) => {
     bedBtn.value === keyNum
       ? (bedBtn.isActive = true)
       : (bedBtn.isActive = false)
