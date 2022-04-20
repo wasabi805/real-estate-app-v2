@@ -92,6 +92,15 @@ export const bedsButtons: IBedsButton[] = [
   { key: 'beds-fltr-5', value: 5, isActive: false },
 ]
 
+export const newBedsButtons: IBedsButton[] = [
+  { id: 'any', text: 'Any', },
+  { id: 'beds-fltr-1', text: 1, },
+  { id: 'beds-fltr-2', text: 2,  },
+  { id: 'beds-fltr-3', text: 3,  },
+  { id: 'beds-fltr-4', text: 4,  },
+  { id: 'beds-fltr-5', text: 5, },
+]
+
 export const bathButtons = [
   {
     id: 'baths-filter-btn-any',

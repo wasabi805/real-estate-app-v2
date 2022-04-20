@@ -18,14 +18,20 @@ const BedsBath = () => {
   const { state, dispatch } = appContext
 
   const bedsButtonClicked = (key: string, state: IinitialState) => {
-    dispatch(handleClickBedsFilterButton(key, state))
+    console.log(key + ' was clicked')
+    // dispatch(handleClickBedsFilterButton(key, state))
   }
 
   const handleBathsButtonClicked = (key: string) => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const { bathButtons, currentBaths } = state.listings?.filters?.bedsBaths
+  const { newBedsButtons, bathButtons, currentBaths } = state.listings?.filters?.bedsBaths
+
+  const mappedBedButtons = state.listings?.filters?.bedsBaths?.newBedsButtons.map( btn=>{
+    btn.onClick = ()=>bedsButtonClicked(btn.id, state)
+    return btn
+  } )
 
   return (
     <BedBathsContainer>
@@ -33,14 +39,22 @@ const BedsBath = () => {
         <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
       <BedsBathButtonContainer>
-        {state.listings?.bedsButtons?.map((btn) => (
+       
+        <ButtonComp
+          activeButton={ ['beds-fltr-1' , 'beds-fltr-3'] }
+          groupType='button-row'
+          buttonGroup={mappedBedButtons}
+        />
+        {/* ---- ORIGINAL ---- */}
+
+        {/* {state.listings?.bedsButtons?.map((btn) => (
           <ButtonComp
             key={btn.key}
             name={btn.value}
             onClick={() => bedsButtonClicked(btn.key, state)}
             type={btn.isActive ? 'primary' : 'default'}
           />
-        ))}
+        ))} */}
       </BedsBathButtonContainer>
 
       <div>

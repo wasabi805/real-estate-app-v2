@@ -18,6 +18,7 @@ import {
   homeTypeButtons,
   bedsButtons,
   bathButtons,
+  newBedsButtons
 } from 'reducers/initialValues'
 
 const {
@@ -123,12 +124,11 @@ export const initialState: IinitialState = {
       },
   
       bedsBaths: {
-        // clickedFilterName: null,
-        // currentRange: [],
-        // bedsButtons: bedsButtons,
+        clickedFilterName: null,
+        currentRange: [],
+        bedsButtons: bedsButtons,
 
-
-
+        newBedsButtons: newBedsButtons,
 
         bathButtons: bathButtons,
         currentBaths: '',
