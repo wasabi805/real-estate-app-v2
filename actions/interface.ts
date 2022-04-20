@@ -63,24 +63,26 @@ export interface IAction {
       isAscending?: boolean
     }
 
-    listingsFilters?: {
+    listings?: {
       isDrawerOpen?: boolean
       clickedFilterName?: ''
       currentRange?: number[] | []
       bedsButtons?: IfilterButtons[]
 
-      forSaleRentSold?: {
-        filterBy?: string[]
-        soldDateRange?: any
-        filterSoldDateRangeBy: any
-      }
-
-      homeType?: {
-        selected?: string
-      }
-
-      bedsBaths?: {
-        currentBaths?: string
+      filters:{
+        forSaleRentSold?: {
+          filterBy?: string[]
+          soldDateRange?: any
+          filterSoldDateRangeBy?: any
+        }
+  
+        homeType?: {
+          selected?: string
+        }
+  
+        bedsBaths?: {
+          currentBaths?: string
+        }
       }
     }
 

@@ -20,14 +20,8 @@ const HomeType = () => {
     dispatch(setSelectedHomeType(id))
   }
 
-  const homeTypeButtons = state.listingsFilters?.homeType?.homeTypeButtons
-  const selectedButton = state.listingsFilters?.homeType?.selected
-
-  console.log(
-    '*********',
-    'selectedButton at HomeType',
-    state.listingsFilters?.homeType
-  )
+  const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
+  const selectedButton = state.listings?.filters?.homeType?.selected
 
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
@@ -57,7 +51,7 @@ const HomeType = () => {
 
     return btn
   })
-  console.log('WHAT IS filterDropdownsRow', state.filterDropdownsRow)
+  
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp

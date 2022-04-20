@@ -53,24 +53,26 @@ export interface IinitialState {
     isAscending: null | boolean
   }
 
-  listingsFilters?: {
+  listings?: {
     isDrawerOpen?: boolean
     clickedFilterName: string
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
 
-    forSaleRentSold?: {
-      filterBy?: []
-      buttons?: IButton[]
-    }
-
-    homeType?: {
-      homeTypeButtons: IButtonWithIcon[]
-      selected?: string
-    }
-    bedsBaths?: {
-      bathButtons?: IBedsButton[]
-      currentBaths?: string
+    filters:{
+      forSaleRentSold?: {
+        filterBy?: []
+        buttons?: IButton[]
+      }
+  
+      homeType?: {
+        homeTypeButtons: IButtonWithIcon[]
+        selected?: string
+      }
+      bedsBaths?: {
+        bathButtons?: IBedsButton[]
+        currentBaths?: string
+      }
     }
   }
 

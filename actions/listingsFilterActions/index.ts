@@ -15,7 +15,7 @@ export const setFilterDrawerOpen = (
 ): Pick<IAction, 'type' | 'payload'> => ({
   type: SET_FILTER_DRAWER_OPEN,
   payload: {
-    listingsFilters: {
+    listings: {
       isDrawerOpen: bool,
     },
   },
@@ -26,13 +26,13 @@ export const handleClickBedsFilterButton = (
   key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-  let currentRange = state.listingsFilters?.currentRange.sort()
+  let currentRange = state.listings?.currentRange.sort()
   const isAny = key === 'any'
   let keyNum = parseInt(key[key.length - 1], 10)
 
   // if is any is clicked after a range or single value for bedroooms is selected
   if (key === 'any') {
-    const activateAnyButtonOnly = state.listingsFilters?.bedsButtons.map(
+    const activateAnyButtonOnly = state.listings?.bedsButtons.map(
       (bedBtn) => {
         if (bedBtn.value === 'Any') {
           bedBtn.isActive = true
@@ -63,13 +63,13 @@ export const handleClickBedsFilterButton = (
 
     // if only one value in the range..
     if (currentRange.length === 1) {
-      if (keyNum < state.listingsFilters?.currentRange[0]) {
+      if (keyNum < state.listings?.currentRange[0]) {
         //grab the new range
         const newRange = range.slice(
           range.indexOf(keyNum),
-          state.listingsFilters?.currentRange[0]
+          state.listings?.currentRange[0]
         )
-        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+        const addAddtionalActiveBtns = state.listings?.bedsButtons?.map(
           (bedBtn) => {
             if (newRange.indexOf(bedBtn.value) >= 0) {
               bedBtn.isActive = true
@@ -88,14 +88,14 @@ export const handleClickBedsFilterButton = (
         )
       }
 
-      if (keyNum > state.listingsFilters?.currentRange[0]) {
+      if (keyNum > state.listings?.currentRange[0]) {
         //grab the new range
         const newRange = range.slice(
-          range.indexOf(state.listingsFilters?.currentRange[0]),
+          range.indexOf(state.listings?.currentRange[0]),
           keyNum
         )
 
-        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+        const addAddtionalActiveBtns = state.listings?.bedsButtons?.map(
           (bedBtn) => {
             if (newRange.indexOf(bedBtn.value) >= 0) {
               bedBtn.isActive = true
@@ -117,11 +117,11 @@ export const handleClickBedsFilterButton = (
 
     // a range exists
     if (currentRange && currentRange.length >= 2) {
-      const rangeInReducer = state.listingsFilters?.currentRange
-      const lastNumInRangeIdx = state.listingsFilters?.currentRange.length - 1
-      const lastValue = state.listingsFilters?.currentRange[lastNumInRangeIdx]
-      const firstValue = state.listingsFilters?.currentRange[0]
-      const previousBtnClicked = state.listingsFilters?.clickedFilterName
+      const rangeInReducer = state.listings?.currentRange
+      const lastNumInRangeIdx = state.listings?.currentRange.length - 1
+      const lastValue = state.listings?.currentRange[lastNumInRangeIdx]
+      const firstValue = state.listings?.currentRange[0]
+      const previousBtnClicked = state.listings?.clickedFilterName
 
       // if a number in the range is clicked twice in a row
       if (keyNum == previousBtnClicked) {
@@ -154,7 +154,7 @@ export const handleClickBedsFilterButton = (
         console.log('-----CASE:2------')
 
         const newRange = range.slice(
-          range.indexOf(state.listingsFilters?.currentRange[0]),
+          range.indexOf(state.listings?.currentRange[0]),
           keyNum
         )
 
@@ -177,7 +177,7 @@ export const handleClickBedsFilterButton = (
 
         //TODO: validate the difference between addAddtionalActiveBtns && activateBedButtons
         //see if one need to get modified to make one of them reusable.
-        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+        const addAddtionalActiveBtns = state.listings?.bedsButtons?.map(
           (bedBtn) => {
             if (newRange.indexOf(bedBtn.value) >= 0) {
               bedBtn.isActive = true
@@ -203,13 +203,13 @@ export const handleClickBedsFilterButton = (
           range.indexOf(keyNum),
           range.indexOf(
             range[
-              state.listingsFilters?.currentRange[
-                state.listingsFilters?.currentRange.length - 1
+              state.listings?.currentRange[
+                state.listings?.currentRange.length - 1
               ]
             ]
           )
         )
-        const addAddtionalActiveBtns = state.listingsFilters?.bedsButtons?.map(
+        const addAddtionalActiveBtns = state.listings?.bedsButtons?.map(
           (bedBtn) => {
             if (newRange.indexOf(bedBtn.value) >= 0) {
               bedBtn.isActive = true
@@ -243,25 +243,13 @@ export const setFilterCurrentBathsAmount = (
   return {
     type: SET_FILTER_CURRENT_BATHS_AMOUNT,
     payload: {
-      listingsFilters: {
+      listings: {
+       filters:{
         bedsBaths: {
           currentBaths: amount,
         },
+       }
       },
-    },
-  }
-}
-
-export const HANDLE_CLICK_BATHS_FILTER_BUTTON =
-  'HANDLE_CLICK_BATHS_FILTER_BUTTON'
-export const handleClickBathsFilterButton = (
-  key: string,
-  state: IinitialState
-): Pick<IAction, 'type' | 'payload'> => {
-  return {
-    type: HANDLE_CLICK_BATHS_FILTER_BUTTON,
-    payload: {
-      listingsFilters: {},
     },
   }
 }

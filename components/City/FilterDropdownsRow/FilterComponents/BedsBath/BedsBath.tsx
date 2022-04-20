@@ -10,7 +10,6 @@ import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/Filt
 
 const {
   handleClickBedsFilterButton,
-  handleClickBathsFilterButton,
   setFilterCurrentBathsAmount,
 } = ListingsFilterActions
 
@@ -26,7 +25,7 @@ const BedsBath = () => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const { bathButtons, currentBaths } = state.listingsFilters?.bedsBaths
+  const { bathButtons, currentBaths } = state.listings?.filters?.bedsBaths
 
   return (
     <BedBathsContainer>
@@ -34,7 +33,7 @@ const BedsBath = () => {
         <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
       <BedsBathButtonContainer>
-        {state.listingsFilters?.bedsButtons?.map((btn) => (
+        {state.listings?.bedsButtons?.map((btn) => (
           <ButtonComp
             key={btn.key}
             name={btn.value}

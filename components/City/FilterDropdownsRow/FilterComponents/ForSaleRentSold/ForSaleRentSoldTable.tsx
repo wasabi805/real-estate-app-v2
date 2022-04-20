@@ -43,17 +43,17 @@ const ForSaleRentSold = () => {
       <div>
         {console.log(
           'YEEEEE',
-          state.listingsFilters?.forSaleRentSold?.soldDateRange
+          state.listings?.filters?.forSaleRentSold?.soldDateRange
         )}
         <Table
           pagination={false}
           showHeader={false}
-          columns={state.listingsFilters?.forSaleRentSold?.soldDateRangeColumns}
-          dataSource={state.listingsFilters?.forSaleRentSold?.soldDateRangeRows}
+          columns={state.listings?.filters?.forSaleRentSold?.soldDateRangeColumns}
+          dataSource={state.listings?.filters?.forSaleRentSold?.soldDateRangeRows}
           rowSelection={{
             type: 'radio',
             selectedRowKeys:
-              state.listingsFilters?.forSaleRentSold?.soldDateRange,
+              state.listings?.filters?.forSaleRentSold?.soldDateRange,
           }}
           onRow={(record) => {
             return {
@@ -73,7 +73,7 @@ const ForSaleRentSold = () => {
         showHeader={false}
         rowSelection={{
           type: 'radio',
-          selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
+          selectedRowKeys: state.listings?.filters?.forSaleRentSold?.filterBy,
         }}
         columns={newColumns}
         dataSource={newSaleRentRows}
@@ -90,7 +90,7 @@ const ForSaleRentSold = () => {
           showHeader={false}
           rowSelection={{
             type: 'radio',
-            selectedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
+            selectedRowKeys: state.listings?.filters?.forSaleRentSold?.filterBy,
           }}
           columns={columns}
           dataSource={[
@@ -105,7 +105,7 @@ const ForSaleRentSold = () => {
             },
           })}
           expandable={{
-            expandedRowKeys: state.listingsFilters?.forSaleRentSold?.filterBy,
+            expandedRowKeys: state.listings?.filters?.forSaleRentSold?.filterBy,
             expandedRowRender: (record) => <ForSaleDateRange />,
             onExpand: (expanded, record) =>
               console.log('onExpand: ', record, expanded),

@@ -39,7 +39,6 @@ const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
 const {
   SET_FILTER_DRAWER_OPEN,
   HANDLE_CLICK_BEDS_FILTER_BUTTON,
-  HANDLE_CLICK_BATHS_FILTER_BUTTON,
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
@@ -78,17 +77,6 @@ export const initialState: IinitialState = {
     activeFilterPanel: '0',
   },
 
-  //ToDO: delete this
-  forSaleRentSold: {
-    filterBy: [],
-
-    buttons: [
-      { name: 'sale', value: 'sale' },
-      { name: 'rent', value: 'rent' },
-      { name: 'sold', value: 'sold' },
-    ],
-  },
-
   //TODO : nest priceFilter in listingsFilters
   priceFilter: {
     //inputs
@@ -111,32 +99,34 @@ export const initialState: IinitialState = {
   },
 
   //TODO : move all filters into listinsgFilters
-  listingsFilters: {
+  listings: {
     isDrawerOpen: false,
     clickedFilterName: null,
     currentRange: [],
     bedsButtons: bedsButtons,
 
-    forSaleRentSold: {
-      filterBy: [],
-      buttons: forSaleRentSoldButtons,
-
-      //TODO VERIFY action and reducer interfaces
-      soldDateRange: '',
-
-      soldDateRangeColumns: soldDateRangeColumns,
-      soldDateRangeRows: soldDateRangeRows,
-    },
-
-    homeType: {
-      homeTypeButtons: homeTypeButtons,
-      selected: '',
-    },
-
-    bedsBaths: {
-      bathButtons: bathButtons,
-      currentBaths: '',
-    },
+    filters:{
+      forSaleRentSold: {
+        filterBy: [],
+        buttons: forSaleRentSoldButtons,
+  
+        //TODO VERIFY action and reducer interfaces
+        soldDateRange: '',
+  
+        soldDateRangeColumns: soldDateRangeColumns,
+        soldDateRangeRows: soldDateRangeRows,
+      },
+  
+      homeType: {
+        homeTypeButtons: homeTypeButtons,
+        selected: '',
+      },
+  
+      bedsBaths: {
+        bathButtons: bathButtons,
+        currentBaths: '',
+      },
+    }
   },
 
   sortAndFilter: {
@@ -240,12 +230,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_ACTIVE_FILTER_PANEL:
-      const activeFilterPanel =
-        action.payload?.filterDropdownsRow?.activeFilterPanel
-      return updateNestedObj(['filterDropdownsRow', 'activeFilterPanel'])(
-        activeFilterPanel
-      )(state)
-
+      const activeFilterPanel = action.payload?.filterDropdownsRow?.activeFilterPanel
+      return updateNestedObj(['filterDropdownsRow', 'activeFilterPanel'])(activeFilterPanel)(
+        state
+      )
+      
     case HOMES_VIEW_TAB_CLICKED:
       const isTableView = action.payload?.listingTable?.isTableView
       return updateNestedObj(['listingTable', 'isTableView'])(isTableView)(
@@ -253,54 +242,41 @@ const appReducer = (state: IinitialState, action: IAction) => {
       )
 
     case SET_FILTER_DRAWER_OPEN:
-      const isDrawerOpen = action.payload?.listingsFilters?.isDrawerOpen
-      return updateNestedObj(['listingsFilters', 'isDrawerOpen'])(isDrawerOpen)(
+      const isDrawerOpen = action.payload?.listings?.isDrawerOpen
+      return updateNestedObj(['listings', 'isDrawerOpen'])(isDrawerOpen)(
         state
       )
 
     case SET_SELECTED_HOME_TYPE:
-      const selected = action.payload?.listingsFilters?.homeType?.selected
-      return updateNestedObj(['listingsFilters', 'homeType', 'selected'])(
+      const selected = action.payload?.listings?.filters?.homeType?.selected
+      return updateNestedObj(['listings','filters', 'homeType', 'selected'])(
         selected
       )(state)
 
     case SET_FILTER_BY_PROPERTY_TYPE:
       const filterBy = action.payload?.forSaleRentSold?.filterBy
-      return updateNestedObj([
-        'listingsFilters',
-        'forSaleRentSold',
-        'filterBy',
-      ])(filterBy)(state)
-
+      return updateNestedObj(['listings','filters', 'forSaleRentSold', 'filterBy'])(
+        filterBy
+      )(state)
+     
     case SET_SOLD_DATE_RANGE:
-      return {
-        ...state,
-        listingsFilters: {
-          ...state.listingsFilters,
-          forSaleRentSold: {
-            ...state.listingsFilters?.forSaleRentSold,
-            soldDateRange:
-              action.payload?.listingsFilters?.forSaleRentSold?.soldDateRange,
-          },
-        },
-      }
+      const soldDateRange=  action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
+      return updateNestedObj(['listings','filters', 'forSaleRentSold', 'soldDateRange'])(
+        soldDateRange
+      )(state)
 
     case HANDLE_CLICK_BEDS_FILTER_BUTTON:
       return {
         ...state,
         listingsFilters: action.payload?.listingsFilters,
       }
-    case HANDLE_CLICK_BATHS_FILTER_BUTTON:
-      return {
-        ...state,
-      }
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
-      const currentBaths =
-        action.payload?.listingsFilters?.bedsBaths?.currentBaths
-      return updateNestedObj(['listingsFilters', 'bedsBaths', 'currentBaths'])(
+      const currentBaths = action.payload?.listings?.filters.bedsBaths?.currentBaths
+      return updateNestedObj(['listings', 'filters', 'bedsBaths', 'currentBaths'])(
         currentBaths
       )(state)
+     
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
       return {
