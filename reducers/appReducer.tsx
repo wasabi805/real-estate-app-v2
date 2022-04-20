@@ -1,5 +1,3 @@
-import { Map } from 'immutable'
-
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
@@ -9,6 +7,7 @@ import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
+import { updateNestedObj, assocPath } from 'utils/helpers'
 
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
@@ -160,10 +159,6 @@ export const initialState: IinitialState = {
   },
 }
 
-const immutableState = Map(initialState)
-const updatedState = (path: string[], updateValue: any) =>
-  immutableState.setIn(path, updateValue).toJS()
-
 const appReducer = (state: IinitialState, action: IAction) => {
   switch (action.type) {
     //  LOGIN MODAL
@@ -247,57 +242,37 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_ACTIVE_FILTER_PANEL:
       const activeFilterPanel =
         action.payload?.filterDropdownsRow?.activeFilterPanel
-      return updatedState(
-        ['filterDropdownsRow', 'activeFilterPanel'],
+      return updateNestedObj(['filterDropdownsRow', 'activeFilterPanel'])(
         activeFilterPanel
-      )
+      )(state)
 
     case HOMES_VIEW_TAB_CLICKED:
       const isTableView = action.payload?.listingTable?.isTableView
-      return updatedState(['listingTable', 'isTableView'], isTableView)
+      return updateNestedObj(['listingTable', 'isTableView'])(isTableView)(
+        state
+      )
 
     case SET_FILTER_DRAWER_OPEN:
       const isDrawerOpen = action.payload?.listingsFilters?.isDrawerOpen
-      return updatedState(['listingsFilters', 'isDrawerOpen'], isDrawerOpen)
+      return updateNestedObj(['listingsFilters', 'isDrawerOpen'])(isDrawerOpen)(
+        state
+      )
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listingsFilters?.homeType?.selected
-
-      console.log('what is selected?', selected)
-
-      //TODO: See why it wont stay open
-      return updatedState(['listingsFilters', 'homeType', 'selected'], selected)
-
-    // return {
-    //   ...state,
-    //   listingsFilters: {
-    //     ...state.listingsFilters,
-    //     homeType: {
-    //       ...state.listingsFilters?.homeType,
-    //       selected: selected,
-    //     },
-    //   },
-    // }
+      return updateNestedObj(['listingsFilters', 'homeType', 'selected'])(
+        selected
+      )(state)
 
     case SET_FILTER_BY_PROPERTY_TYPE:
-      //TODO: GET THIS TO WORK WITH ANT Lib
-
-      // const filterBy = action.payload?.forSaleRentSold?.filterBy
-      // return updatedState(['listingsFilters', 'forSaleRentSold', 'filterBy'], filterBy)
-
-      return {
-        ...state,
-        listingsFilters: {
-          ...state.listingsFilters,
-          forSaleRentSold: {
-            ...state.listingsFilters?.forSaleRentSold,
-            filterBy: action.payload?.forSaleRentSold?.filterBy,
-          },
-        },
-      }
+      const filterBy = action.payload?.forSaleRentSold?.filterBy
+      return updateNestedObj([
+        'listingsFilters',
+        'forSaleRentSold',
+        'filterBy',
+      ])(filterBy)(state)
 
     case SET_SOLD_DATE_RANGE:
-      console.log('what is action', action)
       return {
         ...state,
         listingsFilters: {
@@ -321,17 +296,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
-      return {
-        ...state,
-        listingsFilters: {
-          ...state.listingsFilters,
-          bedsBaths: {
-            ...state.listingsFilters?.bedsBaths,
-            currentBaths:
-              action.payload?.listingsFilters?.bedsBaths?.currentBaths,
-          },
-        },
-      }
+      const currentBaths =
+        action.payload?.listingsFilters?.bedsBaths?.currentBaths
+      return updateNestedObj(['listingsFilters', 'bedsBaths', 'currentBaths'])(
+        currentBaths
+      )(state)
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
       return {

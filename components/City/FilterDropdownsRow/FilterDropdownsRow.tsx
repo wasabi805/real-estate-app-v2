@@ -68,7 +68,7 @@ const FilterDropdownsRow = () => {
           className={'ant-btn for-sale-filter'}
           btnKey={FOR_SALE_PANEL}
           buttonName={'For Sale'}
-          activeKey={state.filterDropdownsRow.activeFilterPanel}
+          activeKey={state.filterDropdownsRow?.activeFilterPanel}
           onChange={() => handleSetActivePanel(FOR_SALE_PANEL)}
           component={
             <>

@@ -19,7 +19,8 @@ interface IButtonCompProps {
   }
   align?: string
   groupType?: string
-  buttonGroup: IButtonGroup[]
+  buttonGroup?: IButtonGroup[]
+  activeButton?: string
   type?:
     | 'link'
     | 'text'

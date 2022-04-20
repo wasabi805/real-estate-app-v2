@@ -8,6 +8,7 @@ interface IBedsButton {
 }
 
 export interface IinitialState {
+  setIn: any
   isLoginModalVisibile: boolean
   user: {
     email: string
