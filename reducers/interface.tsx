@@ -1,5 +1,8 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
+import { ISoldDateRangeRows } from 'utils/interfaces/tables'
+import {IAntTableSelectedRow} from 'utils/interfaces/antDesign'
+
 
 interface IBedsButton {
   id: string
@@ -59,6 +62,9 @@ export interface IinitialState {
       forSaleRentSold?: {
         filterBy?: []
         buttons?: IButton[]
+        soldDateRange: string
+        soldDateRangeColumns : IAntTableSelectedRow[]
+        soldDateRangeRows: ISoldDateRangeRows[]
       }
 
       homeType?: {

@@ -99,17 +99,12 @@ export const initialState: IinitialState = {
     },
   },
 
-  //TODO : move all filters into listinsgFilters
   listings: {
-    isDrawerOpen: false,
     filters: {
       forSaleRentSold: {
         filterBy: [],
         buttons: forSaleRentSoldButtons,
-
-        //TODO VERIFY action and reducer interfaces
         soldDateRange: '',
-
         soldDateRangeColumns: soldDateRangeColumns,
         soldDateRangeRows: soldDateRangeRows,
       },
