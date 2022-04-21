@@ -86,9 +86,9 @@ export interface IAction {
           clickedNumber: Number | string
         }
 
-          allFilters?:{
-            isDrawerOpen?: boolean,
-          }
+        allFilters?: {
+          isDrawerOpen?: boolean
+        }
       }
     }
 

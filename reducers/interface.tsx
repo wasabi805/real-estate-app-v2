@@ -1,8 +1,7 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
 import { ISoldDateRangeRows } from 'utils/interfaces/tables'
-import {IAntTableSelectedRow} from 'utils/interfaces/antDesign'
-
+import { IAntTableSelectedRow } from 'utils/interfaces/antDesign'
 
 interface IBedsButton {
   id: string
@@ -63,7 +62,7 @@ export interface IinitialState {
         filterBy?: []
         buttons?: IButton[]
         soldDateRange: string
-        soldDateRangeColumns : IAntTableSelectedRow[]
+        soldDateRangeColumns: IAntTableSelectedRow[]
         soldDateRangeRows: ISoldDateRangeRows[]
       }
 
@@ -81,8 +80,8 @@ export interface IinitialState {
         currentBaths?: string
       }
 
-      allFilters:{
-        isDrawerOpen: boolean,
+      allFilters: {
+        isDrawerOpen: boolean
       }
     }
   }

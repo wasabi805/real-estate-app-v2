@@ -10,11 +10,11 @@ export const setFilterDrawerOpen = (
   type: SET_FILTER_DRAWER_OPEN,
   payload: {
     listings: {
-      filters:{
-        allFilters:{
+      filters: {
+        allFilters: {
           isDrawerOpen: bool,
-        }
-      }
+        },
+      },
     },
   },
 })
@@ -32,10 +32,12 @@ export const setBedsValues = (
   const range = [1, 2, 3, 4, 5]
   const bedsBathsPath: string[] = ['listings', 'filters', 'bedsBaths']
 
-  let currentRange = state.listings?.filters.bedsBaths.currentRange.sort()
-  let clickedNumber = state.listings?.filters.bedsBaths?.clickedNumber
+  let currentRange: Number | string =
+    state.listings?.filters?.bedsBaths?.currentRange.sort()
+  let clickedNumber: Number | string =
+    state.listings?.filters.bedsBaths?.clickedNumber!
 
-  let keyNum = newKeyValue !== 'any' && newKeyValue
+  let keyNum: Number | string = newKeyValue !== 'any' && newKeyValue
 
   const bedsBathPayload = {
     listings: {
@@ -61,7 +63,7 @@ export const setBedsValues = (
   //  ----- NUMBERS -----
   if (typeof newKeyValue === 'number') {
     // removes the 'any' key if from range if any key was clicked
-    currentRange = currentRange.filter((val) => val !== 'any')
+    currentRange = currentRange.filter((val: Number | string) => val !== 'any')
 
     // Clicked number exists in range stored in reducer
     const isKeyNumPresent = currentRange.indexOf(newKeyValue) >= 0
@@ -116,9 +118,6 @@ export const setBedsValues = (
 
     //if a range exists in the reducer
     if (currentRange.length >= 2) {
-      //TODO REMOVE LATER
-      const previousBtnClicked = state.listings?.clickedFilterName
-
       // if a number in the range is clicked twice in a row
       if (keyNum == clickedNumber) {
         const newRange = [keyNum]
@@ -132,9 +131,8 @@ export const setBedsValues = (
       }
 
       // if the clicked value is less than the lowest range number in the reducer...
-      // if (!isKeyNumPresent && keyNum < firstValue) {
+
       if (!isKeyNumPresent && keyNum < currentRange[0]) {
-        console.log('-----CASE:1------ ')
         //get the new range of numbers
         const newRange = range.slice(
           range.indexOf(keyNum),
@@ -151,7 +149,6 @@ export const setBedsValues = (
 
       // range exists and number in range is clicked
       if (isKeyNumPresent && keyNum > clickedNumber) {
-        console.log('-----CASE:2------ ')
         const newRange = range.slice(range.indexOf(currentRange[0]), keyNum)
 
         return {
@@ -163,26 +160,8 @@ export const setBedsValues = (
         }
       }
 
-      //SUSPECT
-      //range exists but, clicked number is not in the range(set button active)
-      if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
-        console.log('-----CASE:3------')
-
-        const lastVal = keyNum
-
-        const newRange = range.slice(range.indexOf(currentRange[0]), lastVal)
-        return {
-          type: SET_BEDS_VALUES,
-          payload: updateNestedObj(bedsBathsPath)({
-            currentRange: newRange,
-            clickedNumber: newKeyValue,
-          })(bedsBathPayload),
-        }
-      }
-
       // if range exists, number is in range, clicked number value  is less that previously clicked button
       if (isKeyNumPresent && keyNum < clickedNumber) {
-        console.log('-----CASE:4------ ')
         const newRange =
           clickedNumber !== 5
             ? range.slice(
