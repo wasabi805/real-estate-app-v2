@@ -5,7 +5,7 @@ import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { IinitialState } from 'reducers/interface'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
-import { bedsNumberPrefix } from 'utils/contants'
+import { bedsNumberIdPrefix } from 'utils/contants'
 
 const { setBedsValues, setFilterCurrentBathsAmount } = ListingsFilterActions
 
@@ -47,7 +47,7 @@ const BedsBath = () => {
           groupType="button-row"
           buttonGroup={mappedBedButtons}
           activeButton={currentRange.map(
-            (id: string) => `${bedsNumberPrefix}` + `${id}`
+            (id: string) => `${bedsNumberIdPrefix}` + `${id}`
           )}
         />
       </BedsBathButtonContainer>

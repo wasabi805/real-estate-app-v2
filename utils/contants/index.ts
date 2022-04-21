@@ -1,2 +1,5 @@
-export const bedsNumberPrefix = 'beds-fltr-'
-export const bedsButtonFilterRange = [1, 2, 3, 4, 5]
+export const bedsNumberIdPrefix = 'beds-fltr-'
+export const bathsValuesPrefix = 'baths-filter-btn-'
+export const homeTypeIdPrefix = 'home-type-'
+export const soldDateRangeIdPrefix = 'sold-last-'
+export const forSaleRentSoldIdPrefix = 'all-filters-btn-'

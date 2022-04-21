@@ -9,6 +9,7 @@ import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/Fil
 
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
+import { homeTypeIdPrefix } from 'utils/contants'
 
 const { setSelectedHomeType } = HomeTypeActions
 
@@ -25,7 +26,7 @@ const HomeType = () => {
 
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
-    const iconType = btn.id?.split('-')
+    const iconType = btn.id?.split(homeTypeIdPrefix)
     const iconName = iconType && iconType[iconType.length - 1]
 
     let icon

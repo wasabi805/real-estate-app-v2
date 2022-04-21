@@ -1,9 +1,8 @@
 import { IAction } from 'actions/interface'
 import { IinitialState } from 'reducers/interface'
 import { updateNestedObj } from 'utils/helpers'
-import { bedsNumberPrefix } from 'utils/contants'
+import { bedsNumberIdPrefix } from 'utils/contants'
 
-import { handleBedsNumAction, setSingleButtonActive } from './helpers'
 export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
 export const setFilterDrawerOpen = (
   bool: boolean
@@ -22,7 +21,7 @@ export const setBedsValues = (
   key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-  let newKey = key.split(bedsNumberPrefix)[1]
+  let newKey = key.split(bedsNumberIdPrefix)[1]
   let newKeyValue = newKey !== 'any' ? parseInt(newKey, 10) : 'any'
 
   // TODO store in reducer or a contants file.
