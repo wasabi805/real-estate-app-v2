@@ -5,10 +5,11 @@ export const BedsBathButtonContainer = styled.div`
   height: 2.5rem;
   width: 100%;
   display: flex;
+  margin-bottom: 1rem;
 
   & button {
     flex: 1;
-    margin: 0 0.5px;
-    height: 100%;
+    margin: 0.5px;
+    height: 3vh;
   }
 `

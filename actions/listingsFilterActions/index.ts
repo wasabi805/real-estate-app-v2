@@ -25,9 +25,10 @@ export const setBedsValues = (
 
   let newKey = key.split('beds-fltr-')[1]
   let newKeyValue = newKey !== 'any' ? parseInt(newKey, 10) : 'any'
-  const range = [1, 2, 3, 4, 5]
 
-  console.log(newKeyValue, '<---newKeyValue')
+  // TODO store in reducer or a contants file.
+  const range = [1, 2, 3, 4, 5]
+  const bedsBathsPath: string[] = ['listings', 'filters', 'bedsBaths']
 
   let currentRange = state.listings?.filters.bedsBaths.currentRange.sort()
   let clickedNumber = state.listings?.filters.bedsBaths?.clickedNumber
@@ -48,7 +49,7 @@ export const setBedsValues = (
     return {
       type: SET_BEDS_VALUES,
 
-      payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+      payload: updateNestedObj(bedsBathsPath)({
         currentRange: ['any'],
         clickedNumber: 0,
       })(bedsBathPayload),
@@ -70,7 +71,7 @@ export const setBedsValues = (
 
       return {
         type: SET_BEDS_VALUES,
-        payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+        payload: updateNestedObj(bedsBathsPath)({
           currentRange: returnRange,
           clickedNumber: newKeyValue,
         })(bedsBathPayload),
@@ -89,7 +90,7 @@ export const setBedsValues = (
 
         return {
           type: SET_BEDS_VALUES,
-          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+          payload: updateNestedObj(bedsBathsPath)({
             currentRange: newRange,
             clickedNumber: keyNum,
           })(bedsBathPayload),
@@ -103,7 +104,7 @@ export const setBedsValues = (
             : range.slice(range.indexOf(keyNum))
         return {
           type: SET_BEDS_VALUES,
-          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+          payload: updateNestedObj(bedsBathsPath)({
             currentRange: newRange,
             clickedNumber: keyNum,
           })(bedsBathPayload),
@@ -121,7 +122,7 @@ export const setBedsValues = (
         const newRange = [keyNum]
         return {
           type: SET_BEDS_VALUES,
-          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+          payload: updateNestedObj(bedsBathsPath)({
             currentRange: newRange,
             clickedNumber: newKeyValue,
           })(bedsBathPayload),

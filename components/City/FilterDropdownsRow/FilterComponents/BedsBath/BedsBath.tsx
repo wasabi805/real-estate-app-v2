@@ -46,25 +46,16 @@ const BedsBath = () => {
       <div style={{ display: 'flex' }}>
         <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
+
       <BedsBathButtonContainer>
         <ButtonComp
-          // activeButton={ ['beds-fltr-1' , 'beds-fltr-3'] }
+           groupType="button-row"
+           buttonGroup={mappedBedButtons}
           activeButton={currentRange.map(
             (value: string) => `beds-fltr-${value}`
           )}
-          groupType="button-row"
-          buttonGroup={mappedBedButtons}
+         
         />
-        {/* ---- ORIGINAL ---- */}
-
-        {/* {state.listings?.bedsButtons?.map((btn) => (
-          <ButtonComp
-            key={btn.key}
-            name={btn.value}
-            onClick={() => bedsButtonClicked(btn.key, state)}
-            type={btn.isActive ? 'primary' : 'default'}
-          />
-        ))} */}
       </BedsBathButtonContainer>
 
       <div>
