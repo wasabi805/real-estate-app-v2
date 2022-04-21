@@ -7,6 +7,7 @@ import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { IinitialState } from 'reducers/interface'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
+import { bedsNumberPrefix } from 'utils/contants'
 
 const { setBedsValues, setFilterCurrentBathsAmount } = ListingsFilterActions
 
@@ -49,12 +50,11 @@ const BedsBath = () => {
 
       <BedsBathButtonContainer>
         <ButtonComp
-           groupType="button-row"
-           buttonGroup={mappedBedButtons}
+          groupType="button-row"
+          buttonGroup={mappedBedButtons}
           activeButton={currentRange.map(
-            (value: string) => `beds-fltr-${value}`
+            (id: string) => `${bedsNumberPrefix}` + `${id}`
           )}
-         
         />
       </BedsBathButtonContainer>
 

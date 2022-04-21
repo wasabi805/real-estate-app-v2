@@ -1,6 +1,7 @@
 import { IButton, IButtonWithIcon } from 'utils/interfaces/buttons'
 import { ISoldDateRangeRows } from 'utils/interfaces/tables'
 import { IAntTableSelectedRow } from 'utils/interfaces/antDesign'
+import { bedsNumberPrefix } from 'utils/contants'
 
 /* ------ For SALE RENT SOLD ------*/
 
@@ -92,13 +93,13 @@ export const bedsButtons: IBedsButton[] = [
   { key: 'beds-fltr-5', value: 5, isActive: false },
 ]
 
-export const newBedsButtons: IBedsButton[] = [
-  { id: 'beds-fltr-any', text: 'Any',},
-  { id: 'beds-fltr-1', text: 1 },
-  { id: 'beds-fltr-2', text: 2 },
-  { id: 'beds-fltr-3', text: 3 },
-  { id: 'beds-fltr-4', text: 4 },
-  { id: 'beds-fltr-5', text: 5 },
+export const newBedsButtons: IButton[] = [
+  { id: `${bedsNumberPrefix}any`, text: 'Any' },
+  { id: `${bedsNumberPrefix}1`, text: 1 },
+  { id: `${bedsNumberPrefix}2`, text: 2 },
+  { id: `${bedsNumberPrefix}3`, text: 3 },
+  { id: `${bedsNumberPrefix}4`, text: 4 },
+  { id: `${bedsNumberPrefix}5`, text: 5 },
 ]
 
 export const bathButtons = [

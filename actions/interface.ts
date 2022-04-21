@@ -82,6 +82,8 @@ export interface IAction {
 
         bedsBaths?: {
           currentBaths?: string
+          currentRange?: Number | string[]
+          clickedNumber: Number | string
         }
       }
     }

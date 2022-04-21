@@ -7,7 +7,7 @@ import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
-import { updateNestedObj, assocPath } from 'utils/helpers'
+import { updateNestedObj } from 'utils/helpers'
 
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
@@ -282,35 +282,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     //TODO VERIFY
     case SET_BEDS_VALUES:
-      console.log('SET_BEDS_VALUES in reducer', action)
-
       const currentRange =
-        action.payload?.listings.filters.bedsBaths.currentRange
+        action.payload?.listings?.filters?.bedsBaths?.currentRange
       const clickedNumber =
-        action.payload?.listings.filters.bedsBaths.clickedNumber
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            bedsBaths: {
-              ...state.listings.filters.bedsBaths,
-              currentRange: currentRange,
-              clickedNumber: clickedNumber,
-            },
-          },
-        },
-      }
+        action.payload?.listings?.filters?.bedsBaths?.clickedNumber
 
-      //original
-      // return {
-      //   ...state,
-      //   listings: action.payload?.listings,
-      // }
-      return {
-        ...state,
-      }
+      return updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+        ...state.listings?.filters.bedsBaths,
+        currentRange,
+        clickedNumber,
+      })(state)
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
       const currentBaths =

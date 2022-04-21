@@ -1,6 +1,7 @@
 import { IAction } from 'actions/interface'
 import { IinitialState } from 'reducers/interface'
 import { updateNestedObj } from 'utils/helpers'
+import { bedsNumberPrefix } from 'utils/contants'
 
 import { handleBedsNumAction, setSingleButtonActive } from './helpers'
 export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
@@ -21,9 +22,7 @@ export const setBedsValues = (
   key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-  console.log('SET_BEDS_VALUES - action', { key, state })
-
-  let newKey = key.split('beds-fltr-')[1]
+  let newKey = key.split(bedsNumberPrefix)[1]
   let newKeyValue = newKey !== 'any' ? parseInt(newKey, 10) : 'any'
 
   // TODO store in reducer or a contants file.
@@ -132,25 +131,18 @@ export const setBedsValues = (
       // if the clicked value is less than the lowest range number in the reducer...
       // if (!isKeyNumPresent && keyNum < firstValue) {
       if (!isKeyNumPresent && keyNum < currentRange[0]) {
-        console.log('-----CASE:1------ CONFIRMED WORKS')
+        console.log('-----CASE:1------ ')
         //get the new range of numbers
         const newRange = range.slice(
           range.indexOf(keyNum),
           currentRange[currentRange.length - 1]
         )
-
         return {
           type: SET_BEDS_VALUES,
-          payload: {
-            listings: {
-              filters: {
-                bedsBaths: {
-                  currentRange: newRange,
-                  clickedNumber: newKeyValue,
-                },
-              },
-            },
-          },
+          payload: updateNestedObj(bedsBathsPath)({
+            currentRange: newRange,
+            clickedNumber: newKeyValue,
+          })(bedsBathPayload),
         }
       }
 
@@ -161,16 +153,10 @@ export const setBedsValues = (
 
         return {
           type: SET_BEDS_VALUES,
-          payload: {
-            listings: {
-              filters: {
-                bedsBaths: {
-                  currentRange: newRange,
-                  clickedNumber: newKeyValue,
-                },
-              },
-            },
-          },
+          payload: updateNestedObj(bedsBathsPath)({
+            currentRange: newRange,
+            clickedNumber: newKeyValue,
+          })(bedsBathPayload),
         }
       }
 
@@ -184,16 +170,10 @@ export const setBedsValues = (
         const newRange = range.slice(range.indexOf(currentRange[0]), lastVal)
         return {
           type: SET_BEDS_VALUES,
-          payload: {
-            listings: {
-              filters: {
-                bedsBaths: {
-                  currentRange: newRange,
-                  clickedNumber: newKeyValue,
-                },
-              },
-            },
-          },
+          payload: updateNestedObj(bedsBathsPath)({
+            currentRange: newRange,
+            clickedNumber: newKeyValue,
+          })(bedsBathPayload),
         }
       }
 
@@ -210,16 +190,10 @@ export const setBedsValues = (
 
         return {
           type: SET_BEDS_VALUES,
-          payload: {
-            listings: {
-              filters: {
-                bedsBaths: {
-                  currentRange: newRange,
-                  clickedNumber: newKeyValue,
-                },
-              },
-            },
-          },
+          payload: updateNestedObj(bedsBathsPath)({
+            currentRange: newRange,
+            clickedNumber: newKeyValue,
+          })(bedsBathPayload),
         }
       }
     }
