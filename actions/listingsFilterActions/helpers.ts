@@ -1,4 +1,4 @@
-import { HANDLE_CLICK_BEDS_FILTER_BUTTON } from '.'
+import { SET_BEDS_VALUES } from '.'
 import { bedsButtons } from 'reducers/initialValues'
 
 export const range = [1, 2, 3, 4, 5]
@@ -10,7 +10,7 @@ export const handleBedsNumAction = (
   clickedFilterName
 ) => {
   return {
-    type: HANDLE_CLICK_BEDS_FILTER_BUTTON,
+    type: SET_BEDS_VALUES,
     // payload: {
     //   listingsFilters: {
     //     ...state.listings,

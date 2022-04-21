@@ -9,7 +9,7 @@ import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 
 const {
-  handleClickBedsFilterButton,
+  setBedsValues,
   setFilterCurrentBathsAmount,
 } = ListingsFilterActions
 
@@ -17,19 +17,20 @@ const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  const bedsButtonClicked = (key: string, state: IinitialState) => {
-    console.log(key + ' was clicked')
-    // dispatch(handleClickBedsFilterButton(key, state))
+  const handleBedsButtonClicked = (key: string, state: IinitialState) => {
+    dispatch(setBedsValues(key, state))
   }
 
   const handleBathsButtonClicked = (key: string) => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const { newBedsButtons, bathButtons, currentBaths } = state.listings?.filters?.bedsBaths
+  const { newBedsButtons, bathButtons, currentBaths , currentRange, clickedNumber} = state.listings?.filters?.bedsBaths
+
+  console.log('state.listings?.filters?.bedsBaths back at component', state.listings?.filters?.bedsBaths)
 
   const mappedBedButtons = state.listings?.filters?.bedsBaths?.newBedsButtons.map( btn=>{
-    btn.onClick = ()=>bedsButtonClicked(btn.id, state)
+    btn.onClick = ()=>handleBedsButtonClicked(btn.id, state)
     return btn
   } )
 
@@ -41,9 +42,13 @@ const BedsBath = () => {
       <BedsBathButtonContainer>
        
         <ButtonComp
-          activeButton={ ['beds-fltr-1' , 'beds-fltr-3'] }
+          // activeButton={ ['beds-fltr-1' , 'beds-fltr-3'] }
+          activeButton={ 
+            currentRange.map( (value: string) => 
+            `beds-fltr-${value}`)  
+          }
           groupType='button-row'
-          buttonGroup={mappedBedButtons}
+          buttonGroup={ mappedBedButtons }
         />
         {/* ---- ORIGINAL ---- */}
 

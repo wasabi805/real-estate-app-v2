@@ -39,7 +39,7 @@ const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
 
 const {
   SET_FILTER_DRAWER_OPEN,
-  HANDLE_CLICK_BEDS_FILTER_BUTTON,
+  SET_BEDS_VALUES,
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
@@ -125,6 +125,8 @@ export const initialState: IinitialState = {
   
       bedsBaths: {
         clickedFilterName: null,
+
+        clickedNumber: 0,
         currentRange: [],
         bedsButtons: bedsButtons,
 
@@ -273,15 +275,35 @@ const appReducer = (state: IinitialState, action: IAction) => {
       )(state)
 
         //TODO VERIFY
-    case HANDLE_CLICK_BEDS_FILTER_BUTTON:
-      return {
+    case SET_BEDS_VALUES:
+      console.log('SET_BEDS_VALUES in reducer', action)
+
+      const currentRange = action.payload?.listings.filters.bedsBaths.currentRange
+      const clickedNumber = action.payload?.listings.filters.bedsBaths.clickedNumber
+      return{
         ...state,
-        listings: action.payload?.listings,
+        listings:{
+          ...state.listings,
+          filters:{
+            ...state.listings.filters,
+            bedsBaths:{
+              ...state.listings.filters.bedsBaths,
+              currentRange: currentRange,
+              clickedNumber: clickedNumber
+            }
+          }
+        }
       }
+
+
+      //original
       // return {
       //   ...state,
       //   listings: action.payload?.listings,
       // }
+      return {
+        ...state,
+      }
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
       const currentBaths = action.payload?.listings?.filters.bedsBaths?.currentBaths

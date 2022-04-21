@@ -93,7 +93,7 @@ export const bedsButtons: IBedsButton[] = [
 ]
 
 export const newBedsButtons: IBedsButton[] = [
-  { id: 'any', text: 'Any', },
+  { id: 'beds-fltr-any', text: 'Any', },
   { id: 'beds-fltr-1', text: 1, },
   { id: 'beds-fltr-2', text: 2,  },
   { id: 'beds-fltr-3', text: 3,  },
