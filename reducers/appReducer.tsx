@@ -124,13 +124,9 @@ export const initialState: IinitialState = {
       },
 
       bedsBaths: {
-        clickedFilterName: null,
-
+        newBedsButtons: newBedsButtons,
         clickedNumber: 0,
         currentRange: [],
-        bedsButtons: bedsButtons,
-
-        newBedsButtons: newBedsButtons,
 
         bathButtons: bathButtons,
         currentBaths: '',
@@ -280,7 +276,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
         'soldDateRange',
       ])(soldDateRange)(state)
 
-    //TODO VERIFY
     case SET_BEDS_VALUES:
       const currentRange =
         action.payload?.listings?.filters?.bedsBaths?.currentRange
