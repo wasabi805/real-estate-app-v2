@@ -99,9 +99,6 @@ export const TileIconButton = styled.span`
     border-radius: 4px;
     font weight: 200;
   }
-
-  
-
 `
 
 export const ButtonRowContainer = styled.div`

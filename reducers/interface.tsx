@@ -74,6 +74,10 @@ export interface IinitialState {
         bathButtons?: IBedsButton[]
         currentBaths?: string
       }
+
+      allFilters:{
+        isDrawerOpen: boolean,
+      }
     }
   }
 

@@ -102,10 +102,6 @@ export const initialState: IinitialState = {
   //TODO : move all filters into listinsgFilters
   listings: {
     isDrawerOpen: false,
-    clickedFilterName: null,
-    currentRange: [],
-    bedsButtons: bedsButtons,
-
     filters: {
       forSaleRentSold: {
         filterBy: [],
@@ -132,6 +128,10 @@ export const initialState: IinitialState = {
         bathButtons: bathButtons,
         currentBaths: '',
       },
+
+      allFilters:{
+        isDrawerOpen: false,
+      }
     },
   },
 
@@ -249,8 +249,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
       )
 
     case SET_FILTER_DRAWER_OPEN:
-      const isDrawerOpen = action.payload?.listings?.isDrawerOpen
-      return updateNestedObj(['listings', 'isDrawerOpen'])(isDrawerOpen)(state)
+      const isDrawerOpen = action.payload?.listings?.filters?.allFilters?.isDrawerOpen
+      return updateNestedObj(['listings', 'filters', 'allFilters', 'isDrawerOpen'])(isDrawerOpen)(state)
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected

@@ -10,7 +10,11 @@ export const setFilterDrawerOpen = (
   type: SET_FILTER_DRAWER_OPEN,
   payload: {
     listings: {
-      isDrawerOpen: bool,
+      filters:{
+        allFilters:{
+          isDrawerOpen: bool,
+        }
+      }
     },
   },
 })
