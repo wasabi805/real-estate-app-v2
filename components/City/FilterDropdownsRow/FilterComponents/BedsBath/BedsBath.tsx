@@ -8,10 +8,7 @@ import { IinitialState } from 'reducers/interface'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 
-const {
-  setBedsValues,
-  setFilterCurrentBathsAmount,
-} = ListingsFilterActions
+const { setBedsValues, setFilterCurrentBathsAmount } = ListingsFilterActions
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
@@ -25,14 +22,24 @@ const BedsBath = () => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const { newBedsButtons, bathButtons, currentBaths , currentRange, clickedNumber} = state.listings?.filters?.bedsBaths
+  const {
+    newBedsButtons,
+    bathButtons,
+    currentBaths,
+    currentRange,
+    clickedNumber,
+  } = state.listings?.filters?.bedsBaths
 
-  console.log('state.listings?.filters?.bedsBaths back at component', state.listings?.filters?.bedsBaths)
+  console.log(
+    'state.listings?.filters?.bedsBaths back at component',
+    state.listings?.filters?.bedsBaths
+  )
 
-  const mappedBedButtons = state.listings?.filters?.bedsBaths?.newBedsButtons.map( btn=>{
-    btn.onClick = ()=>handleBedsButtonClicked(btn.id, state)
-    return btn
-  } )
+  const mappedBedButtons =
+    state.listings?.filters?.bedsBaths?.newBedsButtons.map((btn) => {
+      btn.onClick = () => handleBedsButtonClicked(btn.id, state)
+      return btn
+    })
 
   return (
     <BedBathsContainer>
@@ -40,15 +47,13 @@ const BedsBath = () => {
         <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
       <BedsBathButtonContainer>
-       
         <ButtonComp
           // activeButton={ ['beds-fltr-1' , 'beds-fltr-3'] }
-          activeButton={ 
-            currentRange.map( (value: string) => 
-            `beds-fltr-${value}`)  
-          }
-          groupType='button-row'
-          buttonGroup={ mappedBedButtons }
+          activeButton={currentRange.map(
+            (value: string) => `beds-fltr-${value}`
+          )}
+          groupType="button-row"
+          buttonGroup={mappedBedButtons}
         />
         {/* ---- ORIGINAL ---- */}
 

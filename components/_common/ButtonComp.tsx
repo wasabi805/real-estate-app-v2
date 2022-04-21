@@ -67,12 +67,12 @@ const ButtonComp = styled(
         )
 
       case 'button-row':
-        const isSelected =(activeBtn , id)=>{
-          if(activeBtn && typeof activeBtn === 'string'){
+        const isSelected = (activeBtn, id) => {
+          if (activeBtn && typeof activeBtn === 'string') {
             return activeButton === id ? 'primary' : ''
           }
-          if(activeBtn && Array.isArray(activeBtn)){
-            return (activeBtn.indexOf(id)>=0) && 'primary'
+          if (activeBtn && Array.isArray(activeBtn)) {
+            return activeBtn.indexOf(id) >= 0 && 'primary'
           }
         }
         return (

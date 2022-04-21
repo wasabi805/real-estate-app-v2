@@ -59,12 +59,12 @@ export interface IinitialState {
     currentRange: number[] | []
     bedsButtons?: IfilterButtons[]
 
-    filters:{
+    filters: {
       forSaleRentSold?: {
         filterBy?: []
         buttons?: IButton[]
       }
-  
+
       homeType?: {
         homeTypeButtons: IButtonWithIcon[]
         selected?: string

@@ -51,7 +51,7 @@ const HomeType = () => {
 
     return btn
   })
-  
+
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp

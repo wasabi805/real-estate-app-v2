@@ -1,10 +1,8 @@
 import { IAction } from 'actions/interface'
 import { IinitialState } from 'reducers/interface'
+import { updateNestedObj } from 'utils/helpers'
 
-import {
-  handleBedsNumAction,
-  setSingleButtonActive,
-} from './helpers'
+import { handleBedsNumAction, setSingleButtonActive } from './helpers'
 export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
 export const setFilterDrawerOpen = (
   bool: boolean
@@ -23,158 +21,156 @@ export const setBedsValues = (
   key: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-
-  console.log('SET_BEDS_VALUES - action',{key, state})
+  console.log('SET_BEDS_VALUES - action', { key, state })
 
   let newKey = key.split('beds-fltr-')[1]
-  let newKeyValue = newKey !=='any' ? parseInt(newKey,10) : "any"
+  let newKeyValue = newKey !== 'any' ? parseInt(newKey, 10) : 'any'
   const range = [1, 2, 3, 4, 5]
 
-  console.log(newKeyValue , '<---newKeyValue')
+  console.log(newKeyValue, '<---newKeyValue')
 
   let currentRange = state.listings?.filters.bedsBaths.currentRange.sort()
   let clickedNumber = state.listings?.filters.bedsBaths?.clickedNumber
 
   let keyNum = newKeyValue !== 'any' && newKeyValue
 
+  const bedsBathPayload = {
+    listings: {
+      filters: {
+        bedsBaths: {},
+      },
+    },
+  }
+
+  // ----- STRINGS -----
   // if is any is clicked after a range or single value for bedroooms is selected
   if (typeof newKeyValue === 'string') {
-    return{
+    return {
       type: SET_BEDS_VALUES,
-      payload:{
-        listings:{
-          filters:{
-            bedsBaths:{
-              currentRange: ['any'],
-              clickedNumber: 0,
-            }
-          }
-        }
-      }
+
+      payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+        currentRange: ['any'],
+        clickedNumber: 0,
+      })(bedsBathPayload),
     }
   }
 
+  //  ----- NUMBERS -----
   if (typeof newKeyValue === 'number') {
-    currentRange = currentRange.filter((val)=>val !=='any' )
+    // removes the 'any' key if from range if any key was clicked
+    currentRange = currentRange.filter((val) => val !== 'any')
 
-    //CASE A: CURRENT RANGE is EMPTY of ['any]
+    // Clicked number exists in range stored in reducer
     const isKeyNumPresent = currentRange.indexOf(newKeyValue) >= 0
-    console.log('isKeyNumPresent' , isKeyNumPresent)
+
     //if a range hasnt been set yet...
     if (!isKeyNumPresent && currentRange.length === 0) {
       const startRange = range.indexOf(keyNum)
       const returnRange = range.slice(startRange)
-     
-       return{
-      type: SET_BEDS_VALUES,
-      payload:{
-        listings:{
-          filters:{
-            bedsBaths:{
-              currentRange: returnRange,
-              clickedNumber: newKeyValue
-            }
-          }
-        }
+
+      return {
+        type: SET_BEDS_VALUES,
+        payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+          currentRange: returnRange,
+          clickedNumber: newKeyValue,
+        })(bedsBathPayload),
       }
-    }
     }
 
     // if only one value in the range..
-    if (currentRange.length === 1) {
-      if (keyNum < state.listings?.currentRange[0]) {
-        //grab the new range
-        const newRange = range.slice(
-          range.indexOf(keyNum),
-          state.listings?.currentRange[0]
-        )
-        const addAddtionalActiveBtns = state.listings?.bedsButtons?.map(
-          (bedBtn) => {
-            if (newRange.indexOf(bedBtn.value) >= 0) {
-              bedBtn.isActive = true
-              return bedBtn
-            }
-            bedBtn.isActive = false
-            return bedBtn
-          }
-        )
 
-        return handleBedsNumAction(
-          state,
-          newRange,
-          addAddtionalActiveBtns,
-          keyNum
-        )
+    if (currentRange.length === 1) {
+      if (keyNum > currentRange[0]) {
+        //grab the new range
+        const newRange =
+          keyNum !== 5
+            ? range.slice(range.indexOf(currentRange[0]), keyNum)
+            : range.slice(range.indexOf(currentRange[0]))
+
+        return {
+          type: SET_BEDS_VALUES,
+          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+            currentRange: newRange,
+            clickedNumber: keyNum,
+          })(bedsBathPayload),
+        }
       }
 
+      if (keyNum < currentRange[0]) {
+        const newRange =
+          keyNum !== 5
+            ? range.slice(range.indexOf(keyNum), currentRange[0])
+            : range.slice(range.indexOf(keyNum))
+        return {
+          type: SET_BEDS_VALUES,
+          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+            currentRange: newRange,
+            clickedNumber: keyNum,
+          })(bedsBathPayload),
+        }
+      }
     }
-    // a range exists
+
+    //if a range exists in the reducer
     if (currentRange.length >= 2) {
-      // CASE B " A range exits"
-      alert(' a range exists')
-      //grab the range range in state: === currentRange
-      
+      //TODO REMOVE LATER
       const previousBtnClicked = state.listings?.clickedFilterName
 
       // if a number in the range is clicked twice in a row
-      if (keyNum == previousBtnClicked) {
+      if (keyNum == clickedNumber) {
         const newRange = [keyNum]
-        alert('same')
-        return handleBedsNumAction(
-          state,
-          newRange,
-          setSingleButtonActive(state, keyNum),
-          keyNum
-        )
+        return {
+          type: SET_BEDS_VALUES,
+          payload: updateNestedObj(['listings', 'filters', 'bedsBaths'])({
+            currentRange: newRange,
+            clickedNumber: newKeyValue,
+          })(bedsBathPayload),
+        }
       }
 
       // if the clicked value is less than the lowest range number in the reducer...
       // if (!isKeyNumPresent && keyNum < firstValue) {
-        if (!isKeyNumPresent && keyNum < currentRange[0]) {
+      if (!isKeyNumPresent && keyNum < currentRange[0]) {
         console.log('-----CASE:1------ CONFIRMED WORKS')
         //get the new range of numbers
-        const newRange = range.slice(range.indexOf(keyNum), currentRange[currentRange.length-1])
-          console.log('case1 - newRange', newRange)
-       
-          return{
-            type: SET_BEDS_VALUES,
-            payload:{
-              listings:{
-                filters:{
-                  bedsBaths:{
-                    currentRange: newRange,
-                    clickedNumber: newKeyValue
-                  }
-                }
-              }
-            }
-          }
+        const newRange = range.slice(
+          range.indexOf(keyNum),
+          currentRange[currentRange.length - 1]
+        )
+
+        return {
+          type: SET_BEDS_VALUES,
+          payload: {
+            listings: {
+              filters: {
+                bedsBaths: {
+                  currentRange: newRange,
+                  clickedNumber: newKeyValue,
+                },
+              },
+            },
+          },
+        }
       }
 
       // range exists and number in range is clicked
       if (isKeyNumPresent && keyNum > clickedNumber) {
-        console.log('-----CASE:2------ CONFIRMED WORKS')
-        alert('clicked key alreay in range and less than last clicked button')
-        const newRange = range.slice(
-          range.indexOf(currentRange[0]),
-          keyNum
-        )
+        console.log('-----CASE:2------ ')
+        const newRange = range.slice(range.indexOf(currentRange[0]), keyNum)
 
-        return{
+        return {
           type: SET_BEDS_VALUES,
-          payload:{
-            listings:{
-              filters:{
-                bedsBaths:{
+          payload: {
+            listings: {
+              filters: {
+                bedsBaths: {
                   currentRange: newRange,
-                  clickedNumber: newKeyValue
-                }
-              }
-            }
-          }
+                  clickedNumber: newKeyValue,
+                },
+              },
+            },
+          },
         }
-
-
       }
 
       //SUSPECT
@@ -182,47 +178,47 @@ export const setBedsValues = (
       if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
         console.log('-----CASE:3------')
 
-      
         const lastVal = keyNum
 
         const newRange = range.slice(range.indexOf(currentRange[0]), lastVal)
-        return{
+        return {
           type: SET_BEDS_VALUES,
-          payload:{
-            listings:{
-              filters:{
-                bedsBaths:{
+          payload: {
+            listings: {
+              filters: {
+                bedsBaths: {
                   currentRange: newRange,
-                  clickedNumber: newKeyValue
-                }
-              }
-            }
-          }
-        }}
- 
+                  clickedNumber: newKeyValue,
+                },
+              },
+            },
+          },
+        }
+      }
+
       // if range exists, number is in range, clicked number value  is less that previously clicked button
       if (isKeyNumPresent && keyNum < clickedNumber) {
-        console.log('-----CASE:4------ Confirmed WORKS')
-        const newRange = clickedNumber !== 5? range.slice(
-          range.indexOf(keyNum),
-          range.indexOf(
-            range[currentRange[currentRange.length-1]
-            ]
-          )
-        ): range.slice(range.indexOf(keyNum))
+        console.log('-----CASE:4------ ')
+        const newRange =
+          clickedNumber !== 5
+            ? range.slice(
+                range.indexOf(keyNum),
+                range.indexOf(range[currentRange[currentRange.length - 1]])
+              )
+            : range.slice(range.indexOf(keyNum))
 
-        return{
+        return {
           type: SET_BEDS_VALUES,
-          payload:{
-            listings:{
-              filters:{
-                bedsBaths:{
+          payload: {
+            listings: {
+              filters: {
+                bedsBaths: {
                   currentRange: newRange,
-                  clickedNumber: newKeyValue
-                }
-              }
-            }
-          }
+                  clickedNumber: newKeyValue,
+                },
+              },
+            },
+          },
         }
       }
     }
@@ -242,11 +238,11 @@ export const setFilterCurrentBathsAmount = (
     type: SET_FILTER_CURRENT_BATHS_AMOUNT,
     payload: {
       listings: {
-       filters:{
-        bedsBaths: {
-          currentBaths: amount,
+        filters: {
+          bedsBaths: {
+            currentBaths: amount,
+          },
         },
-       }
       },
     },
   }

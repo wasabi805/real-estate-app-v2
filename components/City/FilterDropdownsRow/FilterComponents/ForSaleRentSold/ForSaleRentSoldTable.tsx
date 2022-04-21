@@ -48,8 +48,12 @@ const ForSaleRentSold = () => {
         <Table
           pagination={false}
           showHeader={false}
-          columns={state.listings?.filters?.forSaleRentSold?.soldDateRangeColumns}
-          dataSource={state.listings?.filters?.forSaleRentSold?.soldDateRangeRows}
+          columns={
+            state.listings?.filters?.forSaleRentSold?.soldDateRangeColumns
+          }
+          dataSource={
+            state.listings?.filters?.forSaleRentSold?.soldDateRangeRows
+          }
           rowSelection={{
             type: 'radio',
             selectedRowKeys:
