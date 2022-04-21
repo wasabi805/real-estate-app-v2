@@ -16,9 +16,9 @@ import {
   soldDateRangeColumns,
   soldDateRangeRows,
   homeTypeButtons,
-  bedsButtons,
   bathButtons,
-  newBedsButtons,
+  bedsButtons,
+  bedsButtonFilterRange,
 } from 'reducers/initialValues'
 
 const {
@@ -124,8 +124,9 @@ export const initialState: IinitialState = {
       },
 
       bedsBaths: {
-        newBedsButtons: newBedsButtons,
+        bedsButtons,
         clickedNumber: 0,
+        range: bedsButtonFilterRange,
         currentRange: [],
 
         bathButtons: bathButtons,

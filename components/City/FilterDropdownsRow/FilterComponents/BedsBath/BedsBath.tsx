@@ -3,9 +3,7 @@ import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { IinitialState } from 'reducers/interface'
-import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 import { bedsNumberPrefix } from 'utils/contants'
 
@@ -23,24 +21,20 @@ const BedsBath = () => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const {
-    newBedsButtons,
-    bathButtons,
-    currentBaths,
-    currentRange,
-    clickedNumber,
-  } = state.listings?.filters?.bedsBaths
+  const { bathButtons, currentBaths, currentRange } =
+    state.listings?.filters?.bedsBaths
 
   console.log(
     'state.listings?.filters?.bedsBaths back at component',
     state.listings?.filters?.bedsBaths
   )
 
-  const mappedBedButtons =
-    state.listings?.filters?.bedsBaths?.newBedsButtons.map((btn) => {
+  const mappedBedButtons = state.listings?.filters?.bedsBaths?.bedsButtons.map(
+    (btn) => {
       btn.onClick = () => handleBedsButtonClicked(btn.id, state)
       return btn
-    })
+    }
+  )
 
   return (
     <BedBathsContainer>

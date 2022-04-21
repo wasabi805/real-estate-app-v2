@@ -1,5 +1,4 @@
 import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
-import { IfilterButtons } from 'utils/dictionaries'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
 
 interface IBedsButton {
@@ -55,9 +54,6 @@ export interface IinitialState {
 
   listings?: {
     isDrawerOpen?: boolean
-    clickedFilterName: string
-    currentRange: number[] | []
-    bedsButtons?: IfilterButtons[]
 
     filters: {
       forSaleRentSold?: {
@@ -70,6 +66,11 @@ export interface IinitialState {
         selected?: string
       }
       bedsBaths?: {
+        bedsButtons: IButton[]
+        clickedNumber: Number | string
+        range: Number[]
+        currentRange: Number | string[]
+
         bathButtons?: IBedsButton[]
         currentBaths?: string
       }

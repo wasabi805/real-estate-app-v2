@@ -78,22 +78,7 @@ export const homeTypeButtons: IButtonWithIcon[] = [
 
 /* ----- BEDS BATHS ----- */
 
-interface IBedsButton {
-  key: string
-  value: string | Number
-  isActive: Boolean
-}
-
-export const bedsButtons: IBedsButton[] = [
-  { key: 'any', value: 'Any', isActive: true },
-  { key: 'beds-fltr-1', value: 1, isActive: false },
-  { key: 'beds-fltr-2', value: 2, isActive: false },
-  { key: 'beds-fltr-3', value: 3, isActive: false },
-  { key: 'beds-fltr-4', value: 4, isActive: false },
-  { key: 'beds-fltr-5', value: 5, isActive: false },
-]
-
-export const newBedsButtons: IButton[] = [
+export const bedsButtons: IButton[] = [
   { id: `${bedsNumberPrefix}any`, text: 'Any' },
   { id: `${bedsNumberPrefix}1`, text: 1 },
   { id: `${bedsNumberPrefix}2`, text: 2 },
@@ -101,6 +86,10 @@ export const newBedsButtons: IButton[] = [
   { id: `${bedsNumberPrefix}4`, text: 4 },
   { id: `${bedsNumberPrefix}5`, text: 5 },
 ]
+
+export const bedsButtonFilterRange = bedsButtons
+  .filter((btn: IButton) => typeof btn.text! === 'number')
+  .map((btn: IButton) => btn.text!)
 
 export const bathButtons = [
   {
