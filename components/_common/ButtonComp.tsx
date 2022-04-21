@@ -67,6 +67,14 @@ const ButtonComp = styled(
         )
 
       case 'button-row':
+        const isSelected = (activeBtn, id) => {
+          if (activeBtn && typeof activeBtn === 'string') {
+            return activeButton === id ? 'primary' : ''
+          }
+          if (activeBtn && Array.isArray(activeBtn)) {
+            return activeBtn.indexOf(id) >= 0 && 'primary'
+          }
+        }
         return (
           <ButtonRowContainer align={align} buttonStyle={buttonStyle}>
             {buttonGroup.map((btn) => (
@@ -74,7 +82,7 @@ const ButtonComp = styled(
                 id={btn.id}
                 key={btn.id}
                 onClick={btn.onClick}
-                type={activeButton === btn.id ? 'primary' : ''}
+                type={activeButton && isSelected(activeButton, btn.id)}
                 size={btn.size}
               >
                 {btn.text}

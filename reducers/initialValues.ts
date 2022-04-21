@@ -1,13 +1,22 @@
 import { IButton, IButtonWithIcon } from 'utils/interfaces/buttons'
 import { ISoldDateRangeRows } from 'utils/interfaces/tables'
 import { IAntTableSelectedRow } from 'utils/interfaces/antDesign'
+import {
+  bedsNumberIdPrefix,
+  bathsValuesPrefix,
+  homeTypeIdPrefix,
+  soldDateRangeIdPrefix,
+  forSaleRentSoldIdPrefix,
+} from 'utils/contants'
 
+
+/*  4-21-2022 REFLOGED BACK TO REFACTOR INITIAL VALUES */
 /* ------ For SALE RENT SOLD ------*/
 
 export const forSaleRentSoldButtons: IButton[] = [
-  { id: 'all-filters-btn-for-sale', text: 'For Sale', size: 'large' },
-  { id: 'all-filters-btn-for-rent', text: 'For Rent', size: 'large' },
-  { id: 'all-filters-btn-sold', text: 'Sold', size: 'large' },
+  { id: `${forSaleRentSoldIdPrefix}for-sale`, text: 'For Sale', size: 'large' },
+  { id: `${forSaleRentSoldIdPrefix}for-rent`, text: 'For Rent', size: 'large' },
+  { id: `${forSaleRentSoldIdPrefix}sold`, text: 'Sold', size: 'large' },
 ]
 
 export const soldDateRangeColumns: IAntTableSelectedRow[] = [
@@ -18,57 +27,33 @@ export const soldDateRangeColumns: IAntTableSelectedRow[] = [
 ]
 
 export const soldDateRangeRows: ISoldDateRangeRows[] = [
-  {
-    key: 'sold-last-1-week',
-    soldDatePeriod: 'Last 1 Week',
-  },
-  {
-    key: 'sold-last-1-month',
-    soldDatePeriod: 'Last 1 Month',
-  },
-  {
-    key: 'sold-last-3-months',
-    soldDatePeriod: 'Last 3 Months',
-  },
-  {
-    key: 'sold-last-6-months',
-    soldDatePeriod: 'Last 6 Months',
-  },
-  {
-    key: 'sold-last-1-year',
-    soldDatePeriod: 'Last 1 Year',
-  },
-  {
-    key: 'sold-last-2-years',
-    soldDatePeriod: 'Last 2 Years',
-  },
-  {
-    key: 'sold-last-3-years',
-    soldDatePeriod: 'Last 3 Years',
-  },
-  {
-    key: 'sold-last-5-years',
-    soldDatePeriod: 'Last 5 Years',
-  },
+  { key: `${soldDateRangeIdPrefix}1-week`, soldDatePeriod: 'Last 1 Week' },
+  { key: `${soldDateRangeIdPrefix}1-month`, soldDatePeriod: 'Last 1 Month' },
+  { key: `${soldDateRangeIdPrefix}3-months`, soldDatePeriod: 'Last 3 Months' },
+  { key: `${soldDateRangeIdPrefix}6-months`, soldDatePeriod: 'Last 6 Months' },
+  { key: `${soldDateRangeIdPrefix}1-year`, soldDatePeriod: 'Last 1 Year' },
+  { key: `${soldDateRangeIdPrefix}2-years`, soldDatePeriod: 'Last 2 Years' },
+  { key: `${soldDateRangeIdPrefix}3-years`, soldDatePeriod: 'Last 3 Years' },
+  { key: `${soldDateRangeIdPrefix}5-years`, soldDatePeriod: 'Last 5 Years' },
 ]
 
 /* ----- HOME TYPE ----- */
 
 export const homeTypeButtons: IButtonWithIcon[] = [
   {
-    id: 'home-type-house',
+    id: `${homeTypeIdPrefix}house`,
     text: 'Home',
     onClick: null,
     icon: null,
   },
   {
-    id: 'home-type-multiFamily',
+    id: `${homeTypeIdPrefix}multiFamily`,
     text: 'Multi Family',
     onClick: null,
     icon: null,
   },
   {
-    id: 'home-type-condo',
+    id: `${homeTypeIdPrefix}condo`,
     text: 'condo',
     onClick: null,
     icon: null,
@@ -77,55 +62,25 @@ export const homeTypeButtons: IButtonWithIcon[] = [
 
 /* ----- BEDS BATHS ----- */
 
-interface IBedsButton {
-  key: string
-  value: string | Number
-  isActive: Boolean
-}
-
-export const bedsButtons: IBedsButton[] = [
-  { key: 'any', value: 'Any', isActive: true },
-  { key: 'beds-fltr-1', value: 1, isActive: false },
-  { key: 'beds-fltr-2', value: 2, isActive: false },
-  { key: 'beds-fltr-3', value: 3, isActive: false },
-  { key: 'beds-fltr-4', value: 4, isActive: false },
-  { key: 'beds-fltr-5', value: 5, isActive: false },
+export const bedsButtons: IButton[] = [
+  { id: `${bedsNumberIdPrefix}any`, text: 'Any' },
+  { id: `${bedsNumberIdPrefix}1`, text: 1 },
+  { id: `${bedsNumberIdPrefix}2`, text: 2 },
+  { id: `${bedsNumberIdPrefix}3`, text: 3 },
+  { id: `${bedsNumberIdPrefix}4`, text: 4 },
+  { id: `${bedsNumberIdPrefix}5`, text: 5 },
 ]
 
+export const bedsButtonFilterRange = bedsButtons
+  .filter((btn: IButton) => typeof btn.text! === 'number')
+  .map((btn: IButton) => btn.text!)
+
 export const bathButtons = [
-  {
-    id: 'baths-filter-btn-any',
-    text: 'Any',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-one-plus',
-    text: '1+',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-one-and-half-plus',
-    text: '1.5+',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-two-plus',
-    text: '2+',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-two-and-half-plus',
-    text: '2.5+',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-three-plus',
-    text: '3+',
-    onClick: null,
-  },
-  {
-    id: 'baths-filter-btn-four-plus',
-    text: '4+',
-    onClick: null,
-  },
+  { id: `${bathsValuesPrefix}any`, text: 'Any' },
+  { id: `${bathsValuesPrefix}one-plus`, text: '1+' },
+  { id: `${bathsValuesPrefix}one-and-half-plus`, text: '1.5+' },
+  { id: `${bathsValuesPrefix}two-plus`, text: '2+' },
+  { id: `${bathsValuesPrefix}two-and-half-plus`, text: '2.5' },
+  { id: `${bathsValuesPrefix}three-plus`, text: '3+' },
+  { id: `${bathsValuesPrefix}four-plus`, text: '4+' },
 ]

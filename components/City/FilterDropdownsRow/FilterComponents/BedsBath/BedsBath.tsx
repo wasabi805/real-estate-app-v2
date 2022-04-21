@@ -3,44 +3,53 @@ import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { IinitialState } from 'reducers/interface'
-import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
+import { bedsNumberIdPrefix } from 'utils/contants'
 
-const {
-  handleClickBedsFilterButton,
-  setFilterCurrentBathsAmount,
-} = ListingsFilterActions
+const { setBedsValues, setFilterCurrentBathsAmount } = ListingsFilterActions
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  const bedsButtonClicked = (key: string, state: IinitialState) => {
-    dispatch(handleClickBedsFilterButton(key, state))
+  const handleBedsButtonClicked = (key: string, state: IinitialState) => {
+    dispatch(setBedsValues(key, state))
   }
 
   const handleBathsButtonClicked = (key: string) => {
     dispatch(setFilterCurrentBathsAmount(key))
   }
 
-  const { bathButtons, currentBaths } = state.listings?.filters?.bedsBaths
+  const { bathButtons, currentBaths, currentRange } =
+    state.listings?.filters?.bedsBaths
+
+  console.log(
+    'state.listings?.filters?.bedsBaths back at component',
+    state.listings?.filters?.bedsBaths
+  )
+
+  const mappedBedButtons = state.listings?.filters?.bedsBaths?.bedsButtons.map(
+    (btn) => {
+      btn.onClick = () => handleBedsButtonClicked(btn.id, state)
+      return btn
+    }
+  )
 
   return (
     <BedBathsContainer>
       <div style={{ display: 'flex' }}>
         <h4> Beds </h4> <span>Tap 2 numbers to select a range</span>
       </div>
+
       <BedsBathButtonContainer>
-        {state.listings?.bedsButtons?.map((btn) => (
-          <ButtonComp
-            key={btn.key}
-            name={btn.value}
-            onClick={() => bedsButtonClicked(btn.key, state)}
-            type={btn.isActive ? 'primary' : 'default'}
-          />
-        ))}
+        <ButtonComp
+          groupType="button-row"
+          buttonGroup={mappedBedButtons}
+          activeButton={currentRange.map(
+            (id: string) => `${bedsNumberIdPrefix}` + `${id}`
+          )}
+        />
       </BedsBathButtonContainer>
 
       <div>
