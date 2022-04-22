@@ -69,10 +69,13 @@ export interface IinitialState {
         bedsButtons: IButton[]
         clickedNumber: Number | string
         range: Number[]
-        currentRange: Number | string[]
+        currentRange: Number | string []
 
         bathButtons?: IBedsButton[]
         currentBaths?: string
+      }
+      allFilters:{
+        isDrawerOpen: boolean
       }
     }
   }

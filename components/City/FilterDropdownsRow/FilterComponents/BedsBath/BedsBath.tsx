@@ -26,7 +26,7 @@ const BedsBath = () => {
 
   console.log(
     'state.listings?.filters?.bedsBaths back at component',
-    state.listings?.filters?.bedsBaths
+    state.listings?.filters
   )
 
   const mappedBedButtons = state.listings?.filters?.bedsBaths?.bedsButtons.map(

@@ -25,7 +25,7 @@ const AllFiltersDrawer = () => {
         width={'42rem'}
         placement="right"
         onClose={handleClose}
-        visible={state?.listings?.isDrawerOpen}
+        visible={state?.listings?.filters?.allFilters?.isDrawerOpen}
       >
         <DrawerCotent>
           {/* ----- FOR SALE FOR RENT SOLD ----- */}

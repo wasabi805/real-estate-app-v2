@@ -12,7 +12,11 @@ export const setFilterDrawerOpen = (
   type: SET_FILTER_DRAWER_OPEN,
   payload: {
     listings: {
-      isDrawerOpen: bool,
+      filters:{
+        allFilters:{
+          isDrawerOpen: bool,
+        }
+      }
     },
   },
 })
@@ -52,7 +56,7 @@ export const setBedsValues = (
   //  ----- NUMBERS -----
   if (typeof idValue === 'number') {
     // removes the 'any' key if from range if any key was clicked
-    currentRange = currentRange.filter((val: Number| string) => val !== 'any')
+    currentRange = currentRange!.filter((val: Number| string) => val !== 'any')
 
     // Clicked number exists in range stored in reducer
     const isKeyNumPresent: boolean = currentRange.indexOf(idValue) >= 0
