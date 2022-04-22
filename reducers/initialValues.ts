@@ -84,3 +84,12 @@ export const bathButtons = [
   { id: `${bathsValuesPrefix}three-plus`, text: '3+' },
   { id: `${bathsValuesPrefix}four-plus`, text: '4+' },
 ]
+
+export const bedsBathsPayload = {
+  listings: {
+    filters: {
+      bedsBaths: {},
+    },
+  },
+}
+
