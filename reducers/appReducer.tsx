@@ -1,13 +1,12 @@
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsActions from 'actions/ListingsActions'
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
-import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
+import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions'
+import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
-import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
-import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
-import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActions'
+import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
+import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 import {
@@ -64,7 +63,7 @@ const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
 
-const { SET_CLICKED_ROW } = ListingTableActions
+const { SET_CLICKED_ROW } = ListingsActions
 const { HOMES_VIEW_TAB_CLICKED } = ListingsActions
 const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
   ForSaleRentSoldActions

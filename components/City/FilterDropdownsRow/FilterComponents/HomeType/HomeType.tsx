@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import * as HomeTypeActions from 'actions/listingsFilterActions/homeTypeActions'
+import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'

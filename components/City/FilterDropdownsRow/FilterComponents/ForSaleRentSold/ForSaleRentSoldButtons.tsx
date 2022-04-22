@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import ButtonComp from '@components/_common/ButtonComp'
-import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
+import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 

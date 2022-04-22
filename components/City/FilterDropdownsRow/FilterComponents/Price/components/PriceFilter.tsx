@@ -3,7 +3,7 @@ import AppContext from 'context/appContext'
 import RangedSlider from '@components/_common/RangedSlider'
 import InputComp from '@components/_common/InputComp'
 
-import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
+import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
 
 import {
   PriceFilterContainer,

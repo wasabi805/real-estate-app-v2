@@ -1,4 +1,4 @@
-import { IAction } from '../interface'
+import { IAction } from '../../interface'
 
 export const SET_SELECTED_HOME_TYPE = 'SET_SELECTED_HOME_TYPE'
 export const setSelectedHomeType = (

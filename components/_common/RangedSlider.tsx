@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AppContext from 'context/appContext'
 import styled from '@emotion/styled'
-import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
+import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
 import { Slider } from 'antd'
 import 'antd/dist/antd.css'
 import { priceRangeSliderMinId } from 'utils/contants'

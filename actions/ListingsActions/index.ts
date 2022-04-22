@@ -17,3 +17,17 @@ export const homesViewTabClicked = (
     },
   }
 }
+
+export const SET_CLICKED_ROW = 'SET_CLICKED_ROW'
+export const setClickedRow = (
+  property_id: string[]
+): Pick<IAction, 'type' | 'payload'> => {
+  return {
+    type: SET_CLICKED_ROW,
+    payload: {
+      listings: {
+        currentHome: property_id,
+      },
+    },
+  }
+}

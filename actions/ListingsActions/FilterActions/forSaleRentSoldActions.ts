@@ -1,4 +1,4 @@
-import { IAction } from '../interface'
+import { IAction } from '../../interface'
 
 import { updateNestedObj } from 'utils/helpers'
 const forSaleRestSoldPayload = {

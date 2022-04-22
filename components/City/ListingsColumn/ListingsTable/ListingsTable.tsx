@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import * as ListingsTableActions from 'actions/listingsTableActions'
+import * as ListingsActions from 'actions/ListingsActions'
+
 import { Table } from 'antd'
 import 'antd/dist/antd.css'
 import { ListingsTableContainer } from 'components/City/styles'
 import { columnNames } from './columnNames'
 
-const { setClickedRow } = ListingsTableActions
+const { setClickedRow } = ListingsActions
 
 const ListingsTable = () => {
   const appContext = useContext(AppContext)

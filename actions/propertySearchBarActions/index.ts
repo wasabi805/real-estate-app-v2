@@ -1,6 +1,6 @@
 import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/IPropertySearchBar'
 import { IAction } from '../interface'
-import { defineFilterPriceSliderData } from 'actions/listingsFilterActions/helpers'
+import { defineFilterPriceSliderData } from 'actions/ListingsActions/FilterActions/helpers'
 import { sortIntergersAscending, sortByAscendOrDescend } from 'utils'
 export const SET_SEARCH_FIELD = 'SET_SEARCH_FIELD'
 export const setSearchField = (
