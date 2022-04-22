@@ -34,7 +34,7 @@ const ListingsTable = () => {
   for a table row to become highlighted/foccused. 
   It also removes the default required radio button which is typical for this type of radio selection behavior. */
   const [selectedRowKey, setSelectedRowKey] = useState(
-    state.listingTable.currentHome
+    state.listings.currentHome
   )
   const selectRow = (record: Irecord) => {
     const currentSelectedHome = selectedRowKey

@@ -17,7 +17,7 @@ const { setMinPriceFilterField, setMaxPriceFilterField } = PriceFilterActions
 const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  console.log('state back at slider', state)
+
   const handleMinPriceField = (value: number) => {
     dispatch(setMinPriceFilterField(value, state))
   }

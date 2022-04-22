@@ -1,4 +1,3 @@
-import { IfilterButtons } from 'utils/dictionaries'
 export interface IAction {
   type: string
   payload?: {
@@ -54,6 +53,9 @@ export interface IAction {
     }
 
     listings?: {
+      isTableView?: boolean
+      currentHome?: string[]
+
       filters?: {
         forSaleRentSold?: {
           filterBy?: string[]

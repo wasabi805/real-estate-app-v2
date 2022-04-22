@@ -36,6 +36,10 @@ export interface IinitialState {
   }
 
   listings: {
+    isTableView: boolean
+    // currentHome: [''],
+    currentHome: string[]
+
     filters: {
       forSaleRentSold: {
         filterBy: []

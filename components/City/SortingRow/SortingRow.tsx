@@ -3,7 +3,7 @@ import AppContext from 'context/appContext'
 import { Menu, Dropdown, Tabs } from 'antd'
 import { SortByOptionsContainer } from '../styles'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
-import * as ListingTabActions from 'actions/listingTabActions.ts'
+import * as ListingsActions from 'actions/ListingsActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 
@@ -33,7 +33,7 @@ const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { setActiveSortCategory } = ListingsSortFilterActions
-  const { homesViewTabClicked } = ListingTabActions
+  const { homesViewTabClicked } = ListingsActions
   const { sortAndFilter, searchResults } = state
 
   const activeSortCAtegory = sortAndFilter.activeSort

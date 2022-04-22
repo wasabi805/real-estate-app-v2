@@ -6,7 +6,7 @@ export const setClickedRow = (
   return {
     type: SET_CLICKED_ROW,
     payload: {
-      listingTable: {
+      listings: {
         currentHome: property_id,
       },
     },

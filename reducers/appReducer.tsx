@@ -1,6 +1,6 @@
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
-import * as ListingTabActions from 'actions/listingTabActions.ts'
+import * as ListingsActions from 'actions/ListingsActions'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
@@ -65,7 +65,7 @@ const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
 
 const { SET_CLICKED_ROW } = ListingTableActions
-const { HOMES_VIEW_TAB_CLICKED } = ListingTabActions
+const { HOMES_VIEW_TAB_CLICKED } = ListingsActions
 const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
   ForSaleRentSoldActions
 
@@ -93,7 +93,11 @@ export const initialState: IinitialState = {
     activeFilterPanel: '0',
   },
 
+  // ALL LISTINGS PROPS
   listings: {
+    isTableView: false,
+    currentHome: ['2892620475'],
+
     filters: {
       forSaleRentSold: {
         filterBy: [],
@@ -150,12 +154,6 @@ export const initialState: IinitialState = {
     activeSort: 'Price',
     sortedProperties: [],
     isAscending: null,
-  },
-
-  listingTable: {
-    isTableView: false,
-    // currentHome: [''],
-    currentHome: ['2892620475'],
   },
 
   loginModal: {
@@ -270,10 +268,14 @@ const appReducer = (state: IinitialState, action: IAction) => {
       )(state)
 
     case HOMES_VIEW_TAB_CLICKED:
-      const isTableView = action.payload?.listingTable?.isTableView
-      return updateNestedObj(['listingTable', 'isTableView'])(isTableView)(
-        state
-      )
+      const isTableView = action.payload?.listings?.isTableView
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          isTableView: action.payload?.listings?.isTableView,
+        },
+      }
 
     /* ----- FOR SALE RENT SOLD -----  */
 
@@ -394,9 +396,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_CLICKED_ROW:
       return {
         ...state,
-        listingTable: {
-          ...state.listingTable,
-          currentHome: action?.payload?.listingTable?.currentHome,
+        listings: {
+          ...state.listings,
+          currentHome: action?.payload?.listings?.currentHome,
         },
       }
 

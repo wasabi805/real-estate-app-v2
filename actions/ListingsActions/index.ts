@@ -9,8 +9,9 @@ export const homesViewTabClicked = (
 
   return {
     type: HOMES_VIEW_TAB_CLICKED,
+
     payload: {
-      listingTable: {
+      listings: {
         isTableView,
       },
     },

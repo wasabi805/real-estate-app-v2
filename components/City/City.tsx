@@ -29,7 +29,7 @@ const Listings: React.FC = () => {
         <SelectedHome />
 
         <ListingCardsAndTableCol>
-          {state.listingTable.isTableView ? (
+          {state.listings.isTableView ? (
             <ListingsTableBody />
           ) : (
             <ListingCards />

@@ -12,29 +12,26 @@ const SelectedHome = () => {
   const { state, dispatch } = appContext
   const { searchResults, listingTable } = state
 
-  const selectedHomeId = state.listingTable.currentHome
   const allHomes = searchResults.data.listings
 
   const selectedHome = allHomes.filter(
-    (home) => state.listingTable.currentHome[0] === home.property_id
+    (home) => state.listings.currentHome[0] === home.property_id
   )
 
   return (
     <>
-      {listingTable.isTableView && (
+      {state.listings.isTableView && (
         <SelectedHomesContainer>
           <Row>
             <Col span={12}>
               <img
-                alt="fullHouse"
+                alt="selected-home"
                 src={selectedHome[0].photo}
                 style={{ width: '100%' }}
               />
             </Col>
 
-            <Col span={12} style={{ background: 'azure' }}>
-              house data
-            </Col>
+            <Col span={12}>house data</Col>
           </Row>
 
           <ListingsTableHeader />
