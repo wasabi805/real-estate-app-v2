@@ -17,7 +17,7 @@ const { setMinPriceFilterField, setMaxPriceFilterField } = PriceFilterActions
 const PriceFilter = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-
+  console.log('state back at slider', state)
   const handleMinPriceField = (value: number) => {
     dispatch(setMinPriceFilterField(value, state))
   }
@@ -36,8 +36,8 @@ const PriceFilter = () => {
 
   return (
     <PriceFilterContainer
-      moveMin={state.priceFilter?.moveMin}
-      moveMax={state.priceFilter?.moveMax}
+      moveMin={state.listings?.filters.price?.slider.moveMin}
+      moveMax={state.listings?.filters.price?.slider.moveMax}
     >
       <RangedSliderRow>
         <RangedSlider

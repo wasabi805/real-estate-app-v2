@@ -1,6 +1,6 @@
 import { IAction } from 'actions/interface'
 import { updateNestedObj } from 'utils/helpers'
-import { priceFilterPath } from 'utils/contants'
+import { priceFilterPath, priceRangeSliderMinId } from 'utils/contants'
 
 let price
 const pricePayload = {
@@ -20,9 +20,11 @@ export const setMinPriceFilterField = (
 
   price = {
     minField: num,
-    moveMin: {
-      move: true,
-      value: `${percent * 100}% !important`,
+    slider: {
+      moveMin: {
+        move: true,
+        value: `${percent * 100}% !important`,
+      },
     },
   }
 
@@ -37,24 +39,23 @@ export const setMaxPriceFilterField = (
   num: number,
   state: any
 ): Pick<IAction, 'type' | 'payload'> => {
-  const range = state.priceFilter.range
-  const highestPriceIdx = state.priceFilter.range.length - 1
+  const { range } = state.listings?.filters?.price?.slider
+  const highestPrice = range[range.length - 1]
+  const percent = num / highestPrice
 
-  const highestPrice = range[highestPriceIdx]
-  const maxPrice = num
-  const percent = maxPrice / highestPrice
+  price = {
+    maxField: num,
+    slider: {
+      moveMax: {
+        move: true,
+        value: `${percent * 100}% !important`,
+      },
+    },
+  }
 
   return {
     type: SET_MAX_PRICE_FILTER_FIELD,
-    payload: {
-      priceFilter: {
-        maxField: num,
-        moveMax: {
-          move: true,
-          value: `${percent * 100}% !important`,
-        },
-      },
-    },
+    payload: updateNestedObj(priceFilterPath)(price)(pricePayload),
   }
 }
 export const SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN =
@@ -65,44 +66,24 @@ export const setPriceRangeSliderMaxMin = (
   handleClassName: string
 ) => {
   const handleName = handleClassName.split(' ')[1]
-  const isSliderActive = handleName === 'ant-slider-handle-1'
+  const isSliderActive = handleName === priceRangeSliderMinId
 
-  const min = array[0]
-  const max = array[1]
+  price = {
+    slider: {
+      range: [array[0], array[1]],
+      moveMin: {
+        move: isSliderActive,
+        value: array[0],
+      },
+      moveMax: {
+        move: !isSliderActive,
+        value: array[1],
+      },
+    },
+  }
 
   return {
     type: SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
-    // payload: {
-    //   priceFliter: {
-    //     range: [min, max],
-    //     moveMin: {
-    //       move: isSliderActive,
-    //       value: min,
-    //     },
-    //     moveMax: {
-    //       move: !isSliderActive,
-    //       value: max,
-    //     },
-    //   },
-    // },
-    payload: {
-      listings: {
-        filters: {
-          price: {
-            slider: {
-              range: [min, max],
-              moveMin: {
-                move: isSliderActive,
-                value: min,
-              },
-              moveMax: {
-                move: !isSliderActive,
-                value: max,
-              },
-            },
-          },
-        },
-      },
-    },
+    payload: updateNestedObj(priceFilterPath)(price)(pricePayload),
   }
 }

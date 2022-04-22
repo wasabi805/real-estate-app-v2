@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
 import { Slider } from 'antd'
 import 'antd/dist/antd.css'
-
+import { priceRangeSliderMinId } from 'utils/contants'
 const { setPriceRangeSliderMaxMin, setMaxPriceFilterField } = PriceFilterActions
 
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
@@ -18,7 +18,7 @@ const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   const handleShowMinOrMaxInToolTip = (activeElement) => {
     const activeRangeMarker = activeElement.split(' ')[1] //handler className, min or max
 
-    const displayMin = activeRangeMarker === 'ant-slider-handle-1'
+    const displayMin = activeRangeMarker === priceRangeSliderMinId
     setShowMin(displayMin)
   }
 

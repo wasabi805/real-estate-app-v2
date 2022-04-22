@@ -344,70 +344,41 @@ const appReducer = (state: IinitialState, action: IAction) => {
       ])(currentBaths)(state)
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
-      // return {
-      //   ...state,
-      //   priceFilter: {
-      //     ...state.priceFilter,
-      //     minField:
-      //       action.payload?.priceFilter?.range[0] ||
-      //       state.priceFilter?.minField,
-      //     maxField:
-      //       action.payload?.priceFilter?.range[1] ||
-      //       state.priceFilter?.maxField,
-      //     //TODO: THE OR array after range needs to not be hard coded
-      //     range: action.payload?.priceFilter?.range ||
-      //       state.priceFilter?.range || [0, 12345678],
-      //     moveMin: action.payload?.priceFilter?.moveMin,
-      //     moveMax: action.payload?.priceFilter?.moveMax,
-      //   },
-      // }
-
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings?.filters,
-            price: {
-              ...state.listings?.filters.price,
-
-              minField: priceRange[0] || minField,
-              maxField: priceRange[1] || moveMax,
-
-              slider: {
-                range: [],
-
-                moveMin: moveMin,
-                moveMax: moveMax,
-              },
-            },
-          },
-        },
-      }
-
-    case SET_MIN_PRICE_FILTER_FIELD:
       newPrice = {
         ...state.listings?.filters.price,
-        minField,
+        minField: priceRange !== undefined ? priceRange[0] : null,
+        maxField: priceRange !== undefined ? priceRange[1] : null,
         slider: {
-          ...state.listings?.filters.price.slider,
-          moveMin,
+          ...state.listings?.filters?.price?.slider,
+          moveMin: moveMin,
+          moveMax: moveMax,
         },
       }
       return updateNestedObj(priceFilterPath)(newPrice)(state)
 
-    case SET_MAX_PRICE_FILTER_FIELD:
-      return {
-        ...state,
-        priceFilter: {
-          ...state.priceFilter,
-          maxField: action.payload?.priceFilter?.maxField,
-          moveMax: {
-            move: action.payload?.priceFilter?.moveMax.move,
-            value: action.payload?.priceFilter?.moveMax.value,
-          },
+    case SET_MIN_PRICE_FILTER_FIELD:
+      newPrice = {
+        ...state.listings?.filters.price,
+        minField: minField,
+        slider: {
+          ...state.listings?.filters.price.slider,
+          moveMin: moveMin,
         },
       }
+
+      return updateNestedObj(priceFilterPath)(newPrice)(state)
+
+    case SET_MAX_PRICE_FILTER_FIELD:
+      newPrice = {
+        ...state.listings?.filters.price,
+        maxField: maxField,
+        slider: {
+          ...state.listings?.filters.price.slider,
+          moveMax: moveMax,
+        },
+      }
+
+      return updateNestedObj(priceFilterPath)(newPrice)(state)
 
     case SET_ACTIVE_SORT_CATEGORY:
       return {

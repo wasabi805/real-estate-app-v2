@@ -4,4 +4,5 @@ export const homeTypeIdPrefix = 'home-type-'
 export const soldDateRangeIdPrefix = 'sold-last-'
 export const forSaleRentSoldIdPrefix = 'all-filters-btn-'
 
-export const priceFilterPath = ['listings', 'filters', 'price']
+export const priceFilterPath: string[] = ['listings', 'filters', 'price']
+export const priceRangeSliderMinId = 'ant-slider-handle-1'

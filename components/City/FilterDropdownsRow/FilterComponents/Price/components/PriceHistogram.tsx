@@ -19,7 +19,7 @@ const rawData = Array(100).fill().map(Math.random)
 
 const PriceHistogram = () => {
   const { state, dispatch } = useContext(AppContext)
-  console.log('----- PriceHistogram ------', 'Raw data', rawData)
+  // console.log('----- PriceHistogram ------', 'Raw data', rawData)
 
   return (
     <div className="price-filter-histogram">
