@@ -10,7 +10,9 @@ const { setPriceRangeSliderMaxMin, setMaxPriceFilterField } = PriceFilterActions
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----
   const { state, dispatch } = useContext(AppContext)
-  const [minMax, setMinMax] = useState(state.priceFilter?.range)
+  const [minMax, setMinMax] = useState(
+    state.listings?.filters.price.slider.range
+  )
   const [showMin, setShowMin] = useState(false)
 
   const handleShowMinOrMaxInToolTip = (activeElement) => {

@@ -29,7 +29,7 @@ const PriceFilter = () => {
     const minResult = await value[0]
     const maxResult = await value[1]
 
-    //TODO : step 1 start here : change where this updates in reducer
+    //ORIGINAL ONLY DELETE IF YOU CAN CONFIRM IT WORKS NOW
     dispatch(setMinPriceFilterField(minResult, state))
     dispatch(setMaxPriceFilterField(maxResult, state))
   }
@@ -41,7 +41,7 @@ const PriceFilter = () => {
     >
       <RangedSliderRow>
         <RangedSlider
-          sliderRange={state.priceFilter?.range}
+          sliderRange={state.listings?.filters.price.slider.range}
           onAfterChange={getMinMaxFromSliderCb}
         />
       </RangedSliderRow>
@@ -52,7 +52,8 @@ const PriceFilter = () => {
           format={'dollars'}
           placeHolder={'min'}
           name={'minField'}
-          value={state.priceFilter?.minField}
+          // value={state.priceFilter?.minField}
+          value={state.listings?.filters.price.minField}
           onChange={handleMinPriceField}
           size={'middle'}
         />{' '}
@@ -61,7 +62,7 @@ const PriceFilter = () => {
           format={'dollars'}
           placeHolder={'max'}
           name={'maxField'}
-          value={state.priceFilter?.maxField}
+          value={state.listings?.filters.price.maxField}
           onChange={handleMaxPriceField}
           size={'middle'}
         />

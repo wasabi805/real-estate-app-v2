@@ -76,6 +76,23 @@ export interface IAction {
           filterSoldDateRangeBy?: any
         }
 
+        price: {
+          minField?: null | number
+          maxField?: null | number
+
+          slider: {
+            range?: number[]
+            moveMin?: {
+              move?: boolean
+              value?: string
+            }
+            moveMax?: {
+              move?: boolean
+              value?: string
+            }
+          }
+        }
+
         homeType?: {
           selected?: string
         }

@@ -9,7 +9,7 @@ const updateObj = (key: string) => (val: any) => (obj: any) => {
 }
 
 export const updateNestedObj =
-  ([key, ...keys]) =>
+  ([key, ...keys]: string[]) =>
   (val: any) =>
   (obj: any) => {
     if (!key) return val

@@ -6,8 +6,10 @@ export const setMinPriceFilterField = (
   state: any
 ): Pick<IAction, 'type' | 'payload'> => {
   console.log('DEBUGGING', state)
-  const range = state.priceFilter.range
-  const highestPriceIdx = state.priceFilter.range.length - 1
+  // const range = state.priceFilter.range
+  const range = state.listings?.filters.price.slider.range
+
+  const highestPriceIdx = state.listings?.filters.price.slider.range.length - 1
 
   console.log('WHAT IS NUM???', num)
   const highestPrice = range[highestPriceIdx]
@@ -17,12 +19,29 @@ export const setMinPriceFilterField = (
   console.log('CALCULATING PERECNT', percent)
   return {
     type: SET_MIN_PRICE_FILTER_FIELD,
+    // payload: {
+    //   priceFilter: {
+    //     minField: num,
+    //     moveMin: {
+    //       move: true,
+    //       value: `${percent * 100}% !important`,
+    //     },
+    //   },
+    // },
+
     payload: {
-      priceFilter: {
-        minField: num,
-        moveMin: {
-          move: true,
-          value: `${percent * 100}% !important`,
+      listings: {
+        filters: {
+          price: {
+            minField: num,
+
+            slider: {
+              moveMin: {
+                move: true,
+                value: `${percent * 100}% !important`,
+              },
+            },
+          },
         },
       },
     },
@@ -69,16 +88,35 @@ export const setPriceRangeSliderMaxMin = (
 
   return {
     type: SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
+    // payload: {
+    //   priceFliter: {
+    //     range: [min, max],
+    //     moveMin: {
+    //       move: isSliderActive,
+    //       value: min,
+    //     },
+    //     moveMax: {
+    //       move: !isSliderActive,
+    //       value: max,
+    //     },
+    //   },
+    // },
     payload: {
-      priceFliter: {
-        range: [min, max],
-        moveMin: {
-          move: isSliderActive,
-          value: min,
-        },
-        moveMax: {
-          move: !isSliderActive,
-          value: max,
+      listings: {
+        filters: {
+          price: {
+            slider: {
+              range: [min, max],
+              moveMin: {
+                move: isSliderActive,
+                value: min,
+              },
+              moveMax: {
+                move: !isSliderActive,
+                value: max,
+              },
+            },
+          },
         },
       },
     },
