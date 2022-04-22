@@ -1,50 +1,34 @@
 import { IAction } from 'actions/interface'
+import { updateNestedObj } from 'utils/helpers'
+import { priceFilterPath } from 'utils/contants'
+
+let price
+const pricePayload = {
+  listings: { filters: { price: '' } },
+}
 
 export const SET_MIN_PRICE_FILTER_FIELD = 'SET_MIN_PRICE_FILTER_FIELD'
 export const setMinPriceFilterField = (
   num: number,
   state: any
 ): Pick<IAction, 'type' | 'payload'> => {
-  console.log('DEBUGGING', state)
-  // const range = state.priceFilter.range
-  const range = state.listings?.filters.price.slider.range
-
-  const highestPriceIdx = state.listings?.filters.price.slider.range.length - 1
-
-  console.log('WHAT IS NUM???', num)
-  const highestPrice = range[highestPriceIdx]
-  const minPrice = num
-  const percent = minPrice / highestPrice
+  const { range } = state.listings?.filters?.price?.slider
+  const highestPrice = range[range.length - 1]
+  const percent = num / highestPrice
 
   console.log('CALCULATING PERECNT', percent)
+
+  price = {
+    minField: num,
+    moveMin: {
+      move: true,
+      value: `${percent * 100}% !important`,
+    },
+  }
+
   return {
     type: SET_MIN_PRICE_FILTER_FIELD,
-    // payload: {
-    //   priceFilter: {
-    //     minField: num,
-    //     moveMin: {
-    //       move: true,
-    //       value: `${percent * 100}% !important`,
-    //     },
-    //   },
-    // },
-
-    payload: {
-      listings: {
-        filters: {
-          price: {
-            minField: num,
-
-            slider: {
-              moveMin: {
-                move: true,
-                value: `${percent * 100}% !important`,
-              },
-            },
-          },
-        },
-      },
-    },
+    payload: updateNestedObj(priceFilterPath)(price)(pricePayload),
   }
 }
 

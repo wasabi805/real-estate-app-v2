@@ -191,7 +191,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
   let priceRange = action.payload?.listings?.filters?.price?.slider?.range
   let moveMin = action.payload?.listings?.filters?.price?.slider?.moveMin
-  let moveMax = action.payload?.listings?.filters.price.slider.moveMax
+  let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
 
   switch (action.type) {
     //  LOGIN MODAL
