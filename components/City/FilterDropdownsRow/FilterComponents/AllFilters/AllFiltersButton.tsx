@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Button } from 'antd'
 import AppContext from 'context/appContext'
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+import * as FilterDropdownsActions from 'actions/ListingsActions/FilterRowButtonActions'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 const { setActiveFilterPanel } = FilterDropdownsActions
 const { setFilterDrawerOpen } = AllFiltersActions

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
+import * as FilterDropdownsActions from 'actions/ListingsActions/FilterRowButtonActions'
 import {
   FilterDropdownsContainer,
   FilterDropdownsRowStyles,
