@@ -36,12 +36,13 @@ export interface IinitialState {
   }
 
   listings: {
-    isDrawerOpen: boolean
-
     filters: {
       forSaleRentSold: {
         filterBy: []
         buttons: IButton[]
+        soldDateRange: string[] | []
+        soldDateRangeColumns: { dataIndex: string; title: string }[]
+        soldDateRangeRows: { key: string; soldDatePeriod: string }[]
       }
 
       price: {

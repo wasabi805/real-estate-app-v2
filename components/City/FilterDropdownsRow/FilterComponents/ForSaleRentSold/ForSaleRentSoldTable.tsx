@@ -39,12 +39,9 @@ const ForSaleRentSold = () => {
   }
 
   const ForSaleDateRange = () => {
+    console.log('verify??', state.listings?.filters)
     return (
       <div>
-        {console.log(
-          'YEEEEE',
-          state.listings?.filters?.forSaleRentSold?.soldDateRange
-        )}
         <Table
           pagination={false}
           showHeader={false}

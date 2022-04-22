@@ -43,6 +43,8 @@ export const currentBathsPath: string[] = [
 ]
 
 /* ----- ALL FILTERS ----- */
+
+export const allFiltersPayloadPath = ['listings', 'filters', 'allFilters']
 export const isDrawerOpenPath = [
   'listings',
   'filters',

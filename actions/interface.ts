@@ -54,12 +54,7 @@ export interface IAction {
     }
 
     listings?: {
-      isDrawerOpen?: boolean
-      clickedFilterName?: ''
-      currentRange?: number[] | []
-      bedsButtons?: IfilterButtons[]
-
-      filters: {
+      filters?: {
         forSaleRentSold?: {
           filterBy?: string[]
           soldDateRange?: any
@@ -69,12 +64,9 @@ export interface IAction {
         price: {
           minField?: null | number
           maxField?: null | number
-
           allPrices?: number[] | []
 
-          slider: {
-            //TODO : remove range from interface
-            range?: number[]
+          slider?: {
             moveMin?: {
               move?: boolean
               value?: string
@@ -93,7 +85,7 @@ export interface IAction {
         bedsBaths?: {
           currentBaths?: string
           currentRange?: Number | string[]
-          clickedNumber: Number | string
+          clickedNumber?: Number | string
         }
         allFilters?: {
           isDrawerOpen?: boolean

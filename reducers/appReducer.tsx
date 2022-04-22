@@ -50,8 +50,7 @@ const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
 
 const {
   SET_BEDS_VALUES,
-
-  SET_FILTER_BY_PROPERTY_TYPE,
+  // SET_FILTER_BY_PROPERTY_TYPE,
   SET_FILTER_CURRENT_BATHS_AMOUNT,
 } = ListingsFilterActions
 
@@ -68,7 +67,8 @@ const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
 
 const { SET_CLICKED_ROW } = ListingTableActions
 const { HOMES_VIEW_TAB_CLICKED } = ListingTabActions
-const { SET_SOLD_DATE_RANGE } = ForSaleRentSoldActions
+const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
+  ForSaleRentSoldActions
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -95,18 +95,12 @@ export const initialState: IinitialState = {
   },
 
   listings: {
-    // clickedFilterName: null,
-    // currentRange: [],
-    // bedsButtons: bedsButtons,
-
     filters: {
       forSaleRentSold: {
         filterBy: [],
         buttons: forSaleRentSoldButtons,
 
-        //TODO VERIFY action and reducer interfaces
-        soldDateRange: '',
-
+        soldDateRange: [],
         soldDateRangeColumns: soldDateRangeColumns,
         soldDateRangeRows: soldDateRangeRows,
       },
@@ -185,7 +179,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
   let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
 
   let filterByPropertyType = action.payload?.forSaleRentSold?.filterBy
-  let soldDateRange = action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
+  let soldDateRange =
+    action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
 
   switch (action.type) {
     //  LOGIN MODAL
@@ -283,10 +278,37 @@ const appReducer = (state: IinitialState, action: IAction) => {
     /* ----- FOR SALE RENT SOLD -----  */
 
     case SET_FILTER_BY_PROPERTY_TYPE:
-      return updateNestedObj(filterByPropertyTypePath)(filterByPropertyType)(state)
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            forSaleRentSold: {
+              ...state.listings.filters.forSaleRentSold,
+              filterBy:
+                action.payload?.listings?.filters?.forSaleRentSold?.filterBy,
+            },
+          },
+        },
+      }
 
     case SET_SOLD_DATE_RANGE:
-      return updateNestedObj(soldDateRangePath)(soldDateRange)(state)
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            forSaleRentSold: {
+              ...state.listings.filters.forSaleRentSold,
+              soldDateRange:
+                action.payload?.listings?.filters?.forSaleRentSold
+                  ?.soldDateRange,
+            },
+          },
+        },
+      }
 
     /* ----- PRICE ----- */
 
@@ -347,7 +369,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
       const currentBaths =
-        action.payload?.listings?.filters.bedsBaths?.currentBaths
+        action.payload?.listings?.filters?.bedsBaths?.currentBaths
       return updateNestedObj(currentBathsPath)(currentBaths)(state)
 
     /* ----- ALL FILTERS ----- */

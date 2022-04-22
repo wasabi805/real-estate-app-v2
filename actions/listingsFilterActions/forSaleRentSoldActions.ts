@@ -1,11 +1,16 @@
 import { IAction } from '../interface'
 
+import { updateNestedObj } from 'utils/helpers'
+const forSaleRestSoldPayload = {
+  listings: { filters: { forSaleRentSold: {} } },
+}
 export const SET_FILTER_BY_PROPERTY_TYPE = 'SET_FILTER_BY_PROPERTY_TYPE'
 export const setFilterByPropertyType = (
   propertyType: string[]
 ): Pick<IAction, 'type' | 'payload'> => {
   return {
     type: SET_FILTER_BY_PROPERTY_TYPE,
+    // payload: updateNestedObj(['listings', 'filters', 'forSaleRentSold'])({filterBy: propertyType})(forSaleRestSoldPayload)
     payload: {
       listings: {
         filters: {
@@ -13,10 +18,6 @@ export const setFilterByPropertyType = (
             filterBy: propertyType,
           },
         },
-      },
-
-      forSaleRentSold: {
-        filterBy: propertyType,
       },
     },
   }
