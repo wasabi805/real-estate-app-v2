@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react'
 import AppContext from 'context/appContext'
 import styled from '@emotion/styled'
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
+import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
 import { Slider } from 'antd'
 import 'antd/dist/antd.css'
 
-const { setPriceRangeSliderMaxMin, setMaxPriceFilterField } =
-  ListingsFilterActions
+const { setPriceRangeSliderMaxMin, setMaxPriceFilterField } = PriceFilterActions
 
 const RangedSlider = styled(({ sliderRange, onAfterChange }) => {
   // --- Required | Start : ANT Design markup for tool tip data display -----

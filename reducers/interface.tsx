@@ -61,6 +61,23 @@ export interface IinitialState {
         buttons?: IButton[]
       }
 
+      price: {
+        minField?: null | number
+        maxField?: null | number
+
+        slider: {
+          range?: number[]
+          moveMin: {
+            move: boolean
+            value: string
+          }
+          moveMax: {
+            move: boolean
+            value: string
+          }
+        }
+      }
+
       homeType?: {
         homeTypeButtons: IButtonWithIcon[]
         selected?: string

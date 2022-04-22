@@ -2,6 +2,7 @@ import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingTabActions from 'actions/listingTabActions.ts'
 import * as ListingsFilterActions from 'actions/listingsFilterActions'
+import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
 import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
@@ -40,12 +41,16 @@ const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
 
 const {
   SET_BEDS_VALUES,
-  SET_MIN_PRICE_FILTER_FIELD,
-  SET_MAX_PRICE_FILTER_FIELD,
-  SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
+
   SET_FILTER_BY_PROPERTY_TYPE,
   SET_FILTER_CURRENT_BATHS_AMOUNT,
 } = ListingsFilterActions
+
+const {
+  SET_MIN_PRICE_FILTER_FIELD,
+  SET_MAX_PRICE_FILTER_FIELD,
+  SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
+} = PriceFilterActions
 
 const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
@@ -117,6 +122,23 @@ export const initialState: IinitialState = {
 
         soldDateRangeColumns: soldDateRangeColumns,
         soldDateRangeRows: soldDateRangeRows,
+      },
+
+      price: {
+        minField: null,
+        maxField: null,
+
+        slider: {
+          range: [],
+          moveMin: {
+            move: false,
+            value: '',
+          },
+          moveMax: {
+            move: false,
+            value: '',
+          },
+        },
       },
 
       homeType: {

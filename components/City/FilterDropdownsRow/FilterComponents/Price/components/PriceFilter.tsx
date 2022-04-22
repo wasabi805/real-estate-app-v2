@@ -3,7 +3,7 @@ import AppContext from 'context/appContext'
 import RangedSlider from '@components/_common/RangedSlider'
 import InputComp from '@components/_common/InputComp'
 
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
+import * as PriceFilterActions from 'actions/listingsFilterActions/priceActions'
 
 import {
   PriceFilterContainer,
@@ -12,7 +12,7 @@ import {
   PriceSliderButtonContainer,
 } from '@components/City/FilterDropdownsRow/FilterComponents/Price/styles'
 
-const { setMinPriceFilterField, setMaxPriceFilterField } = ListingsFilterActions
+const { setMinPriceFilterField, setMaxPriceFilterField } = PriceFilterActions
 
 const PriceFilter = () => {
   const appContext = useContext(AppContext)
