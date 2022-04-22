@@ -5,31 +5,14 @@ import { bedsNumberIdPrefix } from 'utils/contants'
 import { bedsButtonFilterRange } from 'reducers/initialValues'
 import { bedsBathsPayload } from 'reducers/initialValues'
 
-export const SET_FILTER_DRAWER_OPEN = 'SET_FILTER_DRAWER_OPEN'
-export const setFilterDrawerOpen = (
-  bool: boolean
-): Pick<IAction, 'type' | 'payload'> => ({
-  type: SET_FILTER_DRAWER_OPEN,
-  payload: {
-    listings: {
-      filters:{
-        allFilters:{
-          isDrawerOpen: bool,
-        }
-      }
-    },
-  },
-})
-
-//PREVIOUSLY CALLED HANDLE_CLICK_BEDS_FILTER_BUTTON
 export const SET_BEDS_VALUES = 'SET_BEDS_VALUES'
 export const setBedsValues = (
   buttonId: string,
   state: IinitialState
 ): Pick<IAction, 'type' | 'payload'> => {
-
   let idSuffix: string = buttonId.split(bedsNumberIdPrefix)[1]
-  let idValue: Number| string = idSuffix !== 'any' ? parseInt(idSuffix, 10) : 'any'
+  let idValue: Number | string =
+    idSuffix !== 'any' ? parseInt(idSuffix, 10) : 'any'
 
   // TODO store in reducer or a contants file.
   const range = bedsButtonFilterRange
@@ -56,7 +39,7 @@ export const setBedsValues = (
   //  ----- NUMBERS -----
   if (typeof idValue === 'number') {
     // removes the 'any' key if from range if any key was clicked
-    currentRange = currentRange!.filter((val: Number| string) => val !== 'any')
+    currentRange = currentRange!.filter((val: Number | string) => val !== 'any')
 
     // Clicked number exists in range stored in reducer
     const isKeyNumPresent: boolean = currentRange.indexOf(idValue) >= 0
@@ -158,7 +141,6 @@ export const setBedsValues = (
 
       //range exists but, clicked number is not in the range(set button active)
       if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
-    
         const newRange = range.slice(range.indexOf(currentRange[0]), keyNum)
         return {
           type: SET_BEDS_VALUES,
@@ -171,7 +153,6 @@ export const setBedsValues = (
 
       // if range exists, number is in range, clicked number value  is less that previously clicked button
       if (isKeyNumPresent && keyNum < clickedNumber) {
-       
         const newRange =
           clickedNumber !== 5
             ? range.slice(

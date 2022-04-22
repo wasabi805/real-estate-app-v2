@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
 import { Drawer } from 'antd'
 import 'antd/dist/antd.css'
 import {
@@ -11,8 +10,8 @@ import PriceFilter from '../Price/components/PriceFilter'
 import BedsBath from '../BedsBath/BedsBath'
 import HomeType from '../HomeType/HomeType'
 import ForSaleRentSoldButtons from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/ForSaleRentSoldButtons'
-
-const { setFilterDrawerOpen } = ListingsFilterActions
+import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActions'
+const { setFilterDrawerOpen } = AllFiltersActions
 
 const AllFiltersDrawer = () => {
   const appContext = useContext(AppContext)

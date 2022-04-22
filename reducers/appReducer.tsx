@@ -6,6 +6,7 @@ import * as ListingsSortFilterActions from 'actions/listingsSortFilterActions'
 import * as ListingTableActions from 'actions/listingsTableActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRentSoldActions'
+import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 
@@ -38,7 +39,6 @@ const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
   FilterDropdownsActions
 
 const {
-  SET_FILTER_DRAWER_OPEN,
   SET_BEDS_VALUES,
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
@@ -46,6 +46,8 @@ const {
   SET_FILTER_BY_PROPERTY_TYPE,
   SET_FILTER_CURRENT_BATHS_AMOUNT,
 } = ListingsFilterActions
+
+const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
@@ -132,9 +134,9 @@ export const initialState: IinitialState = {
         currentBaths: '',
       },
 
-      allFilters:{
-        isDrawerOpen: false
-      }
+      allFilters: {
+        isDrawerOpen: false,
+      },
     },
   },
 
@@ -252,8 +254,14 @@ const appReducer = (state: IinitialState, action: IAction) => {
       )
 
     case SET_FILTER_DRAWER_OPEN:
-      const isDrawerOpen = action.payload?.listings?.filters?.allFilters?.isDrawerOpen
-      return updateNestedObj(['listings', 'filters', 'allFilters', 'isDrawerOpen'])(isDrawerOpen)(state)
+      const isDrawerOpen =
+        action.payload?.listings?.filters?.allFilters?.isDrawerOpen
+      return updateNestedObj([
+        'listings',
+        'filters',
+        'allFilters',
+        'isDrawerOpen',
+      ])(isDrawerOpen)(state)
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected

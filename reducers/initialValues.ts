@@ -9,7 +9,6 @@ import {
   forSaleRentSoldIdPrefix,
 } from 'utils/contants'
 
-
 /*  4-21-2022 REFLOGED BACK TO REFACTOR INITIAL VALUES */
 /* ------ For SALE RENT SOLD ------*/
 
@@ -92,4 +91,3 @@ export const bedsBathsPayload = {
     },
   },
 }
-

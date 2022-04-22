@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Button } from 'antd'
 import AppContext from 'context/appContext'
-import * as ListingsFilterActions from 'actions/listingsFilterActions'
+import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActions'
 import * as FilterDropdownsActions from 'actions/filterDropdownsActions'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 const { setActiveFilterPanel } = FilterDropdownsActions
-const { setFilterDrawerOpen } = ListingsFilterActions
+const { setFilterDrawerOpen } = AllFiltersActions
 const { CLOSE_ALL_PANELS } = FILTER_DROPDOWNS_PANEL_KEYS
 
 const AllFilters = () => {
