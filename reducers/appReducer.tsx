@@ -95,9 +95,9 @@ export const initialState: IinitialState = {
   },
 
   listings: {
-    clickedFilterName: null,
-    currentRange: [],
-    bedsButtons: bedsButtons,
+    // clickedFilterName: null,
+    // currentRange: [],
+    // bedsButtons: bedsButtons,
 
     filters: {
       forSaleRentSold: {
@@ -174,6 +174,8 @@ export const initialState: IinitialState = {
 }
 
 const appReducer = (state: IinitialState, action: IAction) => {
+  /* PAYLOAD VARIABLES */
+
   let newPrice = {}
   let minField = action.payload?.listings?.filters?.price?.minField
   let maxField = action.payload?.listings?.filters?.price?.maxField
@@ -181,6 +183,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
   let priceRange = action.payload?.listings?.filters?.price?.allPrices
   let moveMin = action.payload?.listings?.filters?.price?.slider?.moveMin
   let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
+
+  let filterByPropertyType = action.payload?.forSaleRentSold?.filterBy
+  let soldDateRange = action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
 
   switch (action.type) {
     //  LOGIN MODAL
@@ -278,12 +283,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
     /* ----- FOR SALE RENT SOLD -----  */
 
     case SET_FILTER_BY_PROPERTY_TYPE:
-      const filterBy = action.payload?.forSaleRentSold?.filterBy
-      return updateNestedObj(filterByPropertyTypePath)(filterBy)(state)
+      return updateNestedObj(filterByPropertyTypePath)(filterByPropertyType)(state)
 
     case SET_SOLD_DATE_RANGE:
-      const soldDateRange =
-        action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
       return updateNestedObj(soldDateRangePath)(soldDateRange)(state)
 
     /* ----- PRICE ----- */
