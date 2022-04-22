@@ -52,7 +52,9 @@ const PriceHistogram = () => {
         )}
       >
         <BarSeries
-          rawData={state.priceFilter?.range /* or binnedData={...} */}
+          rawData={
+            state.listings.filters.price.allPrices /* or binnedData={...} */
+          }
         />
         <XAxis />
         {/* <YAxis /> */}

@@ -29,44 +29,28 @@ export interface IinitialState {
     activeFilterPanel: string
   }
 
-  priceFilter?: {
-    //inputs
-    minField?: null | number
-    maxField?: null | number
-
-    //slider
-    range?: number[]
-    moveMin: {
-      move: boolean
-      value: string
-    }
-    moveMax: {
-      move: boolean
-      value: string
-    }
-  }
-
   sortAndFilter: {
     activeSort: string
     sortedProperties: []
     isAscending: null | boolean
   }
 
-  listings?: {
-    isDrawerOpen?: boolean
+  listings: {
+    isDrawerOpen: boolean
 
     filters: {
-      forSaleRentSold?: {
-        filterBy?: []
-        buttons?: IButton[]
+      forSaleRentSold: {
+        filterBy: []
+        buttons: IButton[]
       }
 
       price: {
-        minField?: null | number
-        maxField?: null | number
+        minField: null | number
+        maxField: null | number
+        allPrices: number[] | []
 
         slider: {
-          range?: number[]
+          range: number[]
           moveMin: {
             move: boolean
             value: string
@@ -78,18 +62,18 @@ export interface IinitialState {
         }
       }
 
-      homeType?: {
+      homeType: {
         homeTypeButtons: IButtonWithIcon[]
-        selected?: string
+        selected: string
       }
-      bedsBaths?: {
+      bedsBaths: {
         bedsButtons: IButton[]
         clickedNumber: Number | string
         range: Number[]
         currentRange: Number | string[]
 
-        bathButtons?: IBedsButton[]
-        currentBaths?: string
+        bathButtons: IBedsButton[]
+        currentBaths: string
       }
       allFilters: {
         isDrawerOpen: boolean

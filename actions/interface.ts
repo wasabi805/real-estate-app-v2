@@ -27,16 +27,6 @@ export interface IAction {
       filterBy: string[]
     }
 
-    priceFilter?: {
-      range?: number[]
-      minField?: null | number
-      maxField?: null | number
-      moveMin: {
-        move: boolean
-        value: string
-      }
-    }
-
     addressObject?: {
       formatted_address: string
       geometry: {
@@ -80,7 +70,10 @@ export interface IAction {
           minField?: null | number
           maxField?: null | number
 
+          allPrices?: number[] | []
+
           slider: {
+            //TODO : remove range from interface
             range?: number[]
             moveMin?: {
               move?: boolean

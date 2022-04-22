@@ -69,8 +69,9 @@ export const setPriceRangeSliderMaxMin = (
   const isSliderActive = handleName === priceRangeSliderMinId
 
   price = {
+    allPrices: [array[0], array[1]],
+
     slider: {
-      range: [array[0], array[1]],
       moveMin: {
         move: isSliderActive,
         value: array[0],

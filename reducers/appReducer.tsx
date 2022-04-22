@@ -10,7 +10,15 @@ import * as ForSaleRentSoldActions from 'actions/listingsFilterActions/forSaleRe
 import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
-import { priceFilterPath } from 'utils/contants'
+import {
+  filterByPropertyTypePath,
+  soldDateRangePath,
+  priceFilterPath,
+  selectedHomeTypePath,
+  bedsBathsPath,
+  currentBathsPath,
+  isDrawerOpenPath,
+} from 'utils/contants'
 
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
@@ -86,28 +94,6 @@ export const initialState: IinitialState = {
     activeFilterPanel: '0',
   },
 
-  //TODO : nest priceFilter in listingsFilters
-  priceFilter: {
-    //inputs
-    minField: null,
-    maxField: null,
-
-    //slider
-
-    // range: [],
-    range: mockAscendingPriceRange,
-
-    moveMin: {
-      move: false,
-      value: '',
-    },
-    moveMax: {
-      move: false,
-      value: '',
-    },
-  },
-
-  //TODO : move all filters into listinsgFilters
   listings: {
     clickedFilterName: null,
     currentRange: [],
@@ -128,6 +114,9 @@ export const initialState: IinitialState = {
       price: {
         minField: null,
         maxField: null,
+        /* used in slider and histogram */
+        // allPrices: [],
+        allPrices: mockAscendingPriceRange,
 
         slider: {
           // range: [],
@@ -189,7 +178,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
   let minField = action.payload?.listings?.filters?.price?.minField
   let maxField = action.payload?.listings?.filters?.price?.maxField
 
-  let priceRange = action.payload?.listings?.filters?.price?.slider?.range
+  let priceRange = action.payload?.listings?.filters?.price?.allPrices
   let moveMin = action.payload?.listings?.filters?.price?.slider?.moveMin
   let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
 
@@ -286,62 +275,40 @@ const appReducer = (state: IinitialState, action: IAction) => {
         state
       )
 
-    case SET_FILTER_DRAWER_OPEN:
-      const isDrawerOpen =
-        action.payload?.listings?.filters?.allFilters?.isDrawerOpen
-      return updateNestedObj([
-        'listings',
-        'filters',
-        'allFilters',
-        'isDrawerOpen',
-      ])(isDrawerOpen)(state)
-
-    case SET_SELECTED_HOME_TYPE:
-      const selected = action.payload?.listings?.filters?.homeType?.selected
-      return updateNestedObj(['listings', 'filters', 'homeType', 'selected'])(
-        selected
-      )(state)
+    /* ----- FOR SALE RENT SOLD -----  */
 
     case SET_FILTER_BY_PROPERTY_TYPE:
       const filterBy = action.payload?.forSaleRentSold?.filterBy
-      return updateNestedObj([
-        'listings',
-        'filters',
-        'forSaleRentSold',
-        'filterBy',
-      ])(filterBy)(state)
+      return updateNestedObj(filterByPropertyTypePath)(filterBy)(state)
 
     case SET_SOLD_DATE_RANGE:
       const soldDateRange =
         action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
-      return updateNestedObj([
-        'listings',
-        'filters',
-        'forSaleRentSold',
-        'soldDateRange',
-      ])(soldDateRange)(state)
+      return updateNestedObj(soldDateRangePath)(soldDateRange)(state)
 
-    case SET_BEDS_VALUES:
-      const currentRange =
-        action.payload?.listings?.filters?.bedsBaths?.currentRange
-      const clickedNumber =
-        action.payload?.listings?.filters?.bedsBaths?.clickedNumber
+    /* ----- PRICE ----- */
 
-      return updateNestedObj(['listings', 'filters', 'bedsBaths'])({
-        ...state.listings?.filters.bedsBaths,
-        currentRange,
-        clickedNumber,
-      })(state)
+    case SET_MIN_PRICE_FILTER_FIELD:
+      newPrice = {
+        ...state.listings?.filters.price,
+        minField: minField,
+        slider: {
+          ...state.listings?.filters.price.slider,
+          moveMin: moveMin,
+        },
+      }
+      return updateNestedObj(priceFilterPath)(newPrice)(state)
 
-    case SET_FILTER_CURRENT_BATHS_AMOUNT:
-      const currentBaths =
-        action.payload?.listings?.filters.bedsBaths?.currentBaths
-      return updateNestedObj([
-        'listings',
-        'filters',
-        'bedsBaths',
-        'currentBaths',
-      ])(currentBaths)(state)
+    case SET_MAX_PRICE_FILTER_FIELD:
+      newPrice = {
+        ...state.listings?.filters.price,
+        maxField: maxField,
+        slider: {
+          ...state.listings?.filters.price.slider,
+          moveMax: moveMax,
+        },
+      }
+      return updateNestedObj(priceFilterPath)(newPrice)(state)
 
     case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
       newPrice = {
@@ -356,29 +323,37 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
       return updateNestedObj(priceFilterPath)(newPrice)(state)
 
-    case SET_MIN_PRICE_FILTER_FIELD:
-      newPrice = {
-        ...state.listings?.filters.price,
-        minField: minField,
-        slider: {
-          ...state.listings?.filters.price.slider,
-          moveMin: moveMin,
-        },
-      }
+    /* ----- HOME-TYPE FILTERS ----- */
 
-      return updateNestedObj(priceFilterPath)(newPrice)(state)
+    case SET_SELECTED_HOME_TYPE:
+      const selected = action.payload?.listings?.filters?.homeType?.selected
+      return updateNestedObj(selectedHomeTypePath)(selected)(state)
 
-    case SET_MAX_PRICE_FILTER_FIELD:
-      newPrice = {
-        ...state.listings?.filters.price,
-        maxField: maxField,
-        slider: {
-          ...state.listings?.filters.price.slider,
-          moveMax: moveMax,
-        },
-      }
+    /* ----- BEDS BATHS ----- */
 
-      return updateNestedObj(priceFilterPath)(newPrice)(state)
+    case SET_BEDS_VALUES:
+      const currentRange =
+        action.payload?.listings?.filters?.bedsBaths?.currentRange
+      const clickedNumber =
+        action.payload?.listings?.filters?.bedsBaths?.clickedNumber
+
+      return updateNestedObj(bedsBathsPath)({
+        ...state.listings?.filters.bedsBaths,
+        currentRange,
+        clickedNumber,
+      })(state)
+
+    case SET_FILTER_CURRENT_BATHS_AMOUNT:
+      const currentBaths =
+        action.payload?.listings?.filters.bedsBaths?.currentBaths
+      return updateNestedObj(currentBathsPath)(currentBaths)(state)
+
+    /* ----- ALL FILTERS ----- */
+
+    case SET_FILTER_DRAWER_OPEN:
+      const isDrawerOpen =
+        action.payload?.listings?.filters?.allFilters?.isDrawerOpen
+      return updateNestedObj(isDrawerOpenPath)(isDrawerOpen)(state)
 
     case SET_ACTIVE_SORT_CATEGORY:
       return {

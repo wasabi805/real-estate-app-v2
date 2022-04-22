@@ -41,7 +41,7 @@ const PriceFilter = () => {
     >
       <RangedSliderRow>
         <RangedSlider
-          sliderRange={state.listings?.filters.price.slider.range}
+          sliderRange={state.listings.filters.price.allPrices}
           onAfterChange={getMinMaxFromSliderCb}
         />
       </RangedSliderRow>
