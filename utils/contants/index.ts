@@ -6,12 +6,7 @@ export const forSaleRentSoldIdPrefix = 'all-filters-btn-'
 
 /* ----- FOR SALE RENT SOLD -----  */
 
-export const filterByPropertyTypePath = [
-  'listings',
-  'filters',
-  'forSaleRentSold',
-  'filterBy',
-]
+export const forSaleRentSoldPath = ['listings', 'filters', 'forSaleRentSold']
 
 export const soldDateRangePath = [
   'listings',

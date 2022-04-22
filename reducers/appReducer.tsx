@@ -11,8 +11,7 @@ import * as AllFiltersActions from 'actions/listingsFilterActions/allFiltersActi
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 import {
-  filterByPropertyTypePath,
-  soldDateRangePath,
+  forSaleRentSoldPath,
   priceFilterPath,
   selectedHomeTypePath,
   bedsBathsPath,
@@ -178,7 +177,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
   let moveMin = action.payload?.listings?.filters?.price?.slider?.moveMin
   let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
 
-  let filterByPropertyType = action.payload?.forSaleRentSold?.filterBy
+  let filterByPropertyType =
+    action.payload?.listings?.filters?.forSaleRentSold?.filterBy
   let soldDateRange =
     action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
 
@@ -278,37 +278,16 @@ const appReducer = (state: IinitialState, action: IAction) => {
     /* ----- FOR SALE RENT SOLD -----  */
 
     case SET_FILTER_BY_PROPERTY_TYPE:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            forSaleRentSold: {
-              ...state.listings.filters.forSaleRentSold,
-              filterBy:
-                action.payload?.listings?.filters?.forSaleRentSold?.filterBy,
-            },
-          },
-        },
-      }
+      return updateNestedObj(forSaleRentSoldPath)({
+        ...state.listings.filters.forSaleRentSold,
+        filterBy: filterByPropertyType,
+      })(state)
 
     case SET_SOLD_DATE_RANGE:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            forSaleRentSold: {
-              ...state.listings.filters.forSaleRentSold,
-              soldDateRange:
-                action.payload?.listings?.filters?.forSaleRentSold
-                  ?.soldDateRange,
-            },
-          },
-        },
-      }
+      return updateNestedObj(forSaleRentSoldPath)({
+        ...state.listings.filters.forSaleRentSold,
+        soldDateRange,
+      })(state)
 
     /* ----- PRICE ----- */
 
