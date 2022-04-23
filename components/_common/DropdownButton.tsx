@@ -4,6 +4,16 @@ import { DropdownButtonContainer } from 'components/_common/styles'
 
 const { Panel } = Collapse
 
+interface IDropdownButtonProps {
+  className?: string
+  buttonName: string
+  component?: JSX.Element
+  onChange?: () => void
+  activeKey: string
+  btnKey: string
+  buttonStyles: React.CSSProperties
+}
+
 const DropdownButton = ({
   className,
   buttonName,
@@ -12,7 +22,7 @@ const DropdownButton = ({
   activeKey,
   btnKey,
   buttonStyles,
-}) => {
+}: IDropdownButtonProps) => {
   return (
     <DropdownButtonContainer buttonStyles={buttonStyles}>
       <Collapse onChange={onChange} activeKey={activeKey} className={className}>

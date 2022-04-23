@@ -43,25 +43,29 @@ export const ListingsContainer = styled.div`
 
 export const SortByOptionsContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  height: 3rem;
-  width: 100%;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #8080800f;
+  border: 1px solid cyan;
 
-  .photo-tables-buttons {
-    margin-left: auto;
-    margin-right: 1rem;
-    align-self: flex-end;
+  // | -------ORIGINAL BELOW ------- |
+  // display: flex;
+  // flex-direction: row;
+  // height: 3rem;
+  // width: 100%;
+  // margin-bottom: 1rem;
+  // border-bottom: 1px solid #8080800f;
 
-    & button {
-      border: none;
-      background: transparent;
-      font-size: 1.1rem;
-      font-weight: 400;
-      cursor: pointer;
-    }
-  }
+  // .photo-tables-buttons {
+  //   margin-left: auto;
+  //   margin-right: 1rem;
+  //   align-self: flex-end;
+
+  //   & button {
+  //     border: none;
+  //     background: transparent;
+  //     font-size: 1.1rem;
+  //     font-weight: 400;
+  //     cursor: pointer;
+  //   }
+  // }
 `
 
 export const SpecRowTwo = styled(Row)`

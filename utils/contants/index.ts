@@ -3,6 +3,7 @@ export const bathsValuesPrefix = 'baths-filter-btn-'
 export const homeTypeIdPrefix = 'home-type-'
 export const soldDateRangeIdPrefix = 'sold-last-'
 export const forSaleRentSoldIdPrefix = 'all-filters-btn-'
+export const filterRowButtonsIdPrefix = 'filter-row-button-'
 
 /* ----- FOR SALE RENT SOLD -----  */
 

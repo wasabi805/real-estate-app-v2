@@ -2,6 +2,21 @@ import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { sortByAscendOrDescend } from 'actions/helpers'
 import { IinitialState } from 'reducers/interface'
 
+export const TOGGLE_SORT_LISTINGS_PANEL = 'TOGGLE_SORT_LISTINGS_PANEL'
+export const toggleSortListingsPanel = (bool: boolean) => {
+  return {
+    type: TOGGLE_SORT_LISTINGS_PANEL,
+    payload: {
+      listings: {
+        sort: {
+          togglePanel: bool,
+        },
+      },
+    },
+  }
+}
+
+// |------ ORIGINAL BELOW -------|
 export const SET_ACTIVE_SORT_CATEGORY = 'SET_ACTIVE_SORT_CATEGORY'
 
 interface ISortAndFilter {

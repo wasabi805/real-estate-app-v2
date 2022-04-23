@@ -7,6 +7,7 @@ import {
   homeTypeIdPrefix,
   soldDateRangeIdPrefix,
   forSaleRentSoldIdPrefix,
+  filterRowButtonsIdPrefix,
 } from 'utils/contants'
 
 /*  4-21-2022 REFLOGED BACK TO REFACTOR INITIAL VALUES */
@@ -91,3 +92,26 @@ export const bedsBathsPayload = {
     },
   },
 }
+
+export const filterRowButtons: IButton[] = [
+  {
+    id: `${filterRowButtonsIdPrefix}forSale`,
+    className: 'ant-btn for-sale-filter',
+    text: 'For Sale',
+  },
+  {
+    id: `${filterRowButtonsIdPrefix}price`,
+    className: 'ant-btn price-filter',
+    text: 'Price',
+  },
+  {
+    id: `${filterRowButtonsIdPrefix}homeType`,
+    className: 'ant-btn homeType-filter',
+    text: 'Home-Type',
+  },
+  {
+    id: `${filterRowButtonsIdPrefix}bedsBath`,
+    className: 'ant-btn bedsBath-filter',
+    text: 'Beds / Bath',
+  },
+]

@@ -57,6 +57,8 @@ export interface IAction {
       currentHome?: string[]
 
       filters?: {
+        activeFilterPanel?: string
+
         forSaleRentSold?: {
           filterBy?: string[]
           soldDateRange?: any
@@ -92,6 +94,13 @@ export interface IAction {
         allFilters?: {
           isDrawerOpen?: boolean
         }
+      }
+
+      sort?: {
+        togglePanel?: boolean
+        criteria?: string
+        sortedHomes?: []
+        isAscending?: null | boolean
       }
     }
 

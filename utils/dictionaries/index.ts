@@ -1,5 +1,3 @@
-import { IButton, IButtonWithIcon } from '../interfaces/buttons'
-
 interface IdictionaryEntry {
   key: string
   value: Number
@@ -17,7 +15,7 @@ export const SORT_BY_LISTING_CATEGORIES: IdictionaryEntry[] = [
 
 export const FILTER_DROPDOWNS_PANEL_KEYS = {
   CLOSE_ALL_PANELS: '0',
-  FOR_SALE_PANEL: '1',
+  FOR_SALE_PANEL: 'test',
   PRICE_PANEL: '2',
   HOME_TYPE_PANEL: '3',
   BEDS_BATH_PANEL: '4',

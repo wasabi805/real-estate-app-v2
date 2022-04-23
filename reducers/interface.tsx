@@ -41,6 +41,8 @@ export interface IinitialState {
     currentHome: string[]
 
     filters: {
+      activeFilterPanel: string
+
       forSaleRentSold: {
         filterBy: []
         buttons: IButton[]
@@ -83,6 +85,13 @@ export interface IinitialState {
       allFilters: {
         isDrawerOpen: boolean
       }
+    }
+
+    sort: {
+      togglePanel: boolean
+      criteria: string
+      sortedHomes: []
+      isAscending: null | boolean
     }
   }
 

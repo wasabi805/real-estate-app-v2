@@ -3,10 +3,12 @@ import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsActions from 'actions/ListingsActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortRowButtonActions'
+import * as ListingsSortFilterActions from 'actions/ListingsActions/SortListings'
+import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import * as FilterDropdownsActions from 'actions/ListingsActions/FilterRowButtonActions'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
+import * as SortListingsActions from 'actions/ListingsActions/SortListings'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 import {
@@ -21,6 +23,7 @@ import {
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
 import {
+  filterRowButtons,
   forSaleRentSoldButtons,
   soldDateRangeColumns,
   soldDateRangeRows,
@@ -43,8 +46,7 @@ const {
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
 
-const { SET_ACTIVE_FILTER_PANEL, SET_SELECTED_HOME_TYPE } =
-  FilterDropdownsActions
+const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
 
 const {
   SET_BEDS_VALUES,
@@ -58,6 +60,7 @@ const {
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = PriceFilterActions
 
+const { SET_ACTIVE_FILTER_PANEL } = FilterActions
 const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -67,6 +70,8 @@ const { SET_CLICKED_ROW } = ListingsActions
 const { HOMES_VIEW_TAB_CLICKED } = ListingsActions
 const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
   ForSaleRentSoldActions
+
+const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -98,6 +103,9 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      buttons: filterRowButtons,
+      activeFilterPanel: '0',
+
       forSaleRentSold: {
         filterBy: [],
         buttons: forSaleRentSoldButtons,
@@ -146,6 +154,13 @@ export const initialState: IinitialState = {
       allFilters: {
         isDrawerOpen: false,
       },
+    },
+
+    sort: {
+      togglePanel: false,
+      criteria: '',
+      sortedHomes: [],
+      isAscending: null,
     },
   },
 
@@ -261,10 +276,12 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_ACTIVE_FILTER_PANEL:
       const activeFilterPanel =
-        action.payload?.filterDropdownsRow?.activeFilterPanel
-      return updateNestedObj(['filterDropdownsRow', 'activeFilterPanel'])(
-        activeFilterPanel
-      )(state)
+        action.payload?.listings?.filters?.activeFilterPanel
+      console.log('what is action', action)
+      return updateNestedObj(['listings', 'filters'])({
+        ...state.listings.filters,
+        activeFilterPanel,
+      })(state)
 
     case HOMES_VIEW_TAB_CLICKED:
       const isTableView = action.payload?.listings?.isTableView
@@ -371,6 +388,14 @@ const appReducer = (state: IinitialState, action: IAction) => {
           data: action.payload?.searchResults?.data,
         },
       }
+
+    /* ----- SORT LISTINGS ----- */
+
+    case TOGGLE_SORT_LISTINGS_PANEL:
+      return updateNestedObj(['listings', 'sort'])({
+        ...state.listings.sort,
+        togglePanel: !action.payload?.listings?.sort?.togglePanel,
+      })(state)
 
     case SET_IS_ASCENDING:
       return {

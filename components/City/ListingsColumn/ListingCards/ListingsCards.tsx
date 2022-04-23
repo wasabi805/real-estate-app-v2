@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import Card from '@components/City/ListingsColumn/ListingCards/Card'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortRowButtonActions'
+import * as ListingsSortFilterActions from 'actions/ListingsActions/SortListings'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
 import { ListingsCardWrapper } from 'components/City/ListingsColumn/ListingCards/styles'
 const { sortListings } = ListingsSortFilterActions

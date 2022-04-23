@@ -1,5 +1,6 @@
 export interface IButton {
   id?: string | undefined
+  className: string
   text?: string | Number
   onClick?: { (): void } | null
   size?: string
