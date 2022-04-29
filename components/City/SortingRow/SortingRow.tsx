@@ -11,10 +11,6 @@ import DropdownButton from '@components/_common/DropdownButton'
 
 const { TabPane } = Tabs
 
-// const { toggleSortListingsPanel: toggleSortPanel } = SortListingsActions
-
-
-//TODO: THESE TWO COMPONENTS NEED TO GET GET MERGED FOR STATE TO UPDATE CORRECTLY
 export const AscendDescendTab: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
@@ -23,9 +19,7 @@ export const AscendDescendTab: React.FC = () => {
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
     let isAsc = key === 'sort-listings-ascending'
-    console.log('what is the value of key', key)
-    console.log('isAsc', isAsc)
-    dispatch(setIsAscending(isAsc , state ))
+    dispatch(setIsAscending(isAsc, state))
   }
 
   return (
@@ -46,13 +40,8 @@ const SortingRow: React.FC = () => {
   const { sortAndFilter, searchResults } = state
   const { toggleSortListingsPanel } = SortListingsActions
 
-  // STEP 1.) Click the row
   const handleSetActive = (e: IantDesignEventObj) => {
-    console.log('clicked category from dropdown', state.listings.sort)
     dispatch(setActiveSortCategory(e.key, state))
-    
-    // ORIGINAL BELOW
-    // dispatch(setActiveSortCategory(e.key, sortAndFilter, searchResults))
   }
 
   const handlePhotoTableButtonClick = (e) => {

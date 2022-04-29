@@ -167,9 +167,6 @@ export const initialState: IinitialState = {
 
       isAscending: null,
       togglePanel: false,
-      
-      
-      
     },
   },
 
@@ -388,19 +385,14 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_ACTIVE_SORT_CATEGORY:
       return {
         ...state,
-        // sortAndFilter: {
-        //   ...state.sortAndFilter,
-        //   activeSort: action.payload?.sortAndFilter?.activeSort,
-        // },
 
-        //TODO, remove sortAndFilter above
-        listings:{
+        listings: {
           ...state.listings,
-          sort:{
+          sort: {
             ...state.listings.sort,
             criteria: action.payload?.listings?.sort?.criteria,
-            isAscending: action.payload?.listings?.sort?.isAscending
-          }
+            isAscending: action.payload?.listings?.sort?.isAscending,
+          },
         },
 
         searchResults: {
@@ -420,13 +412,13 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_IS_ASCENDING:
       return {
         ...state,
-        listings:{
+        listings: {
           ...state.listings,
-          sort:{
+          sort: {
             ...state.listings.sort,
             criteria: action.payload?.listings?.sort?.criteria,
-            isAscending: action.payload?.listings?.sort?.isAscending
-          }
+            isAscending: action.payload?.listings?.sort?.isAscending,
+          },
         },
 
         searchResults: {

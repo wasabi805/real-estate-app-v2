@@ -8,18 +8,9 @@ import ListingCards from 'components/City/ListingsColumn/ListingCards'
 import { ListingsTableBody } from 'components/City/ListingsColumn/ListingsTable/styles'
 import SelectedHome from '@components/City/ListingsColumn/SelectedHome/SelectedHome'
 
-const { sortListings } = ListingsSortFilterActions
-
 const Listings: React.FC = () => {
   const appContext = useContext(AppContext)
-  const { state, dispatch } = appContext
-  const { searchResults, sortAndFilter } = state
-
-  // useEffect(() => {
-  //   if (state.sortAndFilter.isAscending !== null) {
-  //     dispatch(sortListings(sortAndFilter, searchResults))
-  //   }
-  // }, [sortAndFilter.isAscending])
+  const { state } = appContext
 
   return (
     <>
