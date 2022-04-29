@@ -157,24 +157,13 @@ export const initialState: IinitialState = {
     },
 
     sort: {
-      //TODO swap criteria for activeSort
-      // activeSort: 'Price',
       criteria: 'Price',
-
-      //TODO swap sortedProperties for sortedHomes
-      // sortedProperties: [],
       sortedHomes: [],
 
       isAscending: null,
       togglePanel: false,
     },
   },
-
-  // sortAndFilter: {
-  //   activeSort: 'Price',
-  //   sortedProperties: [],
-  //   isAscending: null,
-  // },
 
   loginModal: {
     isLogin: true,
@@ -283,14 +272,13 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_ACTIVE_FILTER_PANEL:
       const activeFilterPanel =
         action.payload?.listings?.filters?.activeFilterPanel
-      console.log('what is action', action)
+     
       return updateNestedObj(['listings', 'filters'])({
         ...state.listings.filters,
         activeFilterPanel,
       })(state)
 
     case HOMES_VIEW_TAB_CLICKED:
-      const isTableView = action.payload?.listings?.isTableView
       return {
         ...state,
         listings: {
@@ -390,6 +378,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.listings,
           sort: {
             ...state.listings.sort,
+            togglePanel: false,
             criteria: action.payload?.listings?.sort?.criteria,
             isAscending: action.payload?.listings?.sort?.isAscending,
           },
@@ -416,6 +405,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.listings,
           sort: {
             ...state.listings.sort,
+            togglePanel: false,
             criteria: action.payload?.listings?.sort?.criteria,
             isAscending: action.payload?.listings?.sort?.isAscending,
           },

@@ -37,7 +37,6 @@ const SortingRow: React.FC = () => {
   const { setActiveSortCategory } = ListingsSortActions
   const { homesViewTabClicked } = ListingsActions
 
-  const { sortAndFilter, searchResults } = state
   const { toggleSortListingsPanel } = SortListingsActions
 
   const handleSetActive = (e: IantDesignEventObj) => {
@@ -89,23 +88,6 @@ const SortingRow: React.FC = () => {
           Table
         </button>
       </span>
-
-      {/* ORIGINAL BELOW */}
-      {/* <span>40 of 132 homes•</span>
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={handleSetActive}>
-          Sort: {activeSortCAtegory}
-        </a>
-      </Dropdown>
-
-      <span className="photo-tables-buttons">
-        <button name="Photo" onClick={handlePhotoTableButtonClick}>
-          Photos
-        </button>
-        <button name="Table" onClick={handlePhotoTableButtonClick}>
-          Table
-        </button>
-      </span> */}
     </SortByOptionsContainer>
   )
 }

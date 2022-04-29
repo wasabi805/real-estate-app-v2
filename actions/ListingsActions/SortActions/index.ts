@@ -43,6 +43,7 @@ export const setActiveSortCategory = (criteria: string, state: any) => {
     payload: {
       listings: {
         sort: {
+          togglePanel: false,
           criteria: criteria,
           isAscending: state.listings.sort.isAscending,
         },
