@@ -67,7 +67,7 @@ const FilterDropdownsRow = () => {
       <FilterDropdownsContainer>
         {/* BUTTON ONE */}
 
-        {/* <DropdownButton
+        <DropdownButton
           className={'ant-btn for-sale-filter'}
           btnKey={FOR_SALE_PANEL}
           buttonName={'For Sale'}
@@ -82,7 +82,7 @@ const FilterDropdownsRow = () => {
           buttonStyles={{
             width: '6rem',
           }}
-        /> */}
+        />
 
         {/* BUTTON TWO */}
         <DropdownButton

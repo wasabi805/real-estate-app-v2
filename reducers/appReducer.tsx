@@ -272,7 +272,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_ACTIVE_FILTER_PANEL:
       const activeFilterPanel =
         action.payload?.listings?.filters?.activeFilterPanel
-     
+
       return updateNestedObj(['listings', 'filters'])({
         ...state.listings.filters,
         activeFilterPanel,

@@ -94,9 +94,6 @@ export const setBedsValues = (
 
     //if a range exists in the reducer
     if (currentRange.length >= 2) {
-      //TODO REMOVE LATER
-      const previousBtnClicked = state.listings?.clickedFilterName
-
       // if a number in the range is clicked twice in a row
       if (keyNum == clickedNumber) {
         const newRange = [keyNum]
@@ -110,7 +107,6 @@ export const setBedsValues = (
       }
 
       // if the clicked value is less than the lowest range number in the reducer...
-      // if (!isKeyNumPresent && keyNum < firstValue) {
       if (!isKeyNumPresent && keyNum < currentRange[0]) {
         //get the new range of numbers
         const newRange = range.slice(
@@ -129,7 +125,6 @@ export const setBedsValues = (
       // range exists and number in range is clicked
       if (isKeyNumPresent && keyNum > clickedNumber) {
         const newRange = range.slice(range.indexOf(currentRange[0]), keyNum)
-
         return {
           type: SET_BEDS_VALUES,
           payload: updateNestedObj(bedsBathsPath)({
@@ -140,7 +135,8 @@ export const setBedsValues = (
       }
 
       //range exists but, clicked number is not in the range(set button active)
-      if (!isKeyNumPresent && keyNum >= previousBtnClicked) {
+
+      if (keyNum > clickedNumber && isKeyNumPresent === false) {
         const newRange = range.slice(range.indexOf(currentRange[0]), keyNum)
         return {
           type: SET_BEDS_VALUES,
