@@ -1,27 +1,31 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import { Menu, Dropdown, Tabs } from 'antd'
+import { Menu, Tabs } from 'antd'
 import { SortByOptionsContainer } from '../styles'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortListings'
+import * as ListingsSortActions from 'actions/ListingsActions/SortActions'
 import * as ListingsActions from 'actions/ListingsActions'
-import * as SortListingsActions from 'actions/ListingsActions/SortListings'
+import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
 
 const { TabPane } = Tabs
 
-const { toggleSortListingsPanel: toggleSortPanel } = SortListingsActions
+// const { toggleSortListingsPanel: toggleSortPanel } = SortListingsActions
 
+
+//TODO: THESE TWO COMPONENTS NEED TO GET GET MERGED FOR STATE TO UPDATE CORRECTLY
 export const AscendDescendTab: React.FC = () => {
   const appContext = useContext(AppContext)
-  const { dispatch } = appContext
-  const { setIsAscending } = ListingsSortFilterActions
+  const { state, dispatch } = appContext
+  const { setIsAscending } = ListingsSortActions
 
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
     let isAsc = key === 'sort-listings-ascending'
-    dispatch(setIsAscending(isAsc))
+    console.log('what is the value of key', key)
+    console.log('isAsc', isAsc)
+    dispatch(setIsAscending(isAsc , state ))
   }
 
   return (
@@ -36,26 +40,20 @@ export const AscendDescendTab: React.FC = () => {
 const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { setActiveSortCategory } = ListingsSortFilterActions
+  const { setActiveSortCategory } = ListingsSortActions
   const { homesViewTabClicked } = ListingsActions
 
   const { sortAndFilter, searchResults } = state
   const { toggleSortListingsPanel } = SortListingsActions
 
+  // STEP 1.) Click the row
   const handleSetActive = (e: IantDesignEventObj) => {
-    dispatch(setActiveSortCategory(e.key, sortAndFilter, searchResults))
+    console.log('clicked category from dropdown', state.listings.sort)
+    dispatch(setActiveSortCategory(e.key, state))
+    
+    // ORIGINAL BELOW
+    // dispatch(setActiveSortCategory(e.key, sortAndFilter, searchResults))
   }
-
-  // const menu = (
-  //   <Menu>
-  //     <AscendDescendTab />
-  //     {SORT_BY_LISTING_CATEGORIES.map((category) => (
-  //       <Menu.Item key={category.value} onClick={handleSetActive}>
-  //         {category.value}
-  //       </Menu.Item>
-  //     ))}
-  //   </Menu>
-  // )
 
   const handlePhotoTableButtonClick = (e) => {
     console.log('what is e', e)

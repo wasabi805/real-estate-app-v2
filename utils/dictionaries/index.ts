@@ -1,6 +1,6 @@
 interface IdictionaryEntry {
   key: string
-  value: Number
+  value: Number | string
 }
 
 export const SORT_BY_LISTING_CATEGORIES: IdictionaryEntry[] = [

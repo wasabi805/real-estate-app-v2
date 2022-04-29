@@ -3,12 +3,12 @@ import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsActions from 'actions/ListingsActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortListings'
+import * as ListingsSortFilterActions from 'actions/ListingsActions/SortActions'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import * as FilterDropdownsActions from 'actions/ListingsActions/FilterRowButtonActions'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
-import * as SortListingsActions from 'actions/ListingsActions/SortListings'
+import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 import {
@@ -157,18 +157,27 @@ export const initialState: IinitialState = {
     },
 
     sort: {
-      togglePanel: false,
-      criteria: '',
+      //TODO swap criteria for activeSort
+      // activeSort: 'Price',
+      criteria: 'Price',
+
+      //TODO swap sortedProperties for sortedHomes
+      // sortedProperties: [],
       sortedHomes: [],
+
       isAscending: null,
+      togglePanel: false,
+      
+      
+      
     },
   },
 
-  sortAndFilter: {
-    activeSort: 'Price',
-    sortedProperties: [],
-    isAscending: null,
-  },
+  // sortAndFilter: {
+  //   activeSort: 'Price',
+  //   sortedProperties: [],
+  //   isAscending: null,
+  // },
 
   loginModal: {
     isLogin: true,
@@ -379,10 +388,21 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_ACTIVE_SORT_CATEGORY:
       return {
         ...state,
-        sortAndFilter: {
-          ...state.sortAndFilter,
-          activeSort: action.payload?.sortAndFilter?.activeSort,
+        // sortAndFilter: {
+        //   ...state.sortAndFilter,
+        //   activeSort: action.payload?.sortAndFilter?.activeSort,
+        // },
+
+        //TODO, remove sortAndFilter above
+        listings:{
+          ...state.listings,
+          sort:{
+            ...state.listings.sort,
+            criteria: action.payload?.listings?.sort?.criteria,
+            isAscending: action.payload?.listings?.sort?.isAscending
+          }
         },
+
         searchResults: {
           ...state.searchResults,
           data: action.payload?.searchResults?.data,
@@ -400,9 +420,18 @@ const appReducer = (state: IinitialState, action: IAction) => {
     case SET_IS_ASCENDING:
       return {
         ...state,
-        sortAndFilter: {
-          ...state.sortAndFilter,
-          isAscending: action.payload?.sortAndFilter?.isAscending,
+        listings:{
+          ...state.listings,
+          sort:{
+            ...state.listings.sort,
+            criteria: action.payload?.listings?.sort?.criteria,
+            isAscending: action.payload?.listings?.sort?.isAscending
+          }
+        },
+
+        searchResults: {
+          ...state.searchResults,
+          data: action.payload?.searchResults?.data,
         },
       }
 

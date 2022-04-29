@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortListings'
+import * as ListingsSortFilterActions from 'actions/ListingsActions/SortActions'
 import { ListingsContainer, ListingCardsAndTableCol } from './styles'
 import { FilterDropdownsRow } from 'components/City/FilterDropdownsRow'
 import SortingRow from './SortingRow/SortingRow'
@@ -15,11 +15,11 @@ const Listings: React.FC = () => {
   const { state, dispatch } = appContext
   const { searchResults, sortAndFilter } = state
 
-  useEffect(() => {
-    if (state.sortAndFilter.isAscending !== null) {
-      dispatch(sortListings(sortAndFilter, searchResults))
-    }
-  }, [sortAndFilter.isAscending])
+  // useEffect(() => {
+  //   if (state.sortAndFilter.isAscending !== null) {
+  //     dispatch(sortListings(sortAndFilter, searchResults))
+  //   }
+  // }, [sortAndFilter.isAscending])
 
   return (
     <>
