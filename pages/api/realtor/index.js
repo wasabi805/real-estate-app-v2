@@ -81,7 +81,7 @@ const realtorApi = async (request, response) => {
 
       return getListings(stateCode, city)
     }
-
+    console.log('FIRED!!!!!!!!!!!!')
     /**
      * If request data was from Google Places Auto Complete
      */
@@ -130,3 +130,5 @@ const realtorApi = async (request, response) => {
 }
 
 export default realtorApi
+
+

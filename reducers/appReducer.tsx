@@ -60,7 +60,7 @@ const {
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = PriceFilterActions
 
-const { SET_ACTIVE_FILTER_PANEL } = FilterActions
+const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE } = FilterActions
 const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -72,6 +72,9 @@ const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
   ForSaleRentSoldActions
 
 const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
+
+
+
 
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
@@ -107,7 +110,7 @@ export const initialState: IinitialState = {
       activeFilterPanel: '0',
 
       forSaleRentSold: {
-        filterBy: [],
+        filterBy: ['all-filters-btn-for-sale'],
         buttons: forSaleRentSoldButtons,
 
         soldDateRange: [],
@@ -441,6 +444,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
       return {
         ...state,
       }
+
+      case UPDATE_FILTER_RESPONSE:
+        return{
+          ...state
+        }
 
     default:
       return state

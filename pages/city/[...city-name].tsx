@@ -4,21 +4,18 @@ import Image from 'next/image'
 import 'antd/dist/antd.css'
 import { CityWrapper } from './styles'
 import { MapColumnContainer, ListingsColumnContainer } from './styles'
-import Listings from 'components/City/City'
+import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@components/City/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 
-const CityDetails = () => {
+const CityDetails = ({todo}) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  useEffect(() => {
-    console.log('CITY PAGE LOADED', state)
-  }, [])
-
+  console.log('what is todo', todo)
   return (
     <CityWrapper>
       <Row>
@@ -43,5 +40,19 @@ const CityDetails = () => {
     </CityWrapper>
   )
 }
+
+export const getServerSideProps = async (context) => {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${context.params.id}`
+  );
+  const todo = await res.json();
+  console.log('context in getServerSideProps', context)
+
+  return {
+    props: {
+      todo,
+    },
+  };
+};
 
 export default CityDetails
