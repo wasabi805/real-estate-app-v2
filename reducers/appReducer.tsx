@@ -73,9 +73,6 @@ const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
 
 const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
 
-
-
-
 export const initialState: IinitialState = {
   isLoginModalVisibile: false,
   user: {
@@ -445,10 +442,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
         ...state,
       }
 
-      case UPDATE_FILTER_RESPONSE:
-        return{
-          ...state
-        }
+    case UPDATE_FILTER_RESPONSE:
+      return {
+        ...state,
+      }
 
     default:
       return state

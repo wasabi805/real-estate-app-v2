@@ -17,10 +17,10 @@ export const setActiveFilterPanel = (
 }
 
 export const UPDATE_FILTER_RESPONSE = 'UPDATE_FILTER_RESPONSE'
-export const updateFilterResponse =(data)=>{
+export const updateFilterResponse = (data) => {
   console.log('what is data', data)
-  return{
+  return {
     type: UPDATE_FILTER_RESPONSE,
-    payload:''
+    payload: '',
   }
 }

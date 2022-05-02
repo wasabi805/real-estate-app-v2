@@ -6,7 +6,7 @@ import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
-import {  useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
 import { homeTypeIdPrefix } from 'utils/contants'
@@ -18,17 +18,14 @@ const HomeType = () => {
   const { width, height } = PROPERTY_TYPE_TILE_PROPS
   const router = useRouter()
 
-
-  const handleHomeTypeButtonClick = async(id: string, state: any) => {
+  const handleHomeTypeButtonClick = async (id: string, state: any) => {
     router.push(`/city/state/foo/bar`)
     dispatch(setSelectedHomeType(id))
   }
-  
 
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
 
-  
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
     const iconType = btn.id?.split(homeTypeIdPrefix)
@@ -53,7 +50,7 @@ const HomeType = () => {
     }
 
     btn.onClick = () => {
-      handleHomeTypeButtonClick(btn.id! , state)
+      handleHomeTypeButtonClick(btn.id!, state)
     }
     btn.icon = icon
 

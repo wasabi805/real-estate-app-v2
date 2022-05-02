@@ -130,5 +130,3 @@ const realtorApi = async (request, response) => {
 }
 
 export default realtorApi
-
-

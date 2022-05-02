@@ -11,11 +11,11 @@ import { FilterDropdownsRow } from '@components/City/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 
-const CityDetails = ({todo}) => {
+const CityDetails = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  console.log('what is todo', todo)
+  console.log('what is todo', props)
   return (
     <CityWrapper>
       <Row>
@@ -41,18 +41,32 @@ const CityDetails = ({todo}) => {
   )
 }
 
-export const getServerSideProps = async (context) => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${context.params.id}`
-  );
-  const todo = await res.json();
-  console.log('context in getServerSideProps', context)
+export const getStaticProps = async (props) => {
+  let data = null
+
+  try {
+    data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => response.json())
+      .then((json) => json)
+  } catch (err) {
+    console.log()
+  }
+  console.log('what is data', data)
+  console.log('what are props??', props)
 
   return {
     props: {
-      todo,
+      'city-name': '',
+      data,
     },
-  };
-};
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: ['/city/city-name'],
+    fallback: true, // false or 'blocking'
+  }
+}
 
 export default CityDetails
