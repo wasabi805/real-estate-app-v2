@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import * as ListingsSortFilterActions from 'actions/ListingsActions/SortActions'
 import { ListingsContainer, ListingCardsAndTableCol } from './styles'
-import { FilterDropdownsRow } from 'components/City/FilterDropdownsRow'
 import SortingRow from './SortingRow/SortingRow'
 import ListingCards from 'components/City/ListingsColumn/ListingCards'
 import { ListingsTableBody } from 'components/City/ListingsColumn/ListingsTable/styles'

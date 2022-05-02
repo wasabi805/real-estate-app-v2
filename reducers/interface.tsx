@@ -1,5 +1,7 @@
-import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
+import { Ilisting } from 'actions/propertySearchBarActions/interface'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
+import { ISoldDateRangeRows } from 'utils/interfaces/tables'
+import { IAntTableSelectedRow } from 'utils/interfaces/antDesign'
 
 interface IBedsButton {
   id: string

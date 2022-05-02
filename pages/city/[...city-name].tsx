@@ -4,21 +4,18 @@ import Image from 'next/image'
 import 'antd/dist/antd.css'
 import { CityWrapper } from './styles'
 import { MapColumnContainer, ListingsColumnContainer } from './styles'
-import Listings from 'components/City/City'
+import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@components/City/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 
-const CityDetails = () => {
+const CityDetails = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  useEffect(() => {
-    console.log('CITY PAGE LOADED', state)
-  }, [])
-
+  console.log('what is todo', props)
   return (
     <CityWrapper>
       <Row>
@@ -42,6 +39,34 @@ const CityDetails = () => {
       </Row>
     </CityWrapper>
   )
+}
+
+export const getStaticProps = async (props) => {
+  let data = null
+
+  try {
+    data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => response.json())
+      .then((json) => json)
+  } catch (err) {
+    console.log()
+  }
+  console.log('what is data', data)
+  console.log('what are props??', props)
+
+  return {
+    props: {
+      'city-name': '',
+      data,
+    },
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: ['/city/city-name'],
+    fallback: true, // false or 'blocking'
+  }
 }
 
 export default CityDetails
