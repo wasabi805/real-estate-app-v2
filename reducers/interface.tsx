@@ -1,4 +1,4 @@
-import { Ilisting } from 'actions/propertySearchBarActions/IPropertySearchBar'
+import { Ilisting } from 'actions/propertySearchBarActions/interface'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
 
 interface IBedsButton {
