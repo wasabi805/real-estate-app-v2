@@ -33,6 +33,8 @@ import {
   bedsButtonFilterRange,
 } from 'reducers/initialValues'
 
+import { addRemoveCurrentFilters } from 'utils/helpers'
+
 const {
   RENDER_LOGIN_MODLE,
   DISMISS_LOGIN_MODLE,
@@ -126,7 +128,7 @@ export const initialState: IinitialState = {
         },
       },
 
-      currentSetFilters: ['stuff', 'fooBar'],
+      currentSetFilters: [],
 
       buttons: filterRowButtons,
       activeFilterPanel: '0',
@@ -199,6 +201,9 @@ export const initialState: IinitialState = {
 }
 
 const appReducer = (state: IinitialState, action: IAction) => {
+  /* STATE VARIABLES */
+  let currentSetFiltersState = state.listings.filters.currentSetFilters
+
   /* PAYLOAD VARIABLES */
 
   let newPrice = {}
@@ -213,6 +218,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
     action.payload?.listings?.filters?.forSaleRentSold?.filterBy
   let soldDateRange =
     action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
+
+  let currentSetFiltersPayload =
+    action.payload?.listings?.filters?.currentSetFilters
 
   switch (action.type) {
     //  LOGIN MODAL
@@ -369,38 +377,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected
-      let homeTypeFilters = action.payload.listings?.filters.currentSetFilters
-
-      console.log('action', action)
-
-      console.log('what is homeTypeFilters', homeTypeFilters)
-
-      let updatedCurrentSetFilters = [
-        ...state.listings.filters.currentSetFilters,
-      ]
-      const matches = updatedCurrentSetFilters.filter((s) =>
-        s.includes('homeType')
-      )
-
-      if (matches.length === 0) {
-        updatedCurrentSetFilters = [
-          ...state.listings.filters.currentSetFilters,
-          ...action.payload.listings?.filters.currentSetFilters,
-        ]
-      }
-
-      if (matches.length > 0) {
-        //get the index now
-
-        console.log(updatedCurrentSetFilters, 'updatedCurrentSetFilters------')
-        console.log(matches[0], 'mathces-----')
-        console.log(updatedCurrentSetFilters.indexOf(matches[0]))
-
-        //TODO : make this resuable
-        const index = updatedCurrentSetFilters.indexOf(matches[0])
-        updatedCurrentSetFilters[index] =
-          action.payload.listings?.filters.currentSetFilters[0]
-      }
 
       return updateNestedObj(['listings', 'filters'])({
         ...state.listings.filters,
@@ -408,7 +384,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.listings.filters.homeType,
           selected: selected,
         },
-        currentSetFilters: updatedCurrentSetFilters,
+        currentSetFilters: addRemoveCurrentFilters(
+          'homeType',
+          currentSetFiltersPayload,
+          currentSetFiltersState
+        ),
       })(state)
 
     /* ----- BEDS BATHS ----- */
