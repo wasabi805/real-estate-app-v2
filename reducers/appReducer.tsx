@@ -14,7 +14,6 @@ import { updateNestedObj } from 'utils/helpers'
 import {
   forSaleRentSoldPath,
   priceFilterPath,
-  selectedHomeTypePath,
   bedsBathsPath,
   currentBathsPath,
   isDrawerOpenPath,
@@ -111,6 +110,7 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      currentSetFilters: ['foo-bar'],
       filtersDict: {
         'for-sale-rest-sold': {
           order: 0,
@@ -127,8 +127,6 @@ export const initialState: IinitialState = {
           slug: '/homeType=',
         },
       },
-
-      currentSetFilters: [],
 
       buttons: filterRowButtons,
       activeFilterPanel: '0',
@@ -377,19 +375,45 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected
+      console.log(
+        'REDUCER : what is selected',
+        action.payload?.listings?.filters?.homeType
+      )
 
-      return updateNestedObj(['listings', 'filters'])({
-        ...state.listings.filters,
-        homeType: {
-          ...state.listings.filters.homeType,
-          selected: selected,
+      // return updateNestedObj(['listings', 'filters'])({
+      //   ...state.listings.filters,
+      // homeType: {
+      //   ...state.listings.filters.homeType,
+      //   selected: action.payload?.listings?.filters?.homeType?.selected,
+      //   foo:'bar'
+      // },
+      // currentSetFilters: addRemoveCurrentFilters(
+      //   'homeType',
+      //   currentSetFiltersPayload,
+      //   currentSetFiltersState
+      // ),
+      // })(state)
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            homeType: {
+              ...state.listings.filters.homeType,
+              selected: action.payload?.listings?.filters?.homeType?.selected,
+              foo: 'bar',
+            },
+
+            //TODO : this will get handled in useRoute hook
+            // currentSetFilters: addRemoveCurrentFilters(
+            //   'homeType',
+            //   currentSetFiltersPayload,
+            //   currentSetFiltersState
+            // ),
+          },
         },
-        currentSetFilters: addRemoveCurrentFilters(
-          'homeType',
-          currentSetFiltersPayload,
-          currentSetFiltersState
-        ),
-      })(state)
+      }
 
     /* ----- BEDS BATHS ----- */
 

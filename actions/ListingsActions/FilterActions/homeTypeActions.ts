@@ -13,9 +13,12 @@ export const setSelectedHomeType = (
       listings: {
         filters: {
           homeType: {
+            stuff: 'things',
             selected: homeType,
           },
-          currentSetFilters: [`homeType=${homeTypeCategory(homeType)}`],
+          //TODO : this will get handled in useRoute hook
+
+          // currentSetFilters: [`homeType=${homeTypeCategory(homeType)}`],
         },
       },
     },

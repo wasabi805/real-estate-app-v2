@@ -22,6 +22,8 @@ export const updateNestedObj =
     return updateObj(key)(val)(obj)
   }
 
+export const arrayIncludesString = (array, string) => array.includes(string)
+
 /** Filter Strings used in url for listings */
 export const addRemoveCurrentFilters = (
   keyString: string, // ex.) homeType

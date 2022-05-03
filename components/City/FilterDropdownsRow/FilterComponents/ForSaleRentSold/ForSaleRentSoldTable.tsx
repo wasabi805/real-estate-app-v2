@@ -9,6 +9,7 @@ import {
   SoldRadioWrapper,
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
+import useFilterListings from '@hooks/useFilterListings'
 
 const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 
@@ -16,6 +17,16 @@ const ForSaleRentSold = () => {
   const { columns, saleRent, soldExpandable } = ForSaleRentSoldTableFormat
 
   const { state, dispatch } = useContext(AppContext)
+
+  console.log('what is state', state)
+  const { currentSetFilters, filteredListings } = useFilterListings()
+
+  const handleClickPropertyStatus = (recordKey: string) => {
+    filteredListings({
+      key: 'forSaleRentSold',
+      id: recordKey,
+    })
+  }
 
   const newColumns = [
     {
@@ -39,7 +50,6 @@ const ForSaleRentSold = () => {
   }
 
   const ForSaleDateRange = () => {
-    console.log('verify??', state.listings?.filters)
     return (
       <div>
         <Table
@@ -78,10 +88,13 @@ const ForSaleRentSold = () => {
         }}
         columns={newColumns}
         dataSource={newSaleRentRows}
+        // onRow={(record, rowIndex) => ({
+        //   onClick: () => {
+        //     dispatch(setFilterByPropertyType([record.key]))
+        //   },
+        // })}
         onRow={(record, rowIndex) => ({
-          onClick: () => {
-            dispatch(setFilterByPropertyType([record.key]))
-          },
+          onClick: () => handleClickPropertyStatus(record.key), //if things go south, remember record.key used to be [record.key]
         })}
       />
 

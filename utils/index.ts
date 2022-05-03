@@ -1,6 +1,6 @@
 /* Strings */
 export const ifWhiteSpaces = (string) => {
-  return string.split(' ').length > 1 ? string.split(' ').join('%20') : string
+  return string.split(' ').length > 1 ? string.split(' ').join('-') : string
 }
 
 export const homeTypeCategory = (homeTypeClass: string) => {
