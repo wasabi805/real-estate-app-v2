@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
+// import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
@@ -10,17 +10,22 @@ import { useRouter } from 'next/router'
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
 import { homeTypeIdPrefix } from 'utils/contants'
+import { filterListings } from 'actions/helpers'
+import useFilterListings from '@hooks/useFilterListings'
 
-const { setSelectedHomeType } = HomeTypeActions
+// const { setSelectedHomeType } = HomeTypeActions
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
   const { width, height } = PROPERTY_TYPE_TILE_PROPS
-  const router = useRouter()
 
-  const handleHomeTypeButtonClick = async (id: string, state: any) => {
-    router.push(`/city/state/foo/bar`)
-    dispatch(setSelectedHomeType(id))
+  const { currentSetFilters, filteredListings } = useFilterListings()
+
+  const handleHomeTypeButtonClick = (id: string, state: any) => {
+    filteredListings({
+      key: 'homeType',
+      id: id,
+    })
   }
 
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons

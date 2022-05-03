@@ -85,6 +85,12 @@ export const initialState: IinitialState = {
   },
   fetchProperty: false,
   searchResults: {
+    // city: '',
+    // state: '',
+
+    city: 'santa monica',
+    state: 'ca',
+
     data: {
       // listings: [],
       listings: mockListings,
@@ -103,6 +109,25 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      filtersDict: {
+        'for-sale-rest-sold': {
+          order: 0,
+          slug: '/homeType=',
+        },
+
+        price: {
+          order: 1,
+          slug: '/price=',
+        },
+
+        homeType: {
+          order: 2,
+          slug: '/homeType=',
+        },
+      },
+
+      currentSetFilters: ['fooBar'],
+
       buttons: filterRowButtons,
       activeFilterPanel: '0',
 
@@ -247,6 +272,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
       return {
         ...state,
         searchResults: {
+          city: action.payload?.searchResults?.city,
+          state: action.payload?.searchResults?.state,
           data: { ...action.payload?.searchResults?.data },
           initialData: { ...action.payload?.searchResults?.data },
         },
@@ -342,7 +369,33 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected
-      return updateNestedObj(selectedHomeTypePath)(selected)(state)
+      let homeTypeFilters = action.payload.listings?.filters.currentSetFilters
+
+      console.log('action', action)
+
+      console.log('what is homeTypeFilters', homeTypeFilters)
+
+      const updatedCurrentSetFilters = [
+        ...state.listings.filters.currentSetFilters,
+      ]
+      const matches = updatedCurrentSetFilters.filter((s) =>
+        s.includes('homeType')
+      )
+      const x = updatedCurrentSetFilters.indexOf(matches[0])
+
+      console.log(x, 'matches')
+
+      return updateNestedObj(['listings', 'filters'])({
+        ...state.listings.filters,
+        homeType: {
+          ...state.listings.filters.homeType,
+          selected: selected,
+        },
+        currentSetFilters: [
+          ...state.listings.filters.currentSetFilters,
+          ...homeTypeFilters,
+        ],
+      })(state)
 
     /* ----- BEDS BATHS ----- */
 

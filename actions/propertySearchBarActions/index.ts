@@ -29,9 +29,11 @@ export const autoCompleteUpdateStateAndFetchListings = (
 
 export const UPDATE_STATE_WITH_SEARCH_RESULTS =
   'UPDATE_STATE_WITH_SEARCH_RESULTS'
-export const updateStateWithSearchResults = (
-  data
-): Pick<IAction, 'type' | 'payload'> => {
+export const updateStateWithSearchResults = ({
+  data,
+  city,
+  state,
+}): Pick<IAction, 'type' | 'payload'> => {
   const prices = data.listings.map((h) => {
     return h.price_raw
   })
@@ -42,6 +44,8 @@ export const updateStateWithSearchResults = (
     payload: {
       searchResults: {
         data,
+        city,
+        state,
       },
       priceFilter: {
         range: sortedPrices,

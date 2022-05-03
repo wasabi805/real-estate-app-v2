@@ -1,3 +1,13 @@
+/* Strings */
+export const ifWhiteSpaces = (string) => {
+  return string.split(' ').length > 1 ? string.split(' ').join('%20') : string
+}
+
+export const homeTypeCategory = (homeTypeClass: string) => {
+  return homeTypeClass.replace(/^(home-type-)/, '')
+}
+
+/* Numbers */
 export const sortByAscendOrDescend = (
   isAsc: Boolean,
   key: string,
