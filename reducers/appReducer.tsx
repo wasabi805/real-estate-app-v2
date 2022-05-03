@@ -126,7 +126,7 @@ export const initialState: IinitialState = {
         },
       },
 
-      currentSetFilters: ['fooBar'],
+      currentSetFilters: ['stuff', 'fooBar'],
 
       buttons: filterRowButtons,
       activeFilterPanel: '0',
@@ -375,15 +375,32 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
       console.log('what is homeTypeFilters', homeTypeFilters)
 
-      const updatedCurrentSetFilters = [
+      let updatedCurrentSetFilters = [
         ...state.listings.filters.currentSetFilters,
       ]
       const matches = updatedCurrentSetFilters.filter((s) =>
         s.includes('homeType')
       )
-      const x = updatedCurrentSetFilters.indexOf(matches[0])
 
-      console.log(x, 'matches')
+      if (matches.length === 0) {
+        updatedCurrentSetFilters = [
+          ...state.listings.filters.currentSetFilters,
+          ...action.payload.listings?.filters.currentSetFilters,
+        ]
+      }
+
+      if (matches.length > 0) {
+        //get the index now
+
+        console.log(updatedCurrentSetFilters, 'updatedCurrentSetFilters------')
+        console.log(matches[0], 'mathces-----')
+        console.log(updatedCurrentSetFilters.indexOf(matches[0]))
+
+        //TODO : make this resuable
+        const index = updatedCurrentSetFilters.indexOf(matches[0])
+        updatedCurrentSetFilters[index] =
+          action.payload.listings?.filters.currentSetFilters[0]
+      }
 
       return updateNestedObj(['listings', 'filters'])({
         ...state.listings.filters,
@@ -391,10 +408,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
           ...state.listings.filters.homeType,
           selected: selected,
         },
-        currentSetFilters: [
-          ...state.listings.filters.currentSetFilters,
-          ...homeTypeFilters,
-        ],
+        currentSetFilters: updatedCurrentSetFilters,
       })(state)
 
     /* ----- BEDS BATHS ----- */

@@ -6,14 +6,10 @@ import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
-import { useRouter } from 'next/router'
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
 import { homeTypeIdPrefix } from 'utils/contants'
-import { filterListings } from 'actions/helpers'
 import useFilterListings from '@hooks/useFilterListings'
-
-// const { setSelectedHomeType } = HomeTypeActions
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
