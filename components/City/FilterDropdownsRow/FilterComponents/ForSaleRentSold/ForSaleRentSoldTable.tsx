@@ -25,7 +25,8 @@ const ForSaleRentSold = () => {
   const handleClickPropertyStatus = (className: string) => {
     filterListings({
       param: {
-        id: 'forSaleRentSold',
+        // id: 'forSaleRentSold',
+        id: 'status',
         className,
         query: 'status',
         slug: forSaleSoldRentCategory(className),

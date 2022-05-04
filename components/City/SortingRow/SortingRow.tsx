@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import { Menu, Tabs } from 'antd'
 import { SortByOptionsContainer } from '../styles'
-import * as ListingsSortActions from 'actions/ListingsActions/SortActions'
 import * as ListingsActions from 'actions/ListingsActions'
 import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
@@ -42,7 +41,6 @@ export const AscendDescendTab: React.FC = () => {
 const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
-  const { setActiveSortCategory } = ListingsSortActions
   const { homesViewTabClicked } = ListingsActions
 
   const { toggleSortListingsPanel } = SortListingsActions

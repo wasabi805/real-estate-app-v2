@@ -24,7 +24,6 @@ const useRoute = () => {
     /* SORT LISTINGS  */
     if (data.sortListings) {
       urlQuery = [`${data.sortListings.query}=${data.sortListings.slug}`]
-      console.log('what is data.sortListings', data.sortListings)
 
       updatedCurrentSetFilters = addRemoveCurrentFilters(
         `${data.sortListings.id}`,

@@ -23,7 +23,7 @@ const HomeType = () => {
       param: {
         id: 'homeType',
         className,
-        query: 'home-type',
+        query: 'homeType',
         slug: homeTypeCategory(className),
       },
       state: state,

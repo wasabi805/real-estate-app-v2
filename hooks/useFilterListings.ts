@@ -4,7 +4,7 @@ import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/f
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import useRoute from './useRoute'
 import { IFilterListingsProps } from 'utils/interfaces/hooks'
-const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
+const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
 const useFilterListings = () => {
@@ -28,12 +28,14 @@ const useFilterListings = () => {
       case 'homeType':
         updateUrl()
         dispatch(setSelectedHomeType(param.className))
-        break
+        return
 
-      case 'forSaleRentSold':
+      case 'status':
+        console.log(param.id, 'param.id')
+        console.log(param.className, 'param.className')
         updateUrl()
         dispatch(setFilterByPropertyType([param.className]))
-        break
+        return
 
       default:
         return

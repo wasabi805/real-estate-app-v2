@@ -4,7 +4,7 @@ export const ifWhiteSpaces = (string) => {
 }
 
 export const homeTypeCategory = (className: string) => {
-  return className.replace(/^(home-type-)/, '')
+  return className.replace(/^(homeType-)/, '')
 }
 
 export const forSaleSoldRentCategory = (className: string) => {

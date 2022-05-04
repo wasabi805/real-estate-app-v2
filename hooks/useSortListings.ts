@@ -31,7 +31,7 @@ const useSortListings = () => {
           },
         })
         dispatch(setIsAscending(param.isAsc, state))
-        break
+        return
 
       case 'sort-list':
         const isLowOrHigh = (status: boolean | null) => {
@@ -50,7 +50,7 @@ const useSortListings = () => {
           },
         })
         dispatch(setActiveSortCategory(param.slug, state))
-        break
+        return
 
       default:
         return
