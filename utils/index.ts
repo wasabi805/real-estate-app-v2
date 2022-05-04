@@ -13,7 +13,6 @@ export const sortByAscendOrDescend = (
   key: string,
   data: []
 ): [] => {
-  console.log('what is data', data)
   return data.sort((a: any, b: any) => {
     return isAsc ? a[key] - b[key] : +b[key] - +a[key]
   })

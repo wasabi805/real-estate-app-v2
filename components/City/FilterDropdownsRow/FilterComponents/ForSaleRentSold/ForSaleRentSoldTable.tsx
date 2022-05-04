@@ -18,7 +18,6 @@ const ForSaleRentSold = () => {
 
   const { state, dispatch } = useContext(AppContext)
 
-  console.log('what is state', state)
   const { currentSetFilters, filteredListings } = useFilterListings()
 
   const handleClickPropertyStatus = (recordKey: string) => {

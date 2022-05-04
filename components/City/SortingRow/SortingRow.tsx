@@ -44,7 +44,6 @@ const SortingRow: React.FC = () => {
   }
 
   const handlePhotoTableButtonClick = (e) => {
-    console.log('what is e', e)
     dispatch(homesViewTabClicked(e.target.name))
   }
 

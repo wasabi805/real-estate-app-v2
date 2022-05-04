@@ -27,17 +27,9 @@ const HomeType = () => {
     )
   }
 
-  useEffect(() => {
-    console.log('change is state', state)
-  }, [state])
-
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
-  console.log(
-    'what is selected in homeTYpe Comp',
-    state.listings?.filters?.homeType
-  )
-
+  
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
     const iconType = btn.id?.split(homeTypeIdPrefix)
