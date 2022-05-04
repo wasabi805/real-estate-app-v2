@@ -12,10 +12,7 @@ const useSortListings = () => {
   }
 
   const sortListings = (data: iData) => {
-    console.log(data, 'what is data')
-    handleRoute({
-      sort: data,
-    })
+    handleRoute({ sortListings: data })
   }
 
   return { sortListings }

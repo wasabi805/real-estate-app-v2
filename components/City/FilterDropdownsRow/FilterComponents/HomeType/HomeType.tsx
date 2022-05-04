@@ -10,21 +10,24 @@ import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
 import { homeTypeIdPrefix } from 'utils/contants'
 import useFilterListings from '@hooks/useFilterListings'
+import { homeTypeCategory } from 'utils'
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
   const { width, height } = PROPERTY_TYPE_TILE_PROPS
 
-  const { filteredListings } = useFilterListings(useContext(AppContext).state)
+  const { filterListings } = useFilterListings()
 
-  const handleHomeTypeButtonClick = (id: string, state: any) => {
-    filteredListings(
-      {
-        key: 'homeType',
-        id: id,
+  const handleHomeTypeButtonClick = (className: string, state: any) => {
+    filterListings({
+      param: {
+        id: 'homeType',
+        className,
+        query: 'home-type',
+        slug: homeTypeCategory(className),
       },
-      state
-    )
+      state: state,
+    })
   }
   console.log('what is state at homeType', state)
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons

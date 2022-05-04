@@ -25,6 +25,8 @@ export interface IinitialState {
       listings: Ilisting[]
     }
     initialData: []
+    city: string
+    state: string
   }
 
   filterDropdownsRow: {

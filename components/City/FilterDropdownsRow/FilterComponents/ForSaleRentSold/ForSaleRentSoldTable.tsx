@@ -11,6 +11,8 @@ import {
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
 import useFilterListings from '@hooks/useFilterListings'
 
+import { forSaleSoldRentCategory } from 'utils'
+
 const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 
 const ForSaleRentSold = () => {
@@ -18,16 +20,18 @@ const ForSaleRentSold = () => {
 
   const { state, dispatch } = useContext(AppContext)
 
-  const { filteredListings } = useFilterListings()
+  const { filterListings } = useFilterListings()
 
-  const handleClickPropertyStatus = (recordKey: string) => {
-    filteredListings(
-      {
-        key: 'forSaleRentSold',
-        id: recordKey,
+  const handleClickPropertyStatus = (className: string) => {
+    filterListings({
+      param: {
+        id: 'forSaleRentSold',
+        className,
+        query: 'status',
+        slug: forSaleSoldRentCategory(className),
       },
-      state
-    )
+      state,
+    })
   }
 
   const newColumns = [

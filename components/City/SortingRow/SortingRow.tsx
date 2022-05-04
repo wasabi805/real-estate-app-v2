@@ -40,7 +40,7 @@ const SortingRow: React.FC = () => {
   const { homesViewTabClicked } = ListingsActions
 
   const { toggleSortListingsPanel } = SortListingsActions
-  const { filteredListings } = useFilterListings()
+
   const { sortListings } = useSortListings()
 
   //  TODO : use useFilterListingHook
