@@ -1,9 +1,12 @@
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { sortByAscendOrDescend } from 'actions/helpers'
 import { IinitialState } from 'reducers/interface'
+import { IAction } from 'actions/interface'
 
 export const TOGGLE_SORT_LISTINGS_PANEL = 'TOGGLE_SORT_LISTINGS_PANEL'
-export const toggleSortListingsPanel = (bool: boolean) => {
+export const toggleSortListingsPanel = (
+  bool: boolean
+): Pick<IAction, 'type' | 'payload'> => {
   return {
     type: TOGGLE_SORT_LISTINGS_PANEL,
     payload: {
@@ -25,7 +28,10 @@ interface ISortAndFilter {
 }
 type test = Pick<IinitialState, 'searchResults'>
 
-export const setActiveSortCategory = (criteria: string, state: any) => {
+export const setActiveSortCategory = (
+  slug: string,
+  state: any
+): Pick<IAction, 'type' | 'payload'> => {
   let isAscending
 
   if (state.listings.sort.isAscending === null || undefined) {
@@ -35,7 +41,7 @@ export const setActiveSortCategory = (criteria: string, state: any) => {
   const listingsToSort = [...state.searchResults.data.listings]
 
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
-    (item) => item?.value === criteria
+    (item) => item?.value === slug
   )?.pop()?.key
 
   return {
@@ -44,7 +50,7 @@ export const setActiveSortCategory = (criteria: string, state: any) => {
       listings: {
         sort: {
           togglePanel: false,
-          criteria: criteria,
+          criteria: slug,
           isAscending: state.listings.sort.isAscending,
         },
       },
@@ -63,7 +69,10 @@ export const setActiveSortCategory = (criteria: string, state: any) => {
 }
 
 export const SET_IS_ASCENDING = 'SET_IS_ASCENDING'
-export const setIsAscending = (isAscending: boolean, state: any) => {
+export const setIsAscending = (
+  isAscending: boolean,
+  state: any
+): Pick<IAction, 'type' | 'payload'> => {
   const criteria = state.listings.sort.criteria
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
     (item) => item?.value === criteria
@@ -91,7 +100,10 @@ export const setIsAscending = (isAscending: boolean, state: any) => {
 
 /** ----- FIRES WHEN THE MENU TABS ARE CLICKED ----- */
 export const SORT_LISTINGS = 'SORT_LISTINGS'
-export const sortListings = (sortAndFilter, searchResults) => {
+export const sortListings = (
+  sortAndFilter,
+  searchResults
+): Pick<IAction, 'type' | 'payload'> => {
   const listingsToSort = [...searchResults?.data?.listings]
 
   const clickedTab = sortAndFilter.activeSort

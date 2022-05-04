@@ -25,6 +25,8 @@ export interface IinitialState {
       listings: Ilisting[]
     }
     initialData: []
+    city: string
+    state: string
   }
 
   filterDropdownsRow: {
@@ -44,6 +46,7 @@ export interface IinitialState {
 
     filters: {
       activeFilterPanel: string
+      currentSetFilters: string[]
 
       forSaleRentSold: {
         filterBy: []

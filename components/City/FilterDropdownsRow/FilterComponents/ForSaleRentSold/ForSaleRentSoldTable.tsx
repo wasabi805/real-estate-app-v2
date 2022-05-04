@@ -9,6 +9,9 @@ import {
   SoldRadioWrapper,
 } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
 import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
+import useFilterListings from '@hooks/useFilterListings'
+
+import { forSaleSoldRentCategory } from 'utils'
 
 const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 
@@ -16,6 +19,21 @@ const ForSaleRentSold = () => {
   const { columns, saleRent, soldExpandable } = ForSaleRentSoldTableFormat
 
   const { state, dispatch } = useContext(AppContext)
+
+  const { filterListings } = useFilterListings()
+
+  const handleClickPropertyStatus = (className: string) => {
+    filterListings({
+      param: {
+        // id: 'forSaleRentSold',
+        id: 'status',
+        className,
+        query: 'status',
+        slug: forSaleSoldRentCategory(className),
+      },
+      state,
+    })
+  }
 
   const newColumns = [
     {
@@ -39,7 +57,6 @@ const ForSaleRentSold = () => {
   }
 
   const ForSaleDateRange = () => {
-    console.log('verify??', state.listings?.filters)
     return (
       <div>
         <Table
@@ -68,7 +85,6 @@ const ForSaleRentSold = () => {
 
   return (
     <ForSaleRentSoldContainer>
-      {/* TODO : step 1: setFilterByPropertyType */}
       <Table
         pagination={false}
         showHeader={false}
@@ -79,9 +95,7 @@ const ForSaleRentSold = () => {
         columns={newColumns}
         dataSource={newSaleRentRows}
         onRow={(record, rowIndex) => ({
-          onClick: () => {
-            dispatch(setFilterByPropertyType([record.key]))
-          },
+          onClick: () => handleClickPropertyStatus(record.key),
         })}
       />
 

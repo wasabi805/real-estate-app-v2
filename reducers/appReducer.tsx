@@ -14,7 +14,6 @@ import { updateNestedObj } from 'utils/helpers'
 import {
   forSaleRentSoldPath,
   priceFilterPath,
-  selectedHomeTypePath,
   bedsBathsPath,
   currentBathsPath,
   isDrawerOpenPath,
@@ -32,6 +31,8 @@ import {
   bedsButtons,
   bedsButtonFilterRange,
 } from 'reducers/initialValues'
+
+import { addRemoveCurrentFilters } from 'utils/helpers'
 
 const {
   RENDER_LOGIN_MODLE,
@@ -60,7 +61,8 @@ const {
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = PriceFilterActions
 
-const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE } = FilterActions
+const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE, UPDATE_FILTERS_URLS } =
+  FilterActions
 const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -85,6 +87,12 @@ export const initialState: IinitialState = {
   },
   fetchProperty: false,
   searchResults: {
+    // city: '',
+    // state: '',
+
+    city: 'santa monica',
+    state: 'ca',
+
     data: {
       // listings: [],
       listings: mockListings,
@@ -103,6 +111,24 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      currentSetFilters: [''],
+      filtersDict: {
+        'for-sale-rest-sold': {
+          order: 0,
+          slug: '/homeType=',
+        },
+
+        price: {
+          order: 1,
+          slug: '/price=',
+        },
+
+        homeType: {
+          order: 2,
+          slug: '/homeType=',
+        },
+      },
+
       buttons: filterRowButtons,
       activeFilterPanel: '0',
 
@@ -174,6 +200,9 @@ export const initialState: IinitialState = {
 }
 
 const appReducer = (state: IinitialState, action: IAction) => {
+  /* STATE VARIABLES */
+  let currentSetFiltersState = state.listings.filters.currentSetFilters
+
   /* PAYLOAD VARIABLES */
 
   let newPrice = {}
@@ -188,6 +217,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
     action.payload?.listings?.filters?.forSaleRentSold?.filterBy
   let soldDateRange =
     action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
+
+  let currentSetFiltersPayload =
+    action.payload?.listings?.filters?.currentSetFilters
+
+  let selectedHomeType = action.payload?.listings?.filters?.homeType?.selected
 
   switch (action.type) {
     //  LOGIN MODAL
@@ -247,6 +281,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
       return {
         ...state,
         searchResults: {
+          city: action.payload?.searchResults?.city,
+          state: action.payload?.searchResults?.state,
           data: { ...action.payload?.searchResults?.data },
           initialData: { ...action.payload?.searchResults?.data },
         },
@@ -277,6 +313,11 @@ const appReducer = (state: IinitialState, action: IAction) => {
         ...state.listings.filters,
         activeFilterPanel,
       })(state)
+
+    case UPDATE_FILTERS_URLS:
+      return updateNestedObj(['listings', 'filters', 'currentSetFilters'])(
+        action.payload?.listings?.filters?.currentSetFilters
+      )(state)
 
     case HOMES_VIEW_TAB_CLICKED:
       return {
@@ -341,8 +382,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
     /* ----- HOME-TYPE FILTERS ----- */
 
     case SET_SELECTED_HOME_TYPE:
-      const selected = action.payload?.listings?.filters?.homeType?.selected
-      return updateNestedObj(selectedHomeTypePath)(selected)(state)
+      return updateNestedObj(['listings', 'filters', 'homeType'])({
+        ...state.listings.filters.homeType,
+        selected: selectedHomeType,
+      })(state)
 
     /* ----- BEDS BATHS ----- */
 
@@ -418,15 +461,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SORT_LISTINGS:
-      return {
-        ...state,
-        searchResults: {
-          ...state.searchResults,
-          data: {
-            ...action.payload?.searchResults?.data,
-          },
-        },
-      }
+      return updateNestedObj(['searchResults', 'data'])({
+        ...action.payload?.searchResults?.data,
+      })(state)
 
     case SET_CLICKED_ROW:
       return {

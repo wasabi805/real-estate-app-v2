@@ -1,28 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
-import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
+// import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import ButtonComp from 'components/_common/ButtonComp'
 import House from 'icons/House'
 import MultiFamilyHome from 'icons/MultiFamilyHome'
 import Condo from 'icons/Condo'
 import { HomeTypeButtonsContainer } from 'components/City/FilterDropdownsRow/FilterComponents/HomeType/styles'
-import { useRouter } from 'next/router'
 import { PROPERTY_TYPE_TILE_PROPS } from 'utils/dictionaries'
 import { IButton } from 'utils/interfaces/buttons'
 import { homeTypeIdPrefix } from 'utils/contants'
-
-const { setSelectedHomeType } = HomeTypeActions
+import useFilterListings from '@hooks/useFilterListings'
+import { homeTypeCategory } from 'utils'
 
 const HomeType = () => {
   const { state, dispatch } = useContext(AppContext)
   const { width, height } = PROPERTY_TYPE_TILE_PROPS
-  const router = useRouter()
 
-  const handleHomeTypeButtonClick = async (id: string, state: any) => {
-    router.push(`/city/state/foo/bar`)
-    dispatch(setSelectedHomeType(id))
+  const { filterListings } = useFilterListings()
+
+  const handleHomeTypeButtonClick = (className: string, state: any) => {
+    filterListings({
+      param: {
+        id: 'homeType',
+        className,
+        query: 'homeType',
+        slug: homeTypeCategory(className),
+      },
+      state: state,
+    })
   }
-
+  console.log('what is state at homeType', state)
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
 

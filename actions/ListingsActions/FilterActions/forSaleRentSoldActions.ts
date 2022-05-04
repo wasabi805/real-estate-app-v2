@@ -10,7 +10,6 @@ export const setFilterByPropertyType = (
 ): Pick<IAction, 'type' | 'payload'> => {
   return {
     type: SET_FILTER_BY_PROPERTY_TYPE,
-    // payload: updateNestedObj(['listings', 'filters', 'forSaleRentSold'])({filterBy: propertyType})(forSaleRestSoldPayload)
     payload: {
       listings: {
         filters: {

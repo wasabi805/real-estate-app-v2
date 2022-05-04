@@ -58,6 +58,7 @@ export interface IAction {
 
       filters?: {
         activeFilterPanel?: string
+        currentSetFilters?: string[]
 
         forSaleRentSold?: {
           filterBy?: string[]
@@ -65,7 +66,7 @@ export interface IAction {
           filterSoldDateRangeBy?: any
         }
 
-        price: {
+        price?: {
           minField?: null | number
           maxField?: null | number
           allPrices?: number[] | []

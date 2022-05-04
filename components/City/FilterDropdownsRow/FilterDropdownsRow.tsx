@@ -101,7 +101,6 @@ const FilterDropdownsRow = () => {
             width: '6rem',
           }}
         />
-
         {/* BUTTON THREE */}
         <DropdownButton
           className={'ant-btn home-type-content'}

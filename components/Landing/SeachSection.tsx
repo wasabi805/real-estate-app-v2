@@ -35,7 +35,7 @@ const SearchSection: React.FC = () => {
   const router = useRouter()
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
-
+  console.log('what is state when loaded?', state)
   useEffect(() => {
     if (state.fetchProperty) {
       handleFetchPropertyData()
@@ -60,7 +60,14 @@ const SearchSection: React.FC = () => {
         // update state with search results
         console.log('what is response ', response)
 
-        dispatch(updateStateWithSearchResults(response.data))
+        // dispatch(updateStateWithSearchResults(response.data ))
+        dispatch(
+          updateStateWithSearchResults({
+            data: response.data,
+            city: city,
+            state: state,
+          })
+        )
         router.push(`/city/${city}/${state}`)
       })
   }
