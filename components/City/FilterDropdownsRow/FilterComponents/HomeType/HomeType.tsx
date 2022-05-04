@@ -26,7 +26,7 @@ const HomeType = () => {
       state
     )
   }
-
+  console.log('what is state at homeType', state)
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
 

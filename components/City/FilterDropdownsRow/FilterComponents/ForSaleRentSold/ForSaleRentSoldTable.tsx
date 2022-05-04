@@ -21,10 +21,13 @@ const ForSaleRentSold = () => {
   const { currentSetFilters, filteredListings } = useFilterListings()
 
   const handleClickPropertyStatus = (recordKey: string) => {
-    filteredListings({
-      key: 'forSaleRentSold',
-      id: recordKey,
-    })
+    filteredListings(
+      {
+        key: 'forSaleRentSold',
+        id: recordKey,
+      },
+      state
+    )
   }
 
   const newColumns = [
@@ -77,7 +80,6 @@ const ForSaleRentSold = () => {
 
   return (
     <ForSaleRentSoldContainer>
-      {/* TODO : step 1: setFilterByPropertyType */}
       <Table
         pagination={false}
         showHeader={false}
@@ -87,13 +89,8 @@ const ForSaleRentSold = () => {
         }}
         columns={newColumns}
         dataSource={newSaleRentRows}
-        // onRow={(record, rowIndex) => ({
-        //   onClick: () => {
-        //     dispatch(setFilterByPropertyType([record.key]))
-        //   },
-        // })}
         onRow={(record, rowIndex) => ({
-          onClick: () => handleClickPropertyStatus(record.key), //if things go south, remember record.key used to be [record.key]
+          onClick: () => handleClickPropertyStatus(record.key),
         })}
       />
 

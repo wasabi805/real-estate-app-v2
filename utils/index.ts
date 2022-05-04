@@ -3,8 +3,12 @@ export const ifWhiteSpaces = (string) => {
   return string.split(' ').length > 1 ? string.split(' ').join('-') : string
 }
 
-export const homeTypeCategory = (homeTypeClass: string) => {
-  return homeTypeClass.replace(/^(home-type-)/, '')
+export const homeTypeCategory = (className: string) => {
+  return className.replace(/^(home-type-)/, '')
+}
+
+export const forSaleSoldRentCategory = (className: string) => {
+  return className.replace(/^(all-filters-btn-)/, '')
 }
 
 /* Numbers */

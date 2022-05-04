@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useReducer, useContext } from 'react'
-import appReducer, { initialState } from 'reducers/appReducer'
+import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import { ifWhiteSpaces, homeTypeCategory } from 'utils'
-import { arrayIncludesString } from 'utils/helpers'
+import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import useRoute from './useRoute'
+
+const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
 const useFilterListings = (appState: any) => {
@@ -45,7 +45,21 @@ const useFilterListings = (appState: any) => {
         return
 
       case 'forSaleRentSold':
-        alert('forSaleRentSold')
+        handleRoute({
+          stateSlices: {
+            forSaleRentSold: {
+              slug: slug.id,
+              filters: state.listings.filters,
+            },
+            searchResults: {
+              city: state.searchResults.city,
+              state: state.searchResults.state,
+            },
+          },
+        })
+        dispatch(setFilterByPropertyType([slug.id]))
+
+        return
 
       default:
         return
