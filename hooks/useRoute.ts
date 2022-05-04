@@ -23,7 +23,22 @@ const useRoute = () => {
 
     /* SORT LISTINGS  */
     if (data.sortListings) {
-      alert('passed in')
+      urlQuery = [`${data.sortListings.query}=${data.sortListings.slug}`]
+      console.log('what is data.sortListings', data.sortListings)
+
+      updatedCurrentSetFilters = addRemoveCurrentFilters(
+        `${data.sortListings.id}`,
+        urlQuery,
+        data.state!.listings.filters.currentSetFilters
+      )
+
+      route = () => {
+        router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
+        dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+      }
+
+      route()
+      return
     }
 
     /* FILTER LISTINGS  */
@@ -33,7 +48,7 @@ const useRoute = () => {
       updatedCurrentSetFilters = addRemoveCurrentFilters(
         `${data.filterListings.id}`,
         urlQuery,
-        data.state.listings.filters.currentSetFilters
+        data.state!.listings.filters.currentSetFilters
       )
 
       route = () => {
@@ -42,7 +57,11 @@ const useRoute = () => {
       }
 
       route()
+      return
     }
+
+    alert('no route')
+    router.push(path)
   }
 
   return { handleRoute }

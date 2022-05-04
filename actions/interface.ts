@@ -66,7 +66,7 @@ export interface IAction {
           filterSoldDateRangeBy?: any
         }
 
-        price: {
+        price?: {
           minField?: null | number
           maxField?: null | number
           allPrices?: number[] | []

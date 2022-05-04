@@ -1,10 +1,11 @@
 import { IinitialState } from 'reducers/interface'
 
 export interface IParam {
-  id: string
-  className: string
-  query: string
-  slug: string
+  id?: string
+  className?: string
+  query?: string
+  slug?: string
+  isAsc?: boolean
 }
 
 export interface IFilterListingsProps {
@@ -13,7 +14,7 @@ export interface IFilterListingsProps {
 }
 
 export interface IHandleRouteProps {
-  state: IinitialState
+  state?: IinitialState
   filterListings?: IParam
-  sortListings?: any
+  sortListings?: IParam
 }

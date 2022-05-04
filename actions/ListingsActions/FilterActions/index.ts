@@ -17,7 +17,9 @@ export const setActiveFilterPanel = (
 }
 
 export const UPDATE_FILTERS_URLS = 'UPDATE_FILTERS_URLS'
-export const updateFiltersUrls = (updatedUrlStrings: string[]) => {
+export const updateFiltersUrls = (
+  updatedUrlStrings: string[]
+): Pick<IAction, 'type' | 'payload'> => {
   return {
     type: UPDATE_FILTERS_URLS,
     payload: {
@@ -31,10 +33,12 @@ export const updateFiltersUrls = (updatedUrlStrings: string[]) => {
 }
 
 export const UPDATE_FILTER_RESPONSE = 'UPDATE_FILTER_RESPONSE'
-export const updateFilterResponse = (data) => {
+export const updateFilterResponse = (
+  data
+): Pick<IAction, 'type' | 'payload'> => {
   console.log('what is data', data)
   return {
     type: UPDATE_FILTER_RESPONSE,
-    payload: '',
+    payload: {},
   }
 }

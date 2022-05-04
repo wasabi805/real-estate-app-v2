@@ -8,20 +8,26 @@ import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
-import useFilterListings from '@hooks/useFilterListings'
 import useSortListings from '@hooks/useSortListings'
 
 const { TabPane } = Tabs
 
 export const AscendDescendTab: React.FC = () => {
   const appContext = useContext(AppContext)
-  const { state, dispatch } = appContext
-  const { setIsAscending } = ListingsSortActions
+  const { state } = appContext
+  const { sortListings } = useSortListings()
 
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
     let isAsc = key === 'sort-listings-ascending'
-    dispatch(setIsAscending(isAsc, state))
+
+    sortListings({
+      param: {
+        id: 'ascend-descend-listings',
+        isAsc: isAsc,
+      },
+      state: state,
+    })
   }
 
   return (
@@ -43,16 +49,13 @@ const SortingRow: React.FC = () => {
 
   const { sortListings } = useSortListings()
 
-  //  TODO : use useFilterListingHook
-
-  // const handleSetActive = (e: IantDesignEventObj) => {
-  //   console.log('what is state', state)
-  //   dispatch(setActiveSortCategory(e.key, state))
-  // }
-
   const handleSetActive = (e: IantDesignEventObj) => {
     sortListings({
-      param: e.key,
+      param: {
+        id: 'sort-list',
+        query: 'sort',
+        slug: e.key,
+      },
       state: state,
     })
   }
