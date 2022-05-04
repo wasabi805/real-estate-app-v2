@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
+import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import useRoute from './useRoute'
 import { IFilterListingsProps } from 'utils/interfaces/hooks'
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
+
+const { setFilterCurrentBathsAmount } = ListingsFilterActions
 
 const useFilterListings = () => {
   const { dispatch } = useContext(AppContext)
@@ -27,14 +30,17 @@ const useFilterListings = () => {
     switch (param.id) {
       case 'homeType':
         updateUrl()
-        dispatch(setSelectedHomeType(param.className))
+        dispatch(setSelectedHomeType(param.className!))
         return
 
-      case 'status':
-        console.log(param.id, 'param.id')
-        console.log(param.className, 'param.className')
+      case 'status': //aka forSaleRentSold
         updateUrl()
-        dispatch(setFilterByPropertyType([param.className]))
+        dispatch(setFilterByPropertyType([param.className!]))
+        return
+
+      case 'baths':
+        updateUrl()
+        dispatch(setFilterCurrentBathsAmount(param.className!))
         return
 
       default:

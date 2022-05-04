@@ -76,13 +76,20 @@ export const bedsButtonFilterRange = bedsButtons
   .map((btn: IButton) => btn.text!)
 
 export const bathButtons = [
+  // { id: `${bathsValuesPrefix}any`, text: 'Any' },
+  // { id: `${bathsValuesPrefix}one-plus`, text: '1+' },
+  // { id: `${bathsValuesPrefix}one-and-half-plus`, text: '1.5+' },
+  // { id: `${bathsValuesPrefix}two-plus`, text: '2+' },
+  // { id: `${bathsValuesPrefix}two-and-half-plus`, text: '2.5' },
+  // { id: `${bathsValuesPrefix}three-plus`, text: '3+' },
+  // { id: `${bathsValuesPrefix}four-plus`, text: '4+' },
   { id: `${bathsValuesPrefix}any`, text: 'Any' },
-  { id: `${bathsValuesPrefix}one-plus`, text: '1+' },
-  { id: `${bathsValuesPrefix}one-and-half-plus`, text: '1.5+' },
-  { id: `${bathsValuesPrefix}two-plus`, text: '2+' },
-  { id: `${bathsValuesPrefix}two-and-half-plus`, text: '2.5' },
-  { id: `${bathsValuesPrefix}three-plus`, text: '3+' },
-  { id: `${bathsValuesPrefix}four-plus`, text: '4+' },
+  { id: `${bathsValuesPrefix}1`, text: '1+' },
+  { id: `${bathsValuesPrefix}1.5`, text: '1.5+' },
+  { id: `${bathsValuesPrefix}2`, text: '2+' },
+  { id: `${bathsValuesPrefix}2.5`, text: '2.5' },
+  { id: `${bathsValuesPrefix}3`, text: '3+' },
+  { id: `${bathsValuesPrefix}4`, text: '4+' },
 ]
 
 export const bedsBathsPayload = {

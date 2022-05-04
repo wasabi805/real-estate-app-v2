@@ -6,28 +6,33 @@ import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/be
 import { IinitialState } from 'reducers/interface'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 import { bedsNumberIdPrefix } from 'utils/contants'
-
-const { setBedsValues, setFilterCurrentBathsAmount } = ListingsFilterActions
+import useFilterListings from '@hooks/useFilterListings'
+import { bathsCategory } from 'utils'
+const { setBedsValues } = ListingsFilterActions
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
+  const { filterListings } = useFilterListings()
 
   const handleBedsButtonClicked = (key: string, state: IinitialState) => {
     dispatch(setBedsValues(key, state))
   }
 
-  const handleBathsButtonClicked = (key: string) => {
-    dispatch(setFilterCurrentBathsAmount(key))
+  const handleBathsButtonClicked = (className: string) => {
+    filterListings({
+      param: {
+        id: 'baths',
+        className,
+        query: 'min-baths',
+        slug: bathsCategory(className),
+      },
+      state,
+    })
   }
 
   const { bathButtons, currentBaths, currentRange } =
     state.listings?.filters?.bedsBaths
-
-  console.log(
-    'state.listings?.filters?.bedsBaths back at component',
-    state.listings?.filters
-  )
 
   const mappedBedButtons = state.listings?.filters?.bedsBaths?.bedsButtons.map(
     (btn) => {
@@ -55,6 +60,7 @@ const BedsBath = () => {
       <div>
         <h4 style={{ display: 'flex' }}> Baths </h4>
 
+        {/* TODO USE useFilterListings */}
         <div>
           <ButtonComp
             activeButton={currentBaths}
