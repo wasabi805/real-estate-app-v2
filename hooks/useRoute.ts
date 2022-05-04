@@ -12,40 +12,51 @@ const useRoute = () => {
   const router = useRouter()
 
   const handleRoute = (data) => {
-    const { city, state } = data.stateSlices.searchResults
+    let path: string
+    let route
     let urlQuery
-    let updatedCurrentSetFilters
-    const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
+    let updatedCurrentSetFilters: string[]
 
-    const route = () => {
-      router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
-      dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+    if (data.sort) {
+      alert('passed in')
     }
 
-    /* ----- forSaleRentSold ----- */
-    if (data.stateSlices.forSaleRentSold) {
-      const { filters, slug } = data.stateSlices.forSaleRentSold
-      urlQuery = [`forSaleRentSold=${forSaleSoldRentCategory(slug)}`]
+    /* FILTERS  */
 
-      updatedCurrentSetFilters = addRemoveCurrentFilters(
-        'forSaleRentSold',
-        urlQuery,
-        filters.currentSetFilters
-      )
-      route()
-    }
+    if (data.stateSlices) {
+      const { city, state } = data?.stateSlices?.searchResults
+      path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
 
-    /* ----- homeType ----- */
-    if (data.stateSlices.listings) {
-      const { filters, slug } = data.stateSlices.listings
+      route = () => {
+        router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
+        dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+      }
 
-      urlQuery = [`homeType=${homeTypeCategory(slug)}`]
-      updatedCurrentSetFilters = addRemoveCurrentFilters(
-        'homeType',
-        urlQuery,
-        filters.currentSetFilters
-      )
-      route()
+      /* ----- forSaleRentSold ----- */
+      if (data?.stateSlices?.forSaleRentSold) {
+        const { filters, slug } = data.stateSlices.forSaleRentSold
+        urlQuery = [`forSaleRentSold=${forSaleSoldRentCategory(slug)}`]
+
+        updatedCurrentSetFilters = addRemoveCurrentFilters(
+          'forSaleRentSold',
+          urlQuery,
+          filters.currentSetFilters
+        )
+        route()
+      }
+
+      /* ----- homeType ----- */
+      if (data?.stateSlices?.listings) {
+        const { filters, slug } = data.stateSlices.listings
+
+        urlQuery = [`homeType=${homeTypeCategory(slug)}`]
+        updatedCurrentSetFilters = addRemoveCurrentFilters(
+          'homeType',
+          urlQuery,
+          filters.currentSetFilters
+        )
+        route()
+      }
     }
   }
 

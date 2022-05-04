@@ -8,6 +8,8 @@ import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
+import useFilterListings from '@hooks/useFilterListings'
+import useSortListings from '@hooks/useSortListings'
 
 const { TabPane } = Tabs
 
@@ -38,9 +40,21 @@ const SortingRow: React.FC = () => {
   const { homesViewTabClicked } = ListingsActions
 
   const { toggleSortListingsPanel } = SortListingsActions
+  const { filteredListings } = useFilterListings()
+  const { sortListings } = useSortListings()
+
+  //  TODO : use useFilterListingHook
+
+  // const handleSetActive = (e: IantDesignEventObj) => {
+  //   console.log('what is state', state)
+  //   dispatch(setActiveSortCategory(e.key, state))
+  // }
 
   const handleSetActive = (e: IantDesignEventObj) => {
-    dispatch(setActiveSortCategory(e.key, state))
+    sortListings({
+      param: e.key,
+      state: state,
+    })
   }
 
   const handlePhotoTableButtonClick = (e) => {

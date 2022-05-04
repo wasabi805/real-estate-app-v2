@@ -7,14 +7,14 @@ import useRoute from './useRoute'
 const { setFilterByPropertyType, setSoldDateRange } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
-const useFilterListings = (appState: any) => {
+const useFilterListings = () => {
   interface ISlug {
     key: string
     id?: string
   }
   //   const [state, dispatch] = useReducer(appReducer, initialState)
   const { dispatch } = useContext(AppContext)
-  const { handleRoute } = useRoute(appState)
+  const { handleRoute } = useRoute()
 
   const filteredListings = (slug: ISlug, state) => {
     switch (slug.key) {
