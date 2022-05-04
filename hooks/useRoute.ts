@@ -1,16 +1,33 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
+import { homeTypeCategory, ifWhiteSpaces } from 'utils'
 import { useRouter } from 'next/router'
+import { addRemoveCurrentFilters } from 'utils/helpers'
+import * as FilterActions from 'actions/ListingsActions/FilterActions'
+
+const { updateFiltersUrls } = FilterActions
 
 const useRoute = (appSlices) => {
+  const { dispatch } = useContext(AppContext)
   const router = useRouter()
-  const path = '/city/state'
 
-  const handleRoute = (data, id) => {
-    console.log('what is id', id)
+  const handleRoute = (data) => {
+    if (data.stateSlices.listings) {
+      const { filters, slug } = data.stateSlices.listings
+      const { city, state } = data.stateSlices.searchResults
 
-    console.log('what is data', data)
-    console.log('what is appSlices', appSlices)
+      const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
+
+      const urlQuery = [`homeType=${homeTypeCategory(slug)}`]
+      const updatedCurrentSetFilters = addRemoveCurrentFilters(
+        'homeType',
+        urlQuery,
+        filters.currentSetFilters
+      )
+
+      router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
+      dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+    }
   }
 
   return { handleRoute }

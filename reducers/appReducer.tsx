@@ -61,7 +61,8 @@ const {
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = PriceFilterActions
 
-const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE } = FilterActions
+const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE, UPDATE_FILTERS_URLS } =
+  FilterActions
 const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
@@ -311,6 +312,19 @@ const appReducer = (state: IinitialState, action: IAction) => {
         activeFilterPanel,
       })(state)
 
+    case UPDATE_FILTERS_URLS:
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            currentSetFilters:
+              action.payload?.listings?.filters?.currentSetFilters,
+          },
+        },
+      }
+
     case HOMES_VIEW_TAB_CLICKED:
       return {
         ...state,
@@ -375,11 +389,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     case SET_SELECTED_HOME_TYPE:
       const selected = action.payload?.listings?.filters?.homeType?.selected
-      console.log(
-        'REDUCER : what is selected',
-        action.payload?.listings?.filters?.homeType
-      )
-
+     
       // return updateNestedObj(['listings', 'filters'])({
       //   ...state.listings.filters,
       // homeType: {

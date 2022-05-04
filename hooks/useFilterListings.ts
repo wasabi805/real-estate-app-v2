@@ -12,40 +12,27 @@ const useFilterListings = (appState: any) => {
     key: string
     id?: string
   }
-
   //   const [state, dispatch] = useReducer(appReducer, initialState)
   const { dispatch } = useContext(AppContext)
-
-  const [filterData, updateFilters] = useState({
-    listings: {
-      slug: '',
-      filters: appState.listings.filters,
-    },
-    searchResults: {
-      city: appState.searchResults.city,
-      state: appState.searchResults.state,
-    },
-  })
-
   const { handleRoute } = useRoute(appState)
 
-  const path = `/city/${ifWhiteSpaces(
-    appState.searchResults.city
-  )}/${ifWhiteSpaces(appState.searchResults.state)}`
-
-  const filteredListings = (slug: ISlug) => {
+  const filteredListings = (slug: ISlug, state) => {
     switch (slug.key) {
       case 'homeType':
         let id = `${slug.id}`
 
-        updateFilters({
-          listings: {
-            slug,
-            filters: appState.listings.filters,
+        handleRoute({
+          stateSlices: {
+            listings: {
+              slug: slug.id,
+              filters: state.listings.filters,
+            },
+            searchResults: {
+              city: state.searchResults.city,
+              state: state.searchResults.state,
+            },
           },
-        })
-
-        handleRoute(filterData, id) // updates the reducer with the url filters
+        }) // updates the reducer with the url filters
         dispatch(setSelectedHomeType(id)) // updates reducer with changes to the ui
 
         //TODO: try an make another hook to do the routing

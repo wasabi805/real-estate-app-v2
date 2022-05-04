@@ -44,6 +44,7 @@ export interface IinitialState {
 
     filters: {
       activeFilterPanel: string
+      currentSetFilters: string[]
 
       forSaleRentSold: {
         filterBy: []

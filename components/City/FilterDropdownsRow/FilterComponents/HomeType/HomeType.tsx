@@ -18,10 +18,13 @@ const HomeType = () => {
   const { filteredListings } = useFilterListings(useContext(AppContext).state)
 
   const handleHomeTypeButtonClick = (id: string, state: any) => {
-    filteredListings({
-      key: 'homeType',
-      id: id,
-    })
+    filteredListings(
+      {
+        key: 'homeType',
+        id: id,
+      },
+      state
+    )
   }
 
   useEffect(() => {

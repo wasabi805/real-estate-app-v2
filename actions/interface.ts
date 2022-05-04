@@ -58,6 +58,7 @@ export interface IAction {
 
       filters?: {
         activeFilterPanel?: string
+        currentSetFilters?: string[]
 
         forSaleRentSold?: {
           filterBy?: string[]

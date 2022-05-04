@@ -16,6 +16,20 @@ export const setActiveFilterPanel = (
   }
 }
 
+export const UPDATE_FILTERS_URLS = 'UPDATE_FILTERS_URLS'
+export const updateFiltersUrls = (updatedUrlStrings: string[]) => {
+  return {
+    type: UPDATE_FILTERS_URLS,
+    payload: {
+      listings: {
+        filters: {
+          currentSetFilters: updatedUrlStrings,
+        },
+      },
+    },
+  }
+}
+
 export const UPDATE_FILTER_RESPONSE = 'UPDATE_FILTER_RESPONSE'
 export const updateFilterResponse = (data) => {
   console.log('what is data', data)
