@@ -29,7 +29,7 @@ const HomeType = () => {
 
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
-  
+
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
     const iconType = btn.id?.split(homeTypeIdPrefix)

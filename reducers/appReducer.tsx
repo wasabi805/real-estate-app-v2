@@ -111,7 +111,7 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
-      currentSetFilters: ['foo-bar'],
+      currentSetFilters: [''],
       filtersDict: {
         'for-sale-rest-sold': {
           order: 0,
@@ -221,6 +221,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
   let currentSetFiltersPayload =
     action.payload?.listings?.filters?.currentSetFilters
 
+  let selectedHomeType = action.payload?.listings?.filters?.homeType?.selected
+
   switch (action.type) {
     //  LOGIN MODAL
 
@@ -313,17 +315,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
       })(state)
 
     case UPDATE_FILTERS_URLS:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            currentSetFilters:
-              action.payload?.listings?.filters?.currentSetFilters,
-          },
-        },
-      }
+      return updateNestedObj(['listings', 'filters', 'currentSetFilters'])(
+        action.payload?.listings?.filters?.currentSetFilters
+      )(state)
 
     case HOMES_VIEW_TAB_CLICKED:
       return {
@@ -388,42 +382,10 @@ const appReducer = (state: IinitialState, action: IAction) => {
     /* ----- HOME-TYPE FILTERS ----- */
 
     case SET_SELECTED_HOME_TYPE:
-      const selected = action.payload?.listings?.filters?.homeType?.selected
-     
-      // return updateNestedObj(['listings', 'filters'])({
-      //   ...state.listings.filters,
-      // homeType: {
-      //   ...state.listings.filters.homeType,
-      //   selected: action.payload?.listings?.filters?.homeType?.selected,
-      //   foo:'bar'
-      // },
-      // currentSetFilters: addRemoveCurrentFilters(
-      //   'homeType',
-      //   currentSetFiltersPayload,
-      //   currentSetFiltersState
-      // ),
-      // })(state)
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            homeType: {
-              ...state.listings.filters.homeType,
-              selected: action.payload?.listings?.filters?.homeType?.selected,
-              foo: 'bar',
-            },
-
-            //TODO : this will get handled in useRoute hook
-            // currentSetFilters: addRemoveCurrentFilters(
-            //   'homeType',
-            //   currentSetFiltersPayload,
-            //   currentSetFiltersState
-            // ),
-          },
-        },
-      }
+      return updateNestedObj(['listings', 'filters', 'homeType'])({
+        ...state.listings.filters.homeType,
+        selected: selectedHomeType,
+      })(state)
 
     /* ----- BEDS BATHS ----- */
 
@@ -499,15 +461,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
       }
 
     case SORT_LISTINGS:
-      return {
-        ...state,
-        searchResults: {
-          ...state.searchResults,
-          data: {
-            ...action.payload?.searchResults?.data,
-          },
-        },
-      }
+      return updateNestedObj(['searchResults', 'data'])({
+        ...action.payload?.searchResults?.data,
+      })(state)
 
     case SET_CLICKED_ROW:
       return {
