@@ -9,6 +9,7 @@ import * as FilterDropdownsActions from 'actions/ListingsActions/FilterRowButton
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
 import * as SortListingsActions from 'actions/ListingsActions/SortActions'
+import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
 import { mockListings, mockAscendingPriceRange } from 'mockListings'
 import { updateNestedObj } from 'utils/helpers'
 import {
@@ -48,6 +49,8 @@ const {
 } = SearchActions
 
 const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
+
+const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
 
 const {
   SET_BEDS_VALUES,
@@ -388,6 +391,24 @@ const appReducer = (state: IinitialState, action: IAction) => {
       })(state)
 
     /* ----- BEDS BATHS ----- */
+
+    case NEW_SET_BEDS_VALUES:
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            bedsBaths: {
+              ...state.listings.filters.bedsBaths,
+              currentRange:
+                action.payload?.listings?.filters?.bedsBaths?.currentRange,
+              clickedNumber:
+                action.payload?.listings?.filters?.bedsBaths?.clickedNumber,
+            },
+          },
+        },
+      }
 
     case SET_BEDS_VALUES:
       const currentRange =

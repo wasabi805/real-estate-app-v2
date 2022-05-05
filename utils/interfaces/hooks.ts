@@ -10,6 +10,9 @@ export interface IParam {
   className?: string
   query?: string | []
   slug?: string | IMultiSlug[]
+  props?: {
+    [key: string]: any
+  }
   isAsc?: boolean
 }
 

@@ -30,20 +30,21 @@ const BedsBath = () => {
     defineBedsAmount(className, state)
 
     const { bedsAmount } = defineBedsAmount(className, state)!
-    const mappedSlugs = bedsAmount.currentRange.map((amount, idx) => {
-      return idx === 0
-        ? { query: 'min-beds', value: amount }
-        : { query: 'max-beds', value: amount }
-    })
+    const mappedSlugs = bedsAmount.currentRange.map((amount, idx) => ({
+      query: 'beds',
+      value: amount,
+    }))
 
     console.log(bedsAmount, 'bedsAmount')
-    console.log(mappedSlugs, 'mappedSlugs')
 
     filterListings({
       param: {
         id: 'beds',
         className,
         //TODO add a key for bedsAmount to display in UI and pass bedsAmount as the value
+        props: {
+          bedsAmount: bedsAmount,
+        },
         query: 'beds',
         slug: mappedSlugs,
       },

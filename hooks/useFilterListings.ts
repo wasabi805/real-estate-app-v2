@@ -3,12 +3,14 @@ import AppContext from 'context/appContext'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
+import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
 import useRoute from './useRoute'
 import { IFilterListingsProps } from 'utils/interfaces/hooks'
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
 const { setFilterCurrentBathsAmount, setBedsValues } = ListingsFilterActions
+const { newSetBedsValues } = NewBedsBathsActions
 
 const useFilterListings = () => {
   const { dispatch } = useContext(AppContext)
@@ -40,7 +42,7 @@ const useFilterListings = () => {
 
       case 'beds':
         updateUrl()
-        // dispatch(setFilterCurrentBathsAmount(param.className!))
+        dispatch(newSetBedsValues(param))
         return
 
       case 'baths':

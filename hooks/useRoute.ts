@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { addRemoveCurrentFilters } from 'utils/helpers'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { IHandleRouteProps } from 'utils/interfaces/hooks'
+import { isArr } from 'utils/helpers'
 
 const { updateFiltersUrls } = FilterActions
 
@@ -57,25 +58,30 @@ const useRoute = () => {
         return route()
       }
 
-      const multiSlug = () => {
-        alert('beds')
+      const bedsSlugs = () => {
         const queries =
-          Array.isArray(data?.filterListings?.slug) &&
+          isArr(data?.filterListings?.slug) &&
           data?.filterListings?.slug?.map((q) => {
             return `${q.query}=${q.value}`
           })
 
-        const bedsAmount =
-          data?.filterListings?.slug?.length === 1 ? queries[0] : ''
+        //TODO : if isAny, clear route
+        const isAny: boolean = queries.some((q: string) => q.includes('any'))
 
-        urlQuery = [bedsAmount]
-        updatedCurrentSetFilters = addRemoveCurrentFilters(
-          `${data?.filterListings?.id}`,
-          urlQuery,
-          data.state!.listings.filters.currentSetFilters
-        )
+        //TODO : if false, include a max in the query slug
+        const hasNoMax = queries.some((q: string) => q.includes('5'))
 
-        return route()
+        console.log('isAny', isAny)
+        console.log('hasNoMax', hasNoMax)
+
+        // urlQuery = [bedsAmount]
+        // updatedCurrentSetFilters = addRemoveCurrentFilters(
+        //   `${data?.filterListings?.id}`,
+        //   urlQuery,
+        //   data.state!.listings.filters.currentSetFilters
+        // )
+
+        // return route()
 
         // console.log(urlQuery,'urlQuery')
       }
@@ -84,7 +90,7 @@ const useRoute = () => {
         homeType: singleSlug,
         status: singleSlug,
         baths: singleSlug,
-        beds: multiSlug,
+        beds: bedsSlugs,
       }
 
       return filterBy[filterId]()
