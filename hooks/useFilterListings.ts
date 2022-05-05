@@ -8,7 +8,7 @@ import { IFilterListingsProps } from 'utils/interfaces/hooks'
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
-const { setFilterCurrentBathsAmount } = ListingsFilterActions
+const { setFilterCurrentBathsAmount , setBedsValues} = ListingsFilterActions
 
 const useFilterListings = () => {
   const { dispatch } = useContext(AppContext)
@@ -36,6 +36,11 @@ const useFilterListings = () => {
       case 'status': //aka forSaleRentSold
         updateUrl()
         dispatch(setFilterByPropertyType([param.className!]))
+        return
+
+        case 'beds':
+        updateUrl()
+        // dispatch(setFilterCurrentBathsAmount(param.className!))
         return
 
       case 'baths':

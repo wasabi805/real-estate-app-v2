@@ -15,8 +15,20 @@ const BedsBath = () => {
   const { state, dispatch } = appContext
   const { filterListings } = useFilterListings()
 
-  const handleBedsButtonClicked = (key: string, state: IinitialState) => {
-    dispatch(setBedsValues(key, state))
+  // const handleBedsButtonClicked = (key: string, state: IinitialState) => {
+  //   dispatch(setBedsValues(key, state))
+  // }
+  const handleBedsButtonClicked = (className: string, state: IinitialState) => {
+    // dispatch(setBedsValues(className, state))
+    filterListings({
+      param: {
+        id: 'beds',
+        className,
+        query: 'someBedsquery',
+        slug: 'someBedsSlug',
+      },
+      state,
+    })
   }
 
   const handleBathsButtonClicked = (className: string) => {
