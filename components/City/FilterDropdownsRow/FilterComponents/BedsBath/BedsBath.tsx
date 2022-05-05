@@ -9,23 +9,43 @@ import { bedsNumberIdPrefix } from 'utils/contants'
 import useFilterListings from '@hooks/useFilterListings'
 import { bathsCategory } from 'utils'
 const { setBedsValues } = ListingsFilterActions
+import { defineBedsAmount } from 'actions/ListingsActions/FilterActions/helpers'
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { filterListings } = useFilterListings()
 
+  // ORIGINAL below
   // const handleBedsButtonClicked = (key: string, state: IinitialState) => {
   //   dispatch(setBedsValues(key, state))
   // }
+
   const handleBedsButtonClicked = (className: string, state: IinitialState) => {
-    // dispatch(setBedsValues(className, state))
+    // TODO: STEP 1: MOVE THE logic inside setBedValues action into a helper function
+    // STEP 2 : pass the selected button names into an object.
+    // STEP 3 : pass that object into a new key inside filterListings
+    // STEP 4: possibily add some logic into useFilterListing hook and an useRoute
+
+    defineBedsAmount(className, state)
+
+    const { bedsAmount } = defineBedsAmount(className, state)!
+    const mappedSlugs = bedsAmount.currentRange.map((amount, idx) => {
+      return idx === 0
+        ? { query: 'min-beds', value: amount }
+        : { query: 'max-beds', value: amount }
+    })
+
+    console.log(bedsAmount, 'bedsAmount')
+    console.log(mappedSlugs, 'mappedSlugs')
+
     filterListings({
       param: {
         id: 'beds',
         className,
-        query: 'someBedsquery',
-        slug: 'someBedsSlug',
+        //TODO add a key for bedsAmount to display in UI and pass bedsAmount as the value
+        query: 'beds',
+        slug: mappedSlugs,
       },
       state,
     })

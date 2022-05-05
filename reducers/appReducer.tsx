@@ -111,7 +111,7 @@ export const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
-      currentSetFilters: [''],
+      currentSetFilters: [],
       filtersDict: {
         'for-sale-rest-sold': {
           order: 0,

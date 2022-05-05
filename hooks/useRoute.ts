@@ -13,9 +13,16 @@ const useRoute = () => {
   const router = useRouter()
 
   const handleRoute = (data: IHandleRouteProps) => {
-    let route
+    // let route
     let urlQuery
     let updatedCurrentSetFilters: string[]
+
+    const route = () => {
+      router.push(
+        `${path}/filters/${updatedCurrentSetFilters.join(',').trim()}`
+      )
+      dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+    }
 
     const { city, state } = data?.state?.searchResults
 
@@ -30,33 +37,57 @@ const useRoute = () => {
         urlQuery,
         data.state!.listings.filters.currentSetFilters
       )
-
-      route = () => {
-        router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
-        dispatch(updateFiltersUrls(updatedCurrentSetFilters))
-      }
-
-      route()
-      return
+      return route()
     }
 
     /* FILTER LISTINGS  */
-    if (data.filterListings) {
-      urlQuery = [`${data.filterListings.query}=${data.filterListings.slug}`]
+    if (data?.filterListings!) {
+      const filterId = data?.filterListings?.id!
 
-      updatedCurrentSetFilters = addRemoveCurrentFilters(
-        `${data.filterListings.id}`,
-        urlQuery,
-        data.state!.listings.filters.currentSetFilters
-      )
-
-      route = () => {
-        router.push(`${path}/${updatedCurrentSetFilters.join('/')}`)
-        dispatch(updateFiltersUrls(updatedCurrentSetFilters))
+      const singleSlug = () => {
+        urlQuery = [
+          `${data?.filterListings?.query}=${data?.filterListings?.slug}`,
+        ]
+        updatedCurrentSetFilters = addRemoveCurrentFilters(
+          `${data?.filterListings?.id}`,
+          urlQuery,
+          data.state!.listings.filters.currentSetFilters
+        )
+        console.log(updatedCurrentSetFilters)
+        return route()
       }
 
-      route()
-      return
+      const multiSlug = () => {
+        alert('beds')
+        const queries =
+          Array.isArray(data?.filterListings?.slug) &&
+          data?.filterListings?.slug?.map((q) => {
+            return `${q.query}=${q.value}`
+          })
+
+        const bedsAmount =
+          data?.filterListings?.slug?.length === 1 ? queries[0] : ''
+
+        urlQuery = [bedsAmount]
+        updatedCurrentSetFilters = addRemoveCurrentFilters(
+          `${data?.filterListings?.id}`,
+          urlQuery,
+          data.state!.listings.filters.currentSetFilters
+        )
+
+        return route()
+
+        // console.log(urlQuery,'urlQuery')
+      }
+
+      const filterBy = {
+        homeType: singleSlug,
+        status: singleSlug,
+        baths: singleSlug,
+        beds: multiSlug,
+      }
+
+      return filterBy[filterId]()
     }
 
     alert('no route')
