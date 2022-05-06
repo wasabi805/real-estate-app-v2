@@ -50,6 +50,11 @@ const useFilterListings = () => {
         dispatch(setFilterCurrentBathsAmount(param.className!))
         return
 
+      case 'baths-baths-clear':
+        alert('staring the work')
+        console.log({ param, state })
+        return
+
       default:
         return
     }

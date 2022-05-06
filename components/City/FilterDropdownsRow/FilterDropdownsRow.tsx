@@ -18,6 +18,7 @@ import {
 } from '@components/City/FilterDropdownsRow/FilterComponents'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import ButtonComp from '@components/_common/ButtonComp'
+import useFilterListings from '@hooks/useFilterListings'
 
 const { setActiveFilterPanel } = FilterActions
 
@@ -32,6 +33,7 @@ const {
 //  ROW CONTAINING ALL FILTER BUTTONS
 const FilterDropdownsRow = () => {
   const { state, dispatch } = useContext(AppContext)
+  const { filterListings } = useFilterListings()
 
   const handleSetActivePanel = (key: string) => {
     if (state.listings.filters.activeFilterPanel === key) {
@@ -41,16 +43,26 @@ const FilterDropdownsRow = () => {
     dispatch(setActiveFilterPanel(key))
   }
 
+  const handleBedsBathClear = () => {
+    filterListings({
+      state: state,
+      param: {
+        id: 'baths-baths-clear',
+        slug: 'any',
+      },
+    })
+  }
+
   const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
-  const ClearDoneButtons = ({ doneFn }) => (
+  const ClearDoneButtons = ({ clearFn, doneFn }) => (
     <ButtonComp
       groupType="button-row"
       align="right"
       buttonGroup={[
         {
           text: 'Clear',
-          onClick: () => console.log(' Clear clicked'),
+          onClick: clearFn,
         },
         {
           text: 'Done',
@@ -129,7 +141,10 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <BedsBaths />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                clearFn={handleBedsBathClear}
+                doneFn={handleClickDone}
+              />
             </>
           }
           buttonStyles={{

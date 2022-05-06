@@ -45,14 +45,25 @@ const useRoute = () => {
       const filterId = data?.filterListings?.id!
 
       const singleSlug = () => {
+        const { slug } = data?.filterListings!
+        const isAnyOrClear = slug === 'any' || slug === 'clear'
+
         urlQuery = [
           `${data?.filterListings?.query}=${data?.filterListings?.slug}`,
         ]
+
+        if (isAnyOrClear) {
+          urlQuery = ['']
+        }
+        console.log('isAnyOrClear', isAnyOrClear)
+        console.log('data?.filterListings?.query', data?.filterListings?.query)
+        console.log('data?.filterListings?.slug', data?.filterListings?.slug)
+
         updatedCurrentSetFilters = addRemoveCurrentFilters(
           `${data?.filterListings?.id}`,
           urlQuery,
           data.state!.listings.filters.currentSetFilters
-        )
+        ).filter((s) => s !== '')
         console.log(updatedCurrentSetFilters)
         return route()
       }
@@ -63,17 +74,11 @@ const useRoute = () => {
           data?.filterListings?.slug?.map((q) => {
             return `${q.query}=${q.value}`
           })
-
         //TODO : if isAny, clear route
         const isAny: boolean = queries.some((q: string) => q.includes('any'))
 
         //TODO : if false, include a max in the query slug
         const hasNoMax = queries.some((q: string) => q.includes('5'))
-
-        console.log('isAny', isAny)
-        console.log('hasNoMax', hasNoMax)
-        console.log('queries', queries)
-
         if (isAny) {
           urlQuery = ['']
 
