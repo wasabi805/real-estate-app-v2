@@ -15,6 +15,10 @@ export const bathsCategory = (className: string) => {
   return className.replace(/^(baths-filter-btn-)/, '')
 }
 
+export const bedsValue = (className: string) => {
+  return className.replace(/^(beds=)/, '')
+}
+
 /* Numbers */
 export const sortByAscendOrDescend = (
   isAsc: Boolean,

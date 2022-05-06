@@ -21,7 +21,6 @@ export const defineBedsAmount = (className: string, state: IinitialState) => {
 
   // TODO store in reducer or a contants file.
   const range = bedsButtonFilterRange
-  const bedsBathsPath: string[] = ['listings', 'filters', 'bedsBaths']
 
   let currentRange = state.listings?.filters?.bedsBaths?.currentRange.sort()
   let clickedNumber = state.listings?.filters?.bedsBaths?.clickedNumber

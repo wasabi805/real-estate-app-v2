@@ -6,6 +6,7 @@ import { addRemoveCurrentFilters } from 'utils/helpers'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { IHandleRouteProps } from 'utils/interfaces/hooks'
 import { isArr } from 'utils/helpers'
+import { bedsValue } from 'utils'
 
 const { updateFiltersUrls } = FilterActions
 
@@ -19,9 +20,7 @@ const useRoute = () => {
     let updatedCurrentSetFilters: string[]
 
     const route = () => {
-      router.push(
-        `${path}/filters/${updatedCurrentSetFilters.join(',').trim()}`
-      )
+      router.push(`${path}/filters/${updatedCurrentSetFilters}`)
       dispatch(updateFiltersUrls(updatedCurrentSetFilters))
     }
 
@@ -73,17 +72,39 @@ const useRoute = () => {
 
         console.log('isAny', isAny)
         console.log('hasNoMax', hasNoMax)
+        console.log('queries', queries)
 
-        // urlQuery = [bedsAmount]
-        // updatedCurrentSetFilters = addRemoveCurrentFilters(
-        //   `${data?.filterListings?.id}`,
-        //   urlQuery,
-        //   data.state!.listings.filters.currentSetFilters
-        // )
+        if (isAny) {
+          urlQuery = ['']
 
-        // return route()
+          updatedCurrentSetFilters = addRemoveCurrentFilters(
+            `${data?.filterListings?.id}`,
+            urlQuery,
+            data.state!.listings.filters.currentSetFilters
+          )
+        }
 
-        // console.log(urlQuery,'urlQuery')
+        if (hasNoMax) {
+          urlQuery = [`min-beds=${bedsValue(queries[0])}`]
+        }
+
+        if (!hasNoMax && !isAny) {
+          urlQuery = [
+            `min-beds=${bedsValue(queries[0])},max-beds=${bedsValue(
+              queries[queries.length - 1]
+            )}`,
+          ]
+        }
+
+        updatedCurrentSetFilters = addRemoveCurrentFilters(
+          `${data?.filterListings?.id}`,
+          urlQuery,
+          data.state!.listings.filters.currentSetFilters
+        ).filter((s) => s !== '')
+
+        //Don't remove the console.log, see above .filter()
+        console.log(updatedCurrentSetFilters)
+        return route()
       }
 
       const filterBy = {
