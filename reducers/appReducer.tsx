@@ -53,7 +53,6 @@ const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
 const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
 
 const {
-  SET_BEDS_VALUES,
   // SET_FILTER_BY_PROPERTY_TYPE,
   SET_FILTER_CURRENT_BATHS_AMOUNT,
 } = ListingsFilterActions
@@ -409,18 +408,6 @@ const appReducer = (state: IinitialState, action: IAction) => {
           },
         },
       }
-
-    case SET_BEDS_VALUES:
-      const currentRange =
-        action.payload?.listings?.filters?.bedsBaths?.currentRange
-      const clickedNumber =
-        action.payload?.listings?.filters?.bedsBaths?.clickedNumber
-
-      return updateNestedObj(bedsBathsPath)({
-        ...state.listings?.filters.bedsBaths,
-        currentRange,
-        clickedNumber,
-      })(state)
 
     case SET_FILTER_CURRENT_BATHS_AMOUNT:
       const currentBaths =

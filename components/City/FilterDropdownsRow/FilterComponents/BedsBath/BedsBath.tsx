@@ -2,13 +2,11 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
-import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import { IinitialState } from 'reducers/interface'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 import { bedsNumberIdPrefix } from 'utils/contants'
 import useFilterListings from '@hooks/useFilterListings'
 import { bathsCategory } from 'utils'
-const { setBedsValues } = ListingsFilterActions
 import { defineBedsAmount } from 'actions/ListingsActions/FilterActions/helpers'
 
 const BedsBath = () => {
@@ -16,17 +14,7 @@ const BedsBath = () => {
   const { state, dispatch } = appContext
   const { filterListings } = useFilterListings()
 
-  // ORIGINAL below
-  // const handleBedsButtonClicked = (key: string, state: IinitialState) => {
-  //   dispatch(setBedsValues(key, state))
-  // }
-
   const handleBedsButtonClicked = (className: string, state: IinitialState) => {
-    // TODO: STEP 1: MOVE THE logic inside setBedValues action into a helper function
-    // STEP 2 : pass the selected button names into an object.
-    // STEP 3 : pass that object into a new key inside filterListings
-    // STEP 4: possibily add some logic into useFilterListing hook and an useRoute
-
     defineBedsAmount(className, state)
 
     const { bedsAmount } = defineBedsAmount(className, state)!
@@ -34,8 +22,6 @@ const BedsBath = () => {
       query: 'beds',
       value: amount,
     }))
-
-    console.log(bedsAmount, 'bedsAmount')
 
     filterListings({
       param: {
