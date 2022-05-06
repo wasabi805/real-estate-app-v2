@@ -55,6 +55,7 @@ const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
 const {
   // SET_FILTER_BY_PROPERTY_TYPE,
   SET_FILTER_CURRENT_BATHS_AMOUNT,
+  CLEAR_BEDS_BATHS_FILTERS,
 } = ListingsFilterActions
 
 const {
@@ -224,6 +225,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
     action.payload?.listings?.filters?.currentSetFilters
 
   let selectedHomeType = action.payload?.listings?.filters?.homeType?.selected
+
+  let currentRange = action.payload?.listings?.filters?.bedsBaths?.currentRange
+  let currentBaths = action.payload?.listings?.filters?.bedsBaths?.currentBaths
 
   switch (action.type) {
     //  LOGIN MODAL
@@ -413,6 +417,25 @@ const appReducer = (state: IinitialState, action: IAction) => {
       const currentBaths =
         action.payload?.listings?.filters?.bedsBaths?.currentBaths
       return updateNestedObj(currentBathsPath)(currentBaths)(state)
+
+    case CLEAR_BEDS_BATHS_FILTERS:
+      console.log(action)
+      return {
+        ...state,
+        listings: {
+          ...state.listings,
+          filters: {
+            ...state.listings.filters,
+            bedsBaths: {
+              ...state.listings.filters.bedsBaths,
+              currentBaths:
+                action.payload?.listings?.filters?.bedsBaths?.currentBaths,
+              currentRange:
+                action.payload?.listings?.filters?.bedsBaths?.currentRange,
+            },
+          },
+        },
+      }
 
     /* ----- ALL FILTERS ----- */
 

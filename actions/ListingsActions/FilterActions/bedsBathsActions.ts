@@ -31,3 +31,20 @@ export const setFilterByPropertyType = (
     },
   }
 }
+
+export const CLEAR_BEDS_BATHS_FILTERS = 'CLEAR_BEDS_BATHS_FILTERS'
+export const clearBedsBathsFilters = () => {
+  return {
+    type: CLEAR_BEDS_BATHS_FILTERS,
+    payload: {
+      listings: {
+        filters: {
+          bedsBaths: {
+            currentBaths: 'baths-filter-btn-any',
+            currentRange: ['any'],
+          },
+        },
+      },
+    },
+  }
+}

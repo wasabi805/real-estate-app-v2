@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
@@ -60,6 +60,9 @@ const BedsBath = () => {
     }
   )
 
+  useEffect(() => {
+    console.log('what is state now', state.listings.filters.bedsBaths)
+  }, [state])
   return (
     <BedBathsContainer>
       <div style={{ display: 'flex' }}>
@@ -81,6 +84,7 @@ const BedsBath = () => {
 
         {/* TODO USE useFilterListings */}
         <div>
+          {console.log('currentBaths', currentBaths)}
           <ButtonComp
             activeButton={currentBaths}
             groupType="button-row"

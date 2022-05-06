@@ -47,7 +47,8 @@ const FilterDropdownsRow = () => {
     filterListings({
       state: state,
       param: {
-        id: 'baths-baths-clear',
+        id: 'bedsBathsclear',
+        query: 'min-baths',
         slug: 'any',
       },
     })

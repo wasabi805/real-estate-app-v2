@@ -9,7 +9,8 @@ import { IFilterListingsProps } from 'utils/interfaces/hooks'
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
-const { setFilterCurrentBathsAmount } = ListingsFilterActions
+const { setFilterCurrentBathsAmount, clearBedsBathsFilters } =
+  ListingsFilterActions
 const { newSetBedsValues } = NewBedsBathsActions
 
 const useFilterListings = () => {
@@ -40,13 +41,18 @@ const useFilterListings = () => {
       homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),
-      baths: () =>
-        dispatchAction(setFilterCurrentBathsAmount(param.className!)),
-      'baths-baths-clear': () => {},
+      baths: () => {
+        console.log(param.className!)
+        dispatchAction(setFilterCurrentBathsAmount(param.className!))
+      },
+
+      bedsBathsclear: () => {
+        dispatchAction(clearBedsBathsFilters())
+      },
     }
 
     const id = param && param?.id
-
+    console.log('WHAT IS THE ID', param)
     // run the function to update appReducer, UI changes, and url query changes
     filterCategory[id]()
 

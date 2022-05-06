@@ -18,15 +18,14 @@ const useRoute = () => {
     // let route
     let urlQuery
     let updatedCurrentSetFilters: string[]
+    const { city, state } = data?.state?.searchResults!
+
+    const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
 
     const route = () => {
       router.push(`${path}/filters/${updatedCurrentSetFilters}`)
       dispatch(updateFiltersUrls(updatedCurrentSetFilters))
     }
-
-    const { city, state } = data?.state?.searchResults
-
-    const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
 
     /* SORT LISTINGS  */
     if (data.sortListings) {
@@ -117,6 +116,7 @@ const useRoute = () => {
         status: singleSlug,
         baths: singleSlug,
         beds: bedsSlugs,
+        bedsBathsclear: singleSlug,
       }
 
       return filterBy[filterId]()
