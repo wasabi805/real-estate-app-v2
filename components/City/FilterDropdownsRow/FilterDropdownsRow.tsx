@@ -43,13 +43,27 @@ const FilterDropdownsRow = () => {
     dispatch(setActiveFilterPanel(key))
   }
 
-  const handleBedsBathClear = () => {
+  // const handleClearData = () => {
+  //   filterListings({
+  //     state: state,
+  //     param: {
+  //       id: 'bedsBathsclear',
+  //       query: 'min-baths',
+  //       slug: 'any',
+  //     },
+  //   })
+  // }
+
+  const handleClearData = () => {
     filterListings({
       state: state,
       param: {
-        id: 'bedsBathsclear',
-        query: 'min-baths',
-        slug: 'any',
+        id: 'clearData',
+        props: {
+          filterCategory: 'bedsBaths',
+          // TODO : use these to remove the url query when clear is clicked
+          query: ['min-beds', 'max-beds', 'min-baths'],
+        },
       },
     })
   }
@@ -143,7 +157,7 @@ const FilterDropdownsRow = () => {
             <>
               <BedsBaths />
               <ClearDoneButtons
-                clearFn={handleBedsBathClear}
+                clearFn={handleClearData}
                 doneFn={handleClickDone}
               />
             </>

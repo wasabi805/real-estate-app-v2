@@ -15,12 +15,14 @@ const useRoute = () => {
   const router = useRouter()
 
   const handleRoute = (data: IHandleRouteProps) => {
-    // let route
+    console.log('what is the data', data)
+
     let urlQuery
     let updatedCurrentSetFilters: string[]
     const { city, state } = data?.state?.searchResults!
 
     const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
+    const currentPath = router.asPath
 
     const route = () => {
       router.push(`${path}/filters/${updatedCurrentSetFilters}`)
@@ -39,9 +41,48 @@ const useRoute = () => {
       return route()
     }
 
+    console.log('WHAT IS DATA IN useRoute', data)
+
     /* FILTER LISTINGS  */
     if (data?.filterListings!) {
       const filterId = data?.filterListings?.id!
+
+      const handleClearData = () => {
+        const { filterCategory, query } = data?.filterListings.props!
+        console.log(
+          '****** data?.filterListings.props *******',
+          data?.filterListings.props
+        )
+        console.log('------ filterCategory -------', filterCategory)
+
+        const clearFilterBy = {
+          bedsBaths: () => {
+            const { currentRange } = data.state?.listings.filters.bedsBaths!
+            const splitUrl = currentPath.split('/')
+
+            const queryPortionOfUrl =
+              Array.isArray(currentRange) && currentRange[0]
+                ? 'min-beds'
+                : 'min-baths'
+
+            //get only the parts of the url pertaining to filters
+            const urlStringOnlyFilterParams = splitUrl.filter((str) =>
+              str.includes(queryPortionOfUrl)
+            )
+
+            //split the combined string of url queries
+            const splitUrlQueries = urlStringOnlyFilterParams[0].split(',')
+            const bedsBathQueries = new RegExp('min-beds|max-beds|min-baths')
+
+            const remainingQueries = splitUrlQueries.filter((str) => {
+              return !bedsBathQueries.test(str)
+            })
+            console.log('remainingQueries', remainingQueries)
+          },
+        }
+
+        return clearFilterBy[filterCategory]()
+      }
 
       const singleSlug = () => {
         const { slug } = data?.filterListings!
@@ -54,9 +95,6 @@ const useRoute = () => {
         if (isAnyOrClear) {
           urlQuery = ['']
         }
-        console.log('isAnyOrClear', isAnyOrClear)
-        console.log('data?.filterListings?.query', data?.filterListings?.query)
-        console.log('data?.filterListings?.slug', data?.filterListings?.slug)
 
         updatedCurrentSetFilters = addRemoveCurrentFilters(
           `${data?.filterListings?.id}`,
@@ -75,7 +113,6 @@ const useRoute = () => {
           })
         //TODO : if isAny, clear route
         const isAny: boolean = queries.some((q: string) => q.includes('any'))
-
         //TODO : if false, include a max in the query slug
         const hasNoMax = queries.some((q: string) => q.includes('5'))
         if (isAny) {
@@ -116,7 +153,7 @@ const useRoute = () => {
         status: singleSlug,
         baths: singleSlug,
         beds: bedsSlugs,
-        bedsBathsclear: singleSlug,
+        clearData: handleClearData,
       }
 
       return filterBy[filterId]()

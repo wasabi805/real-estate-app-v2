@@ -24,6 +24,7 @@ const useFilterListings = () => {
         state: state,
         filterListings: {
           id: param.id,
+          props: param?.props,
           className: param.className,
           query: param.query,
           slug: param.slug,
@@ -37,6 +38,8 @@ const useFilterListings = () => {
     }
 
     // dictionary of functions based in filter type to update appReducer, UI changes, and url query changes
+    /* IMPORTANT, any key changes made here should also get updated in in filterBy obj at useRoute hook as well */
+
     const filterCategory = {
       homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
@@ -46,46 +49,21 @@ const useFilterListings = () => {
         dispatchAction(setFilterCurrentBathsAmount(param.className!))
       },
 
-      bedsBathsclear: () => {
-        dispatchAction(clearBedsBathsFilters())
+      clearData: () => {
+        console.log('what is param.props', param.props)
+        const { filterCategory } = param.props!
+
+        const clearBy = {
+          bedsBaths: () => dispatchAction(clearBedsBathsFilters()),
+        }
+
+        return clearBy[filterCategory]()
       },
     }
 
     const id = param && param?.id
-    console.log('WHAT IS THE ID', param)
     // run the function to update appReducer, UI changes, and url query changes
     filterCategory[id]()
-
-    /**  updateUrl() does what it says and dispatches updates the UI */
-    // switch (param.id) {
-    //   case 'homeType':
-    //     updateUrl()
-    //     dispatch(setSelectedHomeType(param.className!))
-    //     return
-
-    //   case 'status': //aka forSaleRentSold
-    //     updateUrl()
-    //     dispatch(setFilterByPropertyType([param.className!]))
-    //     return
-
-    //   case 'beds':
-    //     updateUrl()
-    //     dispatch(newSetBedsValues(param))
-    //     return
-
-    //   case 'baths':
-    //     updateUrl()
-    //     dispatch(setFilterCurrentBathsAmount(param.className!))
-    //     return
-
-    //   case 'baths-baths-clear':
-    //     alert('staring the work')
-    //     console.log({ param, state })
-    //     return
-
-    //   default:
-    //     return
-    // }
   }
 
   return { filterListings }
