@@ -2,6 +2,12 @@ import { Ilisting } from 'actions/propertySearchBarActions/interface'
 import { IButtonWithIcon, IButton } from 'utils/interfaces/buttons'
 import { ISoldDateRangeRows } from 'utils/interfaces/tables'
 import { IAntTableSelectedRow } from 'utils/interfaces/antDesign'
+import { IAction } from 'actions/interface'
+
+export interface IReducerSlice {
+  state: IinitialState
+  action: IAction
+}
 
 interface IBedsButton {
   id: string

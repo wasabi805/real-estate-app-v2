@@ -1,3 +1,4 @@
+/*----- ACTIONS -----*/
 import * as LoginModalActions from 'actions/modalActions'
 import * as SearchActions from 'actions/propertySearchBarActions'
 import * as ListingsActions from 'actions/ListingsActions'
@@ -10,31 +11,17 @@ import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/f
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
 import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
-import { mockListings, mockAscendingPriceRange } from 'mockListings'
-import { updateNestedObj } from 'utils/helpers'
-import {
-  forSaleRentSoldPath,
-  priceFilterPath,
-  bedsBathsPath,
-  currentBathsPath,
-  isDrawerOpenPath,
-} from 'utils/contants'
 
+/*----- REDUCER SLICES -----*/
+import * as LoginModalSlice from 'reducers/loginModal'
+import * as LocationAutoCompSlice from 'reducers/locationAutoComp'
+import * as ListingsFiltersSlice from 'reducers/listings'
+
+/*----- INTERFACES -----*/
 import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
-import {
-  filterRowButtons,
-  forSaleRentSoldButtons,
-  soldDateRangeColumns,
-  soldDateRangeRows,
-  homeTypeButtons,
-  bathButtons,
-  bedsButtons,
-  bedsButtonFilterRange,
-} from 'reducers/initialValues'
 
-import { addRemoveCurrentFilters } from 'utils/helpers'
-
+/*----- TYPES -----*/
 const {
   RENDER_LOGIN_MODLE,
   DISMISS_LOGIN_MODLE,
@@ -48,25 +35,22 @@ const {
   UPDATE_STATE_WITH_SEARCH_RESULTS,
 } = SearchActions
 
-const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
-
-const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
-
-const {
-  // SET_FILTER_BY_PROPERTY_TYPE,
-  SET_FILTER_CURRENT_BATHS_AMOUNT,
-  CLEAR_BEDS_BATHS_FILTERS,
-} = ListingsFilterActions
-
 const {
   SET_MIN_PRICE_FILTER_FIELD,
   SET_MAX_PRICE_FILTER_FIELD,
   SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN,
 } = PriceFilterActions
 
-const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTER_RESPONSE, UPDATE_FILTERS_URLS } =
-  FilterActions
-const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
+const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
+const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
+
+const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTERS_URLS } = FilterActions
+
+const {
+  // SET_FILTER_BY_PROPERTY_TYPE,
+  SET_FILTER_CURRENT_BATHS_AMOUNT,
+  CLEAR_BEDS_BATHS_FILTERS,
+} = ListingsFilterActions
 
 const { SORT_LISTINGS, SET_IS_ASCENDING, SET_ACTIVE_SORT_CATEGORY } =
   ListingsSortFilterActions
@@ -78,446 +62,136 @@ const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
 
 const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
 
-export const initialState: IinitialState = {
-  isLoginModalVisibile: false,
-  user: {
-    password: '',
-    email: '',
-  },
-  search: {
-    value: '',
-    isAutoComplete: false,
-  },
-  fetchProperty: false,
-  searchResults: {
-    // city: '',
-    // state: '',
-
-    city: 'santa monica',
-    state: 'ca',
-
-    data: {
-      // listings: [],
-      listings: mockListings,
-    },
-    // initialData: [],
-    initialData: mockListings,
-  },
-
-  filterDropdownsRow: {
-    activeFilterPanel: '0',
-  },
-
-  // ALL LISTINGS PROPS
-  listings: {
-    isTableView: false,
-    currentHome: ['2892620475'],
-
-    filters: {
-      currentSetFilters: [],
-      filtersDict: {
-        'for-sale-rest-sold': {
-          order: 0,
-          slug: '/homeType=',
-        },
-
-        price: {
-          order: 1,
-          slug: '/price=',
-        },
-
-        homeType: {
-          order: 2,
-          slug: '/homeType=',
-        },
-      },
-
-      buttons: filterRowButtons,
-      activeFilterPanel: '0',
-
-      forSaleRentSold: {
-        filterBy: ['all-filters-btn-for-sale'],
-        buttons: forSaleRentSoldButtons,
-
-        soldDateRange: [],
-        soldDateRangeColumns: soldDateRangeColumns,
-        soldDateRangeRows: soldDateRangeRows,
-      },
-
-      price: {
-        minField: null,
-        maxField: null,
-        /* used in slider and histogram */
-        // allPrices: [],
-        allPrices: mockAscendingPriceRange,
-
-        slider: {
-          // range: [],
-          range: mockAscendingPriceRange,
-          moveMin: {
-            move: false,
-            value: '',
-          },
-          moveMax: {
-            move: false,
-            value: '',
-          },
-        },
-      },
-
-      homeType: {
-        homeTypeButtons: homeTypeButtons,
-        selected: '',
-      },
-
-      bedsBaths: {
-        bedsButtons,
-        clickedNumber: 0,
-        range: bedsButtonFilterRange,
-        currentRange: [],
-
-        bathButtons: bathButtons,
-        currentBaths: '',
-      },
-
-      allFilters: {
-        isDrawerOpen: false,
-      },
-    },
-
-    sort: {
-      criteria: 'Price',
-      sortedHomes: [],
-
-      isAscending: null,
-      togglePanel: false,
-    },
-  },
-
-  loginModal: {
-    isLogin: true,
-    email: '',
-    confirmEmail: '',
-    password: '',
-  },
-}
-
 const appReducer = (state: IinitialState, action: IAction) => {
-  /* STATE VARIABLES */
-  let currentSetFiltersState = state.listings.filters.currentSetFilters
+  /*----- LOGIN MODAL -----*/
 
-  /* PAYLOAD VARIABLES */
+  const handleRenderLoginModal = () =>
+    LoginModalSlice.renderLoginModal({ state, action })
 
-  let newPrice = {}
-  let minField = action.payload?.listings?.filters?.price?.minField
-  let maxField = action.payload?.listings?.filters?.price?.maxField
+  const handleDismissLoginModle = () =>
+    LoginModalSlice.dismissLoginModal({ state, action })
 
-  let priceRange = action.payload?.listings?.filters?.price?.allPrices
-  let moveMin = action.payload?.listings?.filters?.price?.slider?.moveMin
-  let moveMax = action.payload?.listings?.filters?.price?.slider?.moveMax
+  const handleIsLogin = () => LoginModalSlice.setIsLogin({ state, action })
 
-  let filterByPropertyType =
-    action.payload?.listings?.filters?.forSaleRentSold?.filterBy
-  let soldDateRange =
-    action.payload?.listings?.filters?.forSaleRentSold?.soldDateRange
+  const handleLoginFormChange = () =>
+    LoginModalSlice.setIsLogin({ state, action })
 
-  let currentSetFiltersPayload =
-    action.payload?.listings?.filters?.currentSetFilters
+  /*----- AUTO COMPLETE SERCH FIELD -----*/
 
-  let selectedHomeType = action.payload?.listings?.filters?.homeType?.selected
+  const handleSetSearchField = () =>
+    LocationAutoCompSlice.setSeachField({ state, action })
 
-  let currentRange = action.payload?.listings?.filters?.bedsBaths?.currentRange
-  let currentBaths = action.payload?.listings?.filters?.bedsBaths?.currentBaths
+  const handleUpdateAutoCompField = () =>
+    LocationAutoCompSlice.autoCompleteUpdateInputAndFetchListings({
+      state,
+      action,
+    })
 
-  switch (action.type) {
-    //  LOGIN MODAL
+  const handleUpdateLocation = () =>
+    LocationAutoCompSlice.updateStateWithSearchResults({ state, action })
 
-    case RENDER_LOGIN_MODLE:
-      return {
-        ...state,
-        isLoginModalVisibile: action.payload?.renderLoginModal,
-      }
+  /*----- SORT LISTINGS ROW BUTTONS-----*/
 
-    case DISMISS_LOGIN_MODLE:
-      return {
-        ...state,
-        isLoginModalVisibile: action.payload?.dismissLoginModal,
-      }
+  const handleToggleSortListingsPanel = () =>
+    ListingsFiltersSlice.toggleSortListingsPanel({ state, action })
+  const handleSetActiveSortCategory = () =>
+    ListingsFiltersSlice.setActiveSortCategory({ state, action })
+  const handleSetIsAscending = () =>
+    ListingsFiltersSlice.setIsAscending({ state, action })
+  const handleSortListings = () =>
+    ListingsFiltersSlice.sortListings({ state, action })
+  const handleSetClickedRow = () =>
+    ListingsFiltersSlice.setClickedRow({ state, action })
 
-    case SET_IS_LOGIN:
-      return {
-        ...state,
-        loginModal: {
-          email: state.loginModal.email,
-          isLogin: action.payload?.isLogin,
-        },
-      }
+  /*----- FILTER LISTINGS ROW BUTTONS-----*/
+  const handleSetActiveFilterPanel = () =>
+    ListingsFiltersSlice.setActiveFilterPanel({ state, action })
+  const handleHomesViewTabClicked = () =>
+    ListingsFiltersSlice.homeViewTabClicked({ state, action })
 
-    case SET_LOGIN_FORM_CHANGE:
-      return {
-        ...state,
-        loginModal: action.payload?.userLoginData,
-      }
+  /*----- FILTER LISTINGS CATEGORIES -----*/
+  const handleUpdateFiltersUrls = () =>
+    ListingsFiltersSlice.updateFiltersUrls({ state, action })
 
-    case SET_SEARCH_FIELD:
-      return {
-        ...state,
-        fetchProperty: false,
-        search: {
-          ...state.search,
-          value: action.payload?.value,
-        },
-      }
+  /* ----- ----- FOR SALE RENT SOLD */
+  const handleSetFilterByPropertyType = () =>
+    ListingsFiltersSlice.setFilterByPropertyType({ state, action })
+  const handleSetSoldDateRange = () =>
+    ListingsFiltersSlice.setSoldDateRange({ state, action })
 
-    case AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS:
-      return {
-        ...state,
-        search: {
-          ...state.search,
-          value:
-            action.payload?.addressObject?.formatted_address ||
-            action.payload?.addressObject?.name,
-          isAutoComplete: action.payload?.addressObject?.formatted_address
-            ? true
-            : false,
-        },
-        fetchProperty: true,
-      }
-    case UPDATE_STATE_WITH_SEARCH_RESULTS:
-      return {
-        ...state,
-        searchResults: {
-          city: action.payload?.searchResults?.city,
-          state: action.payload?.searchResults?.state,
-          data: { ...action.payload?.searchResults?.data },
-          initialData: { ...action.payload?.searchResults?.data },
-        },
-        fetchProperty: false,
-        listingTable: {
-          currentHome: [
-            action.payload?.searchResults?.data.listings[0].property_id,
-          ], //set the first property for the Listing table view
-        },
-        priceFilter: {
-          range: action.payload?.priceFilter.range,
-          moveMin: {
-            move: false,
-            value: '',
-          },
-          moveMax: {
-            move: false,
-            value: '',
-          },
-        },
-      }
+  /* ----- ----- PRICE */
+  const handleSetMinPriceFilterField = () =>
+    ListingsFiltersSlice.setMinPriceFilterField({ state, action })
+  const handleSetMaxPriceFilterField = () =>
+    ListingsFiltersSlice.setMaxPriceFilterField({ state, action })
+  const handleSetPricePriceRangeSliderMaxMin = () =>
+    ListingsFiltersSlice.setPricePriceRangeSliderMaxMin({ state, action })
 
-    case SET_ACTIVE_FILTER_PANEL:
-      const activeFilterPanel =
-        action.payload?.listings?.filters?.activeFilterPanel
+  /* ----- ----- HOME-TYPE FILTERS */
+  const handleSetSelectedHomeType = () =>
+    ListingsFiltersSlice.setSelectedHomeType({ state, action })
 
-      return updateNestedObj(['listings', 'filters'])({
-        ...state.listings.filters,
-        activeFilterPanel,
-      })(state)
+  /* ----- BEDS BATHS FILTERS */
+  const handleNewSetBedsValues = () =>
+    ListingsFiltersSlice.newSetBedsValues({ state, action })
+  const handleSetFilterCurrentBathsAmount = () =>
+    ListingsFiltersSlice.setFilterCurrentBathsAmount({ state, action })
+  const handleClearBedsBathsFilters = () =>
+    ListingsFiltersSlice.clearBedsBathsFilters({ state, action })
 
-    case UPDATE_FILTERS_URLS:
-      return updateNestedObj(['listings', 'filters', 'currentSetFilters'])(
-        action.payload?.listings?.filters?.currentSetFilters
-      )(state)
+  /* ----- ALL FILTERS  */
+  const { SET_FILTER_DRAWER_OPEN } = AllFiltersActions
+  const handleSetFilterDrawerOpen = () =>
+    ListingsFiltersSlice.setFilterDrawerOpen({ state, action })
 
-    case HOMES_VIEW_TAB_CLICKED:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          isTableView: action.payload?.listings?.isTableView,
-        },
-      }
+  const setState: Record<string, () => void> = {
+    /*-----  LOGIN MODAL -----*/
+    [RENDER_LOGIN_MODLE]: handleRenderLoginModal,
+    [DISMISS_LOGIN_MODLE]: handleDismissLoginModle,
+    [SET_IS_LOGIN]: handleIsLogin,
+    [SET_LOGIN_FORM_CHANGE]: handleLoginFormChange,
 
-    /* ----- FOR SALE RENT SOLD -----  */
+    /*----- AUTO COMPLETE SERCH FIELD -----*/
+    [SET_SEARCH_FIELD]: handleSetSearchField,
+    [AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS]: handleUpdateAutoCompField,
+    [UPDATE_STATE_WITH_SEARCH_RESULTS]: handleUpdateLocation,
 
-    case SET_FILTER_BY_PROPERTY_TYPE:
-      return updateNestedObj(forSaleRentSoldPath)({
-        ...state.listings.filters.forSaleRentSold,
-        filterBy: filterByPropertyType,
-      })(state)
+    /*----- SORT LISTINGS ROW BUTTONS-----*/
+    [TOGGLE_SORT_LISTINGS_PANEL]: handleToggleSortListingsPanel,
+    [SET_ACTIVE_SORT_CATEGORY]: handleSetActiveSortCategory,
+    [SET_IS_ASCENDING]: handleSetIsAscending,
+    [SORT_LISTINGS]: handleSortListings,
+    [SET_CLICKED_ROW]: handleSetClickedRow,
 
-    case SET_SOLD_DATE_RANGE:
-      return updateNestedObj(forSaleRentSoldPath)({
-        ...state.listings.filters.forSaleRentSold,
-        soldDateRange,
-      })(state)
+    /*----- FILTER LISTINGS ROW BUTTONS-----*/
+    [SET_ACTIVE_FILTER_PANEL]: handleSetActiveFilterPanel,
+    [HOMES_VIEW_TAB_CLICKED]: handleHomesViewTabClicked,
 
-    /* ----- PRICE ----- */
+    /*----- FILTER LISTINGS CATEGORIES -----*/
+    [UPDATE_FILTERS_URLS]: handleUpdateFiltersUrls,
 
-    case SET_MIN_PRICE_FILTER_FIELD:
-      newPrice = {
-        ...state.listings?.filters.price,
-        minField: minField,
-        slider: {
-          ...state.listings?.filters.price.slider,
-          moveMin: moveMin,
-        },
-      }
-      return updateNestedObj(priceFilterPath)(newPrice)(state)
+    /* ----- ----- FOR SALE RENT SOLD */
+    [SET_FILTER_BY_PROPERTY_TYPE]: handleSetFilterByPropertyType,
+    [SET_SOLD_DATE_RANGE]: handleSetSoldDateRange,
 
-    case SET_MAX_PRICE_FILTER_FIELD:
-      newPrice = {
-        ...state.listings?.filters.price,
-        maxField: maxField,
-        slider: {
-          ...state.listings?.filters.price.slider,
-          moveMax: moveMax,
-        },
-      }
-      return updateNestedObj(priceFilterPath)(newPrice)(state)
+    /* ----- ----- PRICE */
+    [SET_MIN_PRICE_FILTER_FIELD]: handleSetMinPriceFilterField,
+    [SET_MAX_PRICE_FILTER_FIELD]: handleSetMaxPriceFilterField,
+    [SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN]:
+      handleSetPricePriceRangeSliderMaxMin,
 
-    case SET_PRICE_PRICE_RANGE_SLIDER_MAX_MIN:
-      newPrice = {
-        ...state.listings?.filters.price,
-        minField: priceRange !== undefined ? priceRange[0] : null,
-        maxField: priceRange !== undefined ? priceRange[1] : null,
-        slider: {
-          ...state.listings?.filters?.price?.slider,
-          moveMin: moveMin,
-          moveMax: moveMax,
-        },
-      }
-      return updateNestedObj(priceFilterPath)(newPrice)(state)
+    /* ----- ----- HOME-TYPE FILTERS */
+    [SET_SELECTED_HOME_TYPE]: handleSetSelectedHomeType,
 
-    /* ----- HOME-TYPE FILTERS ----- */
+    /* ----- BEDS BATHS FILTERS */
+    [NEW_SET_BEDS_VALUES]: handleNewSetBedsValues,
+    [SET_FILTER_CURRENT_BATHS_AMOUNT]: handleSetFilterCurrentBathsAmount,
+    [CLEAR_BEDS_BATHS_FILTERS]: handleClearBedsBathsFilters,
 
-    case SET_SELECTED_HOME_TYPE:
-      return updateNestedObj(['listings', 'filters', 'homeType'])({
-        ...state.listings.filters.homeType,
-        selected: selectedHomeType,
-      })(state)
-
-    /* ----- BEDS BATHS ----- */
-
-    case NEW_SET_BEDS_VALUES:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            bedsBaths: {
-              ...state.listings.filters.bedsBaths,
-              currentRange:
-                action.payload?.listings?.filters?.bedsBaths?.currentRange,
-              clickedNumber:
-                action.payload?.listings?.filters?.bedsBaths?.clickedNumber,
-            },
-          },
-        },
-      }
-
-    case SET_FILTER_CURRENT_BATHS_AMOUNT:
-      const currentBaths =
-        action.payload?.listings?.filters?.bedsBaths?.currentBaths
-      return updateNestedObj(currentBathsPath)(currentBaths)(state)
-
-    case CLEAR_BEDS_BATHS_FILTERS:
-      console.log(action)
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          filters: {
-            ...state.listings.filters,
-            bedsBaths: {
-              ...state.listings.filters.bedsBaths,
-              currentBaths:
-                action.payload?.listings?.filters?.bedsBaths?.currentBaths,
-              currentRange:
-                action.payload?.listings?.filters?.bedsBaths?.currentRange,
-            },
-          },
-        },
-      }
-
-    /* ----- ALL FILTERS ----- */
-
-    case SET_FILTER_DRAWER_OPEN:
-      const isDrawerOpen =
-        action.payload?.listings?.filters?.allFilters?.isDrawerOpen
-      return updateNestedObj(isDrawerOpenPath)(isDrawerOpen)(state)
-
-    case SET_ACTIVE_SORT_CATEGORY:
-      return {
-        ...state,
-
-        listings: {
-          ...state.listings,
-          sort: {
-            ...state.listings.sort,
-            togglePanel: false,
-            criteria: action.payload?.listings?.sort?.criteria,
-            isAscending: action.payload?.listings?.sort?.isAscending,
-          },
-        },
-
-        searchResults: {
-          ...state.searchResults,
-          data: action.payload?.searchResults?.data,
-        },
-      }
-
-    /* ----- SORT LISTINGS ----- */
-
-    case TOGGLE_SORT_LISTINGS_PANEL:
-      return updateNestedObj(['listings', 'sort'])({
-        ...state.listings.sort,
-        togglePanel: !action.payload?.listings?.sort?.togglePanel,
-      })(state)
-
-    case SET_IS_ASCENDING:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          sort: {
-            ...state.listings.sort,
-            togglePanel: false,
-            criteria: action.payload?.listings?.sort?.criteria,
-            isAscending: action.payload?.listings?.sort?.isAscending,
-          },
-        },
-
-        searchResults: {
-          ...state.searchResults,
-          data: action.payload?.searchResults?.data,
-        },
-      }
-
-    case SORT_LISTINGS:
-      return updateNestedObj(['searchResults', 'data'])({
-        ...action.payload?.searchResults?.data,
-      })(state)
-
-    case SET_CLICKED_ROW:
-      return {
-        ...state,
-        listings: {
-          ...state.listings,
-          currentHome: action?.payload?.listings?.currentHome,
-        },
-      }
-
-    case 'TESTING':
-      return {
-        ...state,
-      }
-
-    case UPDATE_FILTER_RESPONSE:
-      return {
-        ...state,
-      }
-
-    default:
-      return state
+    /* ----- ALL FILTERS  */
+    [SET_FILTER_DRAWER_OPEN]: handleSetFilterDrawerOpen,
   }
+  return setState[action.type]()
 }
 
 export default appReducer
