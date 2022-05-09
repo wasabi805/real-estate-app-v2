@@ -15,15 +15,13 @@ const useRoute = () => {
   const router = useRouter()
 
   const handleRoute = (data: IHandleRouteProps) => {
-    console.log('what is the data', data)
-
-    let urlQuery
+    let urlQuery: string[] = [];
     let updatedCurrentSetFilters: string[]
+
     const { city, state } = data?.state?.searchResults!
 
     const path = `/city/${ifWhiteSpaces(city)}/${ifWhiteSpaces(state)}`
-    const currentPath = router.asPath
-
+  
     const route = () => {
       router.push(`${path}/filters/${updatedCurrentSetFilters}`)
       dispatch(updateFiltersUrls(updatedCurrentSetFilters))
@@ -31,7 +29,7 @@ const useRoute = () => {
 
     /* SORT LISTINGS  */
     if (data.sortListings) {
-      urlQuery = [`${data.sortListings.query}=${data.sortListings.slug}`]
+      urlQuery.push(`${data.sortListings.query}=${data.sortListings.slug}`)
 
       updatedCurrentSetFilters = addRemoveCurrentFilters(
         `${data.sortListings.id}`,
@@ -46,6 +44,30 @@ const useRoute = () => {
     /* FILTER LISTINGS  */
     if (data?.filterListings!) {
       const filterId = data?.filterListings?.id!
+
+      // https://www.redfin.com/city/3104/AZ/Chandler/apartments-for-rent/filter/sort=lo-beds,property-type=condo,min-price=750,min-beds=3,min-baths=2
+      const order =[{
+        id: 'status', //forSaleRentSold
+        value: ''
+      },
+      //start filter
+      {
+        id: 'sort',
+        value: ''
+      },
+      {
+        id: 'homeType',
+        value: ''
+      },
+      {
+        id: 'price',
+        value: ''
+      },
+      {
+        id: 'bedsBaths',
+        value: ''
+      }
+    ]
 
       const handleClearData = () => {
         const { filterCategory, query } = data?.filterListings?.props!
@@ -121,15 +143,14 @@ const useRoute = () => {
       }
 
       const singleSlug = () => {
+        console.log(data, 'what is data ' , '------', data?.filterListings?.id, '------')
         const { slug } = data?.filterListings!
         const isAnyOrClear = slug === 'any' || slug === 'clear'
 
-        urlQuery = [
-          `${data?.filterListings?.query}=${data?.filterListings?.slug}`,
-        ]
+        urlQuery.push(`${data?.filterListings?.query}=${data?.filterListings?.slug}`)
 
         if (isAnyOrClear) {
-          urlQuery = ['']
+          urlQuery.push('')
         }
 
         updatedCurrentSetFilters = addRemoveCurrentFilters(
@@ -162,15 +183,13 @@ const useRoute = () => {
         }
 
         if (hasNoMax) {
-          urlQuery = [`min-beds=${bedsValue(queries[0])}`]
+          urlQuery.push(`min-beds=${bedsValue(queries[0])}`)
         }
 
         if (!hasNoMax && !isAny) {
-          urlQuery = [
-            `min-beds=${bedsValue(queries[0])},max-beds=${bedsValue(
-              queries[queries.length - 1]
-            )}`,
-          ]
+          urlQuery.push( `min-beds=${bedsValue(queries[0])},max-beds=${bedsValue(
+            queries[queries.length - 1]
+          )}`)
         }
 
         updatedCurrentSetFilters = addRemoveCurrentFilters(
