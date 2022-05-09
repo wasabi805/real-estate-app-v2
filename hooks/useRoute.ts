@@ -48,36 +48,72 @@ const useRoute = () => {
       const filterId = data?.filterListings?.id!
 
       const handleClearData = () => {
-        const { filterCategory, query } = data?.filterListings.props!
-        console.log(
-          '****** data?.filterListings.props *******',
-          data?.filterListings.props
-        )
-        console.log('------ filterCategory -------', filterCategory)
+        const { filterCategory, query } = data?.filterListings?.props!
 
         const clearFilterBy = {
           bedsBaths: () => {
-            const { currentRange } = data.state?.listings.filters.bedsBaths!
-            const splitUrl = currentPath.split('/')
+            //WHATS IN THE CURRENT FILTERS?
+            console.log(
+              'WHATS IN THE CURRENT FILTERS?',
+              data.state?.listings.filters.currentSetFilters
+            )
+            const { currentSetFilters } = data.state?.listings.filters! //1 pass arg
 
-            const queryPortionOfUrl =
-              Array.isArray(currentRange) && currentRange[0]
-                ? 'min-beds'
-                : 'min-baths'
+            // REMOVE anything with
+            const bedsBathQueries = new RegExp('min-beds|max-beds|min-baths') //2pass regEx
+            const rest = currentSetFilters.filter(
+              (s) => !bedsBathQueries.test(s)
+            ) //to update the reducer
 
-            //get only the parts of the url pertaining to filters
-            const urlStringOnlyFilterParams = splitUrl.filter((str) =>
-              str.includes(queryPortionOfUrl)
+            const currentPath: string = router.asPath
+
+            //split the path,
+            const pathParts: string[] = currentPath.split('/')
+
+            //now find the string of queries...  // let filterStringUrl: string[] = pathParts.filter( s=> bedsBathQueries.test(s))
+            let filterStringUrl: string = pathParts.reduce(
+              (a, urlPart) => bedsBathQueries.test(urlPart) && urlPart,
+              ''
             )
 
-            //split the combined string of url queries
-            const splitUrlQueries = urlStringOnlyFilterParams[0].split(',')
-            const bedsBathQueries = new RegExp('min-beds|max-beds|min-baths')
+            //if this fails return the currentPath
+            if (typeof filterStringUrl === 'string') {
+              //ex.) filterStringUrl= min-beds=2,max-beds=3,min-baths=1.5,homeType=multiFamily,status=for-rent
+              let filterStringParts = filterStringUrl.split(',')
 
-            const remainingQueries = splitUrlQueries.filter((str) => {
-              return !bedsBathQueries.test(str)
-            })
-            console.log('remainingQueries', remainingQueries)
+              const updatedUrlQueryString =
+                '/filters/' +
+                filterStringParts.reduce((prev, cur) => {
+                  return bedsBathQueries.test(cur) === false
+                    ? prev + cur + '/'
+                    : prev + ''
+                }, '')
+
+              const updatedUrl = pathParts
+                .map((item) => {
+                  if (
+                    bedsBathQueries.test(item) === true ||
+                    item === 'filters' ||
+                    item === 'city'
+                  ) {
+                    return ''
+                  }
+                  return item
+                })
+                .filter((p) => p !== '')
+
+              console.log('updatedUrl', updatedUrl) // ['city', 'santa monica', 'ca]
+              console.log('updatedUrlQueryString', updatedUrlQueryString) // url with removed part
+
+              const newUrl = [...updatedUrl]
+                .join('/')
+                .concat(updatedUrlQueryString)
+              console.log('what is newUrl', newUrl)
+              router.push(newUrl)
+            }
+
+            console.log('is this the right filterStringUrl', filterStringUrl)
+            //ex.) filterStringUrl = ['homeType=multiFamily,status=for-rent,min-beds=2,max-beds=3,min-baths=2']
           },
         }
 
