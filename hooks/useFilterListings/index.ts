@@ -4,6 +4,7 @@ import AppContext from 'context/appContext'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
+import * as ListingsSortActions from 'actions/ListingsActions/SortActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
 import { forSaleRentSoldKey } from 'utils/contants'
 
@@ -25,6 +26,13 @@ const { setSelectedHomeType } = HomeTypeActions
 const { setFilterCurrentBathsAmount, clearBedsBathsFilters } =
   ListingsFilterActions
 const { newSetBedsValues } = NewBedsBathsActions
+const { setActiveSortCategory, setIsAscending } = ListingsSortActions
+
+import {
+  ASCEND_DECEND_LISTINGS_TAB,
+  SORT_LISTINGS_ASCENDING,
+  SORTING_LIST,
+} from 'utils/contants'
 
 const useFilterListings = () => {
   const { dispatch, state } = useContext(AppContext)
@@ -36,9 +44,24 @@ const useFilterListings = () => {
   }
 
   const filterListings = ({ param }: IFilterListingsProps) => {
+    // ----- SORT -----
+    const handleAcendDescendTabClicked = () => {
+      const { className } = param?.props!
+      const isAscending = className === SORT_LISTINGS_ASCENDING
+      dispatchAction(setIsAscending(isAscending, state))
+    }
+
+    const handleClickSortingList = () => {
+      dispatchAction(setActiveSortCategory(param?.props?.criteria, state))
+    }
+
+    // ----- FILTER -----
+
     // dictionary of functions based in filter type to update appReducer, UI changes, and url query changes
     /* IMPORTANT, any key changes made here should also get updated in in filterBy obj at useRoute hook as well */
     const filterCategory: IfilterCategories = {
+      sortTab: handleAcendDescendTabClicked,
+      sortTableRow: handleClickSortingList,
       homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),
@@ -77,6 +100,7 @@ const useFilterListings = () => {
     const { city, state: stateLocation } = state.searchResults
     const { forSaleRentSold, price, homeType, bedsBaths } =
       state.listings.filters
+    const { isAscending, criteria } = state.listings.sort
 
     const url = `/city/${ifWhiteSpaces(city)}/${stateLocation}`
 
@@ -87,8 +111,10 @@ const useFilterListings = () => {
       bathsCategory(bedsBaths.currentBaths) === 'any'
         ? ''
         : bathsCategory(bedsBaths.currentBaths)
+    const highLow = isAscending === true ? 'low' : 'high'
 
     const queryValues = {
+      sort: isAscending === null ? '' : `${criteria}-${highLow}`,
       status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
       hometype: homeTypeCategory(homeType.selected),
       'beds-min': bedsMin,

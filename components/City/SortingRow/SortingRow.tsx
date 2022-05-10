@@ -7,19 +7,18 @@ import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
-import useSortListings from '@hooks/useSortListings'
-import { ASCEND_DECEND_LISTINGS_TAB, SORTING_LIST } from 'utils/contants'
+import useFilterListings from '@hooks/useFilterListings'
 
 const { TabPane } = Tabs
 
 export const AscendDescendTab: React.FC = () => {
-  const { sortListings } = useSortListings()
+  const { filterListings } = useFilterListings()
 
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
-    sortListings({
+    filterListings({
       param: {
-        id: ASCEND_DECEND_LISTINGS_TAB,
+        id: 'sortTab',
         props: {
           className: key,
         },
@@ -43,16 +42,15 @@ const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { homesViewTabClicked } = ListingsActions
+  const { filterListings } = useFilterListings()
 
   const { toggleSortListingsPanel } = SortListingsActions
 
-  const { sortListings } = useSortListings()
-
   //TODO FIX THIS
   const handleSetActive = (criteria: IantDesignEventObj) => {
-    sortListings({
+    filterListings({
       param: {
-        id: SORTING_LIST,
+        id: 'sortTableRow',
         props: {
           criteria: criteria.key,
         },

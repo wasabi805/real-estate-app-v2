@@ -6,7 +6,7 @@ interface IMultiSlug {
 }
 
 export interface IParam {
-  id?: string
+  id: string
   className?: string
   query?: string | []
   slug?: string | IMultiSlug[]
@@ -18,7 +18,6 @@ export interface IParam {
 
 export interface IFilterListingsProps {
   param: IParam
-  state: IinitialState
 }
 
 export interface IHandleRouteProps {
