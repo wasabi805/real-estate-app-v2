@@ -111,3 +111,49 @@
 
   return { handleRoute }
 }
+
+
+///////// SORT \\\\\\\\\\
+
+
+ switch (param.id) {
+      case 'ascend-descend-listings':
+        handleRoute({
+          state: state,
+          sortListings: {
+            id: 'sort',
+            query: `sort=${param.isAsc ? 'low' : 'high'}`,
+            slug: state.listings.sort.criteria,
+          },
+        })
+        dispatch(setIsAscending(param.isAsc, state))
+        return
+
+      case 'sort-list':
+        const isLowOrHigh = (status: boolean | null) => {
+          
+          console.log('what is status', status)
+
+          if (status === null || status === undefined) {
+            return 'high'
+          }
+
+          console.log('what is state.listings.sort.isAscending', state.listings.sort.isAscending)
+
+          return state.listings.sort.isAscending ? 'low' : 'high'
+        }
+
+        handleRoute({
+          state: state,
+          sortListings: {
+            id: 'sort',
+            query: `sort=${isLowOrHigh(state.listings.sort.isAscending)}`,
+            slug: param.slug,
+          },
+        })
+        dispatch(setActiveSortCategory(param.slug, state))
+        return
+
+      default:
+        return
+    }

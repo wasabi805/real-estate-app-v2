@@ -8,29 +8,30 @@ import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
 import useSortListings from '@hooks/useSortListings'
+import { ASCEND_DECEND_LISTINGS_TAB, SORTING_LIST } from 'utils/contants'
 
 const { TabPane } = Tabs
 
 export const AscendDescendTab: React.FC = () => {
-  const appContext = useContext(AppContext)
-  const { state } = appContext
   const { sortListings } = useSortListings()
 
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
-    let isAsc = key === 'sort-listings-ascending'
-
     sortListings({
       param: {
-        id: 'ascend-descend-listings',
-        isAsc: isAsc,
+        id: ASCEND_DECEND_LISTINGS_TAB,
+        props: {
+          className: key,
+        },
       },
-      state: state,
     })
   }
 
   return (
-    <Tabs defaultActiveKey="1" onChange={handleTabClick}>
+    <Tabs
+      defaultActiveKey="sort-listings-ascending"
+      onTabClick={handleTabClick}
+    >
       <TabPane tab="A-Z" key="sort-listings-ascending" />
       <TabPane tab="Z-A" key="sort-listings-descending" />
     </Tabs>
@@ -47,14 +48,15 @@ const SortingRow: React.FC = () => {
 
   const { sortListings } = useSortListings()
 
-  const handleSetActive = (e: IantDesignEventObj) => {
+  //TODO FIX THIS
+  const handleSetActive = (criteria: IantDesignEventObj) => {
     sortListings({
       param: {
-        id: 'sort-list',
-        query: 'sort',
-        slug: e.key,
+        id: SORTING_LIST,
+        props: {
+          criteria: criteria.key,
+        },
       },
-      state: state,
     })
   }
 
@@ -72,7 +74,7 @@ const SortingRow: React.FC = () => {
 
       <DropdownButton
         btnKey={'listings-sort-pannel'}
-        buttonName={'dynamic name'}
+        buttonName={state.listings.sort.criteria}
         activeKey={state.listings.sort.togglePanel && 'listings-sort-pannel'}
         onChange={() =>
           handleToggleSortListingsPanel(state.listings.sort.togglePanel)

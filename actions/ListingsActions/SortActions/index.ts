@@ -29,19 +29,19 @@ interface ISortAndFilter {
 type test = Pick<IinitialState, 'searchResults'>
 
 export const setActiveSortCategory = (
-  slug: string,
+  criteria: string,
+
   state: any
 ): Pick<IAction, 'type' | 'payload'> => {
-  let isAscending
-
-  if (state.listings.sort.isAscending === null || undefined) {
-    isAscending = true
-  }
+  let isAscending =
+    state.listings.sort.isAscending === null
+      ? true
+      : state.listings.sort.isAscending
 
   const listingsToSort = [...state.searchResults.data.listings]
 
   const sortKey = SORT_BY_LISTING_CATEGORIES.filter(
-    (item) => item?.value === slug
+    (item) => item?.value === criteria
   )?.pop()?.key
 
   return {
@@ -50,18 +50,14 @@ export const setActiveSortCategory = (
       listings: {
         sort: {
           togglePanel: false,
-          criteria: slug,
-          isAscending: state.listings.sort.isAscending,
+          criteria: criteria,
+          isAscending: isAscending,
         },
       },
 
       searchResults: {
         data: {
-          listings: sortByAscendOrDescend(
-            state.listings.sort.isAscending,
-            sortKey,
-            listingsToSort
-          ),
+          listings: sortByAscendOrDescend(isAscending, sortKey, listingsToSort),
         },
       },
     },

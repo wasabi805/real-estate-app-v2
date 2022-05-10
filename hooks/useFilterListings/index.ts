@@ -5,6 +5,8 @@ import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/f
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
+import { forSaleRentSoldKey } from 'utils/contants'
+
 import {
   ifWhiteSpaces,
   forSaleSoldRentCategory,
@@ -13,7 +15,7 @@ import {
   nAbbreviator,
 } from 'utils'
 
-import { IfilterCategories } from './interfaces'
+import { IfilterCategories } from '../interfaces'
 import { IinitialState } from 'reducers/interface'
 import { IFilterListingsProps } from 'utils/interfaces/hooks'
 
@@ -51,6 +53,9 @@ const useFilterListings = () => {
 
         const clearBy = {
           bedsBaths: () => dispatchAction(clearBedsBathsFilters()),
+          homeType: () => dispatchAction(setSelectedHomeType('')),
+          status: () =>
+            dispatchAction(setFilterByPropertyType([forSaleRentSoldKey])),
         }
 
         return clearBy[filterCategory]()

@@ -54,17 +54,10 @@ const FilterDropdownsRow = () => {
   //   })
   // }
 
-  const handleClearData = () => {
+  const handleClearData = (param) => {
     filterListings({
       state: state,
-      param: {
-        id: 'clearData',
-        props: {
-          filterCategory: 'bedsBaths',
-          // TODO : use these to remove the url query when clear is clicked
-          query: ['min-beds', 'max-beds', 'min-baths'],
-        },
-      },
+      param,
     })
   }
 
@@ -103,7 +96,17 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <ForSaleRentSold />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                doneFn={handleClickDone}
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'status',
+                    },
+                  })
+                }
+              />
             </>
           }
           buttonStyles={{
@@ -138,7 +141,17 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <HomeType />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                doneFn={handleClickDone}
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'homeType',
+                    },
+                  })
+                }
+              />
             </>
           }
           buttonStyles={{
@@ -157,7 +170,16 @@ const FilterDropdownsRow = () => {
             <>
               <BedsBaths />
               <ClearDoneButtons
-                clearFn={handleClearData}
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'bedsBaths',
+                      // TODO : use these to remove the url query when clear is clicked
+                      query: ['min-beds', 'max-beds', 'min-baths'],
+                    },
+                  })
+                }
                 doneFn={handleClickDone}
               />
             </>

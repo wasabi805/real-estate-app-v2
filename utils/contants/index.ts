@@ -3,6 +3,7 @@ export const bathsValuesPrefix = 'baths-filter-btn-'
 export const homeTypeIdPrefix = 'home-type-'
 export const soldDateRangeIdPrefix = 'sold-last-'
 export const forSaleRentSoldIdPrefix = 'all-filters-btn-'
+export const forSaleRentSoldKey = 'all-filters-btn-for-sale'
 export const filterRowButtonsIdPrefix = 'filter-row-button-'
 
 /* ----- FOR SALE RENT SOLD -----  */
@@ -47,3 +48,9 @@ export const isDrawerOpenPath = [
   'allFilters',
   'isDrawerOpen',
 ]
+
+//
+export const ASCEND_DECEND_LISTINGS_TAB = 'ascend-descend-listings-tab'
+export const SORT_LISTINGS_DESCENDING = 'sort-listings-descending'
+export const SORT_LISTINGS_ASCENDING = 'sort-listings-ascending'
+export const SORTING_LIST = 'sorting-list'
