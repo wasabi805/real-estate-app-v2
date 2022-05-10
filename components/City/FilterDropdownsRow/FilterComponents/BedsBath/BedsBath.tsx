@@ -60,9 +60,6 @@ const BedsBath = () => {
     }
   )
 
-  useEffect(() => {
-    console.log('what is state now', state.listings.filters.bedsBaths)
-  }, [state])
   return (
     <BedBathsContainer>
       <div style={{ display: 'flex' }}>
@@ -84,7 +81,6 @@ const BedsBath = () => {
 
         {/* TODO USE useFilterListings */}
         <div>
-          {console.log('currentBaths', currentBaths)}
           <ButtonComp
             activeButton={currentBaths}
             groupType="button-row"
@@ -101,4 +97,4 @@ const BedsBath = () => {
   )
 }
 
-export default BedsBath
+export default React.memo(BedsBath)

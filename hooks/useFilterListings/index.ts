@@ -71,7 +71,6 @@ const useFilterListings = () => {
       },
 
       clearData: () => {
-        console.log('what is param.props', param.props)
         const { filterCategory } = param.props!
 
         const clearBy = {

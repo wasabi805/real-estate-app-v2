@@ -131,4 +131,4 @@ const ForSaleRentSold = () => {
   )
 }
 
-export default ForSaleRentSold
+export default React.memo(ForSaleRentSold)

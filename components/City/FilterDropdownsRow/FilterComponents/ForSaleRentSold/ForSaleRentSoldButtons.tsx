@@ -29,4 +29,4 @@ const ForSaleRentSoldButtons = () => {
   )
 }
 
-export default ForSaleRentSoldButtons
+export default React.memo(ForSaleRentSoldButtons)

@@ -196,4 +196,4 @@ const FilterDropdownsRow = () => {
   )
 }
 
-export default FilterDropdownsRow
+export default React.memo(FilterDropdownsRow)

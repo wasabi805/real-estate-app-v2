@@ -43,13 +43,13 @@ const CityDetails = (props) => {
 CityDetails.getInitialProps = async ({ query, pathname }) => {
   let data = null
 
-  // try {
-  //   data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-  //     .then((response) => response.json())
-  //     .then((json) => json)
-  // } catch (err) {
-  //   console.log()
-  // }
+  try {
+    data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => response.json())
+      .then((json) => json)
+  } catch (err) {
+    console.log()
+  }
   // console.log('what is data', data)
   console.log('what are props??', query, pathname)
 

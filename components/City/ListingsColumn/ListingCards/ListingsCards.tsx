@@ -22,4 +22,4 @@ const ListingCards = () => {
   )
 }
 
-export default ListingCards
+export default React.memo(ListingCards)
