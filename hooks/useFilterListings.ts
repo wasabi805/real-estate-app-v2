@@ -1,11 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import AppContext from 'context/appContext'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import * as HomeTypeActions from 'actions/ListingsActions/FilterActions/homeTypeActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
-import useRoute from './useRoute'
+import {
+  ifWhiteSpaces,
+  forSaleSoldRentCategory,
+  homeTypeCategory,
+  bathsCategory,
+  nAbbreviator,
+} from 'utils'
+
+import { IfilterCategories } from './interfaces'
+import { IinitialState } from 'reducers/interface'
 import { IFilterListingsProps } from 'utils/interfaces/hooks'
+
 const { setFilterByPropertyType } = ForSaleRentSoldActions
 const { setSelectedHomeType } = HomeTypeActions
 
@@ -14,33 +25,18 @@ const { setFilterCurrentBathsAmount, clearBedsBathsFilters } =
 const { newSetBedsValues } = NewBedsBathsActions
 
 const useFilterListings = () => {
-  const { dispatch } = useContext(AppContext)
-  const { handleRoute } = useRoute()
+  const { dispatch, state } = useContext(AppContext)
+  const router = useRouter()
 
-  const filterListings = ({ param, state }: IFilterListingsProps): void => {
-    //changes url according the changes made in the UI and updates to appReducer
-    const updateUrl = (): void => {
-      handleRoute({
-        state: state,
-        filterListings: {
-          id: param.id,
-          props: param?.props,
-          className: param.className,
-          query: param.query,
-          slug: param.slug,
-        },
-      })
-    }
+  // Updates changes in the UI and appReducer
+  const dispatchAction = (action: any) => {
+    dispatch(action)
+  }
 
-    // Updates changes in the UI and appReducer
-    const dispatchAction = (action: any) => {
-      updateUrl(), dispatch(action)
-    }
-
+  const filterListings = ({ param }: IFilterListingsProps) => {
     // dictionary of functions based in filter type to update appReducer, UI changes, and url query changes
     /* IMPORTANT, any key changes made here should also get updated in in filterBy obj at useRoute hook as well */
-
-    const filterCategory = {
+    const filterCategory: IfilterCategories = {
       homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),
@@ -61,9 +57,45 @@ const useFilterListings = () => {
       },
     }
 
-    const id = param && param?.id
-    // run the function to update appReducer, UI changes, and url query changes
-    filterCategory[id]()
+    const id: string | undefined = param && param?.id
+
+    return filterCategory[id]()
+  }
+
+  /* Wait for updates to UI, then change the route  */
+  useEffect(() => {
+    // handleRoute()
+    handleUrlChange(state)
+  }, [state])
+
+  const handleUrlChange = (state: IinitialState) => {
+    const { city, state: stateLocation } = state.searchResults
+    const { forSaleRentSold, price, homeType, bedsBaths } =
+      state.listings.filters
+
+    const url = `/city/${ifWhiteSpaces(city)}/${stateLocation}`
+
+    const queryValues = {
+      status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
+      hometype: homeTypeCategory(homeType.selected),
+      'beds-min': bedsBaths?.currentRange[0],
+      'beds-max':
+        bedsBaths?.currentRange.length > 1 ? bedsBaths?.currentRange[1] : '',
+      'baths-min': bathsCategory(bedsBaths.currentBaths),
+      'min-price': nAbbreviator(price.minField),
+      'max-price': nAbbreviator(price.maxField),
+    }
+
+    const query = Object.entries(queryValues).reduce((a, [key, value]) => {
+      return value ? { ...a, [key]: value } : a
+    }, {})
+
+    const addFilter = Object.entries(query).some((val) => val)
+
+    return router.push({
+      pathname: url + (addFilter ? '/filters' : '').trim(),
+      query: query,
+    })
   }
 
   return { filterListings }

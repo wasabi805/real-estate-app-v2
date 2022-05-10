@@ -15,7 +15,6 @@ const CityDetails = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  console.log('what is todo', props)
   return (
     <CityWrapper>
       <Row>
@@ -41,18 +40,18 @@ const CityDetails = (props) => {
   )
 }
 
-export const getStaticProps = async (props) => {
+CityDetails.getInitialProps = async ({ query, pathname }) => {
   let data = null
 
-  try {
-    data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => response.json())
-      .then((json) => json)
-  } catch (err) {
-    console.log()
-  }
-  console.log('what is data', data)
-  console.log('what are props??', props)
+  // try {
+  //   data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  //     .then((response) => response.json())
+  //     .then((json) => json)
+  // } catch (err) {
+  //   console.log()
+  // }
+  // console.log('what is data', data)
+  console.log('what are props??', query, pathname)
 
   return {
     props: {
@@ -62,11 +61,11 @@ export const getStaticProps = async (props) => {
   }
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: ['/city/city-name'],
-    fallback: true, // false or 'blocking'
-  }
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: ['/city/city-name'],
+//     fallback: true, // false or 'blocking'
+//   }
+// }
 
 export default CityDetails

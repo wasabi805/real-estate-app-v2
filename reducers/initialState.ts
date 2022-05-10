@@ -47,6 +47,7 @@ const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      isLoading: false,
       currentSetFilters: [],
       filtersDict: {
         'for-sale-rest-sold': {
@@ -69,7 +70,7 @@ const initialState: IinitialState = {
       activeFilterPanel: '0',
 
       forSaleRentSold: {
-        filterBy: ['all-filters-btn-for-sale'],
+        filterBy: [''],
         buttons: forSaleRentSoldButtons,
 
         soldDateRange: [],

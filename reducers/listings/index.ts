@@ -206,9 +206,13 @@ export const setSelectedHomeType = <T extends IReducerSlice>({
   action,
 }: T) => {
   const { selected } = action.payload?.listings?.filters?.homeType!
-  return updateNestedObj(['listings', 'filters', 'homeType'])({
-    ...state.listings.filters.homeType,
-    selected,
+  return updateNestedObj(['listings', 'filters'])({
+    ...state.listings.filters,
+    isLoading: true,
+    homeType: {
+      ...state.listings.filters.homeType,
+      selected,
+    },
   })(state)
 }
 
@@ -273,4 +277,17 @@ export const setFilterDrawerOpen = <T extends IReducerSlice>({
   const isDrawerOpen =
     action.payload?.listings?.filters?.allFilters?.isDrawerOpen
   return updateNestedObj(isDrawerOpenPath)(isDrawerOpen)(state)
+}
+
+export const testSetToFalse = <T extends IReducerSlice>({ state }: T) => {
+  return {
+    ...state,
+    listings: {
+      ...state.listings,
+      filters: {
+        ...state.listings.filters,
+        isLoading: false,
+      },
+    },
+  }
 }
