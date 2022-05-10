@@ -75,13 +75,21 @@ const useFilterListings = () => {
 
     const url = `/city/${ifWhiteSpaces(city)}/${stateLocation}`
 
+    // removes any from the url string when clear button is clicked
+    const bedsMin =
+      bedsBaths?.currentRange[0] === 'any' ? '' : bedsBaths?.currentRange[0]
+    const bathsMin =
+      bathsCategory(bedsBaths.currentBaths) === 'any'
+        ? ''
+        : bathsCategory(bedsBaths.currentBaths)
+
     const queryValues = {
       status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
       hometype: homeTypeCategory(homeType.selected),
-      'beds-min': bedsBaths?.currentRange[0],
+      'beds-min': bedsMin,
       'beds-max':
         bedsBaths?.currentRange.length > 1 ? bedsBaths?.currentRange[1] : '',
-      'baths-min': bathsCategory(bedsBaths.currentBaths),
+      'baths-min': bathsMin,
       'min-price': nAbbreviator(price.minField),
       'max-price': nAbbreviator(price.maxField),
     }
