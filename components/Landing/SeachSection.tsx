@@ -70,12 +70,12 @@ const SearchSection: React.FC = () => {
         )
 
         //ORIGINAL
-        // router.push(`/city/${city}/${state}`)
+        router.push(`/city/${city}/${state}`)
 
-        router.push({
-          pathname: `/city/${city}/${state}`,
-          query: {},
-        })
+        // router.push({
+        //   pathname: `/city/${city}/${state}`,
+        //   query: {},
+        // })
       })
   }
 

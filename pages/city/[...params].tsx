@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import Image from 'next/image'
 import 'antd/dist/antd.css'
-import { CityWrapper } from '../../styles'
-import { MapColumnContainer, ListingsColumnContainer } from '../../styles'
+import { CityWrapper } from './styles'
+import { MapColumnContainer, ListingsColumnContainer } from './styles'
 import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
@@ -14,6 +14,10 @@ import { Row, Col } from 'antd'
 const CityDetails = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
+
+  useEffect(() => {
+    console.log('did they make it?', props)
+  }, [props])
 
   return (
     <CityWrapper>
@@ -40,8 +44,12 @@ const CityDetails = (props) => {
   )
 }
 
-export const getStaticProps = async (props) => {
+export const getServerSideProps = async (props) => {
   let data = null
+
+  const { params, query } = props
+
+  console.log({ params, query }, 'YEEE')
 
   try {
     data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -50,22 +58,21 @@ export const getStaticProps = async (props) => {
   } catch (err) {
     console.log()
   }
-  console.log('what is data', data)
-  console.log('what are props??', props)
 
   return {
     props: {
-      data,
+      params,
+      query,
     },
   }
 }
 
-export async function getStaticPaths() {
-  return {
-    // paths: ['/city/city-name' ,'/city/city-name/filters'],
-    paths: [],
-    fallback: true, // false or 'blocking'
-  }
-}
+// export async function getStaticPaths() {
+//   return {
+//     // paths: ['/city/city-name' ,'/city/city-name/filters'],
+//     paths: ['/city/params'],
+//     fallback: true, // false or 'blocking'
+//   }
+// }
 
 export default CityDetails
