@@ -24,15 +24,33 @@ const realtorApi = async (request, response) => {
       },
     }
 
-    return axios
-      .request(options)
-      .then((listings) => JSON.stringify(listings.data))
-      .then((apiRes) => {
-        response.status(200).send(apiRes)
+    // IF A CITY AND STATE WAS ENTERED
+    if ((stateCode, cityName)) {
+      return axios
+        .request(options)
+        .then((listings) => {
+          return JSON.stringify(listings.data)
+        })
+        .then((apiRes) => {
+          response.status(200).send(apiRes)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+
+    // IF ONLY THE STATE WAS PROVIDED
+    if (stateCode && !cityName) {
+      console.log('RETURN THE STATE PAGE')
+      return response.status(200).send({
+        meta: {
+          tracking_params: {
+            city: '',
+            state: stateCode,
+          },
+        },
       })
-      .catch((error) => {
-        console.error(error)
-      })
+    }
   }
 
   try {
@@ -110,11 +128,15 @@ const realtorApi = async (request, response) => {
     // Scenerio 1.) AutoComplete sends a valid state name, but no city
 
     //ex.) California, USA
-    if (request.query.isAutoComplete === 'true' && fullStateNameSent) {
+    if (
+      request.query.isAutoComplete === 'true' &&
+      fullStateNameSent &&
+      queryParam2 === undefined
+    ) {
       console.log('++++ the full stateName was sent from autoComplete +++++ ')
-      console.log(
-        'send error back to front end and notify City and State are required'
-      )
+      console.log({ queryParam1 })
+
+      stateCode = queryParam1
     }
 
     //Scenerio 2.) AutoComplete sends a valid state code and city name, a zipcode, or a full address

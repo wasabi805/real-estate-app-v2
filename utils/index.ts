@@ -47,3 +47,10 @@ export const nAbbreviator = (num: number) => {
   }
   return num
 }
+
+export const logAutoCompleteResp = ({ response }) => {
+  console.log(
+    'AutoComplete results or Suggested places from google api: ',
+    response
+  )
+}

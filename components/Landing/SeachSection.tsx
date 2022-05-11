@@ -14,6 +14,8 @@ import {
   SearchSectionHeaderStyle,
 } from '@components/PropertySeachBar/styles'
 
+import { logAutoCompleteResp } from 'utils'
+
 const { updateStateWithSearchResults } = SearchActions
 
 const BackgroundImage = styled.div(({ children }) => {
@@ -52,30 +54,33 @@ const SearchSection: React.FC = () => {
         },
       })
       .then((response) => {
+        console.log('what is the response??????????', response)
+
         const { city, state } = response.data.meta.tracking_params
-        console.log(
-          { response },
-          'AutoComplete results or Suggested places from google api'
-        )
+        logAutoCompleteResp({ response })
         // update state with search results
-        console.log('what is response ', response)
 
-        // dispatch(updateStateWithSearchResults(response.data ))
-        dispatch(
-          updateStateWithSearchResults({
-            data: response.data,
-            city: city,
-            state: state,
+        if (state && !city) {
+          alert('render the state page')
+        }
+
+        if (state && city) {
+          dispatch(
+            updateStateWithSearchResults({
+              data: response.data,
+              city: city,
+              state: state,
+            })
+          )
+
+          //ORIGINAL
+          router.push(`/city/${city}/${state}`)
+
+          router.push({
+            pathname: `/city/${city}/${state}`,
+            query: {},
           })
-        )
-
-        //ORIGINAL
-        router.push(`/city/${city}/${state}`)
-
-        // router.push({
-        //   pathname: `/city/${city}/${state}`,
-        //   query: {},
-        // })
+        }
       })
   }
 
