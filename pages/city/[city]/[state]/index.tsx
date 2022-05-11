@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import Image from 'next/image'
 import 'antd/dist/antd.css'
-import { CityWrapper } from './styles'
-import { MapColumnContainer, ListingsColumnContainer } from './styles'
+import { CityWrapper } from '../../styles'
+import { MapColumnContainer, ListingsColumnContainer } from '../../styles'
 import Listings from '@components/City/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
@@ -40,7 +40,7 @@ const CityDetails = (props) => {
   )
 }
 
-CityDetails.getInitialProps = async ({ query, pathname }) => {
+export const getStaticProps = async (props) => {
   let data = null
 
   try {
@@ -50,22 +50,22 @@ CityDetails.getInitialProps = async ({ query, pathname }) => {
   } catch (err) {
     console.log()
   }
-  // console.log('what is data', data)
-  console.log('what are props??', query, pathname)
+  console.log('what is data', data)
+  console.log('what are props??', props)
 
   return {
     props: {
-      'city-name': '',
       data,
     },
   }
 }
 
-// export async function getStaticPaths() {
-//   return {
-//     paths: ['/city/city-name'],
-//     fallback: true, // false or 'blocking'
-//   }
-// }
+export async function getStaticPaths() {
+  return {
+    // paths: ['/city/city-name' ,'/city/city-name/filters'],
+    paths: [],
+    fallback: true, // false or 'blocking'
+  }
+}
 
 export default CityDetails
