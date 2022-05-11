@@ -1,3 +1,6 @@
+/** Array */
+export const isArr = (array) => Array.isArray(array)
+
 /** Objects */
 
 const updateObj = (key: string) => (val: any) => (obj: any) => {

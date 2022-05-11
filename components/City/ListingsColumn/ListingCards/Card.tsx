@@ -35,4 +35,4 @@ const ListingCard: React.FC<IProps> = ({ houseData, className }) => {
   )
 }
 
-export default ListingCard
+export default React.memo(ListingCard)

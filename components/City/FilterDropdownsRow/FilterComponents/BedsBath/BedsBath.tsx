@@ -1,22 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppContext from 'context/appContext'
 import { BedBathsContainer } from '@components/City/FilterDropdownsRow/styles'
 import ButtonComp from '@components/_common/ButtonComp'
-import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import { IinitialState } from 'reducers/interface'
 import { BedsBathButtonContainer } from 'components/City/FilterDropdownsRow/FilterComponents/BedsBath/styles'
 import { bedsNumberIdPrefix } from 'utils/contants'
 import useFilterListings from '@hooks/useFilterListings'
 import { bathsCategory } from 'utils'
-const { setBedsValues } = ListingsFilterActions
+import { defineBedsAmount } from 'actions/ListingsActions/FilterActions/helpers'
 
 const BedsBath = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { filterListings } = useFilterListings()
 
-  const handleBedsButtonClicked = (key: string, state: IinitialState) => {
-    dispatch(setBedsValues(key, state))
+  const handleBedsButtonClicked = (className: string, state: IinitialState) => {
+    defineBedsAmount(className, state)
+
+    const { bedsAmount } = defineBedsAmount(className, state)!
+    const mappedSlugs = bedsAmount.currentRange.map((amount, idx) => ({
+      query: 'beds',
+      value: amount,
+    }))
+
+    filterListings({
+      param: {
+        id: 'beds',
+        className,
+        //TODO add a key for bedsAmount to display in UI and pass bedsAmount as the value
+        props: {
+          bedsAmount: bedsAmount,
+        },
+        query: 'beds',
+        slug: mappedSlugs,
+      },
+      state,
+    })
   }
 
   const handleBathsButtonClicked = (className: string) => {
@@ -78,4 +97,4 @@ const BedsBath = () => {
   )
 }
 
-export default BedsBath
+export default React.memo(BedsBath)

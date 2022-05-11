@@ -88,4 +88,4 @@ const ListingsTable = () => {
   )
 }
 
-export default ListingsTable
+export default React.memo(ListingsTable)

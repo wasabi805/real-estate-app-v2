@@ -3,7 +3,8 @@ import type { AppProps } from 'next/app'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import React, { useReducer } from 'react'
 import AppContext from 'context/appContext'
-import appReducer, { initialState } from 'reducers/appReducer'
+import appReducer from 'reducers/appReducer'
+import initialState from 'reducers/initialState'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
 
 interface IAppProps extends AppProps {

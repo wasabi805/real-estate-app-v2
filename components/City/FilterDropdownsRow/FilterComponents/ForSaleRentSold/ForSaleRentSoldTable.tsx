@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-
+import { forSaleRentSoldKey } from 'utils/contants'
 import * as ForSaleRentSoldActions from 'actions/ListingsActions/FilterActions/forSaleRentSoldActions'
 import { Table } from 'antd'
 import 'antd/dist/antd.css'
@@ -43,7 +43,7 @@ const ForSaleRentSold = () => {
   ]
   const newSaleRentRows = [
     {
-      key: 'all-filters-btn-for-sale',
+      key: forSaleRentSoldKey,
       listingFilterCategory: 'For sale',
     },
     {
@@ -131,4 +131,4 @@ const ForSaleRentSold = () => {
   )
 }
 
-export default ForSaleRentSold
+export default React.memo(ForSaleRentSold)

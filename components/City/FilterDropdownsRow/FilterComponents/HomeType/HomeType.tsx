@@ -29,7 +29,7 @@ const HomeType = () => {
       state: state,
     })
   }
-  console.log('what is state at homeType', state)
+
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
 
@@ -75,4 +75,4 @@ const HomeType = () => {
   )
 }
 
-export default HomeType
+export default React.memo(HomeType)

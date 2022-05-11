@@ -7,30 +7,30 @@ import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import { SORT_BY_LISTING_CATEGORIES } from 'utils/dictionaries'
 import { IantDesignEventObj } from 'interfaces/IantDesign'
 import DropdownButton from '@components/_common/DropdownButton'
-import useSortListings from '@hooks/useSortListings'
+import useFilterListings from '@hooks/useFilterListings'
 
 const { TabPane } = Tabs
 
 export const AscendDescendTab: React.FC = () => {
-  const appContext = useContext(AppContext)
-  const { state } = appContext
-  const { sortListings } = useSortListings()
+  const { filterListings } = useFilterListings()
 
   /* Tracks the active tab in reducer state */
   const handleTabClick = (key: string) => {
-    let isAsc = key === 'sort-listings-ascending'
-
-    sortListings({
+    filterListings({
       param: {
-        id: 'ascend-descend-listings',
-        isAsc: isAsc,
+        id: 'sortTab',
+        props: {
+          className: key,
+        },
       },
-      state: state,
     })
   }
 
   return (
-    <Tabs defaultActiveKey="1" onChange={handleTabClick}>
+    <Tabs
+      defaultActiveKey="sort-listings-ascending"
+      onTabClick={handleTabClick}
+    >
       <TabPane tab="A-Z" key="sort-listings-ascending" />
       <TabPane tab="Z-A" key="sort-listings-descending" />
     </Tabs>
@@ -42,19 +42,19 @@ const SortingRow: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const { homesViewTabClicked } = ListingsActions
+  const { filterListings } = useFilterListings()
 
   const { toggleSortListingsPanel } = SortListingsActions
 
-  const { sortListings } = useSortListings()
-
-  const handleSetActive = (e: IantDesignEventObj) => {
-    sortListings({
+  //TODO FIX THIS
+  const handleSetActive = (criteria: IantDesignEventObj) => {
+    filterListings({
       param: {
-        id: 'sort-list',
-        query: 'sort',
-        slug: e.key,
+        id: 'sortTableRow',
+        props: {
+          criteria: criteria.key,
+        },
       },
-      state: state,
     })
   }
 
@@ -72,7 +72,7 @@ const SortingRow: React.FC = () => {
 
       <DropdownButton
         btnKey={'listings-sort-pannel'}
-        buttonName={'dynamic name'}
+        buttonName={state.listings.sort.criteria}
         activeKey={state.listings.sort.togglePanel && 'listings-sort-pannel'}
         onChange={() =>
           handleToggleSortListingsPanel(state.listings.sort.togglePanel)

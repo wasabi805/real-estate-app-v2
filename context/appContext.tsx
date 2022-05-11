@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { initialState } from 'reducers/appReducer'
+import initialState from 'reducers/initialState'
 import { IAction } from 'actions/interface'
 
 interface Istate {

@@ -18,6 +18,7 @@ import {
 } from '@components/City/FilterDropdownsRow/FilterComponents'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import ButtonComp from '@components/_common/ButtonComp'
+import useFilterListings from '@hooks/useFilterListings'
 
 const { setActiveFilterPanel } = FilterActions
 
@@ -32,6 +33,7 @@ const {
 //  ROW CONTAINING ALL FILTER BUTTONS
 const FilterDropdownsRow = () => {
   const { state, dispatch } = useContext(AppContext)
+  const { filterListings } = useFilterListings()
 
   const handleSetActivePanel = (key: string) => {
     if (state.listings.filters.activeFilterPanel === key) {
@@ -41,16 +43,34 @@ const FilterDropdownsRow = () => {
     dispatch(setActiveFilterPanel(key))
   }
 
+  // const handleClearData = () => {
+  //   filterListings({
+  //     state: state,
+  //     param: {
+  //       id: 'bedsBathsclear',
+  //       query: 'min-baths',
+  //       slug: 'any',
+  //     },
+  //   })
+  // }
+
+  const handleClearData = (param) => {
+    filterListings({
+      state: state,
+      param,
+    })
+  }
+
   const handleClickDone = () => dispatch(setActiveFilterPanel(CLOSE_ALL_PANELS))
 
-  const ClearDoneButtons = ({ doneFn }) => (
+  const ClearDoneButtons = ({ clearFn, doneFn }) => (
     <ButtonComp
       groupType="button-row"
       align="right"
       buttonGroup={[
         {
           text: 'Clear',
-          onClick: () => console.log(' Clear clicked'),
+          onClick: clearFn,
         },
         {
           text: 'Done',
@@ -76,7 +96,17 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <ForSaleRentSold />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                doneFn={handleClickDone}
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'status',
+                    },
+                  })
+                }
+              />
             </>
           }
           buttonStyles={{
@@ -111,7 +141,17 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <HomeType />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                doneFn={handleClickDone}
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'homeType',
+                    },
+                  })
+                }
+              />
             </>
           }
           buttonStyles={{
@@ -129,7 +169,19 @@ const FilterDropdownsRow = () => {
           component={
             <>
               <BedsBaths />
-              <ClearDoneButtons doneFn={handleClickDone} />
+              <ClearDoneButtons
+                clearFn={() =>
+                  handleClearData({
+                    id: 'clearData',
+                    props: {
+                      filterCategory: 'bedsBaths',
+                      // TODO : use these to remove the url query when clear is clicked
+                      query: ['min-beds', 'max-beds', 'min-baths'],
+                    },
+                  })
+                }
+                doneFn={handleClickDone}
+              />
             </>
           }
           buttonStyles={{
@@ -144,4 +196,4 @@ const FilterDropdownsRow = () => {
   )
 }
 
-export default FilterDropdownsRow
+export default React.memo(FilterDropdownsRow)

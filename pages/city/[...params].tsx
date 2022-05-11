@@ -15,7 +15,10 @@ const CityDetails = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
-  console.log('what is todo', props)
+  useEffect(() => {
+    console.log('did they make it?', props)
+  }, [props])
+
   return (
     <CityWrapper>
       <Row>
@@ -41,8 +44,12 @@ const CityDetails = (props) => {
   )
 }
 
-export const getStaticProps = async (props) => {
+export const getServerSideProps = async (props) => {
   let data = null
+
+  const { params, query } = props
+
+  console.log({ params, query }, 'YEEE')
 
   try {
     data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -51,22 +58,21 @@ export const getStaticProps = async (props) => {
   } catch (err) {
     console.log()
   }
-  console.log('what is data', data)
-  console.log('what are props??', props)
 
   return {
     props: {
-      'city-name': '',
-      data,
+      params,
+      query,
     },
   }
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: ['/city/city-name'],
-    fallback: true, // false or 'blocking'
-  }
-}
+// export async function getStaticPaths() {
+//   return {
+//     // paths: ['/city/city-name' ,'/city/city-name/filters'],
+//     paths: ['/city/params'],
+//     fallback: true, // false or 'blocking'
+//   }
+// }
 
 export default CityDetails

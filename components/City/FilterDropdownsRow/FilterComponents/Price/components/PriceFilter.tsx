@@ -71,4 +71,4 @@ const PriceFilter = () => {
   )
 }
 
-export default PriceFilter
+export default React.memo(PriceFilter)
