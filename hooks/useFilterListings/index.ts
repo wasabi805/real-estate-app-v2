@@ -118,7 +118,9 @@ const useFilterListings = () => {
       hometype: homeTypeCategory(homeType.selected),
       'beds-min': bedsMin,
       'beds-max':
-        bedsBaths?.currentRange.length > 1 ? bedsBaths?.currentRange[1] : '',
+        bedsBaths?.currentRange.length > 1
+          ? bedsBaths?.currentRange[bedsBaths?.currentRange.length - 1]
+          : '',
       'baths-min': bathsMin,
       'min-price': nAbbreviator(price.minField),
       'max-price': nAbbreviator(price.maxField),
