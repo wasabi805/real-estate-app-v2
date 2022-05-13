@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState, useref, useRef } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppContext from 'context/appContext'
 import axios from 'axios'
 import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
-import { containsSubString, extractHTMLTagValue } from 'utils'
+import { containsSubString, extractHTMLTagValue, isZipCode } from 'utils'
 
 const useAutoComplete = () => {
   interface IInputProps {
@@ -20,6 +20,7 @@ const useAutoComplete = () => {
 
     city: null | string
     state: null | string
+    zipCode: null | string
   }
 
   const { state, dispatch } = useContext(AppContext)
@@ -30,13 +31,6 @@ const useAutoComplete = () => {
       name: null,
     },
     prev: null,
-  })
-
-  interface TPrevStae {}
-  const prevInput = useRef<TPrevStae>({
-    current: {
-      input: {},
-    },
   })
 
   const setSearch = ({ param }: IHooksParam) => {
@@ -77,6 +71,7 @@ const useAutoComplete = () => {
 
     city: null,
     state: null,
+    zipCode: null,
   }
 
   const fetchSugestion = async (request: IRequestParam) => {
@@ -101,41 +96,76 @@ const useAutoComplete = () => {
     const { adr_address } = inputProps?.input!
     const adr_address_chunks = adr_address.split(',')
 
-    const formatCityAndState = adr_address_chunks
-      .map((chunk: string) => {
-        if (containsSubString(chunk, 'locality')) {
-          return { city: extractHTMLTagValue(chunk) }
-        }
-        if (containsSubString(chunk, 'region')) {
-          return { state: extractHTMLTagValue(chunk) }
-        }
-        return {}
-      })
-      .filter((obj) => Object.keys(obj).length > 0)
+    console.log('what is adr_address_chunks', adr_address_chunks)
 
-    const cityStateObj = Object.assign({}, ...formatCityAndState)
 
-    /* MAKE API CALL WITH CITY AND STATE VALUES */
+    const formatCityStateZip = adr_address_chunks.map((chunk: string) => {
+      
+      // Grab the city  
+      if (containsSubString(chunk, 'locality')) {
+        return [{ key: 'city', value: extractHTMLTagValue(chunk) }]
+      }
+
+      // if only zipCode was entered in the input, grab the zipCode and State
+      if (
+        containsSubString(chunk, 'region') &&
+        containsSubString(chunk, 'postal-code')
+      ) {
+        const stateAndZip = extractHTMLTagValue(chunk)
+          .split(' ')
+          .filter((s: string) => s !== '')
+        return [
+          {
+            key: 'zipCode',
+            value: stateAndZip.filter((s) => isZipCode(s)).pop(),
+          },
+          {
+            key: 'state',
+            value: stateAndZip.filter((s) => !isZipCode(s)).pop(),
+          },
+        ]
+      }
+
+      // if no zipcode was entered, just grab the state
+      if (containsSubString(chunk, 'region')) {
+        return [{ key: 'state', value: extractHTMLTagValue(chunk) }]
+      }
+
+      return []
+    })
+
+    console.log(formatCityStateZip.flat(), 'formatCityAndState')
+
+    const cityStateZipObj = formatCityStateZip
+      .flat()
+      .reduce((obj, item) => ((obj[item.key] = item.value), obj), {})
+
+    // /* MAKE API CALL WITH CITY AND STATE VALUES */
     const request = {
       ...requestParam,
       name: '',
       isAutoComplete: true,
-      ...cityStateObj,
+      ...cityStateZipObj,
     }
 
-    fetchSugestion(request)
+    // fetchSugestion(request)
   }
 
   const handleIsStandardSubmit = (inputProps: IInputProps) => {
     // get an autosugestion
     const { name } = inputProps?.input
 
+    console.log('what is name', name)
+    console.log('typeof name', typeof name)
+    console.log('is it a zipCode', isZipCode(name))
+
     const request = {
       ...requestParam,
       city: '',
       state: '',
+      zipCode: isZipCode(name) ? name : '',
 
-      name: name,
+      name: !isZipCode(name) ? name : '',
       isAutoComplete: false,
     }
     fetchSugestion(request)

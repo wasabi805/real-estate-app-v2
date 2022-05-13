@@ -11,6 +11,14 @@ export const extractHTMLTagValue = (htmlStr) => {
   return htmlStr.replace(/<[^>]+>/g, '')
 }
 
+export const isNumeric = (str: string) => {
+  return /^\d+$/.test(str)
+}
+
+export const isZipCode = (str: string) => {
+  return /^\d{5}(?:[-\s]\d{4})?$/.test(str)
+}
+
 export const homeTypeCategory = (className: string) => {
   return className.replace(/^(home-type-)/, '')
 }
