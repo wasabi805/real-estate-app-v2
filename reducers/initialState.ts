@@ -23,18 +23,18 @@ const initialState: IinitialState = {
   },
   fetchProperty: false,
   searchResults: {
-    // city: '',
-    // state: '',
+    city: '',
+    state: '',
 
-    city: 'santa monica',
-    state: 'ca',
+    // city: 'santa monica',
+    // state: 'ca',
 
     data: {
-      // listings: [],
-      listings: mockListings,
+      listings: [],
+      // listings: mockListings,
     },
-    // initialData: [],
-    initialData: mockListings,
+    initialData: [],
+    // initialData: mockListings,
   },
 
   filterDropdownsRow: {

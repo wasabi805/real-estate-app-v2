@@ -4,6 +4,7 @@ import * as SearchActions from 'actions/propertySearchBarActions'
 import AppContext from 'context/appContext'
 import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/interface'
+import useAutoComplete from '@hooks/useAutoComplete'
 
 const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
   SearchActions
@@ -13,6 +14,8 @@ const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiK
 
 const PropertySearchBar: React.FC = () => {
   const appContext = useContext(AppContext)
+  const { setSearch } = useAutoComplete()
+
   const { state, dispatch } = appContext
   const { search } = state
 
@@ -47,15 +50,34 @@ const PropertySearchBar: React.FC = () => {
       autoCompleteRef.current,
       {
         componentRestrictions: { country: 'us' },
-        fields: ['place_id', 'geometry', 'name', 'formatted_address'],
+        fields: [
+          'place_id',
+          'geometry',
+          'name',
+          'formatted_address',
+          'adr_address',
+        ],
       }
     )
 
-    autoComplete.setFields(['address_components', 'formatted_address'])
+    autoComplete.setFields([
+      'address_components',
+      'formatted_address',
+      'adr_address',
+    ])
 
-    autoComplete.addListener('place_changed', () =>
-      handlePlaceSelect(updateQuery)
-    )
+    autoComplete.addListener('place_changed', () => {
+      console.log('when do i fire')
+      // handlePlaceSelect(updateQuery)
+      setSearch({
+        param: {
+          id: 'inputEntered',
+          props: {
+            input: autoComplete.getPlace(), // result from input field when onClick suggested place or when click enter
+          },
+        },
+      })
+    })
   }
 
   async function handlePlaceSelect(updateQuery) {
@@ -65,11 +87,10 @@ const PropertySearchBar: React.FC = () => {
     handleAutoSelected(addressObject)
   }
 
-  const handleAutoSelected = async (
-    autoSelectedInput: IGooglePlacesAddressObj
-  ) => {
+  const handleAutoSelected = (autoSelectedInput: IGooglePlacesAddressObj) => {
+    console.log('when di i fire')
     // update context state to auto selected address
-    await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
+    // await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
   }
 
   const handleSetInputField = (e: React.ChangeEvent<HTMLInputElement>) => {

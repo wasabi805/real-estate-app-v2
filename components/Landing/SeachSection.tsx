@@ -37,52 +37,47 @@ const SearchSection: React.FC = () => {
   const router = useRouter()
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
-  console.log('what is state when loaded?', state)
-  useEffect(() => {
-    if (state.fetchProperty) {
-      handleFetchPropertyData()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.fetchProperty])
+  // console.log('what is state when loaded?', state.search.isAutoComplete)
+  // useEffect(() => {
+  //   if (state.search.isAutoComplete) {
+  //     handleFetchPropertyData()
+  //     alert('go to city')
+  //     console.log('what is stateUpdates', state)
+  //   }
 
-  const handleFetchPropertyData = async () => {
-    await axios
-      .get('http://localhost:3000/api/realtor', {
-        params: {
-          location: state.search.value,
-          isAutoComplete: state.search.isAutoComplete,
-        },
-      })
-      .then((response) => {
-        console.log('what is the response??????????', response)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state.search.isAutoComplete])
 
-        const { city, state } = response.data.meta.tracking_params
-        logAutoCompleteResp({ response })
-        // update state with search results
+  // const handleFetchPropertyData = async () => {
+  //   await axios
+  //     .get('http://localhost:3000/api/realtor', {
+  //       params: {
+  //         location: state.search.value,
+  //         isAutoComplete: state.search.isAutoComplete,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log('what is the response??????????', response)
 
-        if (state && !city) {
-          alert('render the state page')
-        }
+  //       const { city, state } = response.data.meta.tracking_params
+  //       const { searchCityState } = response.data.meta.tracking_params
 
-        if (state && city) {
-          dispatch(
-            updateStateWithSearchResults({
-              data: response.data,
-              city: city,
-              state: state,
-            })
-          )
+  //       console.log({city, state} , 'ANY UPDATES')
+  //       logAutoCompleteResp({ response })
+  //       // update state with search results
 
-          //ORIGINAL
-          router.push(`/city/${city}/${state}`)
-
-          router.push({
-            pathname: `/city/${city}/${state}`,
-            query: {},
-          })
-        }
-      })
-  }
+  //       if ((state && city) && (state!=='noResult' && city !== 'noResult') ) {
+  //         dispatch(
+  //           updateStateWithSearchResults({
+  //             data: response.data,
+  //             city: city,
+  //             state: state,
+  //           })
+  //         )
+  //         return router.push(`/city/${city}/${state}`)
+  //       }
+  //     })
+  // }
 
   return (
     <SectionContainer>
@@ -95,4 +90,4 @@ const SearchSection: React.FC = () => {
   )
 }
 
-export default SearchSection
+export default React.memo(SearchSection)

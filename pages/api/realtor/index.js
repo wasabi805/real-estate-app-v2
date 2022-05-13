@@ -2,10 +2,7 @@ import axios from 'axios'
 import { stateCodes } from '../enums'
 
 const realtorApi = async (request, response) => {
-  console.log(
-    typeof request.query.isAutoComplete,
-    'What is the query from the front client?'
-  )
+  console.log(request, 'What is the query from the front client?')
 
   const getListings = (stateCode, cityName) => {
     const options = {
@@ -25,7 +22,9 @@ const realtorApi = async (request, response) => {
     }
 
     // IF A CITY AND STATE WAS ENTERED
+    //CASE A:
     if ((stateCode, cityName)) {
+      console.log('-----  CASE A  ---------')
       return axios
         .request(options)
         .then((listings) => {
@@ -56,22 +55,27 @@ const realtorApi = async (request, response) => {
   try {
     let stateCode
     let city
-    /**
-     * If request data was given as a standard form submit
-     */
-    if (request.query.isAutoComplete === 'false') {
-      console.log(
-        'Call google places to aid in format before sending to realtor API'
-      )
-      const queryString = request.query.location
-      const data = queryString.split(' ')
+    /*  If request data was given as a standard form submit */
 
-      const rData = data.join(`+`)
+    if (request.query.isAutoComplete === 'false') {
+      // console.log('----- NOT FROM AUTO COMPLETE -----')
+      console.log(
+        'Call google places to aid in format before sending to realtor API, the request that was sent is: ',
+        request.query
+      )
+
+      const queryString = request.query.location // ex.) califonia || san jose || someNonStateorCity
+
+      //if the query is more than one word
+      const data = queryString.split(' ')
+      const joinedString = data.join(`+`) //ex.) san jose = san+jose || south+dakota
+
+      console.log('what is joinedString', joinedString)
 
       const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
       var config = {
         method: 'get',
-        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=${rData}&key=${googleApiKey}`,
+        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=${joinedString}&key=${googleApiKey}`,
         headers: {},
       }
 
@@ -88,18 +92,49 @@ const realtorApi = async (request, response) => {
           console.log(error)
         })
 
-      const mainPrediction = suggestions.predictions[0].description
-        .split(',')
-        .map((str) => str.trim())
-      stateCode = mainPrediction[1]
-      city = mainPrediction[0]
+      console.log('what is suggestions', suggestions)
+      //ex.) california = { predictions:[ { description: 'California, USA'},] status: 'OK' }
+      //ex.) belmont = { predictions:[ {description: 'Belmont, CA, USA'}]   ,status: 'OK' }
+      //ex.) someNonStateorCity = { predictions: [], status: 'ZERO_RESULTS' }
 
-      console.log(mainPrediction, 'mainPrediction')
-      console.log({ stateCode, city })
+      if (suggestions.status === 'ZERO_RESULTS') {
+        city = 'noResult'
+        stateCode = 'noResult'
+      }
+
+      if (suggestions.status === 'OK' && suggestions.predictions.length > 0) {
+        //check the value of the first object
+        const description = suggestions.predictions[0].description.split(',')
+
+        if (description[1].trim() === 'USA') {
+          city = ''
+          stateCode = description[0]
+          return
+        }
+
+        const isValidCityAndState = stateCodes.some((obj) => {
+          return Object.keys(obj).pop() === description[1].trim()
+        })
+
+        if (isValidCityAndState) {
+          city = description[0].trim()
+          stateCode = description[1].trim()
+        }
+      }
+
+      //TODO: REMOVE WHEN CONFIRMED WORKING
+      // const mainPrediction = suggestions.predictions[0].description
+      //   .split(',')
+      //   .map((str) => str.trim())
+      // stateCode = mainPrediction[1]
+      // city = mainPrediction[0]
+
+      // console.log(mainPrediction, 'mainPrediction')
+      // console.log({ stateCode, city })
 
       return getListings(stateCode, city)
     }
-    console.log('FIRED!!!!!!!!!!!!')
+
     /**
      * If request data was from Google Places Auto Complete
      */

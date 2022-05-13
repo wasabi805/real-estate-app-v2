@@ -9,3 +9,12 @@ export interface IfilterCategories {
   baths: () => void
   clearData: TClearBy
 }
+
+export interface IHooksParam {
+  param: {
+    id: string
+    props?: {
+      [key: string]: any
+    }
+  }
+}

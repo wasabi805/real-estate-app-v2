@@ -50,7 +50,8 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
     fetchProperty: false,
     listingTable: {
       currentHome: [
-        action.payload?.searchResults?.data.listings[0].property_id,
+        action.payload?.searchResults?.data.listings.length > 0 &&
+          action.payload?.searchResults?.data.listings[0]?.property_id,
       ], //set the first property for the Listing table view
     },
     priceFilter: {
