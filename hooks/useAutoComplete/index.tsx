@@ -3,7 +3,12 @@ import AppContext from 'context/appContext'
 import axios from 'axios'
 import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
-import { containsSubString, extractHTMLTagValue, isZipCode } from 'utils'
+import {
+  containsSubString,
+  extractHTMLTagValue,
+  isZipCode,
+  extractZipCodeFromString,
+} from 'utils'
 
 const useAutoComplete = () => {
   interface IInputProps {
@@ -98,10 +103,8 @@ const useAutoComplete = () => {
 
     console.log('what is adr_address_chunks', adr_address_chunks)
 
-
     const formatCityStateZip = adr_address_chunks.map((chunk: string) => {
-      
-      // Grab the city  
+      // Grab the city
       if (containsSubString(chunk, 'locality')) {
         return [{ key: 'city', value: extractHTMLTagValue(chunk) }]
       }
@@ -155,17 +158,18 @@ const useAutoComplete = () => {
     // get an autosugestion
     const { name } = inputProps?.input
 
-    console.log('what is name', name)
-    console.log('typeof name', typeof name)
-    console.log('is it a zipCode', isZipCode(name))
+    //step 1, see if the standard submit contains a zipCode
+    const isZip = isZipCode(name)
+    const hasZip = extractZipCodeFromString(name)
+    const zip = isZip ? name : hasZip ? hasZip : ''
 
     const request = {
       ...requestParam,
       city: '',
       state: '',
-      zipCode: isZipCode(name) ? name : '',
+      zipCode: zip,
 
-      name: !isZipCode(name) ? name : '',
+      name: !isZip && !hasZip ? name : '',
       isAutoComplete: false,
     }
     fetchSugestion(request)

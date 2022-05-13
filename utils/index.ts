@@ -35,6 +35,14 @@ export const bedsValue = (className: string) => {
   return className.replace(/^(beds=)/, '')
 }
 
+export const extractZipCodeFromString = (str: string) => {
+  const startIndex = str.search(/\d{5}/)
+  if (startIndex === -1) {
+    return false
+  }
+  return str.slice(startIndex, startIndex + 5)
+}
+
 /* Numbers */
 export const sortByAscendOrDescend = (
   isAsc: Boolean,
