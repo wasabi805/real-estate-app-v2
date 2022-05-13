@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useref, useRef } from 'react'
 import AppContext from 'context/appContext'
 import axios from 'axios'
 import { IHooksParam } from '@hooks/interfaces'
@@ -7,7 +7,10 @@ import useAppModal from '@hooks/useAppModal'
 const useAutoComplete = () => {
   interface IInputProps {
     isAutoComplete: null | boolean
-    input: null | any
+    input: {
+      name: null | any
+    }
+    prev?: null | any
   }
 
   interface IRequestParam {
@@ -22,7 +25,17 @@ const useAutoComplete = () => {
   const { activateModal } = useAppModal()
   const [inputProps, setInputProps] = useState<IInputProps>({
     isAutoComplete: null,
-    input: null,
+    input: {
+      name: null,
+    },
+    prev: null,
+  })
+
+  interface TPrevStae {}
+  const prevInput = useRef<TPrevStae>({
+    current: {
+      input: {},
+    },
   })
 
   const setSearch = ({ param }: IHooksParam) => {
@@ -31,17 +44,27 @@ const useAutoComplete = () => {
     const handleInputRecieved = () => {
       const { input } = param?.props!
 
+      // if input recieved is from googleAutoComplete
       if (input?.adr_address!) {
-        setInputProps({
-          isAutoComplete: true,
-          input: param?.props?.input,
+        setInputProps((prevState) => {
+          return {
+            isAutoComplete: true,
+            input: param?.props?.input,
+            prev: prevState.input,
+          }
         })
         console.log('this is was from auto complete')
       }
+      // if input recieved is from pressing enter button
       if (!input?.adr_address!) {
-        setInputProps({
-          isAutoComplete: false,
-          input: param?.props?.input,
+        setInputProps((prevState) => {
+          console.log('prevState', prevState.input.name)
+
+          return {
+            isAutoComplete: false,
+            input: param?.props?.input,
+            prev: prevState.input.name,
+          }
         })
         console.log('this is from standard submit')
       }
@@ -85,15 +108,13 @@ const useAutoComplete = () => {
     const { adr_address } = inputProps?.input!
 
     console.log('what is adr_address', adr_address)
-    const test = adr_address.split('<span class="locality">')
-    console.log('what is test', test)
 
     const request = {
       ...requestParam,
       isAutoComplete: true,
       city: 'foo',
       state: 'bar',
-      name: inputProps?.input.name,
+      name: inputProps?.input,
     }
 
     fetchSugestion(request)
@@ -116,14 +137,16 @@ const useAutoComplete = () => {
 
   /* -----  ----- */
   useEffect(() => {
-    if (inputProps.isAutoComplete !== null && inputProps.isAutoComplete) {
+    // IS AUTOCOMPLETE RESULT && new input !== old input
+    if (inputProps.isAutoComplete && inputProps.prev !== inputProps.input) {
       handleIsAutoComplete(inputProps)
     }
 
-    if (inputProps.isAutoComplete !== null && !inputProps.isAutoComplete) {
+    // NOT AUTO COMPLETE && new input !== old input
+    if (!inputProps.isAutoComplete && inputProps.prev !== inputProps.input) {
       handleIsStandardSubmit(inputProps)
     }
-  }, [inputProps.isAutoComplete])
+  }, [inputProps.prev, inputProps.input]) // when prev input or current input changes
 
   return { setSearch }
 }
