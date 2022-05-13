@@ -3,6 +3,7 @@ import AppContext from 'context/appContext'
 import axios from 'axios'
 import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
+import { containsSubString, extractHTMLTagValue } from 'utils'
 
 const useAutoComplete = () => {
   interface IInputProps {
@@ -46,27 +47,19 @@ const useAutoComplete = () => {
 
       // if input recieved is from googleAutoComplete
       if (input?.adr_address!) {
-        setInputProps((prevState) => {
-          return {
-            isAutoComplete: true,
-            input: param?.props?.input,
-            prev: prevState.input,
-          }
-        })
-        console.log('this is was from auto complete')
+        setInputProps((prevState) => ({
+          isAutoComplete: true,
+          input: param?.props?.input,
+          prev: prevState.input,
+        }))
       }
       // if input recieved is from pressing enter button
       if (!input?.adr_address!) {
-        setInputProps((prevState) => {
-          console.log('prevState', prevState.input.name)
-
-          return {
-            isAutoComplete: false,
-            input: param?.props?.input,
-            prev: prevState.input.name,
-          }
-        })
-        console.log('this is from standard submit')
+        setInputProps((prevState) => ({
+          isAutoComplete: false,
+          input: param?.props?.input,
+          prev: prevState.input.name,
+        }))
       }
     }
 
@@ -104,17 +97,30 @@ const useAutoComplete = () => {
     //step 2 update the reducer state with the suggestion( for things like updating the input field and to display specic search modal if needed )
     //step 3 determine if route to state page or city page
 
-    //convert xml into city and state
+    /* EXTRACT CITY AND STATE VALUES FROM HTML STRING RETURNED FROM GOOGLE AUTO-COMPLETE  */
     const { adr_address } = inputProps?.input!
+    const adr_address_chunks = adr_address.split(',')
 
-    console.log('what is adr_address', adr_address)
+    const formatCityAndState = adr_address_chunks
+      .map((chunk: string) => {
+        if (containsSubString(chunk, 'locality')) {
+          return { city: extractHTMLTagValue(chunk) }
+        }
+        if (containsSubString(chunk, 'region')) {
+          return { state: extractHTMLTagValue(chunk) }
+        }
+        return {}
+      })
+      .filter((obj) => Object.keys(obj).length > 0)
 
+    const cityStateObj = Object.assign({}, ...formatCityAndState)
+
+    /* MAKE API CALL WITH CITY AND STATE VALUES */
     const request = {
       ...requestParam,
+      name: '',
       isAutoComplete: true,
-      city: 'foo',
-      state: 'bar',
-      name: inputProps?.input,
+      ...cityStateObj,
     }
 
     fetchSugestion(request)
@@ -143,7 +149,11 @@ const useAutoComplete = () => {
     }
 
     // NOT AUTO COMPLETE && new input !== old input
-    if (!inputProps.isAutoComplete && inputProps.prev !== inputProps.input) {
+    if (
+      !inputProps.isAutoComplete &&
+      inputProps.prev !== inputProps.input &&
+      inputProps.input.name // prevents call being made on page load
+    ) {
       handleIsStandardSubmit(inputProps)
     }
   }, [inputProps.prev, inputProps.input]) // when prev input or current input changes

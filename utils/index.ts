@@ -3,6 +3,14 @@ export const ifWhiteSpaces = (string: string) => {
   return string.split(' ').length > 1 ? string.split(' ').join('-') : string
 }
 
+export const containsSubString = (str: string, subStr: string) => {
+  return str.includes(subStr)
+}
+
+export const extractHTMLTagValue = (htmlStr) => {
+  return htmlStr.replace(/<[^>]+>/g, '')
+}
+
 export const homeTypeCategory = (className: string) => {
   return className.replace(/^(home-type-)/, '')
 }
