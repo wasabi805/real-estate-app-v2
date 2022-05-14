@@ -89,15 +89,13 @@ const suggestPlace = async (request, response) => {
       //------------------    PRIMARY REQUEST   -------------------------------
 
       if (isAutoComplete === 'false') {
-        console.log('********', name)
         zipCode ? (input = zipCode) : (input = name)
       }
 
-      //TODO : find how to restrict to USA only, example, 'ca' brings back cancun
       const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
       const config = {
         method: 'get',
-        url: `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=${input}&key=${googleApiKey}`,
+        url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=geocode&components=country:us&key=${googleApiKey}`,
         headers: {},
       }
       const requested = await fetchGoogleApiPlaceSugestion(config)

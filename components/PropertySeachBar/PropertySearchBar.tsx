@@ -81,18 +81,20 @@ const PropertySearchBar: React.FC = () => {
     })
   }
 
-  async function handlePlaceSelect(updateQuery) {
-    const addressObject = autoComplete.getPlace() // get place from google api
-    const query = addressObject.formatted_address
-    updateQuery(query)
-    handleAutoSelected(addressObject)
-  }
+  //TODO REMOVE WHEN setSearch CONFIRMED WORKING
 
-  const handleAutoSelected = (autoSelectedInput: IGooglePlacesAddressObj) => {
-    console.log('when di i fire')
-    // update context state to auto selected address
-    // await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
-  }
+  // async function handlePlaceSelect(updateQuery) {
+  //   const addressObject = autoComplete.getPlace() // get place from google api
+  //   const query = addressObject.formatted_address
+  //   updateQuery(query)
+  //   handleAutoSelected(addressObject)
+  // }
+
+  // const handleAutoSelected = (autoSelectedInput: IGooglePlacesAddressObj) => {
+  //   console.log('when di i fire')
+  //   // update context state to auto selected address
+  //   // await dispatch(autoCompleteUpdateStateAndFetchListings(autoSelectedInput))
+  // }
 
   const handleSetInputField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
