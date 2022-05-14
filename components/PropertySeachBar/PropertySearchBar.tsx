@@ -49,7 +49,8 @@ const PropertySearchBar: React.FC = () => {
     autoComplete = new window.google.maps.places.Autocomplete(
       autoCompleteRef.current,
       {
-        componentRestrictions: { country: 'us' },
+        componentRestrictions: { country: 'us' }, //limits to only places in the us
+        types: ['geocode'], // limits results and removes establishments like businesses.
         fields: [
           'place_id',
           'geometry',

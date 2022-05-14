@@ -100,9 +100,6 @@ const useAutoComplete = () => {
     /* EXTRACT CITY AND STATE VALUES FROM HTML STRING RETURNED FROM GOOGLE AUTO-COMPLETE  */
     const { adr_address } = inputProps?.input!
     const adr_address_chunks = adr_address.split(',')
-
-    console.log('what is adr_address_chunks', adr_address_chunks)
-
     const formatCityStateZip = adr_address_chunks.map((chunk: string) => {
       // Grab the city
       if (containsSubString(chunk, 'locality')) {
@@ -137,8 +134,6 @@ const useAutoComplete = () => {
       return []
     })
 
-    console.log(formatCityStateZip.flat(), 'formatCityAndState')
-
     const cityStateZipObj = formatCityStateZip
       .flat()
       .reduce((obj, item) => ((obj[item.key] = item.value), obj), {})
@@ -151,7 +146,7 @@ const useAutoComplete = () => {
       ...cityStateZipObj,
     }
 
-    // fetchSugestion(request)
+    fetchSugestion(request)
   }
 
   const handleIsStandardSubmit = (inputProps: IInputProps) => {
