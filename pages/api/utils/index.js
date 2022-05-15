@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { stateCodes } from '../enums'
 export const fetchGoogleApiPlaceSugestion = (config) => {
   return axios(config)
     .then(function (response) {
@@ -11,4 +12,13 @@ export const fetchGoogleApiPlaceSugestion = (config) => {
     .catch(function (error) {
       console.log(error)
     })
+}
+
+export const containsStateCode = (str) => {
+  const filteredResult = stateCodes.filter(
+    (code) => Object.keys(code).pop() === str
+  )
+  return filteredResult.length > 0
+    ? Object.keys(filteredResult[0]).pop()
+    : false
 }

@@ -93,13 +93,7 @@ const useAutoComplete = () => {
   }
 
   const fetchSugestion = async (request: IRequestParam) => {
-    console.log('what is requestObbj', request)
     dispatch(setIsLoading(true))
-    // const realtorRequest = {
-    //     city,
-    //     state,
-    //     zipCode
-    // }
 
     const autoCompleteResults = await axios.get(
       `http://localhost:3000/api/googleApis/suggestPlace`,
@@ -107,35 +101,6 @@ const useAutoComplete = () => {
     )
 
     console.log('did i come back with results?', autoCompleteResults)
-    //call realtor api with params from x
-
-    //   .then( async(response) => {
-    //     try{
-    //         console.log('what is the response', response)
-    //         // call realtor api with data from auto complete hook
-    //         const { city, state, zipCode } = response?.data!
-    //         const request ={
-    //             city,
-    //             state,
-    //             zipCode
-    //         }
-
-    //         const res =  await axios.get('http://localhost:3000/api/getListings', {
-    //           params: {
-    //             request
-    //           },
-    //         })
-
-    //         console.log('what are the listings', res)
-
-    //         // update state with response
-    //         // dispatch(fetchSugestionSuccess(someData))
-
-    //     }catch(error){
-    //         console.log('Error Occured Fetching Listings Data')
-    //     }
-
-    //   })
 
     dispatch(setIsLoading(false))
   }
