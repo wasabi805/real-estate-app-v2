@@ -101,16 +101,13 @@ const useAutoComplete = () => {
     //     zipCode
     // }
 
-    const x = await axios.get(
+    const autoCompleteResults = await axios.get(
       `http://localhost:3000/api/googleApis/suggestPlace`,
       { params: request }
     )
-    console.log('test', x)
 
+    console.log('did i come back with results?', autoCompleteResults)
     //call realtor api with params from x
-    const z = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-
-    console.log('test2', z)
 
     //   .then( async(response) => {
     //     try{

@@ -1,5 +1,6 @@
 import { fetchGoogleApiPlaceSugestion } from '../utils'
 import { extractZipCodeFromString } from 'utils'
+import getListings from 'pages/api/getListings'
 import { stateCodes } from '../enums'
 
 const suggestPlace = async (request, response) => {
@@ -90,10 +91,14 @@ const suggestPlace = async (request, response) => {
                   : { ...acc, state: cur }
               }, {})
 
-            return response.status(200).send({
-              ...resobj,
+            const req = {
               ...cityStateZip,
+            }
+            const listings = await getListings(req)
+
+            return response.status(200).send({
               routeTo: 'cityPage',
+              listings,
             })
           }
 
