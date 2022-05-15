@@ -8,12 +8,12 @@ export const onFetchSuccess = (
   }
 }
 
-export const SET_IS_FETCHING = 'SET_IS_FETCHING'
-export const setIsFetching = (boolean: boolean) => {
+export const SET_IS_LOADING = 'SET_IS_LOADING'
+export const setIsLoading = (boolean: boolean) => {
   return {
-    type: SET_IS_FETCHING,
+    type: SET_IS_LOADING,
     payload: {
-      fetchProperty: boolean,
+      isLoading: boolean,
     },
   }
 }

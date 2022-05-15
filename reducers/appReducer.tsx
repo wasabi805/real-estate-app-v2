@@ -1,6 +1,7 @@
 /*----- ACTIONS -----*/
+import * as GlobalActions from 'actions/GlobalActions'
 import * as LoginModalActions from 'actions/modalActions'
-import * as SearchActions from 'actions/propertySearchBarActions'
+import * as PropertySearchBarActions from 'actions/propertySearchBarActions'
 import * as ListingsActions from 'actions/ListingsActions'
 import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/bedsBathsActions'
 import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
@@ -13,6 +14,7 @@ import * as SortListingsActions from 'actions/ListingsActions/SortActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
 
 /*----- REDUCER SLICES -----*/
+import * as GlobalSlice from 'reducers/global'
 import * as LoginModalSlice from 'reducers/loginModal'
 import * as LocationAutoCompSlice from 'reducers/locationAutoComp'
 import * as ListingsFiltersSlice from 'reducers/listings'
@@ -22,6 +24,9 @@ import { IinitialState } from 'reducers/interface'
 import { IAction } from 'actions/interface'
 
 /*----- TYPES -----*/
+
+const {SET_IS_LOADING} = GlobalActions
+
 const {
   RENDER_LOGIN_MODLE,
   DISMISS_LOGIN_MODLE,
@@ -33,7 +38,7 @@ const {
   SET_SEARCH_FIELD,
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
-} = SearchActions
+} = PropertySearchBarActions
 
 const {
   SET_MIN_PRICE_FILTER_FIELD,
@@ -63,6 +68,11 @@ const { SET_SOLD_DATE_RANGE, SET_FILTER_BY_PROPERTY_TYPE } =
 const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
 
 const appReducer = (state: IinitialState, action: IAction) => {
+  /*----- APP STATE -----*/
+  
+  const handleSetIsLoading =()=>
+    GlobalSlice.setIsLoading({state, action})
+  
   /*----- LOGIN MODAL -----*/
 
   const handleRenderLoginModal = () =>
@@ -145,6 +155,9 @@ const appReducer = (state: IinitialState, action: IAction) => {
     ListingsFiltersSlice.setFilterDrawerOpen({ state, action })
 
   const setState: Record<string, () => void> = {
+    /*-----  GLOBAL -----*/
+    [SET_IS_LOADING] : handleSetIsLoading,
+
     /*-----  LOGIN MODAL -----*/
     [RENDER_LOGIN_MODLE]: handleRenderLoginModal,
     [DISMISS_LOGIN_MODLE]: handleDismissLoginModle,

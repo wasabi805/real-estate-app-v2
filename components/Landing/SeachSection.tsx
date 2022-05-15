@@ -15,6 +15,7 @@ import {
 } from '@components/PropertySeachBar/styles'
 
 import { logAutoCompleteResp } from 'utils'
+import { stat } from 'fs'
 
 const { updateStateWithSearchResults } = SearchActions
 
@@ -35,6 +36,10 @@ const SearchSection: React.FC = () => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const router = useRouter()
+
+  useEffect(()=>{
+    console.log('IS IT LOADING?' , state.isLoading)
+  },[state.isLoading])
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
   // console.log('what is state when loaded?', state.search.isAutoComplete)

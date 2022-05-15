@@ -3,6 +3,8 @@ import AppContext from 'context/appContext'
 import axios from 'axios'
 import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
+import * as GlobalActions from 'actions/GlobalActions'
+import * as PropertySearchBarActions from 'actions/propertySearchBarActions'
 import {
   containsSubString,
   extractHTMLTagValue,
@@ -27,6 +29,9 @@ const useAutoComplete = () => {
     state: null | string
     zipCode: null | string
   }
+
+  const {setIsLoading} =GlobalActions
+  const {fetchSugestionSuccess} =PropertySearchBarActions
 
   const { state, dispatch } = useContext(AppContext)
   const { activateModal } = useAppModal()
@@ -81,13 +86,61 @@ const useAutoComplete = () => {
 
   const fetchSugestion = async (request: IRequestParam) => {
     console.log('what is requestObbj', request)
-    await axios
+    dispatch(setIsLoading(true))
+
+    const googlAutoCompResults = await axios
       .get(`http://localhost:3000/api/googleApis/suggestPlace`, {
         params: request,
+    })
+    
+    const {city, state, zipCode} = googlAutoCompResults.data
+    const realtorRequest = {
+        city,
+        state,
+        zipCode
+    }
+
+    console.log('realtorRequest', realtorRequest)
+    const realtorResponse =  await axios.get('http://localhost:3000/api/getListings', {
+        params: {
+            realtorRequest
+        },
       })
-      .then((response) => {
-        console.log('what is the response', response)
-      })
+
+    console.log('what is realtorResponse', realtorResponse)
+
+
+
+
+    //   .then( async(response) => {
+    //     try{
+    //         console.log('what is the response', response)
+    //         // call realtor api with data from auto complete hook 
+    //         const { city, state, zipCode } = response?.data!
+    //         const request ={
+    //             city,
+    //             state,
+    //             zipCode
+    //         }
+
+    //         const res =  await axios.get('http://localhost:3000/api/getListings', {
+    //           params: {
+    //             request
+    //           },
+    //         })
+
+    //         console.log('what are the listings', res)
+
+    //         // update state with response
+    //         // dispatch(fetchSugestionSuccess(someData))
+
+    //     }catch(error){
+    //         console.log('Error Occured Fetching Listings Data')
+    //     }
+    
+    //   })
+
+      dispatch(setIsLoading(false))
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */

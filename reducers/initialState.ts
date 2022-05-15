@@ -13,6 +13,7 @@ import {
 
 const initialState: IinitialState = {
   isLoginModalVisibile: false,
+  isLoading: false,
   user: {
     password: '',
     email: '',

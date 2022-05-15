@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import AppContext from 'context/appContext'
 import * as SearchActions from 'actions/propertySearchBarActions'
-import * as FetchActions from 'actions/FetchActions'
+import * as FetchActions from 'actions/GlobalActions'
 import { IHooksParam } from 'utils/interfaces/hooks'
 import { STATE_PAGE, CITY_PAGE } from 'utils/contants'
 

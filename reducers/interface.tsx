@@ -16,6 +16,8 @@ interface IBedsButton {
 
 export interface IinitialState {
   setIn: any
+
+  isLoading : boolean,
   isLoginModalVisibile: boolean
   user: {
     email: string
