@@ -1,4 +1,8 @@
-import { fetchGoogleApiPlaceSugestion, containsStateCode } from '../utils'
+import {
+  fetchGoogleApiPlaceSugestion,
+  containsStateCode,
+  getStateValueFromKey,
+} from '../utils'
 import { extractZipCodeFromString } from 'utils'
 import getListings from 'pages/api/getListings'
 import { stateCodes } from '../enums'
@@ -59,15 +63,30 @@ const suggestPlace = async (request, response) => {
         const primaryGuessSubStrLastVal =
           primaryGuessSubStr[primaryGuessSubStr.length - 1]
 
-        //CASE A: ZIPCODE WAS SENT IN
-        console.log(
-          'what is the predicted chuck',
-          '########',
-          primaryGuess,
-          '########'
-        )
+        //  BEFORE ANY CHECKS, SEE IF THE USER SENT IN JUST A STATE CODE:
+        if (containsStateCode(name.toUpperCase())) {
+          const fullStateName = getStateValueFromKey(
+            containsStateCode(name.toUpperCase())
+          )
+
+          const res = {
+            ...resobj,
+            state: fullStateName,
+
+            modal: {
+              id: 'didYouMean',
+              isOpen: true,
+              props: {
+                predictions: allGuesses, //  send back all guesses and have user select one of them
+              },
+            },
+          }
+          return response.status(200).send(res)
+        }
+
+        //START CHECKS IF a STATECODE WAS NOT MANUALLY SUBMITTED
         if (extractZipCodeFromString(primaryGuess)) {
-          console.log('primaryGuessSubStr', primaryGuessSubStr)
+          //CASE A: ZIPCODE WAS SENT IN
 
           /* CASE PREDICTION RETURNED A ZIPCODE IT RECOGNIZED */
           if (extractZipCodeFromString(primaryGuessSubStrLastVal)) {
@@ -130,8 +149,8 @@ const suggestPlace = async (request, response) => {
           //if something comes back that isn't just city and state
           //ex.) space = [space place, gilbert, az]
           if (primaryGuessSubStr.length > 2) {
-            console.log('what is allGuesses', allGuesses)
-            console.log('render did you mean')
+            // console.log('what is allGuesses', allGuesses)
+            // console.log('render did you mean')
           }
 
           //if city and state comeback

@@ -22,3 +22,11 @@ export const containsStateCode = (str) => {
     ? Object.keys(filteredResult[0]).pop()
     : false
 }
+
+export const getStateValueFromKey = (stateAbrv) => {
+  const stateValue = stateCodes.filter(
+    (code) => Object.keys(code).pop() === stateAbrv
+  )
+
+  return stateValue[0][stateAbrv]
+}
