@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { fetchGoogleApiPlaceSugestion } from '../utils'
 import { extractZipCodeFromString } from 'utils'
 import { stateCodes } from '../enums'
@@ -29,17 +28,19 @@ const suggestPlace = async (request, response) => {
         routeTo: '',
 
         modal: {
-            id: null,
-            isOpen : false,
-            props:{}
+          id: null,
+          isOpen: false,
+          props: {},
         },
-
       }
 
       /* CASE 1 : ZipCode or city was manually sent in */
-      const extractStateCityZip = async() => {
+      const extractStateCityZip = async () => {
         const primaryGuess = requested.predictions[0].description
-        const primaryGuessSubStr = primaryGuess.split(',').map((s)=>s.trim()).filter((s)=>s!=='USA')
+        const primaryGuessSubStr = primaryGuess
+          .split(',')
+          .map((s) => s.trim())
+          .filter((s) => s !== 'USA')
         const allGuesses = requested.predictions
 
         //step 1 check if zipCode exists:
@@ -51,68 +52,80 @@ const suggestPlace = async (request, response) => {
         )
 
         if (extractZipCodeFromString(primaryGuess)) {
-            //  TODO: Should ask did you mean and show more predictions : will be did you mean 
+          //  TODO: Should ask did you mean and show more predictions : will be did you mean
 
-            // IF THE LAST ELEMENT IN ARRAY doesn't have a zipcode, then the array is an address
-            // render more predictions
+          // IF THE LAST ELEMENT IN ARRAY doesn't have a zipcode, then the array is an address
+          // render more predictions
 
-            //    [ '88888 Brown Dr', 'Twentynine Palms', 'CA' ] just 888888
-            //    [ '12345 Taliesin Drive', 'Scottsdale', 'AZ' ] just 12345
+          //    [ '88888 Brown Dr', 'Twentynine Palms', 'CA' ] just 888888
+          //    [ '12345 Taliesin Drive', 'Scottsdale', 'AZ' ] just 12345
 
-            //    [ 'Palomar Park', 'CA 94062' ] - 94062
-            //    [ 'Redwood City', 'CA 94061' ] - 94061
-            //    [ 'Santa Barbara','CA 93117' ] santa barbara 93117 || santa barbara 93117 || someString 93117 more strings
+          //    [ 'Palomar Park', 'CA 94062' ] - 94062
+          //    [ 'Redwood City', 'CA 94061' ] - 94061
+          //    [ 'Santa Barbara','CA 93117' ] santa barbara 93117 || santa barbara 93117 || someString 93117 more strings
 
-            //verify if zipCode is regogized by autoPlace
-
-            console.log( '???????' , extractZipCodeFromString(primaryGuessSubStr[primaryGuessSubStr.length-1]))
-            console.log('primaryGuessSubStr', primaryGuessSubStr)
-            
-            /* CASE PREDICTION RETURNED A ZIPCODE IT RECOGNIZED */
-            if(extractZipCodeFromString(primaryGuessSubStr[primaryGuessSubStr.length-1])){
-
-                // Format primaryGuess into object containing city and state derived from the zipcode
-                let cityStateZip = primaryGuessSubStr[primaryGuessSubStr.length-1].split(' ').reduce((acc, cur)=>{
-                    acc.city= primaryGuessSubStr[0]
-                    return extractZipCodeFromString(cur) ? { ...acc, zipCode: cur} : { ...acc, state: cur}
-                },{})
-
-                
-                return response.status(200).send({
-                    ...resobj, 
-                    ...cityStateZip,
-                    routeTo : 'cityPage'
-                }) 
-            }
-
-            /* CASE PREDICTION DIDN'T RETURN A ZIPCODE IT RECOGNIZED */
-            if(!extractZipCodeFromString(primaryGuessSubStr[primaryGuessSubStr.length-1])){
-
-                let clientRes ={
-                    ...resobj,
-                    routeTo: '/',
-                    modal: {
-                        id: 'didYouMean',
-                        isOpen : true,
-                        props:{
-                            predictions: allGuesses //  send back all guesses and have user select one of them
-                        }
-                    },
-                }
-
-                return response.status(200).send(clientRes) 
-            }
-            
+          //verify if zipCode is regogized by autoPlace
 
           console.log(
-            'what is primaryDescriptionChucks -has zipcode',primaryGuessSubStr
+            '???????',
+            extractZipCodeFromString(
+              primaryGuessSubStr[primaryGuessSubStr.length - 1]
+            )
           )
+          console.log('primaryGuessSubStr', primaryGuessSubStr)
 
+          /* CASE PREDICTION RETURNED A ZIPCODE IT RECOGNIZED */
+          if (
+            extractZipCodeFromString(
+              primaryGuessSubStr[primaryGuessSubStr.length - 1]
+            )
+          ) {
+            // Format primaryGuess into object containing city and state derived from the zipcode
+            let cityStateZip = primaryGuessSubStr[primaryGuessSubStr.length - 1]
+              .split(' ')
+              .reduce((acc, cur) => {
+                acc.city = primaryGuessSubStr[0]
+                return extractZipCodeFromString(cur)
+                  ? { ...acc, zipCode: cur }
+                  : { ...acc, state: cur }
+              }, {})
+
+            return response.status(200).send({
+              ...resobj,
+              ...cityStateZip,
+              routeTo: 'cityPage',
+            })
+          }
+
+          /* CASE PREDICTION DIDN'T RETURN A ZIPCODE IT RECOGNIZED */
+          if (
+            !extractZipCodeFromString(
+              primaryGuessSubStr[primaryGuessSubStr.length - 1]
+            )
+          ) {
+            let clientRes = {
+              ...resobj,
+              routeTo: '/',
+              modal: {
+                id: 'didYouMean',
+                isOpen: true,
+                props: {
+                  predictions: allGuesses, //  send back all guesses and have user select one of them
+                },
+              },
+            }
+
+            return response.status(200).send(clientRes)
+          }
+
+          console.log(
+            'what is primaryDescriptionChucks -has zipcode',
+            primaryGuessSubStr
+          )
         }
 
         /* CASE City and or STATE was entered without a zipCode */
         if (!extractZipCodeFromString(primaryGuess)) {
-            
           //TODO : you cant just index since the data types change in the array order based on
           //if its a zip, full address, just city name etc...
 
@@ -123,8 +136,9 @@ const suggestPlace = async (request, response) => {
           //    [ 'Redwood City',  'CA' ] = redwood city
 
           //    [ 'Casa Grande', 'AZ' ] = ca --> should bring back state
-    
-          console.log('what is primaryDescriptionChucks - no zipCode ',
+
+          console.log(
+            'what is primaryDescriptionChucks - no zipCode ',
             primaryGuessSubStr
           )
         }

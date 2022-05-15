@@ -32,14 +32,14 @@ const BackgroundImage = styled.div(({ children }) => {
   }
 })
 
-const SearchSection: React.FC = () => {
+const SearchSection: React.FC = ({ data }) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const router = useRouter()
 
-  useEffect(()=>{
-    console.log('IS IT LOADING?' , state.isLoading)
-  },[state.isLoading])
+  useEffect(() => {
+    console.log('IS IT LOADING?', state.isLoading)
+  }, [state.isLoading])
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
   // console.log('what is state when loaded?', state.search.isAutoComplete)

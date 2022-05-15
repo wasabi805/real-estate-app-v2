@@ -25,7 +25,7 @@ import { IAction } from 'actions/interface'
 
 /*----- TYPES -----*/
 
-const {SET_IS_LOADING} = GlobalActions
+const { SET_IS_LOADING } = GlobalActions
 
 const {
   RENDER_LOGIN_MODLE,
@@ -69,10 +69,9 @@ const { TOGGLE_SORT_LISTINGS_PANEL } = SortListingsActions
 
 const appReducer = (state: IinitialState, action: IAction) => {
   /*----- APP STATE -----*/
-  
-  const handleSetIsLoading =()=>
-    GlobalSlice.setIsLoading({state, action})
-  
+
+  const handleSetIsLoading = () => GlobalSlice.setIsLoading({ state, action })
+
   /*----- LOGIN MODAL -----*/
 
   const handleRenderLoginModal = () =>
@@ -156,7 +155,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
   const setState: Record<string, () => void> = {
     /*-----  GLOBAL -----*/
-    [SET_IS_LOADING] : handleSetIsLoading,
+    [SET_IS_LOADING]: handleSetIsLoading,
 
     /*-----  LOGIN MODAL -----*/
     [RENDER_LOGIN_MODLE]: handleRenderLoginModal,

@@ -1,7 +1,7 @@
 export interface IAction {
   type: string
   payload?: {
-    isLoading?: boolean,
+    isLoading?: boolean
     renderLoginModal?: boolean
     dismissLoginModal?: boolean
     userLoginData?: {

@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
 import { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
 import AppContext from '../context/appContext'
-import { SearchSection } from '../components/Landing'
+import { SearchSection } from './Landing'
 
 interface IHomeProps {
   res: any

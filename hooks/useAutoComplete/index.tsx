@@ -30,8 +30,8 @@ const useAutoComplete = () => {
     zipCode: null | string
   }
 
-  const {setIsLoading} =GlobalActions
-  const {fetchSugestionSuccess} =PropertySearchBarActions
+  const { setIsLoading } = GlobalActions
+  const { fetchSugestionSuccess } = PropertySearchBarActions
 
   const { state, dispatch } = useContext(AppContext)
   const { activateModal } = useAppModal()
@@ -41,6 +41,14 @@ const useAutoComplete = () => {
       name: null,
     },
     prev: null,
+  })
+
+  const [autoCompleteResp, setAutoCompleteResp] = useState({
+    city: '',
+    state: '',
+    zipCode: '',
+    name: '',
+    isAutoComplete: false,
   })
 
   const setSearch = ({ param }: IHooksParam) => {
@@ -87,35 +95,27 @@ const useAutoComplete = () => {
   const fetchSugestion = async (request: IRequestParam) => {
     console.log('what is requestObbj', request)
     dispatch(setIsLoading(true))
+    // const realtorRequest = {
+    //     city,
+    //     state,
+    //     zipCode
+    // }
 
-    const googlAutoCompResults = await axios
-      .get(`http://localhost:3000/api/googleApis/suggestPlace`, {
-        params: request,
-    })
-    
-    const {city, state, zipCode} = googlAutoCompResults.data
-    const realtorRequest = {
-        city,
-        state,
-        zipCode
-    }
+    const x = await axios.get(
+      `http://localhost:3000/api/googleApis/suggestPlace`,
+      { params: request }
+    )
+    console.log('test', x)
 
-    console.log('realtorRequest', realtorRequest)
-    const realtorResponse =  await axios.get('http://localhost:3000/api/getListings', {
-        params: {
-            realtorRequest
-        },
-      })
+    //call realtor api with params from x
+    const z = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
 
-    console.log('what is realtorResponse', realtorResponse)
-
-
-
+    console.log('test2', z)
 
     //   .then( async(response) => {
     //     try{
     //         console.log('what is the response', response)
-    //         // call realtor api with data from auto complete hook 
+    //         // call realtor api with data from auto complete hook
     //         const { city, state, zipCode } = response?.data!
     //         const request ={
     //             city,
@@ -137,10 +137,10 @@ const useAutoComplete = () => {
     //     }catch(error){
     //         console.log('Error Occured Fetching Listings Data')
     //     }
-    
+
     //   })
 
-      dispatch(setIsLoading(false))
+    dispatch(setIsLoading(false))
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */
@@ -220,6 +220,9 @@ const useAutoComplete = () => {
       name: !isZip && !hasZip ? name : '',
       isAutoComplete: false,
     }
+    //TODO: instead of fetching return it back to PropertySearchBar Comp and have
+    // getServerSideProps do the fetching
+    // return setAutoCompleteResp(request)
     fetchSugestion(request)
   }
 
@@ -240,7 +243,7 @@ const useAutoComplete = () => {
     }
   }, [inputProps.prev, inputProps.input]) // when prev input or current input changes
 
-  return { setSearch }
+  return { setSearch, autoCompleteResp }
 }
 
 export default useAutoComplete

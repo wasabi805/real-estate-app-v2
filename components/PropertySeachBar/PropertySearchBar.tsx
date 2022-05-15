@@ -12,9 +12,9 @@ const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
 
-const PropertySearchBar: React.FC = () => {
+const PropertySearchBar = () => {
   const appContext = useContext(AppContext)
-  const { setSearch } = useAutoComplete()
+  const { setSearch, autoCompleteResp } = useAutoComplete()
 
   const { state, dispatch } = appContext
   const { search } = state
