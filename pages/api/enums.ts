@@ -52,7 +52,7 @@ export const stateCodes = [
   { WY: 'Wyoming' },
 ]
 
-export const topTenCitiesByStatePop = [
+export const topTenCitiesByState = [
   {
     id: 'AL',
     name: 'Alabama',

@@ -5,6 +5,7 @@ import {
   extractCitiesInState,
 } from '../utils'
 import { extractZipCodeFromString } from 'utils'
+import { topTenCitiesByState } from '../enums'
 import getListings from 'pages/api/getListings'
 import getCities from 'pages/api/getCities'
 import { stateCodes } from '../enums'
@@ -29,32 +30,7 @@ const suggestPlace = async (request, response) => {
       let input
       console.log('what is request sent into getGooglePlacesSuggestion', input)
 
-      let resobj = {
-        city: '',
-        state: '',
-        zipCode: '',
-
-        routeTo: '',
-
-        modal: {
-          id: null,
-          isOpen: false,
-          props: {},
-        },
-      }
-
-      //  TODO: Should ask did you mean and show more predictions : will be did you mean
-
-      // IF THE LAST ELEMENT IN ARRAY doesn't have a zipcode, then the array is an address
-      // render more predictions
-
-      //    [ '88888 Brown Dr', 'Twentynine Palms', 'CA' ] just 888888
-      //    [ '12345 Taliesin Drive', 'Scottsdale', 'AZ' ] just 12345
-
-      //    [ 'Palomar Park', 'CA 94062' ] - 94062
-      //    [ 'Redwood City', 'CA 94061' ] - 94061
-      //    [ 'Santa Barbara','CA 93117' ] santa barbara 93117 || santa barbara 93117 || someString 93117 more strings
-
+    
       //verify if zipCode is regogized by autoPlace
 
       /* STEP1:  ZipCode or city was manually sent in: */
@@ -67,26 +43,31 @@ const suggestPlace = async (request, response) => {
         const primaryGuessSubStrLastVal =
           primaryGuessSubStr[primaryGuessSubStr.length - 1]
 
+
+
         //  BEFORE ANY CHECKS, SEE IF THE USER SENT IN JUST A STATE CODE:
         if (containsStateCode(name.toUpperCase())) {
           const fullStateName = getStateValueFromKey(
             containsStateCode(name.toUpperCase())
           )
 
-          const res = {
-            ...resobj,
-            state: fullStateName,
+        const res = { 
+            props:{
+                routeTo: '/', //may not need this
+                stateName: fullStateName,
+                predictions: allGuesses, //  send back all guesses and have user select one of them
 
             modal: {
-              id: 'didYouMean',
-              isOpen: true,
-              props: {
-                predictions: allGuesses, //  send back all guesses and have user select one of them
-              },
+                id: 'didYouMean???',
+                isOpen: true
             },
+            },
+
+            
           }
           return response.status(200).send(res)
         }
+
 
         //START CHECKS IF a STATECODE WAS NOT MANUALLY SUBMITTED
         if (extractZipCodeFromString(primaryGuess)) {
@@ -115,7 +96,6 @@ const suggestPlace = async (request, response) => {
           /* CASE PREDICTION DIDN'T RETURN A ZIPCODE IT RECOGNIZED */
           if (!extractZipCodeFromString(primaryGuessSubStrLastVal)) {
             let clientRes = {
-              ...resobj,
               routeTo: '/',
               modal: {
                 id: 'didYouMean',
@@ -154,13 +134,16 @@ const suggestPlace = async (request, response) => {
             stateCodes
           )
 
-          //if it returns the state name proper
+          //if it returns the state name proper, redirect to state page
           if (primaryGuessSubStr.length === 1 && stateAbr) {
-            //get top 20 cities by popuation
-            const data = await getCities()
-            const allCitiesUS = data.cities
-
-            extractCitiesInState(stateAbr, allCitiesUS)
+            const topCities = extractCitiesInState(stateAbr, topTenCitiesByState)
+            response.status(200).send({
+                props:{
+                    routeTo: 'statePage',
+                    stateName: primaryGuessSubStr[0],
+                    topCities,
+                }
+            })
           }
 
           //if something comes back that isn't just city and state

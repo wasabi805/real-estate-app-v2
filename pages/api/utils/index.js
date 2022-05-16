@@ -30,7 +30,7 @@ export const getStateKeyFromValue = (stateProper, stateCodes) => {
     const stateValue = Object.values(stateCodes[idx])[0]
     let stateKey = Object.keys(stateCodes[idx])[0]
 
-    console.log({ stateValue, stateKey })
+    // console.log({ stateValue, stateKey })
 
     if (stateValue === stateProper) {
       result = stateKey
@@ -45,10 +45,6 @@ export const getStateValueFromKey = (stateAbrv) => {
   return stateValue[0][stateAbrv]
 }
 
-export const extractCitiesInState = (stateName, allCitiesUS) => {
-  console.log('********', { stateName, allCitiesUS })
-  // return allCitiesUS.map( (city)=>{
-  //   console.log('city.division',city.division)
-  //   return city.division
-  // }).length
+export const extractCitiesInState = (stateAbrv, allCitiesUS) => {
+  return allCitiesUS.filter((state)=>state.id === stateAbrv).map((state)=>(state.cities)).flat()
 }
