@@ -5,6 +5,7 @@ import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
 import * as GlobalActions from 'actions/GlobalActions'
 import * as PropertySearchBarActions from 'actions/propertySearchBarActions'
+
 import {
   containsSubString,
   extractHTMLTagValue,
@@ -31,7 +32,8 @@ const useAutoComplete = () => {
   }
 
   const { setIsLoading } = GlobalActions
-  const { fetchSugestionSuccess } = PropertySearchBarActions
+  const { fetchSugestionSuccess, updateStateWithSearchResults } =
+    PropertySearchBarActions
 
   const { state, dispatch } = useContext(AppContext)
   const { activateModal } = useAppModal()
@@ -95,12 +97,18 @@ const useAutoComplete = () => {
   const fetchSugestion = async (request: IRequestParam) => {
     dispatch(setIsLoading(true))
 
-    const autoCompleteResults = await axios.get(
+    const data = await axios.get(
       `http://localhost:3000/api/googleApis/suggestPlace`,
       { params: request }
     )
-
-    console.log('did i come back with results?', autoCompleteResults)
+    console.log('did i come back with results?', data)
+    // dispatch(
+    //     updateStateWithSearchResults({
+    //       data: autoCompleteResults.data,
+    //       city: city,
+    //       state: state,
+    //     })
+    //   )
 
     dispatch(setIsLoading(false))
   }

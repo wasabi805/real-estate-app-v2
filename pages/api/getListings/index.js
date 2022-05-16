@@ -19,7 +19,7 @@ const getListings = async (req, res) => {
         sort: 'relevance',
       },
       headers: {
-        'x-rapidapi-host': 'realtor.p.rapidapi.com',
+        'x-rapidapi-host': process.env.REALTOR_HOST,
         'x-rapidapi-key': process.env.REALTOR_API_KEY,
       },
     }

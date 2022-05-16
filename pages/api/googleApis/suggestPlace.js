@@ -2,10 +2,14 @@ import {
   fetchGoogleApiPlaceSugestion,
   containsStateCode,
   getStateValueFromKey,
+  extractCitiesInState,
 } from '../utils'
 import { extractZipCodeFromString } from 'utils'
 import getListings from 'pages/api/getListings'
+import getCities from 'pages/api/getCities'
 import { stateCodes } from '../enums'
+import { getStateKeyFromValue } from '../utils'
+import axios from 'axios'
 
 const suggestPlace = async (request, response) => {
   //   console.log('what is the request', request.query)
@@ -101,12 +105,11 @@ const suggestPlace = async (request, response) => {
               }, {})
 
             const req = cityStateZip
-            const listings = await getListings(req)
+            const data = await getListings(req)
 
-            return response.status(200).send({
-              routeTo: 'cityPage',
-              listings,
-            })
+            data.routeTo = 'cityPage'
+
+            return response.status(200).send(data)
           }
 
           /* CASE PREDICTION DIDN'T RETURN A ZIPCODE IT RECOGNIZED */
@@ -145,6 +148,20 @@ const suggestPlace = async (request, response) => {
             'what is primaryDescriptionChucks - no zipCode ',
             primaryGuessSubStr
           )
+
+          const stateAbr = getStateKeyFromValue(
+            primaryGuessSubStr[0],
+            stateCodes
+          )
+
+          //if it returns the state name proper
+          if (primaryGuessSubStr.length === 1 && stateAbr) {
+            //get top 20 cities by popuation
+            const data = await getCities()
+            const allCitiesUS = data.cities
+
+            extractCitiesInState(stateAbr, allCitiesUS)
+          }
 
           //if something comes back that isn't just city and state
           //ex.) space = [space place, gilbert, az]
