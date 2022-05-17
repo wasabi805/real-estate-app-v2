@@ -42,6 +42,14 @@ const Landing: React.FC = (props) => {
   
   }, [state.isLoading])
 
+  useEffect(() => {
+    console.log('State Updated', state)
+    if(state.searchResults.routeTo){
+      const url = state.searchResults.routeTo
+      router.push(url)
+    }
+  }, [state.searchResults.routeTo])
+
   const handleTestApiCall = ()=>{
     console.log('what is props', props)
   }

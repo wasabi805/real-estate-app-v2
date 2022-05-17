@@ -92,8 +92,6 @@ const useFilterListings = () => {
   /* Wait for updates to UI, then change the route  */
   useEffect(() => {
     handleUrlChange(state)
-    alert('ran')
-    console.log(state)
   }, [state.listings.filters])
 
   const handleUrlChange = (state: IinitialState) => {

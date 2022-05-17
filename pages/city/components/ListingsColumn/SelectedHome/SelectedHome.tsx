@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import fullHouse from 'public/fullHouse.jpg'
 import AppContext from 'context/appContext'
-import { SelectedHomesContainer } from 'components/City/styles'
-import { ListingsTableHeader } from 'components/City/ListingsColumn/ListingsTable/styles'
+import { SelectedHomesContainer } from '@pages/city/components/styles'
+import { ListingsTableHeader } from '@pages/city/components/ListingsColumn/ListingsTable/styles'
 
 import { Row, Col, Table } from 'antd'
 
@@ -12,7 +12,7 @@ const SelectedHome = () => {
   const { state, dispatch } = appContext
   const { searchResults, listingTable } = state
 
-  const allHomes = searchResults.data.listings
+  const allHomes = searchResults.data.props.listings
 
   const selectedHome = allHomes.filter(
     (home) => state.listings.currentHome[0] === home.property_id

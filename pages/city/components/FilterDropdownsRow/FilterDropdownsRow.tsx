@@ -5,9 +5,9 @@ import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import {
   FilterDropdownsContainer,
   FilterDropdownsRowStyles,
-} from '@components/City/FilterDropdownsRow/styles'
+} from '@pages/city/components/FilterDropdownsRow/styles'
 
-import AllFiltersButton from '@components/City/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersButton'
+import AllFiltersButton from '@pages/city/components/FilterDropdownsRow/FilterComponents/AllFilters/AllFiltersButton'
 import DropdownButton from '@components/_common/DropdownButton'
 
 import {
@@ -15,7 +15,7 @@ import {
   HomeType,
   BedsBaths,
   Price,
-} from '@components/City/FilterDropdownsRow/FilterComponents'
+} from '@pages/city/components/FilterDropdownsRow/FilterComponents'
 import { FILTER_DROPDOWNS_PANEL_KEYS } from 'utils/dictionaries'
 import ButtonComp from '@components/_common/ButtonComp'
 import useFilterListings from '@hooks/useFilterListings'

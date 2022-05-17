@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Menu, Dropdown } from 'antd'
-import { FilterButtonWrapper } from 'components/City/FilterDropdownsRow/styles'
+import { FilterButtonWrapper } from '@pages/city/components/FilterDropdownsRow/styles'
 import 'antd/dist/antd.css'
 
 interface ImenuItem {

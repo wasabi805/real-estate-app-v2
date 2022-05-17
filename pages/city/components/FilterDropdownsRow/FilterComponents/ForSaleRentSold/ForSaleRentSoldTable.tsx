@@ -7,8 +7,8 @@ import 'antd/dist/antd.css'
 import {
   ForSaleRentSoldContainer,
   SoldRadioWrapper,
-} from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
-import { ForSaleRentSoldTableFormat } from 'components/City/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
+} from '@pages/city/components/FilterDropdownsRow/FilterComponents/ForSaleRentSold/styles'
+import { ForSaleRentSoldTableFormat } from '@pages/city/components/FilterDropdownsRow/FilterComponents/ForSaleRentSold'
 import useFilterListings from '@hooks/useFilterListings'
 
 import { forSaleSoldRentCategory } from 'utils'

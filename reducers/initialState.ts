@@ -24,6 +24,7 @@ const initialState: IinitialState = {
   },
   fetchProperty: false,
   searchResults: {
+    routeTo: null,
     city: '',
     state: '',
 

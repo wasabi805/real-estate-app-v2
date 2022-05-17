@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import Card from '@components/City/ListingsColumn/ListingCards/Card'
+import Card from '@pages/city/components/ListingsColumn/ListingCards/Card'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
-import { ListingsCardWrapper } from 'components/City/ListingsColumn/ListingCards/styles'
+import { ListingsCardWrapper } from '@pages/city/components/ListingsColumn/ListingCards/styles'
 
 const ListingCards = () => {
   const appContext = useContext(AppContext)
@@ -11,7 +11,7 @@ const ListingCards = () => {
 
   return (
     <ListingsCardWrapper>
-      {searchResults.data.listings.map((house: Ilisting) => (
+      {searchResults.data.props.listings.map((house: Ilisting) => (
         <Card
           key={house.property_id}
           className={'listing-card'}

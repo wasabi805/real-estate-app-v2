@@ -4,10 +4,10 @@ import Image from 'next/image'
 import 'antd/dist/antd.css'
 import { CityWrapper } from './styles'
 import { MapColumnContainer, ListingsColumnContainer } from './styles'
-import Listings from '@components/City/Listings'
+import Listings from 'pages/city/components/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
-import { FilterDropdownsRow } from '@components/City/FilterDropdownsRow'
+import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 

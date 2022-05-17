@@ -29,6 +29,7 @@ export interface IinitialState {
   }
   fetchProperty: boolean
   searchResults: {
+    routeTo: null | string,
     data: {
       listings: Ilisting[]
     }

@@ -1,4 +1,5 @@
 import { IReducerSlice } from 'reducers/interface'
+import { sortIntergersAscending } from 'utils'
 
 export const setSeachField = <T extends IReducerSlice>({
   state,
@@ -55,7 +56,10 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
       ], //set the first property for the Listing table view
     },
     priceFilter: {
-      range: action.payload?.priceFilter.range,
+      //original
+      // range: action.payload?.priceFilter.range,
+
+      range:[0, 123456789],
       moveMin: {
         move: false,
         value: '',
@@ -71,7 +75,41 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
 export const fetchSuggestionSuccess = ({state, action})=>{
   console.log('what is action in reducer',action)
   console.log('what is state in reducer', state)
+
+    const prices = action.payload?.searchResults?.data?.props?.listings.map((h) => {
+    return h.price_raw
+  })
+  const sortedPrices = sortIntergersAscending(prices)
+
   return{
-    ...state
+    ...state,
+    fetchProperty: false,
+
+    searchResults: {
+      routeTo: action.payload?.searchResults?.data.props.routeTo ,
+      city: action.payload?.searchResults?.data.props.cityName,
+      state: action.payload?.searchResults?.data.props.stateName,
+      data: { ...action.payload?.searchResults?.data },
+      initialData: { ...action.payload?.searchResults?.data },
+    },
+
+    listingTable: {
+      currentHome: [
+        action.payload?.searchResults?.data.props.listings.length > 0 &&
+          action.payload?.searchResults?.data.props.listings[0]?.property_id,
+      ], //set the first property for the Listing table view
+    },
+
+    priceFilter: {
+      range: sortedPrices,
+      moveMin: {
+        move: false,
+        value: '',
+      },
+      moveMax: {
+        move: false,
+        value: '',
+      },
+    },
   }
 }
