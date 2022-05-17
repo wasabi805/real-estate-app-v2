@@ -46,5 +46,8 @@ export const getStateValueFromKey = (stateAbrv) => {
 }
 
 export const extractCitiesInState = (stateAbrv, allCitiesUS) => {
-  return allCitiesUS.filter((state)=>state.id === stateAbrv).map((state)=>(state.cities)).flat()
+  return allCitiesUS
+    .filter((state) => state.id === stateAbrv)
+    .map((state) => state.cities)
+    .flat()
 }

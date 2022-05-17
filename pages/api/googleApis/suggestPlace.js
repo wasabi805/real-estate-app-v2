@@ -12,7 +12,7 @@ import { stateCodes } from '../enums'
 import { getStateKeyFromValue } from '../utils'
 import axios from 'axios'
 
-import getGooglePlacesSuggestion from './getGooglePlacesSuggestion'
+import handleStandardFormSubmit from './handleStandardFormSubmit'
 
 const suggestPlace = async (request, response) => {
   //   console.log('what is the request', request.query)
@@ -28,13 +28,11 @@ const suggestPlace = async (request, response) => {
 
     //------------------    STANDARD SUBMIT    -------------------------------
 
-
-
     //-----------------------------------------------------------------
 
     isAutoComplete === 'true'
       ? handleAutoComplete()
-      : getGooglePlacesSuggestion(request, response)
+      : handleStandardFormSubmit(request, response)
 
     //-----------------------------------------------------------------
   } catch (err) {
