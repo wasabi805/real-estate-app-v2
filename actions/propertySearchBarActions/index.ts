@@ -57,14 +57,6 @@ export const updateStateWithSearchResults = ({
 //TODO MAKE THE INTERFACE FOR THIS
 export const FETCH_SUGGESTION_SUCCESS = 'FETCH_SUGGESTION_SUCCESS'
 export const fetchSugestionSuccess = (data) => {
-  console.log('what is data in action', data)
-
-  // const{ cityName, listings, stateName, zipCode, routeTo, meta } = data.props
-  // const prices = data.props?.listings.map((h) => {
-  //   return h.price_raw
-  // })
-  // const sortedPrices = sortIntergersAscending(prices)
-
   return {
     type: FETCH_SUGGESTION_SUCCESS,
     payload: {

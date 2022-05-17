@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppContext from 'context/appContext'
 import Image from 'next/image'
 import 'antd/dist/antd.css'
@@ -8,23 +8,28 @@ import Listings from '@pages/city/components/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
-
+import { useRouter } from 'next/router'
 import { Row, Col } from 'antd'
 
 const City = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
+  const router = useRouter()
 
   useEffect(() => {
-    console.log('did they make it?', props)
-  }, [props])
+    console.log('State Updated', state)
+    if (state.searchResults.routeTo !== state.searchResults.prevRoute) {
+      const url = state.searchResults.routeTo
+      console.log(Object.keys(router))
+      router.push(url)
+    }
+  }, [state.searchResults.routeTo])
 
   return (
     <CityWrapper>
       <Row>
         <Col>
-          {/* <input placeholder="uncomment this to get back auto search"></input> */}
-          {/* <PropertySearchBar /> */}
+          <PropertySearchBar />
         </Col>
       </Row>
       <Row>

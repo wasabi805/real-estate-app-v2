@@ -116,11 +116,6 @@ const useAutoComplete = () => {
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */
   const handleIsAutoComplete = (inputProps: IInputProps) => {
-    //the plan,
-    //step 1 get the auto complete suggestions from api
-    //step 2 update the reducer state with the suggestion( for things like updating the input field and to display specic search modal if needed )
-    //step 3 determine if route to state page or city page
-
     /* EXTRACT CITY AND STATE VALUES FROM HTML STRING RETURNED FROM GOOGLE AUTO-COMPLETE  */
     const { adr_address } = inputProps?.input!
     const adr_address_chunks = adr_address.split(',')

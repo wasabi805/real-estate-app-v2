@@ -19,6 +19,7 @@ let res = {
 
 const handleStandardFormSubmit = async (request, response) => {
   /* Start by spliiting up autocomplete string results */
+  console.log('what is request.query', request.query)
   const extractStateCityZip = async () => {
     const primaryGuess = autoCompleteResults.predictions[0].description
     const primaryGuessSubStr = primaryGuess
