@@ -38,6 +38,7 @@ const {
   SET_SEARCH_FIELD,
   AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS,
   UPDATE_STATE_WITH_SEARCH_RESULTS,
+  FETCH_SUGGESTION_SUCCESS
 } = PropertySearchBarActions
 
 const {
@@ -98,6 +99,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
   const handleUpdateLocation = () =>
     LocationAutoCompSlice.updateStateWithSearchResults({ state, action })
+
+    const handleFetchSuggestionSuccess = ()=>LocationAutoCompSlice.fetchSuggestionSuccess({state, action})
 
   /*----- SORT LISTINGS ROW BUTTONS-----*/
 
@@ -167,6 +170,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
     [SET_SEARCH_FIELD]: handleSetSearchField,
     [AUTO_COMPLETE_UPDATE_INPUT_AND_FETCH_LISTINGS]: handleUpdateAutoCompField,
     [UPDATE_STATE_WITH_SEARCH_RESULTS]: handleUpdateLocation,
+    [FETCH_SUGGESTION_SUCCESS]: handleFetchSuggestionSuccess,
 
     /*----- SORT LISTINGS ROW BUTTONS-----*/
     [TOGGLE_SORT_LISTINGS_PANEL]: handleToggleSortListingsPanel,

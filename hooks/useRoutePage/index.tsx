@@ -34,13 +34,13 @@ const useRoutePage = () => {
     // return routePaths[id]()
   }
 
-  useEffect(() => {
-    if (state.fetchProperty) {
-      alert('changed')
-      console.log('what is route', route)
-      router.push(route)
-    }
-  }, [state.fetchProperty])
+  // useEffect(() => {
+  //   if (state.fetchProperty) {
+  //     alert('changed')
+  //     console.log('what is route', route)
+  //     router.push(route)
+  //   }
+  // }, [state.fetchProperty])
 
   return { routeTo }
 }

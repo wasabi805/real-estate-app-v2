@@ -107,8 +107,10 @@ const PropertySearchBar = () => {
     )
   }, [])
 
+  
   return (
-    <input
+    <div>
+      <input
       className={properySearchInputStyles}
       ref={autoCompleteRef}
       id={'autocomplete'}
@@ -117,6 +119,8 @@ const PropertySearchBar = () => {
       name={'seach-input'}
       value={search.value}
     />
+    
+    </div>
   )
 }
 

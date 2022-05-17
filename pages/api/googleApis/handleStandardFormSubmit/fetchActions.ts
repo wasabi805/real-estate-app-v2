@@ -7,6 +7,7 @@ import { topTenCitiesByState } from '@pages/api/enums'
 
 import getListings from '@pages/api/getListings'
 import { extractZipCodeFromString } from 'utils'
+import { cityPageUrl } from '../urls'
 //STATE ABREV SENT AS STANDARD FORM SUBMIT
 export const handleFetchStateAbrv = (request, response, predictions) => {
   let res
@@ -43,25 +44,40 @@ export const zipCodeConfirmed = async (
   const req = cityStateZip
   const data = await getListings(req)
 
-  data.routeTo = 'cityPage'
-
-  return response.status(200).send(data)
+  const url = cityPageUrl({
+    cityName : cityStateZip.city,
+    stateName: cityStateZip.state,
+  })
+  
+  return response.status(200).send({
+    props:{
+      routeTo: url,
+      listings: data.listings,
+      cityName: cityStateZip.city,
+      stateName: cityStateZip.state,
+      zipCode: cityStateZip.zipCode,
+      meta: {
+        tracking_params: data.meta.tracking_params
+      }
+    }
+  })
 }
 
 export const zipCodeNotConfirmed = (response, allGuesses) => {
-  let clientRes = {
-    routeTo: '/',
-    modal: {
-      id: 'didYouMean',
-      isOpen: true,
-      props: {
-        stuff: 'things',
-        predictions: allGuesses, //  send back all guesses and have user select one of them
-      },
-    },
-  }
 
-  return response.status(200).send(clientRes)
+  return response.status(200).send({
+    props:{
+      modal: {
+        id: 'didYouMean',
+        isOpen: true,
+        props: {
+          stuff: 'things',
+          predictions: allGuesses, //  send back all guesses and have user select one of them
+        },
+      },
+
+    }
+  })
 }
 
 export const stateNameConfirmed = (response, primaryGuessSubStr, stateAbr) => {
@@ -87,10 +103,17 @@ export const cityOrCityAndStateConfirmed = async (
   }, {})
 
   const req = cityAndState
-  const listings = await getListings(req)
+  const data = await getListings(req)
 
   return response.status(200).send({
-    routeTo: 'cityPage',
-    listings,
+    props:{
+      routeTo: 'cityPage',
+      listings: data.listings,
+      stateName: cityAndState.state,
+      cityName: cityAndState.city,
+      meta: {
+        tracking_params: data.meta.tracking_params
+      }
+    },
   })
 }

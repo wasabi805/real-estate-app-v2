@@ -4,12 +4,12 @@ import { useUser } from '@auth0/nextjs-auth0'
 import React, { useContext } from 'react'
 import { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
 import AppContext from '../context/appContext'
-import { SearchSection } from './Landing'
+import Landing  from './landing'
 
 interface IHomeProps {
   res: any
 }
-const Home: NextPage<IHomeProps> = ({ res }) => {
+const Home: NextPage<IHomeProps> = (props) => {
   const { user, error, isLoading } = useUser()
 
   // console.log('what is res', res)
@@ -32,40 +32,24 @@ const Home: NextPage<IHomeProps> = ({ res }) => {
   return (
     <>
       {/* <GooglePlacesScript /> */}
-      <SearchSection />
+      <Landing props={props} />
       <TESTCOMP1 />
       <TESTCOMP2 />
     </>
   )
 }
+
+export async function getServerSideProps() {
+
+  return{
+    props:{
+      message : 'foo!',
+    }
+  }
+}
+
+
+
+
 export default Home
 
-// export const getStaticProps = async () => {
-//   var options = {
-//     method: 'GET',
-//     url: 'https://realtor.p.rapidapi.com/locations/auto-complete',
-//     params: { input: 'new york' },
-//     headers: {
-//       'x-rapidapi-host': 'realtor.p.rapidapi.com',
-//       'x-rapidapi-key': process.env.REALTOR_API_KEY,
-//     },
-//   }
-
-//   const res = await axios
-//     .request(options)
-//     .then(function (response) {
-//       console.log(response.data)
-//       return response.data
-//     })
-//     .catch(function (error) {
-//       console.error(error)
-//     })
-
-//   const res = 'temp value'
-
-//   return {
-//     props: {
-//       res: res,
-//     },
-//   }
-// }

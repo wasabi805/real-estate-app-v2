@@ -44,28 +44,28 @@ const CityDetails = (props) => {
   )
 }
 
-export const getServerSideProps = async (props) => {
-  let data = null
+// export const getServerSideProps = async (props) => {
+//   let data = null
 
-  const { params, query } = props
+//   const { params, query } = props
 
-  console.log({ params, query }, 'YEEE')
+//   console.log({ params, query }, 'YEEE')
 
-  try {
-    data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => response.json())
-      .then((json) => json)
-  } catch (err) {
-    console.log()
-  }
+//   try {
+//     data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+//       .then((response) => response.json())
+//       .then((json) => json)
+//   } catch (err) {
+//     console.log()
+//   }
 
-  return {
-    props: {
-      params,
-      query,
-    },
-  }
-}
+//   return {
+//     props: {
+//       params,
+//       query,
+//     },
+//   }
+// }
 
 // export async function getStaticPaths() {
 //   return {
@@ -75,4 +75,4 @@ export const getServerSideProps = async (props) => {
 //   }
 // }
 
-export default CityDetails
+export default React.memo(CityDetails)

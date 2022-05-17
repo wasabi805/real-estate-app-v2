@@ -9,7 +9,7 @@ import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newB
 import { forSaleRentSoldKey } from 'utils/contants'
 
 import {
-  ifWhiteSpaces,
+  joinStringWith,
   forSaleSoldRentCategory,
   homeTypeCategory,
   bathsCategory,
@@ -91,9 +91,10 @@ const useFilterListings = () => {
 
   /* Wait for updates to UI, then change the route  */
   useEffect(() => {
-    // handleRoute()
     handleUrlChange(state)
-  }, [state])
+    alert('ran')
+    console.log(state)
+  }, [state.listings.filters])
 
   const handleUrlChange = (state: IinitialState) => {
     const { city, state: stateLocation } = state.searchResults
@@ -101,7 +102,7 @@ const useFilterListings = () => {
       state.listings.filters
     const { isAscending, criteria } = state.listings.sort
 
-    const url = `/city/${ifWhiteSpaces(city)}/${stateLocation}`
+    const url = `/city/${joinStringWith(city , '-' )}/${stateLocation}`
 
     // removes any from the url string when clear button is clicked
     const bedsMin =
@@ -133,7 +134,7 @@ const useFilterListings = () => {
     const addFilter = Object.entries(query).some((val) => val)
 
     return router.push({
-      pathname: url + (addFilter ? '/filters' : '').trim(),
+      pathname: url + (addFilter ? '/filters' : '/stateFoo').trim(),
       query: query,
     })
   }

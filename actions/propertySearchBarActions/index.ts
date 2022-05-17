@@ -57,8 +57,11 @@ export const updateStateWithSearchResults = ({
 //TODO MAKE THE INTERFACE FOR THIS
 export const FETCH_SUGGESTION_SUCCESS = 'FETCH_SUGGESTION_SUCCESS'
 export const fetchSugestionSuccess = (data) => {
+  console.log('what is data in action', data)
   return {
     type: FETCH_SUGGESTION_SUCCESS,
-    payload: {},
+    payload: {
+      isLoading: false
+    },
   }
 }

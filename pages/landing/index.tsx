@@ -32,14 +32,19 @@ const BackgroundImage = styled.div(({ children }) => {
   }
 })
 
-const SearchSection: React.FC = ({ data }) => {
+const Landing: React.FC = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const router = useRouter()
 
   useEffect(() => {
     console.log('IS IT LOADING?', state.isLoading)
+  
   }, [state.isLoading])
+
+  const handleTestApiCall = ()=>{
+    console.log('what is props', props)
+  }
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
   // console.log('what is state when loaded?', state.search.isAutoComplete)
@@ -89,10 +94,12 @@ const SearchSection: React.FC = ({ data }) => {
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
         <PropertySearchBar />
+        <button onClick={handleTestApiCall} >GET LISTINGS</button>
       </div>
       <BackgroundImage />
     </SectionContainer>
   )
 }
 
-export default React.memo(SearchSection)
+
+export default Landing

@@ -67,3 +67,11 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
     },
   }
 }
+
+export const fetchSuggestionSuccess = ({state, action})=>{
+  console.log('what is action in reducer',action)
+  console.log('what is state in reducer', state)
+  return{
+    ...state
+  }
+}

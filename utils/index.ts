@@ -1,6 +1,6 @@
 /* Strings */
-export const ifWhiteSpaces = (string: string) => {
-  return string.split(' ').length > 1 ? string.split(' ').join('-') : string
+export const joinStringWith = (string: string, char: string) => {
+  return string.split(' ').length > 1 ? string.split(' ').join(char) : string
 }
 
 export const containsSubString = (str: string, subStr: string) => {

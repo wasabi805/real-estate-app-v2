@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const getListings = async (req, res) => {
-  console.log('request.query.realtorRequest', req)
   const { city, state, zipCode } = req
   try {
     // const test = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
@@ -10,7 +9,14 @@ const getListings = async (req, res) => {
 
     const options = {
       method: 'GET',
+      headers: {
+        'x-rapidapi-host': process.env.REALTOR_HOST,
+        'x-rapidapi-key': process.env.REALTOR_API_KEY,
+      },
       url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
+
+      data: req.body,
+
       params: {
         state_code: `${state}`,
         city: `${city}`,
@@ -18,16 +24,13 @@ const getListings = async (req, res) => {
         limit: '200',
         sort: 'relevance',
       },
-      headers: {
-        'x-rapidapi-host': process.env.REALTOR_HOST,
-        'x-rapidapi-key': process.env.REALTOR_API_KEY,
-      },
+     
     }
 
     let response = await axios
       .request(options)
-      .then((listings) => {
-        return listings.data
+      .then((resp) => {
+        return resp.data
       })
       .catch((error) => {
         console.error(error)
@@ -37,6 +40,7 @@ const getListings = async (req, res) => {
           },
         }
       })
+      
 
     return response
   } catch (err) {
