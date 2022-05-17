@@ -5,11 +5,11 @@ import 'antd/dist/antd.css'
 import {
   AllFiltersDrawerContainer,
   DrawerCotent,
-} from '@pages/city/components/FilterDropdownsRow/FilterComponents/AllFilters/styles'
+} from '@pages/City/components/FilterDropdownsRow/FilterComponents/AllFilters/styles'
 import PriceFilter from '../Price/components/PriceFilter'
 import BedsBath from '../BedsBath/BedsBath'
 import HomeType from '../HomeType/HomeType'
-import ForSaleRentSoldButtons from '@pages/city/components/FilterDropdownsRow/FilterComponents/ForSaleRentSold/ForSaleRentSoldButtons'
+import ForSaleRentSoldButtons from '@pages/City/components/FilterDropdownsRow/FilterComponents/ForSaleRentSold/ForSaleRentSoldButtons'
 import * as AllFiltersActions from 'actions/ListingsActions/FilterActions/allFiltersActions'
 const { setFilterDrawerOpen } = AllFiltersActions
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import PriceFilter from '@pages/city/components/FilterDropdownsRow/FilterComponents/Price/components/PriceFilter'
-import { PriceContainer } from '@pages/city/components/FilterDropdownsRow/FilterComponents/Price/styles'
+import PriceFilter from '@pages/City/components/FilterDropdownsRow/FilterComponents/Price/components/PriceFilter'
+import { PriceContainer } from '@pages/City/components/FilterDropdownsRow/FilterComponents/Price/styles'
 import PriceHistogram from './components/PriceHistogram'
 
 const Price = () => {

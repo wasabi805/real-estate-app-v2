@@ -27,6 +27,7 @@ const initialState: IinitialState = {
     routeTo: null,
     city: '',
     state: '',
+    topCities: [],
 
     // city: 'santa monica',
     // state: 'ca',

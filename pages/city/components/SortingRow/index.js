@@ -1,5 +1,5 @@
 import SortingRow, {
   AscendDescendTab,
-} from '@pages/city/components/SortingRow/SortingRow'
+} from '@pages/City/components/SortingRow/SortingRow'
 
 export { SortingRow, AscendDescendTab }

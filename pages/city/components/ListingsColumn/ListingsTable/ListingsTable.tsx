@@ -4,7 +4,7 @@ import * as ListingsActions from 'actions/ListingsActions'
 
 import { Table } from 'antd'
 import 'antd/dist/antd.css'
-import { ListingsTableContainer } from '@pages/city/components/styles'
+import { ListingsTableContainer } from '@pages/City/components/styles'
 import { columnNames } from './columnNames'
 
 const { setClickedRow } = ListingsActions

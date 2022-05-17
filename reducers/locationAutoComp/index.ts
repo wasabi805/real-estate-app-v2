@@ -91,6 +91,7 @@ export const fetchSuggestionSuccess = ({ state, action }) => {
       routeTo: action.payload?.searchResults?.data.props.routeTo,
       city: action.payload?.searchResults?.data.props.cityName,
       state: action.payload?.searchResults?.data.props.stateName,
+      topCities: action.payload?.searchResults?.data.props.topCities,
       data: { ...action.payload?.searchResults?.data },
       initialData: { ...action.payload?.searchResults?.data },
     },

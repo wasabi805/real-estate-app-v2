@@ -36,6 +36,7 @@ export interface IinitialState {
     initialData: []
     city: string
     state: string
+    topCities: any
   }
 
   filterDropdownsRow: {

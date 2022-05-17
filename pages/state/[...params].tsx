@@ -1,13 +1,7 @@
 import React from 'react'
-import TestComponent from './TestComponent.tsx'
 
 const LocationState = () => {
-  return (
-    <div>
-      Location State
-      <TestComponent />
-    </div>
-  )
+  return <div>Location State</div>
 }
 
-export default LocationState
+export default React.memo(LocationState)

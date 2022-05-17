@@ -10,7 +10,7 @@ import {
   RangedSliderRow,
   RangedSliderInputsRow,
   PriceSliderButtonContainer,
-} from '@pages/city/components/FilterDropdownsRow/FilterComponents/Price/styles'
+} from '@pages/City/components/FilterDropdownsRow/FilterComponents/Price/styles'
 
 const { setMinPriceFilterField, setMaxPriceFilterField } = PriceFilterActions
 

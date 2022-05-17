@@ -56,6 +56,7 @@ export const zipCodeConfirmed = async (
       cityName: cityStateZip.city,
       stateName: cityStateZip.state,
       zipCode: cityStateZip.zipCode,
+      topCities: [],
       meta: {
         tracking_params: data.meta.tracking_params,
       },
@@ -81,9 +82,13 @@ export const zipCodeNotConfirmed = (response, allGuesses) => {
 export const stateNameConfirmed = (response, primaryGuessSubStr, stateAbr) => {
   const topCities = extractCitiesInState(stateAbr, topTenCitiesByState)
 
+  const url = `/state/${primaryGuessSubStr[0]}`
+
   response.status(200).send({
     props: {
-      routeTo: 'statePage',
+      routeTo: url,
+      cityName: '',
+      listings: [],
       stateName: primaryGuessSubStr[0],
       topCities,
     },
@@ -113,6 +118,7 @@ export const cityOrCityAndStateConfirmed = async (
       listings: data.listings,
       cityName: cityAndState.city,
       stateName: cityAndState.state,
+      topCities: [],
       meta: {
         tracking_params: data.meta.tracking_params,
       },

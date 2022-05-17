@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import fullHouse from 'public/fullHouse.jpg'
 import AppContext from 'context/appContext'
-import { SelectedHomesContainer } from '@pages/city/components/styles'
-import { ListingsTableHeader } from '@pages/city/components/ListingsColumn/ListingsTable/styles'
+import { SelectedHomesContainer } from '@pages/City/components/styles'
+import { ListingsTableHeader } from '@pages/City/components/ListingsColumn/ListingsTable/styles'
 
 import { Row, Col, Table } from 'antd'
 
