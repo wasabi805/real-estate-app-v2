@@ -65,11 +65,10 @@ export const fetchSugestionSuccess = (data) => {
   // })
   // const sortedPrices = sortIntergersAscending(prices)
 
-
   return {
     type: FETCH_SUGGESTION_SUCCESS,
     payload: {
-      searchResults: data
-    }
+      searchResults: data,
+    },
   }
 }

@@ -39,18 +39,17 @@ const Landing: React.FC = (props) => {
 
   useEffect(() => {
     console.log('IS IT LOADING?', state.isLoading)
-  
   }, [state.isLoading])
 
   useEffect(() => {
     console.log('State Updated', state)
-    if(state.searchResults.routeTo){
+    if (state.searchResults.routeTo) {
       const url = state.searchResults.routeTo
       router.push(url)
     }
   }, [state.searchResults.routeTo])
 
-  const handleTestApiCall = ()=>{
+  const handleTestApiCall = () => {
     console.log('what is props', props)
   }
 
@@ -102,12 +101,11 @@ const Landing: React.FC = (props) => {
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
         <PropertySearchBar />
-        <button onClick={handleTestApiCall} >GET LISTINGS</button>
+        <button onClick={handleTestApiCall}>GET LISTINGS</button>
       </div>
       <BackgroundImage />
     </SectionContainer>
   )
 }
-
 
 export default Landing

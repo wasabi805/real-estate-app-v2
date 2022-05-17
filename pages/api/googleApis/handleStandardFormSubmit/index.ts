@@ -98,7 +98,6 @@ const handleStandardFormSubmit = async (request, response) => {
 
   let input
   if (request.query.isAutoComplete === 'false') {
-
     request.query.zipCode
       ? (input = request.query.zipCode)
       : (input = request.query.name)

@@ -24,7 +24,6 @@ const getListings = async (req, res) => {
         limit: '200',
         sort: 'relevance',
       },
-     
     }
 
     let response = await axios
@@ -40,7 +39,6 @@ const getListings = async (req, res) => {
           },
         }
       })
-      
 
     return response
   } catch (err) {

@@ -45,28 +45,27 @@ export const zipCodeConfirmed = async (
   const data = await getListings(req)
 
   const url = cityPageUrl({
-    cityName : cityStateZip.city,
+    cityName: cityStateZip.city,
     stateName: cityStateZip.state,
   })
-  
+
   return response.status(200).send({
-    props:{
+    props: {
       routeTo: url,
       listings: data.listings,
       cityName: cityStateZip.city,
       stateName: cityStateZip.state,
       zipCode: cityStateZip.zipCode,
       meta: {
-        tracking_params: data.meta.tracking_params
-      }
-    }
+        tracking_params: data.meta.tracking_params,
+      },
+    },
   })
 }
 
 export const zipCodeNotConfirmed = (response, allGuesses) => {
-
   return response.status(200).send({
-    props:{
+    props: {
       modal: {
         id: 'didYouMean',
         isOpen: true,
@@ -75,8 +74,7 @@ export const zipCodeNotConfirmed = (response, allGuesses) => {
           predictions: allGuesses, //  send back all guesses and have user select one of them
         },
       },
-
-    }
+    },
   })
 }
 
@@ -105,15 +103,19 @@ export const cityOrCityAndStateConfirmed = async (
   const req = cityAndState
   const data = await getListings(req)
 
+  const url = cityPageUrl({
+    cityName: cityAndState.city,
+    stateName: cityAndState.state,
+  })
   return response.status(200).send({
-    props:{
-      routeTo: 'cityPage',
+    props: {
+      routeTo: url,
       listings: data.listings,
-      stateName: cityAndState.state,
       cityName: cityAndState.city,
+      stateName: cityAndState.state,
       meta: {
-        tracking_params: data.meta.tracking_params
-      }
+        tracking_params: data.meta.tracking_params,
+      },
     },
   })
 }

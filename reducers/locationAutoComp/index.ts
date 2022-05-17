@@ -59,7 +59,7 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
       //original
       // range: action.payload?.priceFilter.range,
 
-      range:[0, 123456789],
+      range: [0, 123456789],
       moveMin: {
         move: false,
         value: '',
@@ -72,21 +72,23 @@ export const updateStateWithSearchResults = <T extends IReducerSlice>({
   }
 }
 
-export const fetchSuggestionSuccess = ({state, action})=>{
-  console.log('what is action in reducer',action)
+export const fetchSuggestionSuccess = ({ state, action }) => {
+  console.log('what is action in reducer', action)
   console.log('what is state in reducer', state)
 
-    const prices = action.payload?.searchResults?.data?.props?.listings.map((h) => {
-    return h.price_raw
-  })
+  const prices = action.payload?.searchResults?.data?.props?.listings.map(
+    (h) => {
+      return h.price_raw
+    }
+  )
   const sortedPrices = sortIntergersAscending(prices)
 
-  return{
+  return {
     ...state,
     fetchProperty: false,
 
     searchResults: {
-      routeTo: action.payload?.searchResults?.data.props.routeTo ,
+      routeTo: action.payload?.searchResults?.data.props.routeTo,
       city: action.payload?.searchResults?.data.props.cityName,
       state: action.payload?.searchResults?.data.props.stateName,
       data: { ...action.payload?.searchResults?.data },

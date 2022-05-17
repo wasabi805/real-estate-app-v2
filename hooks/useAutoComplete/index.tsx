@@ -103,7 +103,7 @@ const useAutoComplete = () => {
     )
     console.log('did i come back with results?', data)
 
-    dispatch( fetchSugestionSuccess(data))
+    dispatch(fetchSugestionSuccess(data))
 
     // dispatch(
     //     updateStateWithSearchResults({
@@ -112,7 +112,6 @@ const useAutoComplete = () => {
     //       state: state,
     //     })
     //   )
-
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */

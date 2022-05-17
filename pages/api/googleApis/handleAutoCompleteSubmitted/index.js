@@ -12,27 +12,25 @@
 //   import { getStateKeyFromValue } from '../utils'
 //   import axios from 'axios'
 
-const handleAutoCompleteSubmitted = (request,response)=>{
-    console.log('AUTOCOMPLETE - Request ', request.query)
-      response.send('AUTOCOMPLETE REQUEST SENT IN!!!!!!!!!')
+const handleAutoCompleteSubmitted = (request, response) => {
+  console.log('AUTOCOMPLETE - Request ', request.query)
+  response.send('AUTOCOMPLETE REQUEST SENT IN!!!!!!!!!')
 
-      const options = {
-        method: 'GET',
-        url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
-        params: {
-          state_code: `${stateCode}`,
-          city: `${cityName}`,
-          offset: '0',
-          limit: '200',
-          sort: 'relevance',
-        },
-        headers: {
-          'x-rapidapi-host': 'realtor.p.rapidapi.com',
-          'x-rapidapi-key': process.env.REALTOR_API_KEY,
-        },
-      }
-
-      
+  const options = {
+    method: 'GET',
+    url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
+    params: {
+      state_code: `${stateCode}`,
+      city: `${cityName}`,
+      offset: '0',
+      limit: '200',
+      sort: 'relevance',
+    },
+    headers: {
+      'x-rapidapi-host': 'realtor.p.rapidapi.com',
+      'x-rapidapi-key': process.env.REALTOR_API_KEY,
+    },
+  }
 }
 
 export default handleAutoCompleteSubmitted

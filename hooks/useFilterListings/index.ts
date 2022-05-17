@@ -100,7 +100,7 @@ const useFilterListings = () => {
       state.listings.filters
     const { isAscending, criteria } = state.listings.sort
 
-    const url = `/city/${joinStringWith(city , '-' )}/${stateLocation}`
+    const url = `/city/${joinStringWith(city, '-')}/${stateLocation}`
 
     // removes any from the url string when clear button is clicked
     const bedsMin =
