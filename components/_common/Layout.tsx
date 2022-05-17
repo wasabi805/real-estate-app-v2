@@ -5,7 +5,7 @@ import FormInput from './FormInput'
 import { formInputStyles } from './styles'
 import AppContext from 'context/appContext'
 import * as LoginModalActions from 'actions/modalActions'
-import { AllFiltersDrawer } from '@pages/City/components/FilterDropdownsRow/FilterComponents/AllFilters'
+import { AllFiltersDrawer } from '@pages/city/components/FilterDropdownsRow/FilterComponents/AllFilters'
 
 import LoginModal from '@components/_common/modals/LoginModal'
 

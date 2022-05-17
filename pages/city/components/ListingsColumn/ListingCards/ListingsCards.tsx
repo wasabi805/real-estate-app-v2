@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
-import Card from '@pages/City/components/ListingsColumn/ListingCards/Card'
+import Card from '@pages/city/components/ListingsColumn/ListingCards/Card'
 import { Ilisting } from 'actions/propertySearchBarActions/interface'
-import { ListingsCardWrapper } from '@pages/City/components/ListingsColumn/ListingCards/styles'
+import { ListingsCardWrapper } from '@pages/city/components/ListingsColumn/ListingCards/styles'
 
 const ListingCards = () => {
   const appContext = useContext(AppContext)

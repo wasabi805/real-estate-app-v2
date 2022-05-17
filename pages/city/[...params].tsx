@@ -4,14 +4,14 @@ import Image from 'next/image'
 import 'antd/dist/antd.css'
 import { CityWrapper } from './styles'
 import { MapColumnContainer, ListingsColumnContainer } from './styles'
-import Listings from '@pages/City/components/Listings'
+import Listings from '@pages/city/components/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
-import { FilterDropdownsRow } from '@pages/City/components/FilterDropdownsRow'
+import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 
 import { Row, Col } from 'antd'
 
-const CityDetails = (props) => {
+const City = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
 
@@ -44,35 +44,4 @@ const CityDetails = (props) => {
   )
 }
 
-// export const getServerSideProps = async (props) => {
-//   let data = null
-
-//   const { params, query } = props
-
-//   console.log({ params, query }, 'YEEE')
-
-//   try {
-//     data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-//       .then((response) => response.json())
-//       .then((json) => json)
-//   } catch (err) {
-//     console.log()
-//   }
-
-//   return {
-//     props: {
-//       params,
-//       query,
-//     },
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   return {
-//     // paths: ['/city/city-name' ,'/city/city-name/filters'],
-//     paths: ['/city/params'],
-//     fallback: true, // false or 'blocking'
-//   }
-// }
-
-export default React.memo(CityDetails)
+export default City
