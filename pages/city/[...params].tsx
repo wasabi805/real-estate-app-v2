@@ -18,10 +18,6 @@ const City = (props) => {
   const { state, dispatch } = appContext
   const router = useRouter()
 
-  useEffect(() => {
-    console.log('changes in City ', state)
-  }, [state])
-
   return (
     <CityWrapper>
       <Row>

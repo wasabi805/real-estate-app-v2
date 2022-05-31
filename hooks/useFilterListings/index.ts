@@ -39,9 +39,6 @@ import {
 const useFilterListings = () => {
   const { dispatch, state } = useContext(AppContext)
   const router = useRouter()
-  const history = useHistory()
-
-  console.log('what is history at comp', history)
 
   // Updates changes in the UI and appReducer
   const dispatchAction = (action: any) => {
@@ -96,7 +93,7 @@ const useFilterListings = () => {
 
   /* fires from useEffect in the Listings component */
   const handleUrlChange = (state: IinitialState) => {
-    const {pathname, query } = buildUrlFilterString(state)
+    const { pathname, query } = buildUrlFilterString(state)
 
     return router.push({
       pathname,

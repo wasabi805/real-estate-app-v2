@@ -22,8 +22,7 @@ export const HistoryProvider: React.FC = ({ children }) => {
   const { state } = useContext(AppContext)
 
   const [historyState, setHistoryState] = useState([])
-  console.log('what is historyState', historyState)
-  console.log('what can i use in router', useRouter())
+  // console.log('what is historyState', historyState)
 
   function back() {
     for (let i = historyState.length - 2; i >= 0; i--) {

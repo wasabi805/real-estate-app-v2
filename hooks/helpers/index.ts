@@ -6,13 +6,16 @@ import {
   nAbbreviator,
 } from 'utils'
 
-export const buildUrlFilterString = (state: any) => {
+export const buildUrlFilterString = (state: any, routeTo = null) => {
   const { city, state: stateLocation } = state.searchResults
 
   const { forSaleRentSold, price, homeType, bedsBaths } = state.listings.filters
   const { isAscending, criteria } = state.listings.sort
+  let url
 
-  const url = `/city/${joinStringWith(city, '-')}/${stateLocation}`
+  routeTo
+    ? (url = routeTo)
+    : (url = `/city/${joinStringWith(city, '-')}/${stateLocation}`)
 
   // removes any from the url string when clear button is clicked
   const bedsMin =
