@@ -5,6 +5,7 @@ import { IHooksParam } from '@hooks/interfaces'
 import useAppModal from '@hooks/useAppModal'
 import * as GlobalActions from 'actions/GlobalActions'
 import * as PropertySearchBarActions from 'actions/propertySearchBarActions'
+import { useRouter } from 'next/router'
 
 import {
   containsSubString,
@@ -31,6 +32,7 @@ const useAutoComplete = () => {
     zipCode: null | string
   }
 
+  const router = useRouter()
   const { setIsLoading } = GlobalActions
   const { fetchSugestionSuccess, updateStateWithSearchResults } =
     PropertySearchBarActions
@@ -102,8 +104,21 @@ const useAutoComplete = () => {
       { params: request }
     )
     console.log('did i come back with results?', data)
+    const { routeTo } = data.data?.props
 
-    dispatch(fetchSugestionSuccess(data))
+    const { forSaleRentSold, price, homeType, bedsBaths } =
+      state.listings.filters
+
+    console.log('did filters persist?', {
+      forSaleRentSold,
+      price,
+      homeType,
+      bedsBaths,
+    })
+
+    router.push(routeTo)
+    //TODO: WIll need to have ability to make fetches for listings w/ existing filter buttons clicked
+    dispatch(fetchSugestionSuccess(data)) // w/o considering any filter buttons clicked
 
     // dispatch(
     //     updateStateWithSearchResults({

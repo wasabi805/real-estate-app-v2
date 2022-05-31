@@ -12,7 +12,7 @@ import { cityPageUrl } from '../urls'
 export const handleFetchStateAbrv = (request, response, predictions) => {
   let res
   const fullStateName = getStateValueFromKey(
-    containsStateCode(request.query.name.toUpperCase())
+    containsStateCode(request.query.name.toLowerCase())
   )
   res = {
     props: {

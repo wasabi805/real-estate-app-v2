@@ -18,9 +18,12 @@ const HistoryContext = createContext<IuseHistory>({} as IuseHistory)
 
 export const HistoryProvider: React.FC = ({ children }) => {
   const { asPath, push: pushRoute, pathname } = useRouter()
+
   const { state } = useContext(AppContext)
 
   const [historyState, setHistoryState] = useState([])
+  console.log('what is historyState', historyState)
+  console.log('what can i use in router', useRouter())
 
   function back() {
     for (let i = historyState.length - 2; i >= 0; i--) {
