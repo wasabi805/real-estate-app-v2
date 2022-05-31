@@ -7,6 +7,7 @@ import * as ListingsFilterActions from 'actions/ListingsActions/FilterActions/be
 import * as ListingsSortActions from 'actions/ListingsActions/SortActions'
 import * as NewBedsBathsActions from 'actions/ListingsActions/FilterActions/newBedsBathsActions'
 import { forSaleRentSoldKey } from 'utils/contants'
+import { useHistory } from '@hooks/useHistory'
 
 import {
   joinStringWith,
@@ -37,6 +38,9 @@ import {
 const useFilterListings = () => {
   const { dispatch, state } = useContext(AppContext)
   const router = useRouter()
+  const history = useHistory()
+
+  console.log('what is history at comp', history)
 
   // Updates changes in the UI and appReducer
   const dispatchAction = (action: any) => {
@@ -89,11 +93,7 @@ const useFilterListings = () => {
     return filterCategory[id]()
   }
 
-  /* Wait for updates to UI, then change the route  */
-  useEffect(() => {
-    handleUrlChange(state)
-  }, [state.listings.filters])
-
+  /* fires from useEffect in the Listings component */
   const handleUrlChange = (state: IinitialState) => {
     const { city, state: stateLocation } = state.searchResults
     const { forSaleRentSold, price, homeType, bedsBaths } =
@@ -132,12 +132,12 @@ const useFilterListings = () => {
     const addFilter = Object.entries(query).some((val) => val)
 
     return router.push({
-      pathname: url + (addFilter ? '/filters' : '/stateFoo').trim(),
+      pathname: url + (addFilter ? '/filters' : '/').trim(),
       query: query,
     })
   }
 
-  return { filterListings }
+  return { filterListings, handleUrlChange }
 }
 
 export default useFilterListings

@@ -9,21 +9,14 @@ import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 import { useRouter } from 'next/router'
+import { useHistory } from '@hooks/useHistory'
+
 import { Row, Col } from 'antd'
 
 const City = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
   const router = useRouter()
-
-  useEffect(() => {
-    console.log('State Updated', state)
-    if (state.searchResults.routeTo !== state.searchResults.prevRoute) {
-      const url = state.searchResults.routeTo
-      console.log(Object.keys(router))
-      router.push(url)
-    }
-  }, [state.searchResults.routeTo])
 
   return (
     <CityWrapper>

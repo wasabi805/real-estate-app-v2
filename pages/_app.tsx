@@ -6,6 +6,7 @@ import AppContext from 'context/appContext'
 import appReducer from 'reducers/appReducer'
 import initialState from 'reducers/initialState'
 import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
+import { HistoryProvider } from 'hooks/useHistory'
 
 interface IAppProps extends AppProps {
   AppData: any
@@ -22,9 +23,11 @@ function App({ Component, pageProps, AppData }: IAppProps) {
           dispatch,
         }}
       >
-        <PageLayout>
-          <Component {...pageProps} />
-        </PageLayout>
+        <HistoryProvider>
+          <PageLayout>
+            <Component {...pageProps} />
+          </PageLayout>
+        </HistoryProvider>
       </AppContext.Provider>
     </UserProvider>
   )
