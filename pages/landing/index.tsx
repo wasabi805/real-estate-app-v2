@@ -49,8 +49,8 @@ const Landing: React.FC = (props) => {
     }
   }, [state.searchResults.routeTo])
 
-  const handleTestApiCall = () => {
-    console.log('what is props', props)
+  const handleClearSession = () => {
+    sessionStorage.setItem('history', JSON.stringify([]))
   }
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA
@@ -101,7 +101,7 @@ const Landing: React.FC = (props) => {
       <div className={SearchSectionContentStyle}>
         <h3 className={SearchSectionHeaderStyle}>Find a home!</h3>
         <PropertySearchBar />
-        <button onClick={handleTestApiCall}>GET LISTINGS</button>
+        <button onClick={handleClearSession}>Clear Session History</button>
       </div>
       <BackgroundImage />
     </SectionContainer>

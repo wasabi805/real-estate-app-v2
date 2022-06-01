@@ -97,7 +97,7 @@ const useAutoComplete = () => {
     zipCode: null,
   }
 
-  const fetchSugestion = async (request: IRequestParam) => {
+  const fetchSugestion = async (request: IRequestParam, name: string) => {
     dispatch(setIsLoading(true))
 
     const data = await axios.get(
@@ -107,21 +107,68 @@ const useAutoComplete = () => {
     console.log('did i come back with results?', data)
     const { routeTo } = data.data?.props
 
+    if (!sessionStorage.history) {
+      sessionStorage.setItem('history', JSON.stringify([]))
+    }
+
+    let history = JSON.parse(sessionStorage.history)
+
+    console.log('what is the name', name)
+    console.log('what is data', data)
+
+    let updateState = {
+      ...state,
+      search: {
+        ...state.search,
+        value: name,
+      },
+      searchResults: {
+        ...state.searchResults,
+        city: data.data.props.cityName,
+        state: data.data.props.stateName,
+
+        data: {
+          ...state.searchResults.data,
+          props: {
+            ...state.searchResults.data?.props,
+            cityName: data.data.props.cityName,
+            stateName: data.data.props.stateName,
+            zipCode: data.data.props.zipCode,
+            listings: data.data.props.listings || 'fooBar',
+          },
+        },
+      },
+    }
+
+    if (history.length === 0) {
+      history = [
+        {
+          url: buildUrlFilterString(state, routeTo).pathname,
+          state: updateState,
+        },
+      ]
+      sessionStorage.setItem('history', JSON.stringify(history))
+    } else {
+      history = [
+        ...history,
+        {
+          url: buildUrlFilterString(state, routeTo).pathname,
+          state: updateState,
+        },
+      ]
+      sessionStorage.setItem('history', JSON.stringify(history))
+    }
+
     router.push({
       pathname: buildUrlFilterString(state, routeTo).pathname,
       query: buildUrlFilterString(state, routeTo).query,
+      // options:{foo: 'bar'}
     })
 
     //TODO: WIll need to have ability to make fetches for listings w/ existing filter buttons clicked
-    dispatch(fetchSugestionSuccess(data)) // w/o considering any filter buttons clicked
+    //DO THAT HERE
 
-    // dispatch(
-    //     updateStateWithSearchResults({
-    //       data: autoCompleteResults.data,
-    //       city: city,
-    //       state: state,
-    //     })
-    //   )
+    dispatch(fetchSugestionSuccess(data)) // w/o considering any filter buttons clicked
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */
@@ -199,7 +246,7 @@ const useAutoComplete = () => {
     //TODO: instead of fetching return it back to PropertySearchBar Comp and have
     // getServerSideProps do the fetching
     // return setAutoCompleteResp(request)
-    fetchSugestion(request)
+    fetchSugestion(request, name)
   }
 
   /* -----  ----- */

@@ -17,48 +17,25 @@ interface IuseHistory {
 const HistoryContext = createContext<IuseHistory>({} as IuseHistory)
 
 export const HistoryProvider: React.FC = ({ children }) => {
-  const { asPath, push: pushRoute, pathname } = useRouter()
+  // const { asPath, push: pushRoute, pathname } = useRouter()
+  const router = useRouter()
 
   const { state } = useContext(AppContext)
 
   const [historyState, setHistoryState] = useState([])
-  // console.log('what is historyState', historyState)
-
-  function back() {
-    for (let i = historyState.length - 2; i >= 0; i--) {
-      const route = historyState[i]
-      if (!route.includes('#') && route !== pathname) {
-        pushRoute(route)
-
-        // if you want to pop history on back
-        const newHistory = historyState.slice(0, i)
-        setHistoryState(newHistory)
-
-        break
-      }
-    }
-  }
-
-  const push = ({ url }) => {
-    console.log('what is url', url)
-  }
 
   const historyItem = {
-    url: asPath,
+    url: router.asPath,
     state: state,
   }
   useEffect(() => {
-    console.log('asPath', asPath)
-
     setHistoryState((previous) => [...previous, historyItem])
-  }, [asPath])
+  }, [router.asPath])
 
   return (
     <HistoryContext.Provider
       value={{
-        back,
-        push,
-        // history: historyState,
+        history: historyState,
         // setHistory: setHistoryState,
       }}
     >

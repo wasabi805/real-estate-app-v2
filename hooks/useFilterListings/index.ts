@@ -67,11 +67,8 @@ const useFilterListings = () => {
       homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),
-      baths: () => {
-        console.log(param.className!)
-        dispatchAction(setFilterCurrentBathsAmount(param.className!))
-      },
-
+      baths: () =>
+        dispatchAction(setFilterCurrentBathsAmount(param.className!)),
       clearData: () => {
         const { filterCategory } = param.props!
 
