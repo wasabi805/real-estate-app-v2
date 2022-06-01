@@ -50,7 +50,7 @@ const Landing: React.FC = (props) => {
   }, [state.searchResults.routeTo])
 
   const handleClearSession = () => {
-    sessionStorage.setItem('history', JSON.stringify([]))
+    sessionStorage.clear()
   }
 
   // UNCOMMENT TO ALLOW LISTINGS TO COME FROM API and NOT MOCKDATA

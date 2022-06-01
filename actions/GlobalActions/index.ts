@@ -17,3 +17,14 @@ export const setIsLoading = (boolean: boolean) => {
     },
   }
 }
+
+export const SET_PREVIOUS_STATE = 'SET_PREVIOUS_STATE'
+export const setPreviousState = (prevState) => {
+  return {
+    type: SET_PREVIOUS_STATE,
+    payload: {
+      state: prevState.state,
+      url: prevState.url,
+    },
+  }
+}

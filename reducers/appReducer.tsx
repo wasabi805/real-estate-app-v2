@@ -25,7 +25,7 @@ import { IAction } from 'actions/interface'
 
 /*----- TYPES -----*/
 
-const { SET_IS_LOADING } = GlobalActions
+const { SET_IS_LOADING, SET_PREVIOUS_STATE } = GlobalActions
 
 const {
   RENDER_LOGIN_MODLE,
@@ -72,6 +72,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
   /*----- APP STATE -----*/
 
   const handleSetIsLoading = () => GlobalSlice.setIsLoading({ state, action })
+  const handleSetPreviousState = () =>
+    GlobalSlice.setPreviousState({ state, action })
 
   /*----- LOGIN MODAL -----*/
 
@@ -160,6 +162,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
   const setState: Record<string, () => void> = {
     /*-----  GLOBAL -----*/
     [SET_IS_LOADING]: handleSetIsLoading,
+    [SET_PREVIOUS_STATE]: handleSetPreviousState,
 
     /*-----  LOGIN MODAL -----*/
     [RENDER_LOGIN_MODLE]: handleRenderLoginModal,
