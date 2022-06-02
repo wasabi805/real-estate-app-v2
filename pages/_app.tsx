@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { UserProvider } from '@auth0/nextjs-auth0'
-import React, { useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect, useRef } from 'react'
 import AppContext from 'context/appContext'
 import appReducer from 'reducers/appReducer'
 import initialState from 'reducers/initialState'
@@ -23,21 +23,18 @@ function App({ Component, pageProps, AppData }: IAppProps) {
 
   useEffect(() => {
     router.beforePopState((e) => {
-      console.log('what is e', e.idx)
+     
       const idx = e.idx - 2
-      console.log('what is idx', idx)
-      const prevStates =
-        sessionStorage.history && JSON.parse(sessionStorage.history)
-      const prevState = prevStates[idx]
+      
+      const history = JSON.parse(sessionStorage.history)
+      history.currentHistoryIdx = idx
+      console.log('did history update', history)
+      localStorage.setItem('history', JSON.stringify(history))
 
-      console.log('what is prevState', prevState)
+      const prevState = history.instances[idx]
+      console.log('what is history', history)
 
       dispatch(setPreviousState(prevState))
-
-      console.log(
-        'what is sessionStorage at app',
-        JSON.parse(sessionStorage.history)
-      )
     })
   }, [router])
 

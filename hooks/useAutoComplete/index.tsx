@@ -108,13 +108,18 @@ const useAutoComplete = () => {
     const { routeTo } = data.data?.props
 
     if (!sessionStorage.history) {
-      sessionStorage.setItem('history', JSON.stringify([]))
+      sessionStorage.setItem('history', JSON.stringify({
+        currentHistoryIdx:'',
+        instances:[]
+      }))
     }
 
+ 
+    // let history = JSON.parse(sessionStorage.history.instances)
     let history = JSON.parse(sessionStorage.history)
 
     console.log('what is the name', name)
-    console.log('what is data', data)
+    console.log('what is history', history.history)
 
     let updateState = {
       ...state,
@@ -140,23 +145,31 @@ const useAutoComplete = () => {
       },
     }
 
-    if (history.length === 0) {
-      history = [
-        {
-          url: buildUrlFilterString(state, routeTo).pathname,
-          state: updateState,
-        },
-      ]
-      sessionStorage.setItem('history', JSON.stringify(history))
+    let newHistory;
+
+    console.log('history RIGHT BEFORE', history)
+    if (history?.instances.length === 0) {
+      newHistory = {
+        currentHistoryIdx: history.currentHistoryIdx,
+        instances: [
+          {
+            url: buildUrlFilterString(state, routeTo).pathname,
+            state: updateState,
+          },
+        ]
+      }
+      sessionStorage.setItem('history', JSON.stringify(newHistory))
     } else {
-      history = [
-        ...history,
-        {
+      
+      newHistory = {
+        currentHistoryIdx: history.currentHistoryIdx,
+        instances: [ ...history.instances, {
           url: buildUrlFilterString(state, routeTo).pathname,
           state: updateState,
-        },
-      ]
-      sessionStorage.setItem('history', JSON.stringify(history))
+        },]
+      }
+      console.log('is newHistory defined?', newHistory)
+      sessionStorage.setItem('history', JSON.stringify(newHistory))
     }
 
     router.push({

@@ -12,7 +12,7 @@ const SelectedHome = () => {
   const { state, dispatch } = appContext
   const { searchResults, listingTable } = state
 
-  const allHomes = searchResults.data.props.listings
+  const allHomes = searchResults?.data?.props?.listings || []
 
   const selectedHome = allHomes.filter(
     (home) => state.listings.currentHome[0] === home.property_id

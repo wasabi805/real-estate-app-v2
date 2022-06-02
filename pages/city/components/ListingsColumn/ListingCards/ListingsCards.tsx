@@ -11,7 +11,7 @@ const ListingCards = () => {
 
   return (
     <ListingsCardWrapper>
-      {searchResults.data.props.listings.map((house: Ilisting) => (
+      {searchResults?.data?.props?.listings.map((house: Ilisting) => (
         <Card
           key={house.property_id}
           className={'listing-card'}
