@@ -37,12 +37,6 @@ const Landing: React.FC = (props) => {
   const { state, dispatch } = appContext
   const router = useRouter()
 
-  useEffect(() => {
-    console.log('IS IT LOADING?', state.isLoading)
-  }, [state.isLoading])
-
-
-
   const handleClearSession = () => {
     sessionStorage.clear()
   }

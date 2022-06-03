@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const getListings = async (req, res) => {
+
   console.log('what is req?????', Object.keys(req))
-  const { city, state} = req.query
+  const { city, state} = req?.query
   try {
     // const test = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
     // await response.status(200).send({ foo:'bar'})
