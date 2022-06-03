@@ -1,5 +1,6 @@
 import { IReducerSlice } from 'reducers/interface'
 import { updateNestedObj } from 'utils/helpers'
+import { filtersPath } from 'utils/contants'
 import {
   forSaleRentSoldPath,
   priceFilterPath,
@@ -127,9 +128,13 @@ export const setFilterByPropertyType = <T extends IReducerSlice>({
 }: T) => {
   const { filterBy } = action.payload?.listings?.filters?.forSaleRentSold!
 
-  return updateNestedObj(forSaleRentSoldPath)({
-    ...state.listings.filters.forSaleRentSold,
-    filterBy,
+  return updateNestedObj(filtersPath)({
+    ...state.listings.filters,
+    filterButtonClicked: true,
+    forSaleRentSold: {
+      ...state.listings.filters.forSaleRentSold,
+      filterBy,
+    },
   })(state)
 }
 
@@ -208,6 +213,7 @@ export const setSelectedHomeType = <T extends IReducerSlice>({
   const { selected } = action.payload?.listings?.filters?.homeType!
   return updateNestedObj(['listings', 'filters'])({
     ...state.listings.filters,
+    filterButtonClicked: true,
     isLoading: true,
     homeType: {
       ...state.listings.filters.homeType,
@@ -227,6 +233,7 @@ export const newSetBedsValues = <T extends IReducerSlice>({
       ...state.listings,
       filters: {
         ...state.listings.filters,
+        filterButtonClicked: true,
         bedsBaths: {
           ...state.listings.filters.bedsBaths,
           currentRange:
@@ -277,6 +284,23 @@ export const setFilterDrawerOpen = <T extends IReducerSlice>({
   const isDrawerOpen =
     action.payload?.listings?.filters?.allFilters?.isDrawerOpen
   return updateNestedObj(isDrawerOpenPath)(isDrawerOpen)(state)
+}
+
+/* ----- RESET FILTER BUTTON CLICK ----- */
+export const resetFilterButtonClicked = <T extends IReducerSlice>({
+  state,
+  action,
+}: T) => {
+  return {
+    ...state,
+    listings: {
+      ...state.listings,
+      filters: {
+        ...state.listings.filters,
+        filterButtonClicked: false,
+      },
+    },
+  }
 }
 
 export const testSetToFalse = <T extends IReducerSlice>({ state }: T) => {

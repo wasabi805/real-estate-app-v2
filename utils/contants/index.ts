@@ -6,6 +6,8 @@ export const forSaleRentSoldIdPrefix = 'all-filters-btn-'
 export const forSaleRentSoldKey = 'all-filters-btn-for-sale'
 export const filterRowButtonsIdPrefix = 'filter-row-button-'
 
+export const filtersPath = ['listings', 'filters']
+
 /* ----- FOR SALE RENT SOLD -----  */
 
 export const forSaleRentSoldPath = ['listings', 'filters', 'forSaleRentSold']

@@ -25,8 +25,8 @@ const HomeType = () => {
         className,
         query: 'homeType',
         slug: homeTypeCategory(className),
+        // state: state,
       },
-      state: state,
     })
   }
 

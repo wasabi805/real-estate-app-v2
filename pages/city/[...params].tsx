@@ -8,12 +8,48 @@ import Listings from '@pages/city/components/Listings'
 import PropertySearchBar from '@components/PropertySeachBar'
 import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
+import * as FilterActions from 'actions/ListingsActions/FilterActions'
+import { useRouter } from 'next/router'
+import { isArr } from 'utils/helpers'
+import { buildUrlFilterString } from '@hooks/helpers'
+import { homeTypeCategory, forSaleSoldRentCategory } from 'utils'
+
+const { resetFilterButtonClicked } = FilterActions
 
 import { Row, Col } from 'antd'
 
 const City = (props) => {
   const appContext = useContext(AppContext)
   const { state, dispatch } = appContext
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.listings.filters.filterButtonClicked) {
+      //TODO 1: Flip the flag back to false
+      dispatch(resetFilterButtonClicked())
+      //TODO 2: Change the url to include queries
+
+      //GRAB THE FILTERS
+      const currentFilters = state.listings.filters
+      const { homeType, forSaleRentSold } = currentFilters
+
+      const queryValues = {
+        hometype: homeTypeCategory(homeType.selected),
+        status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
+      }
+
+      const queryString = Object.entries(queryValues)
+        .reduce((acc, [key, val]) => {
+          return val ? acc + `${key}=${val}&` : acc
+        }, '')
+        .slice(0, -1)
+
+      /* NOTE Have to use router.query.params to build the url otherwise any type of url string manipulation will append instead of replace the filter values to the url */
+      const url = `${router.query.params[0]}/${router.query.params[1]}/filters?${queryString}`
+      router.push(url)
+    }
+  }, [state.listings.filters.filterButtonClicked])
 
   return (
     <CityWrapper>

@@ -56,6 +56,7 @@ export interface IinitialState {
     currentHome: string[]
 
     filters: {
+      filterButtonClicked: boolean
       activeFilterPanel: string
       currentSetFilters: string[]
 

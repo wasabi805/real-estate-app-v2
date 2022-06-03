@@ -107,7 +107,7 @@ const useAutoComplete = () => {
     console.log('did i come back with results?', data)
     const { routeTo } = data.data?.props
 
-    // dispatch(fetchSugestionSuccess(data)) 
+    // dispatch(fetchSugestionSuccess(data))
 
     router.push({
       pathname: buildUrlFilterString(state, routeTo).pathname,

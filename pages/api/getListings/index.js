@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const getListings = async (req, res) => {
-
   console.log('what is req?????', Object.keys(req))
-  const { city, state} = req?.query
+  console.log('what is just req??', req)
+  const { city, state } = req?.query
   try {
     // const test = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
     // await response.status(200).send({ foo:'bar'})
@@ -34,10 +34,10 @@ const getListings = async (req, res) => {
         return res.status(200).send(resp.data)
       })
       .catch((error) => {
-        return res.send({error})
+        return res.send({ error })
       })
 
-      // console.log(response, 'what is the response')
+    // console.log(response, 'what is the response')
     // return response
   } catch (err) {
     console.log('Error at getListings', err)

@@ -42,3 +42,10 @@ export const updateFilterResponse = (
     payload: {},
   }
 }
+
+export const RESET_FILTER_BUTTON_CLICKED = 'RESET_FILTER_BUTTON_CLICKED'
+export const resetFilterButtonClicked = () => {
+  return {
+    type: RESET_FILTER_BUTTON_CLICKED,
+  }
+}

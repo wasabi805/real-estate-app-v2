@@ -46,6 +46,8 @@ const useFilterListings = () => {
   }
 
   const filterListings = ({ param }: IFilterListingsProps) => {
+    console.log('what are the params?', param)
+
     // ----- SORT -----
     const handleAcendDescendTabClicked = () => {
       const { className } = param?.props!
@@ -64,7 +66,9 @@ const useFilterListings = () => {
     const filterCategory: IfilterCategories = {
       sortTab: handleAcendDescendTabClicked,
       sortTableRow: handleClickSortingList,
-      homeType: () => dispatchAction(setSelectedHomeType(param.className!)),
+      homeType: () => {
+        dispatchAction(setSelectedHomeType(param.className!))
+      },
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),
       baths: () =>
@@ -91,6 +95,7 @@ const useFilterListings = () => {
   /* fires from useEffect in the Listings component */
   const handleUrlChange = (state: IinitialState) => {
     const { pathname, query } = buildUrlFilterString(state)
+    console.log('what is the pathname', pathname)
     alert('i fired')
     return router.push({
       pathname,

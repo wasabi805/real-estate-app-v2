@@ -30,3 +30,11 @@ export const setClickedRow = (
     },
   }
 }
+
+export const UPDATE_LISTINGS = 'UPDATE_LISTINGS'
+export const updateListings = (data) => {
+  return {
+    type: UPDATE_LISTINGS,
+    payload: {},
+  }
+}

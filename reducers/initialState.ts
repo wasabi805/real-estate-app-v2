@@ -51,6 +51,7 @@ const initialState: IinitialState = {
     currentHome: ['2892620475'],
 
     filters: {
+      filterButtonClicked: false,
       isLoading: false,
       currentSetFilters: [],
       filtersDict: {
@@ -86,12 +87,12 @@ const initialState: IinitialState = {
         minField: null,
         maxField: null,
         /* used in slider and histogram */
-        // allPrices: [],
-        allPrices: mockAscendingPriceRange,
+        allPrices: [],
+        // allPrices: mockAscendingPriceRange,
 
         slider: {
-          // range: [],
-          range: mockAscendingPriceRange,
+          range: [],
+          // range: mockAscendingPriceRange,
           moveMin: {
             move: false,
             value: '',

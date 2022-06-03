@@ -42,10 +42,10 @@ export const zipCodeConfirmed = async (
   }, {})
 
   const req = {
-    query:{
+    query: {
       city: cityStateZip.city,
-      state: cityStateZip.state
-    }
+      state: cityStateZip.state,
+    },
   }
 
   //TODO : THIS GETS THE LISTINGS, ONLY RETURN THE CITY URL. THE GET LISTINGS PART SHOULD OCCUR IN APP's useEffct
@@ -109,7 +109,6 @@ export const cityOrCityAndStateConfirmed = async (
   response,
   primaryGuessSubStr
 ) => {
-  console.log('I RAN ALSO')
   const cityAndState = primaryGuessSubStr.reduce((acc, curr) => {
     return containsStateCode(curr)
       ? { ...acc, state: containsStateCode(curr) }

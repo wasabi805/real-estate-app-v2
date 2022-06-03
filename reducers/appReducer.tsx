@@ -50,7 +50,11 @@ const {
 const { SET_SELECTED_HOME_TYPE } = FilterDropdownsActions
 const { NEW_SET_BEDS_VALUES } = NewBedsBathsActions
 
-const { SET_ACTIVE_FILTER_PANEL, UPDATE_FILTERS_URLS } = FilterActions
+const {
+  SET_ACTIVE_FILTER_PANEL,
+  UPDATE_FILTERS_URLS,
+  RESET_FILTER_BUTTON_CLICKED,
+} = FilterActions
 
 const {
   // SET_FILTER_BY_PROPERTY_TYPE,
@@ -127,6 +131,8 @@ const appReducer = (state: IinitialState, action: IAction) => {
   /*----- FILTER LISTINGS CATEGORIES -----*/
   const handleUpdateFiltersUrls = () =>
     ListingsFiltersSlice.updateFiltersUrls({ state, action })
+  const handleResetFilterButtonClicked = () =>
+    ListingsFiltersSlice.resetFilterButtonClicked({ state, action })
 
   /* ----- ----- FOR SALE RENT SOLD */
   const handleSetFilterByPropertyType = () =>
@@ -189,6 +195,7 @@ const appReducer = (state: IinitialState, action: IAction) => {
 
     /*----- FILTER LISTINGS CATEGORIES -----*/
     [UPDATE_FILTERS_URLS]: handleUpdateFiltersUrls,
+    [RESET_FILTER_BUTTON_CLICKED]: handleResetFilterButtonClicked,
 
     /* ----- ----- FOR SALE RENT SOLD */
     [SET_FILTER_BY_PROPERTY_TYPE]: handleSetFilterByPropertyType,
