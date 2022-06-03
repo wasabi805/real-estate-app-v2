@@ -192,9 +192,9 @@ const useAutoComplete = () => {
       isAutoComplete: false,
     }
 
-    const test = Object.entries(query).reduce((obj, [key, val])=>{
-      return val ? {...obj, [key]: val} : obj
-    } ,{})
+    const test = Object.entries(query).reduce((obj, [key, val]) => {
+      return val ? { ...obj, [key]: val } : obj
+    }, {})
 
     console.log('what is test', test)
 

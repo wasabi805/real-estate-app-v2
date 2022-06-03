@@ -38,7 +38,6 @@ const handleStandardFormSubmit = async (request, response) => {
           primaryGuessSubStr,
           primaryGuessSubStrLastVal
         )
-        
       }
 
       /* CASE 2B PREDICTION DIDN'T RETURN A ZIPCODE IT RECOGNIZED */

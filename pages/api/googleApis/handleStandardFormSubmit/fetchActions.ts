@@ -57,7 +57,7 @@ export const zipCodeConfirmed = async (
     stateName: cityStateZip.state,
   })
 
-    return response.status(200).send({
+  return response.status(200).send({
     props: {
       routeTo: url,
       // listings: data.listings,

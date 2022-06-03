@@ -41,13 +41,13 @@ export const soldDateRangeRows: ISoldDateRangeRows[] = [
 
 export const homeTypeButtons: IButtonWithIcon[] = [
   {
-    id: `${homeTypeIdPrefix}house`,
+    id: `${homeTypeIdPrefix}single_family`,
     text: 'Home',
     onClick: null,
     icon: null,
   },
   {
-    id: `${homeTypeIdPrefix}multiFamily`,
+    id: `${homeTypeIdPrefix}multi_family`,
     text: 'Multi Family',
     onClick: null,
     icon: null,

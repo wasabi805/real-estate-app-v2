@@ -40,11 +40,11 @@ const HomeType = () => {
 
     let icon
     switch (iconName) {
-      case 'house':
+      case 'single_family':
         icon = <House width={width} height={height} />
         break
 
-      case 'multiFamily':
+      case 'multi_family':
         icon = <MultiFamilyHome width={width} height={height} />
         break
 
