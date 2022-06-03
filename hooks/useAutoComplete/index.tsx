@@ -107,81 +107,13 @@ const useAutoComplete = () => {
     console.log('did i come back with results?', data)
     const { routeTo } = data.data?.props
 
-    if (!sessionStorage.history) {
-      sessionStorage.setItem('history', JSON.stringify({
-        currentHistoryIdx:'',
-        instances:[]
-      }))
-    }
-
- 
-    // let history = JSON.parse(sessionStorage.history.instances)
-    let history = JSON.parse(sessionStorage.history)
-
-    console.log('what is the name', name)
-    console.log('what is history', history.history)
-
-    let updateState = {
-      ...state,
-      search: {
-        ...state.search,
-        value: name,
-      },
-      searchResults: {
-        ...state.searchResults,
-        city: data.data.props.cityName,
-        state: data.data.props.stateName,
-
-        data: {
-          ...state.searchResults.data,
-          props: {
-            ...state.searchResults.data?.props,
-            cityName: data.data.props.cityName,
-            stateName: data.data.props.stateName,
-            zipCode: data.data.props.zipCode,
-            listings: data.data.props.listings || 'fooBar',
-          },
-        },
-      },
-    }
-
-    let newHistory;
-
-    console.log('history RIGHT BEFORE', history)
-    if (history?.instances.length === 0) {
-      newHistory = {
-        currentHistoryIdx: history.currentHistoryIdx,
-        instances: [
-          {
-            url: buildUrlFilterString(state, routeTo).pathname,
-            state: updateState,
-          },
-        ]
-      }
-      sessionStorage.setItem('history', JSON.stringify(newHistory))
-    } else {
-      
-      newHistory = {
-        currentHistoryIdx: history.currentHistoryIdx,
-        instances: [ ...history.instances, {
-          url: buildUrlFilterString(state, routeTo).pathname,
-          state: updateState,
-        },]
-      }
-      console.log('is newHistory defined?', newHistory)
-      sessionStorage.setItem('history', JSON.stringify(newHistory))
-    }
+    // dispatch(fetchSugestionSuccess(data)) 
 
     router.push({
       pathname: buildUrlFilterString(state, routeTo).pathname,
       query: buildUrlFilterString(state, routeTo).query,
       // options:{foo: 'bar'}
     })
-
-    //TODO: WIll need to have ability to make fetches for listings w/ existing filter buttons clicked
-    //DO THAT HERE
-
-    dispatch(fetchSugestionSuccess(data)) // w/o considering any filter buttons clicked
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */

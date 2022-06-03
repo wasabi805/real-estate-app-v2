@@ -41,13 +41,7 @@ const Landing: React.FC = (props) => {
     console.log('IS IT LOADING?', state.isLoading)
   }, [state.isLoading])
 
-  useEffect(() => {
-    console.log('State Updated', state)
-    if (state.searchResults.routeTo) {
-      const url = state.searchResults.routeTo
-      router.push(url)
-    }
-  }, [state.searchResults.routeTo])
+
 
   const handleClearSession = () => {
     sessionStorage.clear()

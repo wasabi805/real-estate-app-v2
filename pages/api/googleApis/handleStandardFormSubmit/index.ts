@@ -4,19 +4,6 @@ import { stateCodes } from '../../enums'
 import { getStateKeyFromValue } from '../../utils'
 import * as FetchActions from './fetchActions'
 
-let res = {
-  props: {
-    routeTo: '', //may not need this
-    stateName: '',
-    predictions: [], //  send back all guesses and have user select one of them
-
-    modal: {
-      id: '',
-      isOpen: false,
-    },
-  },
-}
-
 const handleStandardFormSubmit = async (request, response) => {
   /* Start by spliiting up autocomplete string results */
   console.log('what is request.query', request.query)

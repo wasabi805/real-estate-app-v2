@@ -42,6 +42,9 @@ export const zipCodeConfirmed = async (
   }, {})
 
   const req = cityStateZip
+
+  //TODO : THIS GETS THE LISTINGS, ONLY RETURN THE CITY URL. THE GET LISTINGS PART SHOULD OCCUR IN APP's useEffct
+  console.log('what is req', req)
   const data = await getListings(req)
 
   const url = cityPageUrl({
@@ -52,14 +55,14 @@ export const zipCodeConfirmed = async (
   return response.status(200).send({
     props: {
       routeTo: url,
-      listings: data.listings,
-      cityName: cityStateZip.city,
-      stateName: cityStateZip.state,
-      zipCode: cityStateZip.zipCode,
-      topCities: [],
-      meta: {
-        tracking_params: data.meta.tracking_params,
-      },
+      // listings: data.listings,
+      // cityName: cityStateZip.city,
+      // stateName: cityStateZip.state,
+      // zipCode: cityStateZip.zipCode,
+      // topCities: [],
+      // meta: {
+      //   tracking_params: data.meta.tracking_params,
+      // },
     },
   })
 }

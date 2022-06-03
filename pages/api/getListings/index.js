@@ -1,15 +1,16 @@
 import axios from 'axios'
 
 const getListings = async (req, res) => {
-  const { city, state, zipCode } = req
+  console.log('what is req?????', Object.keys(req))
+  const { city, state} = req.query
   try {
     // const test = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
     // await response.status(200).send({ foo:'bar'})
     // let response = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-
     const options = {
       method: 'GET',
       headers: {
+        // 'Content-Type': 'application / json',
         'x-rapidapi-host': process.env.REALTOR_HOST,
         'x-rapidapi-key': process.env.REALTOR_API_KEY,
       },
@@ -26,23 +27,20 @@ const getListings = async (req, res) => {
       },
     }
 
-    let response = await axios
+    await axios
       .request(options)
       .then((resp) => {
-        return resp.data
+        return res.status(200).send(resp.data)
       })
       .catch((error) => {
-        console.error(error)
-        return {
-          data: {
-            error,
-          },
-        }
+        return res.send({error})
       })
 
-    return response
+      // console.log(response, 'what is the response')
+    // return response
   } catch (err) {
     console.log('Error at getListings', err)
+    return err
   }
 }
 

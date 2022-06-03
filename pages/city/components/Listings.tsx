@@ -14,9 +14,9 @@ const Listings: React.FC = () => {
   const { handleUrlChange } = useFilterListings()
 
   /* Change the URL if any of the filter buttons are clicked */
-  useEffect(() => {
-    handleUrlChange(state)
-  }, [forSaleRentSold, price, homeType, bedsBaths])
+  // useEffect(() => {
+  //   handleUrlChange(state)
+  // }, [forSaleRentSold, price, homeType, bedsBaths])
 
   return (
     <>

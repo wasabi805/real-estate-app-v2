@@ -91,7 +91,7 @@ const useFilterListings = () => {
   /* fires from useEffect in the Listings component */
   const handleUrlChange = (state: IinitialState) => {
     const { pathname, query } = buildUrlFilterString(state)
-
+    alert('i fired')
     return router.push({
       pathname,
       query,
