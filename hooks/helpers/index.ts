@@ -41,7 +41,6 @@ export const buildUrlFilterString = (state: any, routeTo = null) => {
   }
 
   const query = Object.entries(queryValues).reduce((a, [key, value]) => {
-    console.log({ key, value })
     return value ? { ...a, [key]: value } : a
   }, {})
 

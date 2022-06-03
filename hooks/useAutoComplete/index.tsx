@@ -24,7 +24,7 @@ const useAutoComplete = () => {
     prev?: null | any
   }
 
-  interface IRequestParam {
+  interface IQueryParams {
     isAutoComplete: null | boolean
     name: null | string
 
@@ -88,7 +88,7 @@ const useAutoComplete = () => {
 
   /* -----  -----   ------  ------  ------  --------    ------- */
 
-  const requestParam: IRequestParam = {
+  const queryParams: IQueryParams = {
     isAutoComplete: null,
     name: null,
 
@@ -97,7 +97,7 @@ const useAutoComplete = () => {
     zipCode: null,
   }
 
-  const fetchSugestion = async (request: IRequestParam, name: string) => {
+  const fetchSugestion = async (request: IQueryParams, name: string) => {
     dispatch(setIsLoading(true))
 
     const data = await axios.get(
@@ -161,7 +161,7 @@ const useAutoComplete = () => {
 
     // /* MAKE API CALL WITH CITY AND STATE VALUES */
     const request = {
-      ...requestParam,
+      ...queryParams,
       name: '',
       isAutoComplete: true,
       ...cityStateZipObj,
@@ -173,14 +173,17 @@ const useAutoComplete = () => {
   const handleIsStandardSubmit = (inputProps: IInputProps) => {
     // get an autosugestion
     const { name } = inputProps?.input
+    console.log('why is name undefined', inputProps)
 
     //step 1, see if the standard submit contains a zipCode
     const isZip = isZipCode(name)
     const hasZip = extractZipCodeFromString(name)
     const zip = isZip ? name : hasZip ? hasZip : ''
 
-    const request = {
-      ...requestParam,
+    //TODO: only works for zipCode right now
+
+    const query = {
+      ...queryParams,
       city: '',
       state: '',
       zipCode: zip,
@@ -188,10 +191,17 @@ const useAutoComplete = () => {
       name: !isZip && !hasZip ? name : '',
       isAutoComplete: false,
     }
+
+    const test = Object.entries(query).reduce((obj, [key, val])=>{
+      return val ? {...obj, [key]: val} : obj
+    } ,{})
+
+    console.log('what is test', test)
+
     //TODO: instead of fetching return it back to PropertySearchBar Comp and have
     // getServerSideProps do the fetching
     // return setAutoCompleteResp(request)
-    fetchSugestion(request, name)
+    fetchSugestion(query, inputProps?.input?.name)
   }
 
   /* -----  ----- */

@@ -4,6 +4,7 @@ import handleStandardFormSubmit from './handleStandardFormSubmit'
 const suggestPlace = async (request, response) => {
   try {
     const { isAutoComplete } = request.query
+    
 
     isAutoComplete === 'true'
       ? handleAutoCompleteSubmitted(request, response)

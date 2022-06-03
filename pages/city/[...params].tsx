@@ -10,8 +10,7 @@ import mockMap from 'public/mockMap.jpeg'
 import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { useRouter } from 'next/router'
-import { isArr } from 'utils/helpers'
-import { buildUrlFilterString } from '@hooks/helpers'
+
 import { homeTypeCategory, forSaleSoldRentCategory } from 'utils'
 
 const { resetFilterButtonClicked } = FilterActions

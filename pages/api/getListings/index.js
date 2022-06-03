@@ -1,13 +1,36 @@
 import axios from 'axios'
 
 const getListings = async (req, res) => {
-  console.log('what is req?????', Object.keys(req))
-  console.log('what is just req??', req)
   const { city, state } = req?.query
+  console.log('what is req?.query', req?.query)
+  console.log('what is req?.query.filters', req?.query.filters)
+  let filters;
+  if(req?.query.filters){
+    filters = JSON.parse(req?.query.filters)
+  }
+
+  console.log('what are filters ', filters)
+  if(!filters){
+    console.log('SHOW ME ONLY HOMES FOR SALE')
+  }
+
+  if(filters?.status === 'for-sale'){
+    console.log('SHOW ME ONLY HOMES FOR SALE')
+    console.log('WITH THESE FILTERS', filters)
+  }
+  if(filters?.status === 'for-rent'){
+    console.log('SHOW ME ONLY RENTALS')
+    console.log('WITH THESE FILTERS', filters)
+  }
+
+  if(filters?.status === 'sold'){
+    console.log('SHOW ME SOLD HOMES')
+  }
+
+
   try {
-    // const test = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-    // await response.status(200).send({ foo:'bar'})
-    // let response = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+ 
+  
     const options = {
       method: 'GET',
       headers: {
@@ -17,7 +40,7 @@ const getListings = async (req, res) => {
       },
       url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
 
-      data: req.body,
+      // data: req.body,
 
       params: {
         state_code: `${state}`,
@@ -34,14 +57,14 @@ const getListings = async (req, res) => {
         return res.status(200).send(resp.data)
       })
       .catch((error) => {
-        return res.send({ error })
+        return res.status(500).send( error )
       })
 
     // console.log(response, 'what is the response')
     // return response
   } catch (err) {
     console.log('Error at getListings', err)
-    return err
+    
   }
 }
 

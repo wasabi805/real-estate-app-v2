@@ -57,7 +57,7 @@ export const zipCodeConfirmed = async (
     stateName: cityStateZip.state,
   })
 
-  return response.status(200).send({
+    return response.status(200).send({
     props: {
       routeTo: url,
       // listings: data.listings,
@@ -72,6 +72,22 @@ export const zipCodeConfirmed = async (
       // },
     },
   })
+
+  // return response.status(200).send({
+  //   props: {
+  //     routeTo: url,
+  //     // listings: data.listings,
+  //     // cityName: cityStateZip.city,
+  //     // stateName: cityStateZip.state,
+  //     // city: cityStateZip.city,
+  //     // state: cityStateZip.state,
+  //     // zipCode: cityStateZip.zipCode,
+  //     // topCities: [],
+  //     // meta: {
+  //     //   tracking_params: data.meta.tracking_params,
+  //     // },
+  //   },
+  // })
 }
 
 export const zipCodeNotConfirmed = (response, allGuesses) => {

@@ -49,7 +49,7 @@ function App({ Component, pageProps, AppData }: IAppProps) {
         const getData = async () => {
           const res = hasFilters
             ? await axios.get(
-                `http://localhost:3000/api/getListings?city=${params[0]}&state=${params[1]}&filters=${filters}`
+                `http://localhost:3000/api/getListings?city=${params[0]}&state=${params[1]}&filters=${JSON.stringify(filters)}`
               )
             : await axios.get(
                 `http://localhost:3000/api/getListings?city=${params[0]}&state=${params[1]}`
