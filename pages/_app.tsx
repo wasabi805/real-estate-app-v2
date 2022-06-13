@@ -6,10 +6,8 @@ import AppContext from 'context/appContext'
 import appReducer from 'reducers/appReducer'
 import initialState from 'reducers/initialState'
 import * as GlobalActions from 'actions/GlobalActions'
-import PageLayout, { TESTCOMP1, TESTCOMP2 } from '../components/_common/Layout'
-import { HistoryProvider, useHistory } from 'hooks/useHistory'
+import PageLayout from '../components/_common/Layout'
 import { useRouter } from 'next/router'
-import getListings from '@pages/api/getListings'
 import { containsSubString } from 'utils'
 import axios from 'axios'
 
@@ -30,6 +28,7 @@ function App({ Component, pageProps, AppData }: IAppProps) {
     console.log('what is just router', router)
 
     if (currentPath !== router.asPath) {
+      console.log({currentPath, asPath: router.asPath, router})
       //CITY PAGE
       if (containsSubString(router.asPath, 'city')) {
         const { params } = router?.query

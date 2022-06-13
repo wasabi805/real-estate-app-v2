@@ -23,21 +23,38 @@ const City = (props) => {
 
   const router = useRouter()
 
+  //Price Field
+  useDebounce(()=>{
+    //TODO : make api call with min and max prices
+    alert('price changed')
+    const currentFilters = state.listings.filters
+    const { homeType, forSaleRentSold, price } = currentFilters
+
+    console.log('what is homeType, forSaleRentSold, price', {homeType, forSaleRentSold, price})
+
+
+  } , 2000, [
+    state.listings.filters.price.minField,
+    state.listings.filters.price.maxField,
+  ])
+
+  // Filter buttons clicked
   useDebounce(
     () => {
       if (state.listings.filters.filterButtonClicked) {
-        //TODO 1: Flip the flag back to false
+        //  Flip the flag back to false
         dispatch(resetFilterButtonClicked())
-        //TODO 2: Change the url to include queries
-
-        //GRAB THE FILTERS
+        //  Change the url to include queries
+    
+        //  GRAB THE FILTERS
         const currentFilters = state.listings.filters
-        const { homeType, forSaleRentSold } = currentFilters
+        const { homeType, forSaleRentSold, price } = currentFilters
 
         const queryValues = {
-          // hometype: homeTypeCategory(homeType.selected),
           homeType: formatHomeType(homeType.newSelected),
           status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
+          "min-price": price.minField,
+          "max-price": price.maxField,
         }
 
         const queryString = Object.entries(queryValues)
@@ -46,12 +63,15 @@ const City = (props) => {
           }, '')
           .slice(0, -1)
 
+
+          console.log('what is queryString', queryString)
+
         /* NOTE Have to use router.query.params to build the url otherwise any type of url string manipulation will append instead of replace the filter values to the url */
         const url = `${router.query.params[0]}/${router.query.params[1]}/filters?${queryString}`
         router.push(url)
       }
     },
-    4000,
+    3000,
     [state.listings.filters.filterButtonClicked]
   )
 

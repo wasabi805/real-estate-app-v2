@@ -155,16 +155,20 @@ export const setMinPriceFilterField = <T extends IReducerSlice>({
 }: T) => {
   const { minField } = action.payload?.listings?.filters?.price!
   const { moveMin } = action.payload?.listings?.filters?.price?.slider!
-
-  let newPrice = {
-    ...state.listings?.filters.price,
-    minField: minField,
-    slider: {
-      ...state.listings?.filters.price.slider,
-      moveMin: moveMin,
-    },
+  
+  let filters = {
+    ...state.listings?.filters,
+    filterButtonClicked: true,
+   price:{
+     ...state.listings.filters.price,
+     minField: minField,
+     slider: {
+       ...state.listings?.filters.price.slider,
+       moveMin: moveMin,
+     },
+   }
   }
-  return updateNestedObj(priceFilterPath)(newPrice)(state)
+  return updateNestedObj(['listings', 'filters'])(filters)(state)
 }
 
 export const setMaxPriceFilterField = <T extends IReducerSlice>({
@@ -174,15 +178,31 @@ export const setMaxPriceFilterField = <T extends IReducerSlice>({
   const { maxField } = action.payload?.listings?.filters?.price!
   let { moveMax } = action.payload?.listings?.filters?.price?.slider!
 
-  let newPrice = {
-    ...state.listings?.filters.price,
-    maxField: maxField,
-    slider: {
-      ...state.listings?.filters.price.slider,
-      moveMax: moveMax,
-    },
+
+  let filters = {
+    ...state.listings?.filters,
+    filterButtonClicked: true,
+   price:{
+     ...state.listings.filters.price,
+     maxField: maxField,
+     slider: {
+       ...state.listings?.filters.price.slider,
+       moveMax: moveMax,
+     },
+   }
   }
-  return updateNestedObj(priceFilterPath)(newPrice)(state)
+  return updateNestedObj(['listings', 'filters'])(filters)(state)
+
+  //OLD LOGIC
+  // let newPrice = {
+  //   ...state.listings?.filters.price,
+  //   maxField: maxField,
+  //   slider: {
+  //     ...state.listings?.filters.price.slider,
+  //     moveMax: moveMax,
+  //   },
+  // }
+  // return updateNestedObj(priceFilterPath)(newPrice)(state)
 }
 
 export const setPricePriceRangeSliderMaxMin = <T extends IReducerSlice>({
