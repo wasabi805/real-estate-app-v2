@@ -47,6 +47,34 @@ export const bedsValue = (className: string) => {
   return className.replace(/^(beds=)/, '')
 }
 
+export const getBedsMinAndMax =( range: any )=>{
+
+  let minBeds ;
+  let maxBeds ;
+  console.log(range, 'typeof range[0]')
+  if(typeof range[0] === 'string' ){
+    minBeds = null
+    maxBeds = null
+  }
+
+  if(typeof range[0] === 'number' && range.length === 1){
+    minBeds = range[0]
+  }
+
+  if(typeof range[0] === 'number' && range.length > 1 && range[range.length-1] !== 5){
+    minBeds = range[0]
+    maxBeds = range[range.length-1] 
+  }
+
+  if(typeof range[0] === 'number' && range.length > 1 && range[range.length-1] === 5){
+    minBeds = range[0]
+    maxBeds = null
+  }
+
+  return {minBeds, maxBeds}
+
+}
+
 export const extractZipCodeFromString = (str: string) => {
   const startIndex = str.search(/\d{5}/)
   if (startIndex === -1) {
