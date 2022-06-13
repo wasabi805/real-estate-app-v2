@@ -10,7 +10,7 @@ export const setFilterByPropertyType = (
   propertyType: string[],
   state: any
 ): Pick<IAction, 'type' | 'payload'> => {
-alert('i fired')
+  alert('i fired')
   console.log('what is state in the action', state)
   console.log('what is propertyType in the action', propertyType)
 

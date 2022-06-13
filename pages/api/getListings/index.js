@@ -57,15 +57,11 @@ const getListings = async (req, res) => {
           'https://realtor.p.rapidapi.com/properties/list-for-sale')
 
     //HomeTypes
-    filters.homeType ? options.params.prop_type = replaceWhiteSpaceWith(filters.homeType, ','):  filters = filters
-
-    
-
-
+    if (filters.homeType) {
+      options.params.prop_type = replaceWhiteSpaceWith(filters.homeType, ',')
+    }
 
     console.log('RUN THE CHECKS', filters)
-
-    // options.url = getStatus()
   }
 
   //   const apiFilters = renameKeys(requestKeyMap, filters)

@@ -7,7 +7,8 @@ const Price = () => {
   // THIS IS THE MAIN MENU WRAPPER
   return (
     <PriceContainer>
-      <PriceHistogram />
+      {/* TODO : SEE WHY THIS CAUSES A CRASH WHEN PRICE TAB CLICKED */}
+      {/* <PriceHistogram /> */}
       <PriceFilter />
     </PriceContainer>
   )

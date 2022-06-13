@@ -3,7 +3,7 @@ export const joinStringWith = (string: string, char: string) => {
   return string.split(' ').length > 1 ? string.split(' ').join(char) : string
 }
 
-export const replaceWhiteSpaceWith =(str: string, char: string)=>{
+export const replaceWhiteSpaceWith = (str: string, char: string) => {
   return str.replace(/\s+/g, char).toLowerCase()
 }
 
@@ -27,9 +27,12 @@ export const homeTypeCategory = (className: string) => {
   return className.replace(/^(home-type-)/, '')
 }
 
-export const formatHomeType = (arr : string[])=> {
-  const homeTypes = arr.reduce((acc, str)=> acc + homeTypeCategory(str) + '+' , '')
-  return homeTypes.slice(0,-1)
+export const formatHomeType = (arr: string[]) => {
+  const homeTypes = arr.reduce(
+    (acc, str) => acc + homeTypeCategory(str) + '+',
+    ''
+  )
+  return homeTypes.slice(0, -1)
 }
 
 export const forSaleSoldRentCategory = (className: string) => {

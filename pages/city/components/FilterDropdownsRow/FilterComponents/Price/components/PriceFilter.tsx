@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import AppContext from 'context/appContext'
 import RangedSlider from '@components/_common/RangedSlider'
 import InputComp from '@components/_common/InputComp'
-
+import useFilterListings from '@hooks/useFilterListings'
 import * as PriceFilterActions from 'actions/ListingsActions/FilterActions/priceActions'
-
+import { debounce } from 'utils'
 import {
   PriceFilterContainer,
   RangedSliderRow,
@@ -16,6 +16,7 @@ const { setMinPriceFilterField, setMaxPriceFilterField } = PriceFilterActions
 
 const PriceFilter = () => {
   const appContext = useContext(AppContext)
+  const { filterListings } = useFilterListings()
   const { state, dispatch } = appContext
 
   const handleMinPriceField = (value: number) => {

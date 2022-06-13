@@ -66,10 +66,14 @@ const useFilterListings = () => {
     const filterCategory: IfilterCategories = {
       sortTab: handleAcendDescendTabClicked,
       sortTableRow: handleClickSortingList,
+
+      status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       homeType: () => {
         dispatchAction(setSelectedHomeType(param.className!, state))
       },
-      status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
+
+      price: () => console.log('setting up price'),
+
       beds: () => dispatchAction(newSetBedsValues(param)),
       baths: () =>
         dispatchAction(setFilterCurrentBathsAmount(param.className!)),
