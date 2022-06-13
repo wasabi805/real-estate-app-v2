@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { access } from 'fs'
 import { getStatus } from '../helpers'
+import { replaceWhiteSpaceWith } from 'utils'
 
 const getListings = async (req, res) => {
   const { city, state } = req?.query
@@ -49,26 +50,23 @@ const getListings = async (req, res) => {
   if (Object.keys(filters).length > 0) {
     const filters = JSON.parse(req?.query?.filters)
 
+    //Status
     filters?.status
       ? (options.url = getStatus(filters?.status))
       : (options.url =
           'https://realtor.p.rapidapi.com/properties/list-for-sale')
 
+    //HomeTypes
+    filters.homeType ? options.params.prop_type = replaceWhiteSpaceWith(filters.homeType, ','):  filters = filters
+
+    
+
+
+
     console.log('RUN THE CHECKS', filters)
+
     // options.url = getStatus()
   }
-
-  // WHAT TYPE OF HOME ARE THEY LOOKING FOR
-  // if (!filters?.status) {
-  //   console.log('SHOW ME ONLY LISTINGS FOR SALE')
-  //   console.log('WITH THESE FILTERS', filters)
-  //   options.url = 'https://realtor.p.rapidapi.com/properties/list-for-sale'
-  // }
-
-  // if (filters?.status === 'for-sale') {
-  //   delete filters.status
-  //   console.log('SHOW ME ONLY LISTINGS FOR SALE')
-  //   console.log('WITH THESE FILTERS', filters)
 
   //   const apiFilters = renameKeys(requestKeyMap, filters)
   //   options.params = {

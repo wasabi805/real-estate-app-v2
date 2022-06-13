@@ -11,7 +11,7 @@ import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { useRouter } from 'next/router'
 
-import { homeTypeCategory, forSaleSoldRentCategory } from 'utils'
+import { formatHomeType, forSaleSoldRentCategory } from 'utils'
 
 const { resetFilterButtonClicked } = FilterActions
 
@@ -33,8 +33,14 @@ const City = (props) => {
       const currentFilters = state.listings.filters
       const { homeType, forSaleRentSold } = currentFilters
 
+      // const formatHomeType = (arr : string[])=> {
+      //   const homeTypes = arr.reduce((acc, str)=> acc + homeTypeCategory(str) + '+' , '')
+      //   return homeTypes.slice(0,-1)
+      // }
+
       const queryValues = {
-        hometype: homeTypeCategory(homeType.selected),
+        // hometype: homeTypeCategory(homeType.selected),
+        homeType : formatHomeType(homeType.newSelected),
         status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
       }
 
