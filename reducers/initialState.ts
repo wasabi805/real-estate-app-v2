@@ -107,6 +107,7 @@ const initialState: IinitialState = {
       homeType: {
         homeTypeButtons: homeTypeButtons,
         selected: '',
+        newSelected: [],
       },
 
       bedsBaths: {

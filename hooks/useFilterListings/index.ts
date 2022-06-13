@@ -67,7 +67,7 @@ const useFilterListings = () => {
       sortTab: handleAcendDescendTabClicked,
       sortTableRow: handleClickSortingList,
       homeType: () => {
-        dispatchAction(setSelectedHomeType(param.className!))
+        dispatchAction(setSelectedHomeType(param.className!, state))
       },
       status: () => dispatchAction(setFilterByPropertyType([param.className!])), //aka forSaleRentSold
       beds: () => dispatchAction(newSetBedsValues(param)),

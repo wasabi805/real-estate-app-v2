@@ -25,13 +25,14 @@ const HomeType = () => {
         className,
         query: 'homeType',
         slug: homeTypeCategory(className),
-        // state: state,
+        state: state,
       },
     })
   }
 
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
+  const { newSelected } = state.listings?.filters.homeType
 
   /* Remaps button props from state and adds onClick and icons to buttons */
   const buttonGroup = homeTypeButtons?.map((btn: IButton) => {
@@ -67,7 +68,7 @@ const HomeType = () => {
   return (
     <HomeTypeButtonsContainer>
       <ButtonComp
-        activeButton={selectedButton}
+        activeButton={newSelected}
         groupType={'tile-top-icon'}
         buttonGroup={buttonGroup}
       />

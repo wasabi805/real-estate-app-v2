@@ -89,6 +89,7 @@ export interface IinitialState {
       homeType: {
         homeTypeButtons: IButtonWithIcon[]
         selected: string
+        newSelected: string[]
       }
       bedsBaths: {
         bedsButtons: IButton[]

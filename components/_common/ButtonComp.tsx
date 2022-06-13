@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Button } from 'antd'
 import { TileIconButton, ButtonRowContainer } from 'components/_common/styles'
+import { isArr } from 'utils/helpers'
 
 interface IButtonGroup {
   text: string
@@ -31,6 +32,18 @@ interface IButtonCompProps {
     | undefined
 }
 
+const handleType = (btnId: string, activeButton: string | string[]) => {
+  if (typeof activeButton === 'string') {
+    return btnId === activeButton ? 'primary' : ''
+  }
+
+  if (isArr(activeButton)) {
+    const isActive =
+      activeButton.filter((s) => s === btnId).indexOf(btnId) === 0
+    return isActive ? 'primary' : ''
+  }
+}
+
 const ButtonComp = styled(
   ({
     id,
@@ -55,7 +68,8 @@ const ButtonComp = styled(
                     <Button
                       id={btn.id}
                       onClick={btn.onClick}
-                      type={btn.id === activeButton ? 'primary' : ''}
+                      // type={btn?.id === activeButton ? 'primary' : ''}
+                      type={handleType(btn?.id, activeButton)}
                     >
                       {btn.icon}
                       {btn.text}

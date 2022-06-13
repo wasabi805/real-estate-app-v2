@@ -210,7 +210,7 @@ export const setSelectedHomeType = <T extends IReducerSlice>({
   state,
   action,
 }: T) => {
-  const { selected } = action.payload?.listings?.filters?.homeType!
+  const { selected, newSelected } = action.payload?.listings?.filters?.homeType!
   return updateNestedObj(['listings', 'filters'])({
     ...state.listings.filters,
     filterButtonClicked: true,
@@ -218,6 +218,7 @@ export const setSelectedHomeType = <T extends IReducerSlice>({
     homeType: {
       ...state.listings.filters.homeType,
       selected,
+      newSelected: newSelected,
     },
   })(state)
 }

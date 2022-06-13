@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { access } from 'fs'
+import { getStatus } from '../helpers'
 
 const getListings = async (req, res) => {
   const { city, state } = req?.query
@@ -39,41 +40,48 @@ const getListings = async (req, res) => {
     },
   }
 
-  let filters
+  let filters = {}
   if (req?.query.filters) {
     filters = JSON.parse(req?.query.filters)
   }
 
-  console.log('what are filters ', filters)
+  //IF ANY FILTERS EXIST...
+  if (Object.keys(filters).length > 0) {
+    const filters = JSON.parse(req?.query?.filters)
+
+    filters?.status
+      ? (options.url = getStatus(filters?.status))
+      : (options.url =
+          'https://realtor.p.rapidapi.com/properties/list-for-sale')
+
+    console.log('RUN THE CHECKS', filters)
+    // options.url = getStatus()
+  }
 
   // WHAT TYPE OF HOME ARE THEY LOOKING FOR
-  if (!filters?.status) {
-    console.log('SHOW ME ONLY LISTINGS FOR SALE')
-    console.log('WITH THESE FILTERS', filters)
-    options.url = 'https://realtor.p.rapidapi.com/properties/list-for-sale'
-  }
+  // if (!filters?.status) {
+  //   console.log('SHOW ME ONLY LISTINGS FOR SALE')
+  //   console.log('WITH THESE FILTERS', filters)
+  //   options.url = 'https://realtor.p.rapidapi.com/properties/list-for-sale'
+  // }
 
-  if (filters?.status === 'for-sale') {
-    delete filters.status
-    console.log('SHOW ME ONLY LISTINGS FOR SALE')
-    console.log('WITH THESE FILTERS', filters)
+  // if (filters?.status === 'for-sale') {
+  //   delete filters.status
+  //   console.log('SHOW ME ONLY LISTINGS FOR SALE')
+  //   console.log('WITH THESE FILTERS', filters)
 
-    const apiFilters = renameKeys(requestKeyMap, filters)
-    options.params = {
-      ...options.params,
-      url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
-      ...apiFilters,
-    }
-  }
-  if (filters?.status === 'for-rent') {
-    console.log('SHOW ME ONLY RENTAL LISTINGS')
-    console.log('WITH THESE FILTERS', filters)
-  }
+  //   const apiFilters = renameKeys(requestKeyMap, filters)
+  //   options.params = {
+  //     ...options.params,
+  //     url: 'https://realtor.p.rapidapi.com/properties/list-for-sale',
+  //     ...apiFilters,
+  //   }
+  // }
 
-  if (filters?.status === 'sold') {
-    console.log('SHOW ME SOLD HOMES')
-    console.log('WITH THESE FILTERS', filters)
-  }
+  // if (filters?.status === 'sold') {
+  //   console.log('SHOW ME SOLD HOMES')
+  //   console.log('WITH THESE FILTERS', filters)
+  // }
 
   try {
     await axios

@@ -14,6 +14,7 @@ export interface IParam {
     [key: string]: any
   }
   isAsc?: boolean
+  state?: IinitialState
 }
 
 export interface IFilterListingsProps {
