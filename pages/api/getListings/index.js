@@ -87,7 +87,6 @@ const getListings = async (req, res) => {
   //   }
   // }
 
-
   try {
     await axios
       .request(options)

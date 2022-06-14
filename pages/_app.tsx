@@ -16,6 +16,7 @@ interface IAppProps extends AppProps {
 }
 
 const { setPreviousState } = GlobalActions
+import useRehydrate from '@hooks/useRehydrate'
 
 function App({ Component, pageProps, AppData }: IAppProps) {
   const router = useRouter()
@@ -23,9 +24,11 @@ function App({ Component, pageProps, AppData }: IAppProps) {
   const [state, dispatch] = useReducer(appReducer, initialState)
   const [currentPath, setCurrentPath] = useState(router.asPath)
 
+  // if page is refreshed , use url to update previous state
+  useRehydrate(router.asPath, state)
+
   useEffect(() => {
     console.log('what are changes in router', router.asPath)
-    console.log('what is just router', router)
 
     if (currentPath !== router.asPath) {
       console.log({ currentPath, asPath: router.asPath, router })

@@ -28,27 +28,6 @@ const City = (props) => {
 
   const router = useRouter()
 
-  //Price Field
-  useDebounce(
-    () => {
-      //TODO : make api call with min and max prices
-      alert('price changed')
-      const currentFilters = state.listings.filters
-      const { homeType, forSaleRentSold, price } = currentFilters
-
-      console.log('what is homeType, forSaleRentSold, price', {
-        homeType,
-        forSaleRentSold,
-        price,
-      })
-    },
-    2000,
-    [
-      state.listings.filters.price.minField,
-      state.listings.filters.price.maxField,
-    ]
-  )
-
   // Filter buttons clicked
   useDebounce(
     () => {
@@ -77,8 +56,6 @@ const City = (props) => {
             return val ? acc + `${key}=${val}&` : acc
           }, '')
           .slice(0, -1)
-
-        console.log('what is queryString', queryString)
 
         /* NOTE Have to use router.query.params to build the url otherwise any type of url string manipulation will append instead of replace the filter values to the url */
         const url = `${router.query.params[0]}/${router.query.params[1]}/filters?${queryString}`

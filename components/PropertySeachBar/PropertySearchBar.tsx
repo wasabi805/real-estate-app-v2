@@ -6,8 +6,7 @@ import { properySearchInputStyles } from './styles'
 import { IGooglePlacesAddressObj } from 'actions/propertySearchBarActions/interface'
 import useAutoComplete from '@hooks/useAutoComplete'
 
-const { setSearchField, autoCompleteUpdateStateAndFetchListings } =
-  SearchActions
+const { setSearchField } = SearchActions
 
 const googleApiKey = String(process.env.NEXT_PUBLIC_API_KEY)
 const externalScript = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`
