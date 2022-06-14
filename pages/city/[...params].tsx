@@ -11,7 +11,7 @@ import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { useRouter } from 'next/router'
 import useDebounce from '@hooks/useDebounce'
-import { formatHomeType, forSaleSoldRentCategory, getBedsMinAndMax } from 'utils'
+import { formatHomeType, forSaleSoldRentCategory, getBedsMinAndMax, bathsCategory } from 'utils'
 
 const { resetFilterButtonClicked } = FilterActions
 
@@ -50,14 +50,15 @@ const City = (props) => {
         const currentFilters = state.listings.filters
         const { homeType, forSaleRentSold, price, bedsBaths } = currentFilters
         const {minBeds, maxBeds} = getBedsMinAndMax(bedsBaths.currentRange)
-        
+
         const queryValues = {
-          homeType: formatHomeType(homeType.newSelected),
           status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
+          homeType: formatHomeType(homeType.newSelected),
           "min-price": price.minField,
           "max-price": price.maxField,
           "min-beds" : minBeds,
-          "max-beds" : maxBeds
+          "max-beds" : maxBeds,
+          "min-baths" : bathsCategory(bedsBaths.currentBaths),
         }
 
         const queryString = Object.entries(queryValues)

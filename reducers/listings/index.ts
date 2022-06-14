@@ -272,7 +272,21 @@ export const setFilterCurrentBathsAmount = <T extends IReducerSlice>({
   action,
 }: T) => {
   const { currentBaths } = action.payload?.listings?.filters?.bedsBaths!
-  return updateNestedObj(currentBathsPath)(currentBaths)(state)
+  // return updateNestedObj(currentBathsPath)(currentBaths)(state)
+  return {
+    ...state,
+    listings: {
+      ...state.listings,
+      filters: {
+        ...state.listings.filters,
+        filterButtonClicked: true,
+        bedsBaths: {
+          ...state.listings.filters.bedsBaths,
+          currentBaths: currentBaths
+        },
+      },
+    },
+  }
 }
 
 export const clearBedsBathsFilters = <T extends IReducerSlice>({
