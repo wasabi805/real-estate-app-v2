@@ -155,18 +155,18 @@ export const setMinPriceFilterField = <T extends IReducerSlice>({
 }: T) => {
   const { minField } = action.payload?.listings?.filters?.price!
   const { moveMin } = action.payload?.listings?.filters?.price?.slider!
-  
+
   let filters = {
     ...state.listings?.filters,
     filterButtonClicked: true,
-   price:{
-     ...state.listings.filters.price,
-     minField: minField,
-     slider: {
-       ...state.listings?.filters.price.slider,
-       moveMin: moveMin,
-     },
-   }
+    price: {
+      ...state.listings.filters.price,
+      minField: minField,
+      slider: {
+        ...state.listings?.filters.price.slider,
+        moveMin: moveMin,
+      },
+    },
   }
   return updateNestedObj(['listings', 'filters'])(filters)(state)
 }
@@ -178,18 +178,17 @@ export const setMaxPriceFilterField = <T extends IReducerSlice>({
   const { maxField } = action.payload?.listings?.filters?.price!
   let { moveMax } = action.payload?.listings?.filters?.price?.slider!
 
-
   let filters = {
     ...state.listings?.filters,
     filterButtonClicked: true,
-   price:{
-     ...state.listings.filters.price,
-     maxField: maxField,
-     slider: {
-       ...state.listings?.filters.price.slider,
-       moveMax: moveMax,
-     },
-   }
+    price: {
+      ...state.listings.filters.price,
+      maxField: maxField,
+      slider: {
+        ...state.listings?.filters.price.slider,
+        moveMax: moveMax,
+      },
+    },
   }
   return updateNestedObj(['listings', 'filters'])(filters)(state)
 
@@ -282,7 +281,7 @@ export const setFilterCurrentBathsAmount = <T extends IReducerSlice>({
         filterButtonClicked: true,
         bedsBaths: {
           ...state.listings.filters.bedsBaths,
-          currentBaths: currentBaths
+          currentBaths: currentBaths,
         },
       },
     },

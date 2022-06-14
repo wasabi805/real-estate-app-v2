@@ -30,7 +30,6 @@ const HomeType = () => {
     })
   }
 
-
   const homeTypeButtons = state.listings?.filters?.homeType?.homeTypeButtons
   const selectedButton = state.listings?.filters?.homeType?.selected
   const { newSelected } = state.listings?.filters.homeType

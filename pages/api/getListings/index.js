@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { access } from 'fs'
 import { getStatus } from '../helpers'
 import { replaceWhiteSpaceWith } from 'utils'
 
@@ -61,6 +60,22 @@ const getListings = async (req, res) => {
       options.params.prop_type = replaceWhiteSpaceWith(filters.homeType, ',')
     }
 
+    if (filters['min-price']) {
+      options.params.price_min = parseInt(filters['min-price'], 10)
+    }
+
+    if (filters['max-price']) {
+      options.params.price_max = parseInt(filters['max-price'], 10)
+    }
+
+    if (filters['min-beds']) {
+      options.params.beds_min = parseInt(filters['min-beds'], 10)
+    }
+
+    if (filters['min-baths']) {
+      options.params.baths_min = parseInt(filters['min-baths'], 10)
+    }
+
     console.log('RUN THE CHECKS', filters)
   }
 
@@ -72,10 +87,6 @@ const getListings = async (req, res) => {
   //   }
   // }
 
-  // if (filters?.status === 'sold') {
-  //   console.log('SHOW ME SOLD HOMES')
-  //   console.log('WITH THESE FILTERS', filters)
-  // }
 
   try {
     await axios

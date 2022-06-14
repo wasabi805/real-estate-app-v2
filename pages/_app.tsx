@@ -28,7 +28,7 @@ function App({ Component, pageProps, AppData }: IAppProps) {
     console.log('what is just router', router)
 
     if (currentPath !== router.asPath) {
-      console.log({currentPath, asPath: router.asPath, router})
+      console.log({ currentPath, asPath: router.asPath, router })
       //CITY PAGE
       if (containsSubString(router.asPath, 'city')) {
         const { params } = router?.query

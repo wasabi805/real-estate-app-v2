@@ -11,7 +11,12 @@ import { FilterDropdownsRow } from '@pages/city/components/FilterDropdownsRow'
 import * as FilterActions from 'actions/ListingsActions/FilterActions'
 import { useRouter } from 'next/router'
 import useDebounce from '@hooks/useDebounce'
-import { formatHomeType, forSaleSoldRentCategory, getBedsMinAndMax, bathsCategory } from 'utils'
+import {
+  formatHomeType,
+  forSaleSoldRentCategory,
+  getBedsMinAndMax,
+  bathsCategory,
+} from 'utils'
 
 const { resetFilterButtonClicked } = FilterActions
 
@@ -24,19 +29,25 @@ const City = (props) => {
   const router = useRouter()
 
   //Price Field
-  useDebounce(()=>{
-    //TODO : make api call with min and max prices
-    alert('price changed')
-    const currentFilters = state.listings.filters
-    const { homeType, forSaleRentSold, price } = currentFilters
+  useDebounce(
+    () => {
+      //TODO : make api call with min and max prices
+      alert('price changed')
+      const currentFilters = state.listings.filters
+      const { homeType, forSaleRentSold, price } = currentFilters
 
-    console.log('what is homeType, forSaleRentSold, price', {homeType, forSaleRentSold, price})
-
-
-  } , 2000, [
-    state.listings.filters.price.minField,
-    state.listings.filters.price.maxField,
-  ])
+      console.log('what is homeType, forSaleRentSold, price', {
+        homeType,
+        forSaleRentSold,
+        price,
+      })
+    },
+    2000,
+    [
+      state.listings.filters.price.minField,
+      state.listings.filters.price.maxField,
+    ]
+  )
 
   // Filter buttons clicked
   useDebounce(
@@ -45,20 +56,20 @@ const City = (props) => {
         //  Flip the flag back to false
         dispatch(resetFilterButtonClicked())
         //  Change the url to include queries
-    
+
         //  GRAB THE FILTERS
         const currentFilters = state.listings.filters
         const { homeType, forSaleRentSold, price, bedsBaths } = currentFilters
-        const {minBeds, maxBeds} = getBedsMinAndMax(bedsBaths.currentRange)
+        const { minBeds, maxBeds } = getBedsMinAndMax(bedsBaths.currentRange)
 
         const queryValues = {
           status: forSaleSoldRentCategory(forSaleRentSold.filterBy[0]),
           homeType: formatHomeType(homeType.newSelected),
-          "min-price": price.minField,
-          "max-price": price.maxField,
-          "min-beds" : minBeds,
-          "max-beds" : maxBeds,
-          "min-baths" : bathsCategory(bedsBaths.currentBaths),
+          'min-price': price.minField,
+          'max-price': price.maxField,
+          'min-beds': minBeds,
+          'max-beds': maxBeds,
+          'min-baths': bathsCategory(bedsBaths.currentBaths),
         }
 
         const queryString = Object.entries(queryValues)
@@ -67,8 +78,7 @@ const City = (props) => {
           }, '')
           .slice(0, -1)
 
-
-          console.log('what is queryString', queryString)
+        console.log('what is queryString', queryString)
 
         /* NOTE Have to use router.query.params to build the url otherwise any type of url string manipulation will append instead of replace the filter values to the url */
         const url = `${router.query.params[0]}/${router.query.params[1]}/filters?${queryString}`
