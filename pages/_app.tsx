@@ -17,6 +17,8 @@ interface IAppProps extends AppProps {
 
 const { setPreviousState } = GlobalActions
 import useRehydrate from '@hooks/useRehydrate'
+import usePrevious from '@hooks/usePrevious'
+import useUpdateEffect from '@hooks/useUpdateEffect'
 
 function App({ Component, pageProps, AppData }: IAppProps) {
   const router = useRouter()
@@ -26,6 +28,14 @@ function App({ Component, pageProps, AppData }: IAppProps) {
 
   // if page is refreshed , use url to update previous state
   useRehydrate(router.asPath, state)
+
+  const currSearchResults = state.searchResults
+  const prevSearchResults = usePrevious(state.searchResults)
+
+  useUpdateEffect(
+    () => alert('do now route to the city page'),
+    [currSearchResults, prevSearchResults]
+  )
 
   useEffect(() => {
     console.log('what are changes in router', router.asPath)

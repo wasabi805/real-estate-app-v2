@@ -55,6 +55,7 @@ export const zipCodeConfirmed = async (
     ...res?.data,
     city: req.query.city,
     state: req.query.state,
+    topCities: '',
   })
 }
 
