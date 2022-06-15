@@ -48,46 +48,14 @@ export const zipCodeConfirmed = async (
     },
   }
 
-  //TODO : THIS GETS THE LISTINGS, ONLY RETURN THE CITY URL. THE GET LISTINGS PART SHOULD OCCUR IN APP's useEffct
-  console.log('what is req from fetchActions', req)
-  const data = await getListings(req)
+  //TODO : THIS GETS THE LISTINGS,
 
-  const url = cityPageUrl({
-    cityName: cityStateZip.city,
-    stateName: cityStateZip.state,
-  })
-
+  const res = await getListings(req)
   return response.status(200).send({
-    props: {
-      routeTo: url,
-      // listings: data.listings,
-      // cityName: cityStateZip.city,
-      // stateName: cityStateZip.state,
-      // city: cityStateZip.city,
-      // state: cityStateZip.state,
-      // zipCode: cityStateZip.zipCode,
-      // topCities: [],
-      // meta: {
-      //   tracking_params: data.meta.tracking_params,
-      // },
-    },
+    ...res?.data,
+    city: req.query.city,
+    state: req.query.state,
   })
-
-  // return response.status(200).send({
-  //   props: {
-  //     routeTo: url,
-  //     // listings: data.listings,
-  //     // cityName: cityStateZip.city,
-  //     // stateName: cityStateZip.state,
-  //     // city: cityStateZip.city,
-  //     // state: cityStateZip.state,
-  //     // zipCode: cityStateZip.zipCode,
-  //     // topCities: [],
-  //     // meta: {
-  //     //   tracking_params: data.meta.tracking_params,
-  //     // },
-  //   },
-  // })
 }
 
 export const zipCodeNotConfirmed = (response, allGuesses) => {

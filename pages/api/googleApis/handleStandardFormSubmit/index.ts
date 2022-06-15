@@ -19,7 +19,7 @@ const handleStandardFormSubmit = async (request, response) => {
 
     //  BEFORE ANY CHECKS, SEE IF THE USER SENT IN JUST A STATE CODE:
     //CASE 1 : StateAbrev manually sent
-    if (containsStateCode(request.query.name.toUpperCase())) {
+    if (containsStateCode(request.query?.name?.toUpperCase())) {
       const res = FetchActions.handleFetchStateAbrv(
         request,
         response,
@@ -28,6 +28,7 @@ const handleStandardFormSubmit = async (request, response) => {
       return response.status(200).send(res)
     }
 
+    console.log('what was primaryGuess', primaryGuess)
     /* CASE 2: ZIPCODE WAS SENT IN - 2 outcomes, the zipcode was recongized or not recognized by auto complete */
     if (extractZipCodeFromString(primaryGuess)) {
       /* CASE 2A PREDICTION RETURNED A ZIPCODE IT RECOGNIZED */

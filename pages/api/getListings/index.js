@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { getStatus } from '../helpers'
 import { replaceWhiteSpaceWith } from 'utils'
+import { isEmpty } from 'lodash'
 
-const getListings = async (req, res) => {
+const getListings = async (req) => {
   const { city, state } = req?.query
   console.log('what is req?.query', req?.query)
-  console.log('what is req?.query.filters', req?.query.filters)
+  console.log('what is req?.query?.filters', req?.query?.filters)
 
   const requestKeyMap = {
     hometype: 'prop_type',
@@ -41,11 +42,12 @@ const getListings = async (req, res) => {
   }
 
   let filters = {}
-  if (req?.query.filters) {
+  if (req?.query?.filters) {
     filters = JSON.parse(req?.query.filters)
   }
-
+  console.log('THERE ARE FILTERS', filters)
   //IF ANY FILTERS EXIST...
+  // if (Object.keys(filters).length > 0) {
   if (Object.keys(filters).length > 0) {
     const filters = JSON.parse(req?.query?.filters)
 
@@ -88,17 +90,8 @@ const getListings = async (req, res) => {
   // }
 
   try {
-    await axios
-      .request(options)
-      .then((resp) => {
-        return res.status(200).send(resp.data)
-      })
-      .catch((error) => {
-        return res.status(500).send(error)
-      })
-
-    // console.log(response, 'what is the response')
-    // return response
+    const data = await axios.request(options)
+    return data
   } catch (err) {
     console.log('Error at getListings', err)
   }

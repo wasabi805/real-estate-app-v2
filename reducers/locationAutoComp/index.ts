@@ -76,44 +76,48 @@ export const fetchSuggestionSuccess = ({ state, action }) => {
   console.log('what is action in reducer', action)
   console.log('what is state in reducer', state)
 
-  const prices = action.payload?.searchResults?.data?.props?.listings.map(
-    (h) => {
-      return h.price_raw
-    }
-  )
-  const sortedPrices = sortIntergersAscending(prices)
-
   return {
     ...state,
-    fetchProperty: false,
-
-    searchResults: {
-      prevRoute: state.searchResults.routeTo,
-      routeTo: action.payload?.searchResults?.data.props.routeTo,
-      city: action.payload?.searchResults?.data.props.cityName,
-      state: action.payload?.searchResults?.data.props.stateName,
-      topCities: action.payload?.searchResults?.data.props.topCities,
-      data: { ...action.payload?.searchResults?.data },
-      initialData: { ...action.payload?.searchResults?.data },
-    },
-
-    listingTable: {
-      currentHome: [
-        action.payload?.searchResults?.data.props.listings.length > 0 &&
-          action.payload?.searchResults?.data.props.listings[0]?.property_id,
-      ], //set the first property for the Listing table view
-    },
-
-    priceFilter: {
-      range: sortedPrices,
-      moveMin: {
-        move: false,
-        value: '',
-      },
-      moveMax: {
-        move: false,
-        value: '',
-      },
-    },
   }
+
+  // const prices = action.payload?.searchResults?.data?.props?.listings.map(
+  //   (h) => {
+  //     return h.price_raw
+  //   }
+  // )
+  // const sortedPrices = sortIntergersAscending(prices)
+
+  // return {
+  //   ...state,
+  //   fetchProperty: false,
+
+  //   searchResults: {
+  //     prevRoute: state.searchResults.routeTo,
+  //     routeTo: action.payload?.searchResults?.data.props.routeTo,
+  //     city: action.payload?.searchResults?.data.props.cityName,
+  //     state: action.payload?.searchResults?.data.props.stateName,
+  //     topCities: action.payload?.searchResults?.data.props.topCities,
+  //     data: { ...action.payload?.searchResults?.data },
+  //     initialData: { ...action.payload?.searchResults?.data },
+  //   },
+
+  //   listingTable: {
+  //     currentHome: [
+  //       action.payload?.searchResults?.data.props.listings.length > 0 &&
+  //         action.payload?.searchResults?.data.props.listings[0]?.property_id,
+  //     ], //set the first property for the Listing table view
+  //   },
+
+  //   priceFilter: {
+  //     range: sortedPrices,
+  //     moveMin: {
+  //       move: false,
+  //       value: '',
+  //     },
+  //     moveMax: {
+  //       move: false,
+  //       value: '',
+  //     },
+  //   },
+  // }
 }

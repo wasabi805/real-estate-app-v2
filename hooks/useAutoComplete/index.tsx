@@ -99,21 +99,23 @@ const useAutoComplete = () => {
 
   const fetchSugestion = async (request: IQueryParams, name: string) => {
     dispatch(setIsLoading(true))
+    console.log('what is the request', request)
 
-    const data = await axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/googleApis/suggestPlace`,
       { params: request }
     )
-    console.log('did i come back with results?', data)
-    const { routeTo } = data.data?.props
+    console.log('did i come back with results?', response)
+    // const { routeTo } = data.data?.props
 
-    // dispatch(fetchSugestionSuccess(data))
+    dispatch(fetchSugestionSuccess(response))
 
-    router.push({
-      pathname: buildUrlFilterString(state, routeTo).pathname,
-      query: buildUrlFilterString(state, routeTo).query,
-      // options:{foo: 'bar'}
-    })
+    //ORIGINAL : redirects to city page
+    // router.push({
+    //   pathname: buildUrlFilterString(state, routeTo).pathname,
+    //   query: buildUrlFilterString(state, routeTo).query,
+    //   // options:{foo: 'bar'}
+    // })
   }
 
   /* ----- Massage data recieved from GoogleAutoComplete Input Field ----- */
@@ -189,7 +191,7 @@ const useAutoComplete = () => {
       zipCode: zip,
 
       name: !isZip && !hasZip ? name : '',
-      isAutoComplete: false,
+      isAutoComplete: 'false',
     }
 
     const test = Object.entries(query).reduce((obj, [key, val]) => {
@@ -201,7 +203,7 @@ const useAutoComplete = () => {
     //TODO: instead of fetching return it back to PropertySearchBar Comp and have
     // getServerSideProps do the fetching
     // return setAutoCompleteResp(request)
-    fetchSugestion(query, inputProps?.input?.name)
+    fetchSugestion(test, inputProps?.input?.name)
   }
 
   /* -----  ----- */
